@@ -1,6 +1,8 @@
-﻿using Serilog;
+﻿using POC_Analyse_2.Models.Dto;
+using Serilog;
 using System.Buffers;
 using System.Text;
+using System.Text.Json;
 
 namespace POC_Analyse_2.Middlewares
 {
@@ -8,11 +10,13 @@ namespace POC_Analyse_2.Middlewares
     {
         private readonly RequestDelegate _next;
         private readonly ILogger<RequestLoggingMiddleware> _logger;
+        private readonly HttpClient client;
 
         public RequestLoggingMiddleware(RequestDelegate next, ILogger<RequestLoggingMiddleware> logger) 
         {
             _logger = logger;
             _next = next;
+            client = new HttpClient();
 
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Information()
@@ -26,32 +30,34 @@ namespace POC_Analyse_2.Middlewares
 
         public async Task Invoke(HttpContext context)
         {
-            if (context.Request.Method == "GET")
+            if (context.Request.Method == "GET" || context.Request.Method == "POST")
             {
-                Log.Information(
-                    "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} - {Path} - {UrlReferrer} - {Action} - {SessionId} - {UserAgent}",
-                    DateTimeOffset.Now,
-                    context.Request.Path,
-                    context.Request.Headers.Referer.ToString(),
-                    null,
-                    context.Session.Id,
-                    context.Request.Headers.UserAgent
-                );
-            }
-            else if (context.Request.Method == "POST")
-            {
-                var bodyStream = await GetListOfStringsFromStream( context.Request.Body );
+                string? action = context.Request.Method == "POST"
+                    ? (await GetListOfStringsFromStream(context.Request.Body)).FirstOrDefault()
+                    : null;
 
-
-                Log.Information(
-                    "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} - {Path} - {UrlReferrer} - {Action} - {SessionId} - {UserAgent}",
+                var log = new RequestLogDto(
                     DateTimeOffset.Now,
-                    context.Request.Path,
-                    context.Request.Headers.Referer.ToString(),
-                    bodyStream.First(),
-                    context.Session.Id,
-                    context.Request.Headers.UserAgent
+                    Path: context.Request.Path,
+                    UrlReferrer: context.Request.Headers.Referer.ToString(),
+                    Action: action,
+                    SessionId: context.Session.Id,
+                    UserAgent: context.Request.Headers["User-Agent"].FirstOrDefault() ?? "null"
                 );
+
+                //Log.Information(
+                //    "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} - {Path} - {UrlReferrer} - {Action} - {SessionId} - {UserAgent}",
+                //    DateTimeOffset.Now,
+                //    context.Request.Path,
+                //    context.Request.Headers.Referer.ToString(),
+                //    bodyStream.First(),
+                //    context.Session.Id,
+                //    context.Request.Headers.UserAgent
+                //);
+
+                var json = JsonSerializer.Serialize(log);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                await client.PostAsync("http://localhost:5188/TrackingLogs", content);
             }
 
             await _next(context);

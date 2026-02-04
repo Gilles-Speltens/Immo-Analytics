@@ -1,0 +1,18 @@
+[
+  {
+    "ContainingType": "POC_API_Analyse_1.Controllers.TrackingLogs",
+    "Method": "PostRequest",
+    "RelativePath": "TrackingLogs",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "log",
+        "Type": "POC_API_Analyse_1.RequestLog",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
