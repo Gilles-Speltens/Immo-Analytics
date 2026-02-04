@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <button id="testButton">Test</button>
+
+    <p id="hiddenMessage" style="display:none; margin-top:10px;">Le message a été chargé !</p>
+</div>
+
+@section Scripts {
+    <script>
+        const button = document.getElementById('testButton');
+        const message = document.getElementById('hiddenMessage');
+
+        button.addEventListener('click', () => {
+            message.style.display = 'block'; // On rend le message visible
+
+            fetch('/Home/TestPost', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: 'action=testButton'
+            })
+            .catch(err => console.error(err));
+        });
+    </script>
+}
