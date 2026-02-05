@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "À vendre";
+}
+
+<div class="text-center">
+    <h1 class="display-4">
+        @ViewData["Title"]
+    </h1>
+
+    <div class="row g-4">
+        @foreach (var house in Model)
+        {
+            <div class="col-md-6 col-lg-4">
+                <a asp-controller="Sales"
+                   asp-action="Details"
+                   asp-route-id="@house.Id"
+                   class="text-decoration-none text-dark">
+
+                    <div class="card h-100 shadow-sm">
+                        <img src="@house.ImageUrl"
+                             class="card-img-top"
+                             alt="Maison @house.Address">
+
+                        <div class="card-body">
+                            <h5 class="card-title">@house.Address</h5>
+                            <p class="card-text fw-bold text-primary">
+                                @house.Price.ToString("N0") €
+                            </p>
+                        </div>
+                    </div>
+
+                </a>
+            </div>
+        }
+    </div>
+</div>

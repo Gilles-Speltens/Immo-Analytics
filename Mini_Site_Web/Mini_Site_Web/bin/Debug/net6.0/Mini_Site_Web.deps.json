@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "Mini_Site_Web/1.0.0": {
+        "runtime": {
+          "Mini_Site_Web.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Mini_Site_Web/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

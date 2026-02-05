@@ -1,0 +1,129 @@
+﻿@model Mini_Site_Web.Models.HouseCollaboratorViewModel
+@{
+    ViewData["Title"] = "Le bien de vos rêvesse trouve sur ImmoDemo !";
+    ViewData["NewHouses"] = "Nouveaux biens";
+    ViewData["Collaborators"] = "Nos collaborateurs";
+}
+
+<div class="text-center">
+    <h1 class="display-4 p-3">
+        @ViewData["Title"]
+    </h1>
+
+    <h2 class="display-5">
+        @ViewData["NewHouses"]
+    </h2>
+    <div class="row g-3 mb-5">
+        @foreach (var house in Model.Houses)
+        {
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <a asp-controller="Sales"
+                   asp-action="Details"
+                   asp-route-id="@house.Id"
+                   class="text-decoration-none text-dark">
+
+                    <div class="card h-100 shadow-sm">
+
+                        <img src="@house.ImageUrl"
+                             class="card-img-top"
+                             alt="@house.Address"
+                             style="height: 160px; object-fit: cover;" />
+
+                        <div class="card-body p-2">
+                            <h6 class="card-title mb-1">@house.Address</h6>
+                            <p class="card-text fw-bold text-primary mb-0">
+                                @house.Price.ToString("N0") €
+                            </p>
+                        </div>
+
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+
+    <h2 class="display-5">
+        @ViewData["Collaborators"]
+    </h2>
+    <div class="row g-3 mb-5 justify-content-center">
+        @foreach (var collaborator in Model.Collaborators)
+        {
+            var idSafe = collaborator.Name.Replace(" ", "_");
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="card text-center shadow-sm h-100">
+                    <div class="card-body">
+                        <img src="@collaborator.PhotoUrl"
+                             class="rounded-circle mb-3"
+                             alt="@collaborator.Name"
+                             width="120"
+                             height="120" />
+
+                        <h5 class="card-title">@collaborator.Name</h5>
+
+                        <p class="card-text text-muted">
+                            📞
+                            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                               target="_blank">
+                                @collaborator.Phone
+                            </a>
+                        </p>
+
+                        <button class="btn btn-primary btn-sm toggle-btn" data-target="contactForm-@idSafe">
+                            Plus d'informations
+                        </button>
+
+                        <div class="contact-form mt-3" id="contactForm-@idSafe" style="display:none;">
+                            <div class="card card-body shadow-sm">
+                                <form>
+                                    <div class="mb-2">
+                                        <label for="name@idSafe" class="form-label">Votre nom</label>
+                                        <input type="text" class="form-control" id="name@idSafe" placeholder="Votre nom" />
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="email@idSafe" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="email@idSafe" placeholder="Email" />
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="message@idSafe" class="form-label">Message</label>
+                                        <textarea class="form-control" id="message@idSafe" rows="3" placeholder="Message"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-success btn-sm w-100">Envoyer</button>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
+
+<style>
+    .contact-form {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        z-index: 10;
+    }
+</style>
+
+@section Scripts {
+    <script>
+        document.querySelectorAll('.toggle-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const targetId = btn.getAttribute('data-target');
+                const form = document.getElementById(targetId);
+                if (form.style.display === 'none' || form.style.display === '') {
+                    form.style.display = 'block';
+                } else {
+                    form.style.display = 'none';
+                }
+            });
+        });
+    </script>
+}

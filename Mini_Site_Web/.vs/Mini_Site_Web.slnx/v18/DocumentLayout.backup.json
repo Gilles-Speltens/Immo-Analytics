@@ -1,0 +1,326 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Mini_Site_Web\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{814031E0-A0F4-41F8-9F1B-0169A4EC82A1}|Mini_Site_Web\\Mini_Site_Web.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\mini_site_web\\mini_site_web\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{814031E0-A0F4-41F8-9F1B-0169A4EC82A1}|Mini_Site_Web\\Mini_Site_Web.csproj|solutionrelative:mini_site_web\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{814031E0-A0F4-41F8-9F1B-0169A4EC82A1}|Mini_Site_Web\\Mini_Site_Web.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\mini_site_web\\mini_site_web\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{814031E0-A0F4-41F8-9F1B-0169A4EC82A1}|Mini_Site_Web\\Mini_Site_Web.csproj|solutionrelative:mini_site_web\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{814031E0-A0F4-41F8-9F1B-0169A4EC82A1}|Mini_Site_Web\\Mini_Site_Web.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\mini_site_web\\mini_site_web\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{814031E0-A0F4-41F8-9F1B-0169A4EC82A1}|Mini_Site_Web\\Mini_Site_Web.csproj|solutionrelative:mini_site_web\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{814031E0-A0F4-41F8-9F1B-0169A4EC82A1}|Mini_Site_Web\\Mini_Site_Web.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\mini_site_web\\mini_site_web\\models\\collaborators.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{814031E0-A0F4-41F8-9F1B-0169A4EC82A1}|Mini_Site_Web\\Mini_Site_Web.csproj|solutionrelative:mini_site_web\\models\\collaborators.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{814031E0-A0F4-41F8-9F1B-0169A4EC82A1}|Mini_Site_Web\\Mini_Site_Web.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\mini_site_web\\mini_site_web\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{814031E0-A0F4-41F8-9F1B-0169A4EC82A1}|Mini_Site_Web\\Mini_Site_Web.csproj|solutionrelative:mini_site_web\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{814031E0-A0F4-41F8-9F1B-0169A4EC82A1}|Mini_Site_Web\\Mini_Site_Web.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\mini_site_web\\mini_site_web\\controllers\\salescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{814031E0-A0F4-41F8-9F1B-0169A4EC82A1}|Mini_Site_Web\\Mini_Site_Web.csproj|solutionrelative:mini_site_web\\controllers\\salescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{814031E0-A0F4-41F8-9F1B-0169A4EC82A1}|Mini_Site_Web\\Mini_Site_Web.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\mini_site_web\\mini_site_web\\views\\sales\\sales.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{814031E0-A0F4-41F8-9F1B-0169A4EC82A1}|Mini_Site_Web\\Mini_Site_Web.csproj|solutionrelative:mini_site_web\\views\\sales\\sales.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{814031E0-A0F4-41F8-9F1B-0169A4EC82A1}|Mini_Site_Web\\Mini_Site_Web.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\mini_site_web\\mini_site_web\\models\\housecollaboratorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{814031E0-A0F4-41F8-9F1B-0169A4EC82A1}|Mini_Site_Web\\Mini_Site_Web.csproj|solutionrelative:mini_site_web\\models\\housecollaboratorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{814031E0-A0F4-41F8-9F1B-0169A4EC82A1}|Mini_Site_Web\\Mini_Site_Web.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\mini_site_web\\mini_site_web\\views\\sales\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{814031E0-A0F4-41F8-9F1B-0169A4EC82A1}|Mini_Site_Web\\Mini_Site_Web.csproj|solutionrelative:mini_site_web\\views\\sales\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{814031E0-A0F4-41F8-9F1B-0169A4EC82A1}|Mini_Site_Web\\Mini_Site_Web.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\mini_site_web\\mini_site_web\\models\\house.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{814031E0-A0F4-41F8-9F1B-0169A4EC82A1}|Mini_Site_Web\\Mini_Site_Web.csproj|solutionrelative:mini_site_web\\models\\house.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{814031E0-A0F4-41F8-9F1B-0169A4EC82A1}|Mini_Site_Web\\Mini_Site_Web.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\mini_site_web\\mini_site_web\\controllers\\aboutcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{814031E0-A0F4-41F8-9F1B-0169A4EC82A1}|Mini_Site_Web\\Mini_Site_Web.csproj|solutionrelative:mini_site_web\\controllers\\aboutcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{814031E0-A0F4-41F8-9F1B-0169A4EC82A1}|Mini_Site_Web\\Mini_Site_Web.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\mini_site_web\\mini_site_web\\controllers\\privacycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{814031E0-A0F4-41F8-9F1B-0169A4EC82A1}|Mini_Site_Web\\Mini_Site_Web.csproj|solutionrelative:mini_site_web\\controllers\\privacycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{814031E0-A0F4-41F8-9F1B-0169A4EC82A1}|Mini_Site_Web\\Mini_Site_Web.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\mini_site_web\\mini_site_web\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{814031E0-A0F4-41F8-9F1B-0169A4EC82A1}|Mini_Site_Web\\Mini_Site_Web.csproj|solutionrelative:mini_site_web\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{814031E0-A0F4-41F8-9F1B-0169A4EC82A1}|Mini_Site_Web\\Mini_Site_Web.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\mini_site_web\\mini_site_web\\views\\about\\about.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{814031E0-A0F4-41F8-9F1B-0169A4EC82A1}|Mini_Site_Web\\Mini_Site_Web.csproj|solutionrelative:mini_site_web\\views\\about\\about.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{814031E0-A0F4-41F8-9F1B-0169A4EC82A1}|Mini_Site_Web\\Mini_Site_Web.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\mini_site_web\\mini_site_web\\views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{814031E0-A0F4-41F8-9F1B-0169A4EC82A1}|Mini_Site_Web\\Mini_Site_Web.csproj|solutionrelative:mini_site_web\\views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{814031E0-A0F4-41F8-9F1B-0169A4EC82A1}|Mini_Site_Web\\Mini_Site_Web.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\mini_site_web\\mini_site_web\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{814031E0-A0F4-41F8-9F1B-0169A4EC82A1}|Mini_Site_Web\\Mini_Site_Web.csproj|solutionrelative:mini_site_web\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{814031E0-A0F4-41F8-9F1B-0169A4EC82A1}|Mini_Site_Web\\Mini_Site_Web.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\mini_site_web\\mini_site_web\\views\\shared\\_layout.cshtml.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{814031E0-A0F4-41F8-9F1B-0169A4EC82A1}|Mini_Site_Web\\Mini_Site_Web.csproj|solutionrelative:mini_site_web\\views\\shared\\_layout.cshtml.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{814031E0-A0F4-41F8-9F1B-0169A4EC82A1}|Mini_Site_Web\\Mini_Site_Web.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\mini_site_web\\mini_site_web\\views\\privacy\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{814031E0-A0F4-41F8-9F1B-0169A4EC82A1}|Mini_Site_Web\\Mini_Site_Web.csproj|solutionrelative:mini_site_web\\views\\privacy\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 17,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "site.css",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Mini_Site_Web\\Mini_Site_Web\\wwwroot\\css\\site.css",
+              "RelativeDocumentMoniker": "Mini_Site_Web\\wwwroot\\css\\site.css",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Mini_Site_Web\\Mini_Site_Web\\wwwroot\\css\\site.css",
+              "RelativeToolTip": "Mini_Site_Web\\wwwroot\\css\\site.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-02-05T14:45:51.219Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "HouseCollaboratorViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Mini_Site_Web\\Mini_Site_Web\\Models\\HouseCollaboratorViewModel.cs",
+              "RelativeDocumentMoniker": "Mini_Site_Web\\Models\\HouseCollaboratorViewModel.cs",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Mini_Site_Web\\Mini_Site_Web\\Models\\HouseCollaboratorViewModel.cs",
+              "RelativeToolTip": "Mini_Site_Web\\Models\\HouseCollaboratorViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T13:59:21.302Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "House.cs",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Mini_Site_Web\\Mini_Site_Web\\Models\\House.cs",
+              "RelativeDocumentMoniker": "Mini_Site_Web\\Models\\House.cs",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Mini_Site_Web\\Mini_Site_Web\\Models\\House.cs",
+              "RelativeToolTip": "Mini_Site_Web\\Models\\House.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T13:39:00.182Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Mini_Site_Web\\Mini_Site_Web\\Views\\Sales\\Details.cshtml",
+              "RelativeDocumentMoniker": "Mini_Site_Web\\Views\\Sales\\Details.cshtml",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Mini_Site_Web\\Mini_Site_Web\\Views\\Sales\\Details.cshtml",
+              "RelativeToolTip": "Mini_Site_Web\\Views\\Sales\\Details.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-05T13:32:19.664Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Mini_Site_Web\\Mini_Site_Web\\Program.cs",
+              "RelativeDocumentMoniker": "Mini_Site_Web\\Program.cs",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Mini_Site_Web\\Mini_Site_Web\\Program.cs",
+              "RelativeToolTip": "Mini_Site_Web\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T12:56:34.62Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "PrivacyController.cs",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Mini_Site_Web\\Mini_Site_Web\\Controllers\\PrivacyController.cs",
+              "RelativeDocumentMoniker": "Mini_Site_Web\\Controllers\\PrivacyController.cs",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Mini_Site_Web\\Mini_Site_Web\\Controllers\\PrivacyController.cs",
+              "RelativeToolTip": "Mini_Site_Web\\Controllers\\PrivacyController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T11:41:54.344Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "SalesController.cs",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Mini_Site_Web\\Mini_Site_Web\\Controllers\\SalesController.cs",
+              "RelativeDocumentMoniker": "Mini_Site_Web\\Controllers\\SalesController.cs",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Mini_Site_Web\\Mini_Site_Web\\Controllers\\SalesController.cs",
+              "RelativeToolTip": "Mini_Site_Web\\Controllers\\SalesController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T11:41:41.584Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "AboutController.cs",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Mini_Site_Web\\Mini_Site_Web\\Controllers\\AboutController.cs",
+              "RelativeDocumentMoniker": "Mini_Site_Web\\Controllers\\AboutController.cs",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Mini_Site_Web\\Mini_Site_Web\\Controllers\\AboutController.cs",
+              "RelativeToolTip": "Mini_Site_Web\\Controllers\\AboutController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T11:41:25.797Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Collaborators.cs",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Mini_Site_Web\\Mini_Site_Web\\Models\\Collaborators.cs",
+              "RelativeDocumentMoniker": "Mini_Site_Web\\Models\\Collaborators.cs",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Mini_Site_Web\\Mini_Site_Web\\Models\\Collaborators.cs",
+              "RelativeToolTip": "Mini_Site_Web\\Models\\Collaborators.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T11:20:17.462Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "ErrorViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Mini_Site_Web\\Mini_Site_Web\\Models\\ErrorViewModel.cs",
+              "RelativeDocumentMoniker": "Mini_Site_Web\\Models\\ErrorViewModel.cs",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Mini_Site_Web\\Mini_Site_Web\\Models\\ErrorViewModel.cs",
+              "RelativeToolTip": "Mini_Site_Web\\Models\\ErrorViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T11:12:07.7Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "_Layout.cshtml.css",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Mini_Site_Web\\Mini_Site_Web\\Views\\Shared\\_Layout.cshtml.css",
+              "RelativeDocumentMoniker": "Mini_Site_Web\\Views\\Shared\\_Layout.cshtml.css",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Mini_Site_Web\\Mini_Site_Web\\Views\\Shared\\_Layout.cshtml.css",
+              "RelativeToolTip": "Mini_Site_Web\\Views\\Shared\\_Layout.cshtml.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-02-05T11:11:42.739Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "_ValidationScriptsPartial.cshtml",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Mini_Site_Web\\Mini_Site_Web\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "RelativeDocumentMoniker": "Mini_Site_Web\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Mini_Site_Web\\Mini_Site_Web\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "RelativeToolTip": "Mini_Site_Web\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-05T11:11:36.133Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Mini_Site_Web\\Mini_Site_Web\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Mini_Site_Web\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Mini_Site_Web\\Mini_Site_Web\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Mini_Site_Web\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAkwDgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-05T11:09:22.797Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Mini_Site_Web\\Mini_Site_Web\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "Mini_Site_Web\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Mini_Site_Web\\Mini_Site_Web\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "Mini_Site_Web\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAQwCoAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T11:08:55.189Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Sales.cshtml",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Mini_Site_Web\\Mini_Site_Web\\Views\\Sales\\Sales.cshtml",
+              "RelativeDocumentMoniker": "Mini_Site_Web\\Views\\Sales\\Sales.cshtml",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Mini_Site_Web\\Mini_Site_Web\\Views\\Sales\\Sales.cshtml",
+              "RelativeToolTip": "Mini_Site_Web\\Views\\Sales\\Sales.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-05T11:07:34.569Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Privacy.cshtml",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Mini_Site_Web\\Mini_Site_Web\\Views\\Privacy\\Privacy.cshtml",
+              "RelativeDocumentMoniker": "Mini_Site_Web\\Views\\Privacy\\Privacy.cshtml",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Mini_Site_Web\\Mini_Site_Web\\Views\\Privacy\\Privacy.cshtml",
+              "RelativeToolTip": "Mini_Site_Web\\Views\\Privacy\\Privacy.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-05T10:59:06.927Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "About.cshtml",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Mini_Site_Web\\Mini_Site_Web\\Views\\About\\About.cshtml",
+              "RelativeDocumentMoniker": "Mini_Site_Web\\Views\\About\\About.cshtml",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Mini_Site_Web\\Mini_Site_Web\\Views\\About\\About.cshtml",
+              "RelativeToolTip": "Mini_Site_Web\\Views\\About\\About.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-05T10:56:34.148Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Mini_Site_Web\\Mini_Site_Web\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Mini_Site_Web\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Mini_Site_Web\\Mini_Site_Web\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Mini_Site_Web\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAkwGkAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-05T10:46:43.887Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+﻿@model Mini_Site_Web.Models.House
+
+@{
+    ViewData["Title"] = "Détail du bien";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <img src="@Model.ImageUrl"
+             class="img-fluid rounded shadow-sm"
+             alt="Maison @Model.Address">
+    </div>
+
+    <div class="col-md-6">
+        <h1 class="mb-3">@Model.Address</h1>
+
+        <h3 class="text-primary mb-4">
+            @Model.Price.ToString("N0") €
+        </h3>
+
+        <p>
+            Belle maison située à @Model.Address.
+            Plus de détails à venir…
+        </p>
+
+        <a asp-controller="Sales" asp-action="Index" class="btn btn-outline-secondary">
+            ← Retour aux ventes
+        </a>
+    </div>
+</div>
