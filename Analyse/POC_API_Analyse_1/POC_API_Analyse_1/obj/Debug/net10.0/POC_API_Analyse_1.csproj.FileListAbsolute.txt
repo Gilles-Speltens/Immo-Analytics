@@ -43,3 +43,4 @@ C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Analyse\POC_API_Analyse_1\P
 C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Analyse\POC_API_Analyse_1\POC_API_Analyse_1\bin\Debug\net10.0\Serilog.Sinks.Console.dll
 C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Analyse\POC_API_Analyse_1\POC_API_Analyse_1\bin\Debug\net10.0\Serilog.Sinks.Debug.dll
 C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Analyse\POC_API_Analyse_1\POC_API_Analyse_1\bin\Debug\net10.0\Serilog.Sinks.File.dll
+C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Analyse\POC_API_Analyse_1\POC_API_Analyse_1\bin\Debug\net10.0\Serilog.Sinks.Async.dll

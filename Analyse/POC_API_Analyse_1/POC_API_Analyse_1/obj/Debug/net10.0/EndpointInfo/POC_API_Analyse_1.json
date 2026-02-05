@@ -48,7 +48,7 @@
       "RequestLog": {
         "required": [
           "date",
-          "path",
+          "url",
           "urlReferrer",
           "action",
           "sessionId",
@@ -60,7 +60,7 @@
             "type": "string",
             "format": "date-time"
           },
-          "path": {
+          "url": {
             "type": "string"
           },
           "urlReferrer": {

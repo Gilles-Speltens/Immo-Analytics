@@ -2,7 +2,7 @@
 {
     public record RequestLogDto(
         DateTimeOffset Date,
-        string Path,
+        string Url,
         string? UrlReferrer,
         string? Action,
         string? SessionId,

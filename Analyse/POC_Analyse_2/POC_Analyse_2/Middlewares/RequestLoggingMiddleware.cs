@@ -1,5 +1,6 @@
 ﻿using POC_Analyse_2.Models.Dto;
 using Serilog;
+using System;
 using System.Buffers;
 using System.Text;
 using System.Text.Json;
@@ -38,22 +39,12 @@ namespace POC_Analyse_2.Middlewares
 
                 var log = new RequestLogDto(
                     DateTimeOffset.Now,
-                    Path: context.Request.Path,
-                    UrlReferrer: context.Request.Headers.Referer.ToString(),
+                    Url: $"{context.Request.Scheme}://{context.Request.Host}{context.Request.Path}",
+                    UrlReferrer: context.Request.Headers.Referer.ToString() == "" ? "null" : context.Request.Headers.Referer.ToString(),
                     Action: action,
                     SessionId: context.Session.Id,
                     UserAgent: context.Request.Headers["User-Agent"].FirstOrDefault() ?? "null"
                 );
-
-                //Log.Information(
-                //    "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} - {Path} - {UrlReferrer} - {Action} - {SessionId} - {UserAgent}",
-                //    DateTimeOffset.Now,
-                //    context.Request.Path,
-                //    context.Request.Headers.Referer.ToString(),
-                //    bodyStream.First(),
-                //    context.Session.Id,
-                //    context.Request.Headers.UserAgent
-                //);
 
                 var json = JsonSerializer.Serialize(log);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");

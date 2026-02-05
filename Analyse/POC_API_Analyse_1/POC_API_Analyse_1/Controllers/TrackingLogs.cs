@@ -10,18 +10,17 @@ namespace POC_API_Analyse_1.Controllers
         [HttpPost]
         public IActionResult PostRequest(RequestLog log)
         {
-            Console.WriteLine("test");
             Log.Information(
                     "{DateTime} - {Path} - {UrlReferrer} - {Action} - {SessionId} - {UserAgent}",
                     log.Date,
-                    log.Path,
+                    log.Url,
                     log.UrlReferrer,
                     log.Action,
                     log.SessionId,
                     log.UserAgent
                 );
 
-            return Ok( );
+            return Ok();
         }
 
         //[HttpPost]

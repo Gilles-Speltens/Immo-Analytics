@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "AwDK7M0NrFc=",
+  "dgSpecHash": "HmKV9jhiTfU=",
   "success": true,
   "projectFilePath": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Analyse\\POC_API_Analyse_1\\POC_API_Analyse_1\\POC_API_Analyse_1.csproj",
   "expectedPackageFiles": [
@@ -13,6 +13,7 @@
     "C:\\Users\\gille\\.nuget\\packages\\serilog.extensions.logging\\10.0.0\\serilog.extensions.logging.10.0.0.nupkg.sha512",
     "C:\\Users\\gille\\.nuget\\packages\\serilog.formatting.compact\\3.0.0\\serilog.formatting.compact.3.0.0.nupkg.sha512",
     "C:\\Users\\gille\\.nuget\\packages\\serilog.settings.configuration\\10.0.0\\serilog.settings.configuration.10.0.0.nupkg.sha512",
+    "C:\\Users\\gille\\.nuget\\packages\\serilog.sinks.async\\2.1.0\\serilog.sinks.async.2.1.0.nupkg.sha512",
     "C:\\Users\\gille\\.nuget\\packages\\serilog.sinks.console\\6.1.1\\serilog.sinks.console.6.1.1.nupkg.sha512",
     "C:\\Users\\gille\\.nuget\\packages\\serilog.sinks.debug\\3.0.0\\serilog.sinks.debug.3.0.0.nupkg.sha512",
     "C:\\Users\\gille\\.nuget\\packages\\serilog.sinks.file\\7.0.0\\serilog.sinks.file.7.0.0.nupkg.sha512"

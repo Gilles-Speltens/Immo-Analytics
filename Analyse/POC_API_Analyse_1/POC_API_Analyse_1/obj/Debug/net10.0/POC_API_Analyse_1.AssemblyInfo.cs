@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("POC_API_Analyse_1")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e85a4b0d28038871c17a028082fb0f70d1792604")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0deae70f7d3dbbb8b3f32c0a56497e65d1cf49ce")]
 [assembly: System.Reflection.AssemblyProductAttribute("POC_API_Analyse_1")]
 [assembly: System.Reflection.AssemblyTitleAttribute("POC_API_Analyse_1")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

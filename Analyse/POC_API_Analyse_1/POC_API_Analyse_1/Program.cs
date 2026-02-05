@@ -21,11 +21,11 @@ builder.Services.AddCors(options =>
 
 Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Information()
-                .WriteTo.File(
+                .WriteTo.Async(a => a.File(
                     "Logs/tracking-.log",
                     rollingInterval: RollingInterval.Day,
                     outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} - {Path} - {UrlReferrer} - {Action} - {SessionId} - {UserAgent}{NewLine}"
-                )
+                ))
                 .CreateLogger();
 
 var app = builder.Build();
