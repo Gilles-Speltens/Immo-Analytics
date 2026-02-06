@@ -69,7 +69,9 @@
                             </a>
                         </p>
 
-                        <button class="btn btn-primary btn-sm toggle-btn" data-target="contactForm-@idSafe">
+                        <button class="btn btn-primary btn-sm toggle-btn"
+                                data-action="Click contacte @collaborator.Name"
+                                data-target="contactForm-@idSafe">
                             Plus d'informations
                         </button>
 
@@ -123,6 +125,33 @@
                 } else {
                     form.style.display = 'none';
                 }
+
+                // Envoi POST pour tracker l'action
+                const action = btn.getAttribute('data-action') || 'bouton inconnu';
+                fetch('/Home/Validation', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]')?.value || ''
+                    },
+                    body: action
+                }).catch(err => console.error('Erreur tracking :', err));
+            });
+        });
+
+        document.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href') || 'unknown';
+
+                // Envoie le lien cliqué au controller Home/Validation
+                fetch('/Home/Validation', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]')?.value || ''
+                    },
+                    body: href
+                }).catch(err => console.error('Erreur tracking :', err));
             });
         });
     </script>

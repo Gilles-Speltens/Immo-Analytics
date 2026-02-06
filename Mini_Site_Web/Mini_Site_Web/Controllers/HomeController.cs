@@ -68,5 +68,16 @@ namespace Mini_Site_Web.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        /// <summary>
+        /// Faux contrôleur servent simplement à être contactés lors des useractions,
+        /// afin que le middleware puisse intercepter la requête.
+        /// Le nom ne reflète pas sa véritable fonction afin de ne pas alerter les bloqueurs de publicité.
+        /// </summary>
+        [HttpPost]
+        public IActionResult Validation(string testData)
+        {
+            return new EmptyResult();
+        }
     }
 }
