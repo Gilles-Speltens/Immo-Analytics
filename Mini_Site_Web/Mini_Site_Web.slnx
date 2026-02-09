@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="Mini_Site_Web/Mini_Site_Web.csproj" />
+  <Project Path="Web_Test/Web_Test.csproj" Id="aa3c8326-e5ef-4a74-acb4-f429401a9801" />
 </Solution>

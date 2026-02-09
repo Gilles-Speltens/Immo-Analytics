@@ -1,0 +1,18 @@
+[
+  {
+    "ContainingType": "Tracking_API.Controllers.TrackingDatasController",
+    "Method": "PostRequest",
+    "RelativePath": "TrackingDatas",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "log",
+        "Type": "Tracking_API.Model.Dto.RequestLogDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

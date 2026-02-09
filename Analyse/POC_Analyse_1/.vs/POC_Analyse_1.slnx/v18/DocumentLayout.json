@@ -7,16 +7,16 @@
       "RelativeMoniker": "D:0:0:{EAFB3D3C-8A18-6B3E-1400-C8D0868EA6A4}|POC_Analyse_1\\POC_Analyse_1.csproj|solutionrelative:poc_analyse_1\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{EAFB3D3C-8A18-6B3E-1400-C8D0868EA6A4}|POC_Analyse_1\\POC_Analyse_1.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\analyse\\poc_analyse_1\\poc_analyse_1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EAFB3D3C-8A18-6B3E-1400-C8D0868EA6A4}|POC_Analyse_1\\POC_Analyse_1.csproj|solutionrelative:poc_analyse_1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{EAFB3D3C-8A18-6B3E-1400-C8D0868EA6A4}|POC_Analyse_1\\POC_Analyse_1.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\analyse\\poc_analyse_1\\poc_analyse_1\\models\\logmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EAFB3D3C-8A18-6B3E-1400-C8D0868EA6A4}|POC_Analyse_1\\POC_Analyse_1.csproj|solutionrelative:poc_analyse_1\\models\\logmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EAFB3D3C-8A18-6B3E-1400-C8D0868EA6A4}|POC_Analyse_1\\POC_Analyse_1.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\analyse\\poc_analyse_1\\poc_analyse_1\\models\\dto\\requestlogdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EAFB3D3C-8A18-6B3E-1400-C8D0868EA6A4}|POC_Analyse_1\\POC_Analyse_1.csproj|solutionrelative:poc_analyse_1\\models\\dto\\requestlogdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EAFB3D3C-8A18-6B3E-1400-C8D0868EA6A4}|POC_Analyse_1\\POC_Analyse_1.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\analyse\\poc_analyse_1\\poc_analyse_1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EAFB3D3C-8A18-6B3E-1400-C8D0868EA6A4}|POC_Analyse_1\\POC_Analyse_1.csproj|solutionrelative:poc_analyse_1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EAFB3D3C-8A18-6B3E-1400-C8D0868EA6A4}|POC_Analyse_1\\POC_Analyse_1.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\analyse\\poc_analyse_1\\poc_analyse_1\\testlogs\\logs_2026-02-03_16-32-19.csv||{8B382828-6202-11D1-8870-0000F87579D2}",
@@ -38,8 +38,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Analyse\\POC_Analyse_1\\POC_Analyse_1\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "POC_Analyse_1\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Analyse\\POC_Analyse_1\\POC_Analyse_1\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "POC_Analyse_1\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-03T09:16:29.458Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 4,
@@ -54,7 +67,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "RequestLogDto.cs",
               "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Analyse\\POC_Analyse_1\\POC_Analyse_1\\Models\\DTO\\RequestLogDto.cs",
               "RelativeDocumentMoniker": "POC_Analyse_1\\Models\\DTO\\RequestLogDto.cs",
@@ -62,8 +75,7 @@
               "RelativeToolTip": "POC_Analyse_1\\Models\\DTO\\RequestLogDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-03T15:15:58.568Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-03T15:15:58.568Z"
             },
             {
               "$type": "Document",
@@ -79,13 +91,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Analyse\\POC_Analyse_1\\POC_Analyse_1\\Program.cs",
               "RelativeDocumentMoniker": "POC_Analyse_1\\Program.cs",
               "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Analyse\\POC_Analyse_1\\POC_Analyse_1\\Program.cs",
               "RelativeToolTip": "POC_Analyse_1\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAACAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-03T14:28:37.315Z",
               "EditorCaption": ""
@@ -104,7 +116,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "LogManager.cs",
               "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Analyse\\POC_Analyse_1\\POC_Analyse_1\\Models\\LogManager.cs",
               "RelativeDocumentMoniker": "POC_Analyse_1\\Models\\LogManager.cs",
@@ -112,21 +124,7 @@
               "RelativeToolTip": "POC_Analyse_1\\Models\\LogManager.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAA+wDEAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-03T14:20:05.133Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Analyse\\POC_Analyse_1\\POC_Analyse_1\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "POC_Analyse_1\\Controllers\\HomeController.cs",
-              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Analyse\\POC_Analyse_1\\POC_Analyse_1\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "POC_Analyse_1\\Controllers\\HomeController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-03T09:16:29.458Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-03T14:20:05.133Z"
             }
           ]
         }

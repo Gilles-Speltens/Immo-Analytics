@@ -63,14 +63,13 @@
 
                         <p class="card-text text-muted">
                             📞
-                            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-                               target="_blank">
+                            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
                                 @collaborator.Phone
                             </a>
                         </p>
 
                         <button class="btn btn-primary btn-sm toggle-btn"
-                                data-action="Click contacte @collaborator.Name"
+                                data-action="Click contact @collaborator.Name"
                                 data-target="contactForm-@idSafe">
                             Plus d'informations
                         </button>
@@ -126,7 +125,7 @@
                     form.style.display = 'none';
                 }
 
-                // Envoi POST pour tracker l'action
+                // Envoie POST pour tracker l'action du boutton contact
                 const action = btn.getAttribute('data-action') || 'bouton inconnu';
                 fetch('/Home/Validation', {
                     method: 'POST',
@@ -139,20 +138,18 @@
             });
         });
 
+        // Envoie POST pour tracker l'action du clique sur les liens.
         document.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', (e) => {
                 const href = link.getAttribute('href') || 'unknown';
 
-                // Envoie le lien cliqué au controller Home/Validation
-                fetch('/Home/Validation', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]')?.value || ''
-                    },
-                    body: href
-                }).catch(err => console.error('Erreur tracking :', err));
+                const token = document.querySelector('input[name="__RequestVerificationToken"]')?.value || '';
+
+                const data = JSON.stringify({ href });
+
+                navigator.sendBeacon('/Home/Validation', new Blob([data], { type: 'application/json' }));
             });
         });
+
     </script>
 }

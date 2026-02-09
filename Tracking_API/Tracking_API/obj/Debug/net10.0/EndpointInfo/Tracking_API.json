@@ -1,0 +1,82 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Tracking_API | v1",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://localhost:7042"
+    },
+    {
+      "url": "http://localhost:5078"
+    }
+  ],
+  "paths": {
+    "/TrackingDatas": {
+      "post": {
+        "tags": [
+          "TrackingDatas"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestLogDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestLogDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestLogDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "RequestLogDto": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "url": {
+            "type": "string"
+          },
+          "urlReferrer": {
+            "type": "string"
+          },
+          "action": {
+            "type": "string"
+          },
+          "sessionId": {
+            "type": "string"
+          },
+          "userAgent": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "TrackingDatas"
+    }
+  ]
+}

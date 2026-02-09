@@ -1,4 +1,5 @@
 using Mini_Site_Web.Middleware;
+using Mini_Site_Web.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +7,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddSession();
+
+builder.Services.AddSingleton<RequestLogService>(
+    new RequestLogService("https://localhost:7042/TrackingDatas")
+    );
 
 var app = builder.Build();
 
