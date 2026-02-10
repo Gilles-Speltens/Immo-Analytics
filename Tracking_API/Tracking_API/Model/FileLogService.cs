@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Collections.Concurrent;
+using System.Text;
 using System.Text.RegularExpressions;
 using Tracking_API.Model.Dto;
 
@@ -19,9 +20,18 @@ namespace Tracking_API.Model
         private int MaxMinutes = 525600;
 
         private FileStream fs;
-        public FileLogService(int RotationInterval) 
+
+        ConcurrentQueue<string> _logMessages = new ConcurrentQueue<string>();
+
+        private CancellationTokenSource _cts = new CancellationTokenSource();
+        private readonly UTF8Encoding _utf8 = new UTF8Encoding(true);
+
+
+        public FileLogService(IConfiguration configuration) 
         {
-            if(RotationInterval <= 0)
+            int RotationInterval = configuration.GetValue<int>("LogFileRotationIntervalMinutes");
+
+            if (RotationInterval <= 0)
             {
                 throw new ArgumentException("RotationInterval must be postif.");
             } else if (RotationInterval > MaxMinutes)
@@ -34,26 +44,57 @@ namespace Tracking_API.Model
             this.LogFileTimestamp = DateTime.Now;
             this.CompletePath = String.Concat(Path, filterCharacters(LogFileTimestamp.ToString()));
             this.fs = File.OpenWrite(this.CompletePath);
+
+            StartBackgroundWriter();
         }
 
-        public void addEntry(RequestLogDto log)
+        public void addEntryToQueue(RequestLogDto log)
         {
             string stringLog = format(log);
 
-            DateTime time = DateTime.Now;
+            _logMessages.Enqueue(stringLog);
+        }
 
-            if(isExpired(time))
+        private void StartBackgroundWriter()
+        {
+            Task.Run(async () =>
             {
-                LogFileTimestamp = time;
-                CompletePath = String.Concat(Path, filterCharacters(LogFileTimestamp.ToString()));
+                while (!_cts.Token.IsCancellationRequested)
+                {
+                    try
+                    {
+                        DateTime time = DateTime.Now;
+                        if (isExpired(time)) RotateFile(time);
+                        writeLogsFromQueue();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                    // 1 seconde de sleep.
+                    await Task.Delay(1000);
+                }
+            });
+        }
 
-                fs.Close();
-                fs = File.OpenWrite(this.CompletePath);
+        private void writeLogsFromQueue()
+        {
+            while (_logMessages.TryDequeue(out var log))
+            {
+                var bytes = _utf8.GetBytes(log);
+                fs.Write(bytes, 0, bytes.Length);
             }
 
-            Byte[] info = new UTF8Encoding(true).GetBytes(stringLog);
-            fs.Write(info, 0, info.Length);
             fs.Flush();
+        }
+
+        private void RotateFile(DateTime time)
+        {
+            LogFileTimestamp = time;
+            CompletePath = String.Concat(Path, filterCharacters(LogFileTimestamp.ToString()));
+
+            fs.Close();
+            fs = File.OpenWrite(this.CompletePath);
         }
 
         private bool isExpired(DateTime time)
@@ -93,7 +134,7 @@ namespace Tracking_API.Model
 
         private string format(RequestLogDto log)
         {
-            return $"{log.Date} - {log.Url} - {log.UrlReferrer} - {log.Action} - {log.SessionId} - {log.UserAgent}\n";
+            return $"{DateTime.UtcNow} - {log.UserId} - {log.Url} - {log.UrlReferrer} - {log.Action} - {log.LanguageBrowser} - {log.SessionId} - {log.UserAgent}\n";
         }
     }
 }

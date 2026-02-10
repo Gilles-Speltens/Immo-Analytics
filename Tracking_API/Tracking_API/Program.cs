@@ -8,9 +8,7 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
-builder.Services.AddSingleton<FileLogService>(
-    new FileLogService(2)
-    );
+builder.Services.AddSingleton<FileLogService>();
 
 builder.Services.AddCors(options =>
 {

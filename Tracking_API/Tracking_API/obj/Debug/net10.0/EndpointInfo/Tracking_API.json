@@ -51,9 +51,8 @@
       "RequestLogDto": {
         "type": "object",
         "properties": {
-          "date": {
-            "type": "string",
-            "format": "date-time"
+          "userId": {
+            "type": "string"
           },
           "url": {
             "type": "string"
@@ -62,6 +61,9 @@
             "type": "string"
           },
           "action": {
+            "type": "string"
+          },
+          "languageBrowser": {
             "type": "string"
           },
           "sessionId": {

@@ -79,5 +79,11 @@ namespace Mini_Site_Web.Controllers
         {
             return new EmptyResult();
         }
+
+        [HttpPost]
+        public IActionResult Form(string Name, string Email, string Message)
+        {
+            return new EmptyResult();
+        }
     }
 }

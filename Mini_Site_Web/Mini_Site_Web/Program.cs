@@ -8,7 +8,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddSession();
 
-builder.Services.AddSingleton<RequestLogService>(
+builder.Services.AddSingleton(
     new RequestLogService("https://localhost:7042/TrackingDatas")
     );
 

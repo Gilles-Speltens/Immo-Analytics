@@ -1,8 +1,0 @@
-09-02-26 15:49:41 +01:00 - http://localhost:5198/ - null - null - c47b2a0c-3df0-3670-6fab-42a025d4ee31 - Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0
-09-02-26 15:49:47 +01:00 - http://localhost:5198/Home/Validation - http://localhost:5198/ - {"href":"/Sales"} - cf2f2874-2f58-ad7a-3f04-68bbe7c6ec86 - Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0
-09-02-26 15:49:47 +01:00 - http://localhost:5198/Sales - http://localhost:5198/ - null - 3d072335-fb49-cf1c-f2e7-c5b76370771b - Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0
-09-02-26 15:49:47 +01:00 - http://localhost:5198/About - http://localhost:5198/Sales - null - 2b674cb1-8515-4c80-c036-d166646901e0 - Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0
-09-02-26 15:49:48 +01:00 - http://localhost:5198/Privacy - http://localhost:5198/About - null - cfadcd8b-28c9-701e-725b-20eea45973e1 - Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0
-09-02-26 15:49:49 +01:00 - http://localhost:5198/Sales - http://localhost:5198/Privacy - null - ad17dc00-3333-7c20-8a1c-c31f297f8629 - Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0
-09-02-26 15:49:50 +01:00 - http://localhost:5198/Sales/Details/2 - http://localhost:5198/Sales - null - f1bafca9-9aef-f2ed-f18c-5192a2448a93 - Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0
-09-02-26 15:49:52 +01:00 - http://localhost:5198/Sales - http://localhost:5198/Sales/Details/2 - null - f0fe081e-5810-1f3b-7f40-ddb13f39fa17 - Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0

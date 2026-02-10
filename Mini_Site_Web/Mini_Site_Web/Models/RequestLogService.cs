@@ -1,5 +1,6 @@
 ﻿using Mini_Site_Web.Models.Dto;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Text.Json;
 
 namespace Mini_Site_Web.Models
@@ -17,16 +18,24 @@ namespace Mini_Site_Web.Models
 
         public async void sendLog(HttpContext context)
         {
-            //Formatage des logs.
-            var logDto = await CreateRequestLog(context);
+            try
+            {
+                //Formatage des logs.
+                var logDto = await CreateRequestLog(context);
 
-            Console.WriteLine($"{logDto.Date} - {logDto.Url} - {logDto.UrlReferrer} - {logDto.Action} - {logDto.SessionId} - {logDto.UserAgent}\n");
+                Console.WriteLine($"{logDto.UserId} - {logDto.Url} - {logDto.UrlReferrer} - {logDto.Action} - {logDto.LanguageBrowser} - {logDto.SessionId} - {logDto.UserAgent}\n");
 
-            var json = JsonSerializer.Serialize(logDto);
+                var json = JsonSerializer.Serialize(logDto);
 
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            await client.PostAsync(pathAPI, content);
+                await client.PostAsync(pathAPI, content);
+            }
+            catch (Exception ex)
+            {
+                //TODO Demander quoi faire si connection failed.
+            }
+            
         }
 
         /// <summary>
@@ -39,7 +48,7 @@ namespace Mini_Site_Web.Models
             //Contenu du body sous forme de liste de strings.
             var body = await getBody(context.Request);
 
-            var date = DateTimeOffset.Now;
+            var userId = context.Request.Cookies["uid"] ?? "null";
 
             var url = $"{context.Request.Scheme}://{context.Request.Host}{context.Request.Path}";
 
@@ -51,16 +60,19 @@ namespace Mini_Site_Web.Models
                     ? string.Join(" | ", body)
                     : "null";
 
+            var languageBrowser = Regex.Match(context.Request.Headers.AcceptLanguage, @"^[^,]*").Value;
+
             var sessionId = context.Session?.Id ?? "null";
 
             var userAgent = context.Request.Headers["User-Agent"].FirstOrDefault() ?? "null";
 
             return new RequestLogDto
             {
-                Date = date,
+                UserId = userId,
                 Url = url,
                 UrlReferrer = urlReferrer,
                 Action = action,
+                LanguageBrowser = languageBrowser,
                 SessionId = sessionId,
                 UserAgent = userAgent
             };

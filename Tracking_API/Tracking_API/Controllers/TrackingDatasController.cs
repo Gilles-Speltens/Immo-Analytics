@@ -19,7 +19,7 @@ namespace Tracking_API.Controllers
         [HttpPost]
         public ActionResult PostRequest([FromBody] RequestLogDto log)
         {
-            _logService.addEntry(log);
+            _logService.addEntryToQueue(log);
 
             return NoContent();
         }

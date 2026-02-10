@@ -63,7 +63,7 @@
 
                         <p class="card-text text-muted">
                             📞
-                            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+                            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="track-link">
                                 @collaborator.Phone
                             </a>
                         </p>
@@ -76,21 +76,25 @@
 
                         <div class="contact-form mt-3" id="contactForm-@idSafe" style="display:none;">
                             <div class="card card-body shadow-sm">
-                                <form>
+                                <form method="post" action="/Home/Form">
                                     <div class="mb-2">
-                                        <label for="name@idSafe" class="form-label">Votre nom</label>
-                                        <input type="text" class="form-control" id="name@idSafe" placeholder="Votre nom" />
+                                        <label for="name" class="form-label">Votre nom</label>
+                                        <input type="text" class="form-control" id="name" name="Name" placeholder="Votre nom" />
                                     </div>
+
                                     <div class="mb-2">
-                                        <label for="email@idSafe" class="form-label">Email</label>
-                                        <input type="email" class="form-control" id="email@idSafe" placeholder="Email" />
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="email" name="Email" placeholder="Email" />
                                     </div>
+
                                     <div class="mb-2">
-                                        <label for="message@idSafe" class="form-label">Message</label>
-                                        <textarea class="form-control" id="message@idSafe" rows="3" placeholder="Message"></textarea>
+                                        <label for="message" class="form-label">Message</label>
+                                        <textarea class="form-control" id="message" name="Message" rows="3" placeholder="Message"></textarea>
                                     </div>
+
                                     <button type="submit" class="btn btn-success btn-sm w-100">Envoyer</button>
                                 </form>
+
                             </div>
                         </div>
 
@@ -115,6 +119,8 @@
 
 @section Scripts {
     <script>
+        setUserIdCookie()
+
         document.querySelectorAll('.toggle-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 const targetId = btn.getAttribute('data-target');
@@ -139,7 +145,7 @@
         });
 
         // Envoie POST pour tracker l'action du clique sur les liens.
-        document.querySelectorAll('a').forEach(link => {
+        document.querySelectorAll('a.track-link').forEach(link => {
             link.addEventListener('click', (e) => {
                 const href = link.getAttribute('href') || 'unknown';
 

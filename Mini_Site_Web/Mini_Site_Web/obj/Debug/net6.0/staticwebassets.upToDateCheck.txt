@@ -1,6 +1,15 @@
 wwwroot\css\site.css
 wwwroot\favicon.ico
+wwwroot\images\collaborators\collaborator1.jpg
+wwwroot\images\collaborators\collaborator2.jpg
+wwwroot\images\collaborators\collaborator3.jpg
+wwwroot\images\houses\house1.jpg
+wwwroot\images\houses\house2.jpg
+wwwroot\images\houses\house3.jpg
+wwwroot\images\houses\house4.jpg
+wwwroot\images\houses\house5.jpg
 wwwroot\js\site.js
+wwwroot\js\UserIdGenerator.js
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css
@@ -58,11 +67,3 @@ wwwroot\lib\jquery\dist\jquery.js
 wwwroot\lib\jquery\dist\jquery.min.js
 wwwroot\lib\jquery\dist\jquery.min.map
 wwwroot\lib\jquery\LICENSE.txt
-wwwroot\images\collaborators\collaborator3.jpg
-wwwroot\images\collaborators\collaborator2.jpg
-wwwroot\images\collaborators\collaborator1.jpg
-wwwroot\images\houses\house1.jpg
-wwwroot\images\houses\house2.jpg
-wwwroot\images\houses\house3.jpg
-wwwroot\images\houses\house4.jpg
-wwwroot\images\houses\house5.jpg
