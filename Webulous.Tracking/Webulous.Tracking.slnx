@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Common/Common.csproj" Id="332ce3c9-dbc4-406c-bc04-7f3e7de509b4" />
+  <Project Path="Mini_Site_Web/Mini_Site_Web/Mini_Site_Web.csproj" />
+  <Project Path="Tracking_API/Tracking_API/Tracking_API.csproj" />
+</Solution>

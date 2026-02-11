@@ -1,0 +1,44 @@
+100 requêtes envoyées les une à la suite des autres :
+----- DATA -----
+Duration : 0,0169485
+Number of processed logs : 100
+
+1000 requêtes envoyées les une à la suite des autres :
+----- DATA -----
+Duration : 0,5707456
+Number of processed logs : 1000
+
+10 000 requêtes envoyées les une à la suite des autres :
+----- DATA -----
+Duration : 3,2872853
+Number of processed logs : 10000
+
+100 000 requêtes envoyées les une à la suite des autres (Plus de RAM utilisé que Producer/Consumer algo):
+----- DATA -----
+Duration : 37,2817297
+Number of processed logs : 100000
+
+100 requêtes envoyées en même temps :
+----- DATA -----
+Duration : 0,0245315
+Number of processed logs : 100
+
+1000 requêtes envoyées en même temps :
+----- DATA -----
+Duration : 0,0886694
+Number of processed logs : 1000
+
+10 000 requêtes envoyées en même temps :
+----- DATA -----
+Duration : 0,7349949
+Number of processed logs : 10000
+
+100 000 requêtes envoyées en même temps :
+----- DATA -----
+Duration : 4,6410114
+Number of processed logs : 100000
+
+1 000 000 requêtes envoyées en même temps :
+----- DATA -----
+Duration : 23,7790124
+Number of processed logs : 1000000
