@@ -1,4 +1,5 @@
 using Tracking_API.Model;
+using Tracking_API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,9 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 builder.Services.AddSingleton<FileLogService>();
+builder.Services.AddSingleton(
+    new IPManager(builder.Configuration["PathToWhiteFile"])
+    );
 
 builder.Services.AddCors(options =>
 {
@@ -34,6 +38,8 @@ app.UseCors("AllowMvc");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseMiddleware<AdminSafeListMiddleware>();
 
 app.MapControllers();
 

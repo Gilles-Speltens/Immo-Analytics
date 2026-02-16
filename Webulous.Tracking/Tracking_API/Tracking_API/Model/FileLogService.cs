@@ -54,7 +54,7 @@ namespace Tracking_API.Model
             this._logFileRotationIntervalMinutes = rotationInterval;
             this._path = "Logs/tracking-";
             this._logFileTimeStamp = DateTime.Now;
-            this._completePath = String.Concat(_path, FilterCharacters(_logFileTimeStamp.ToString()));
+            this._completePath = String.Concat(_path, FilterCharacters(_logFileTimeStamp.ToString()), ".log");
 
             this._analyser = new PerformanceAnalyser();
 
@@ -89,7 +89,7 @@ namespace Tracking_API.Model
                     {
                         DateTime time = DateTime.Now;
                         if (IsExpired(time)) RotateFile(time);
-                        WriteLogsFromQueue();
+                        if (!_logMessages.IsEmpty)WriteLogsFromQueue();
                     }
                     catch (Exception ex)
                     {
@@ -137,7 +137,7 @@ namespace Tracking_API.Model
         private void RotateFile(DateTime time)
         {
             _logFileTimeStamp = time;
-            _completePath = String.Concat(_path, FilterCharacters(_logFileTimeStamp.ToString()));
+            _completePath = String.Concat(_path, FilterCharacters(_logFileTimeStamp.ToString()), ".log");
 
             _analyser.NewFile();
         }

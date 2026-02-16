@@ -14,5 +14,57 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Tracking_API.Controllers.TrackingDatasController",
+    "Method": "GetIps",
+    "RelativePath": "TrackingDatas",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.String[]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Tracking_API.Controllers.TrackingDatasController",
+    "Method": "AddIp",
+    "RelativePath": "TrackingDatas/AddIp",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ip",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Tracking_API.Controllers.TrackingDatasController",
+    "Method": "DeleteIp",
+    "RelativePath": "TrackingDatas/DeleteIp",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ip",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

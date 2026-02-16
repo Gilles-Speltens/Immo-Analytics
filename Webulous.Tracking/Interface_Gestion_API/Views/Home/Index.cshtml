@@ -1,0 +1,86 @@
+﻿@model IpListViewModel
+@{
+    ViewData["Title"] = "Gestion des adresses IP";
+}
+
+<div class="container">
+
+    <!-- Formulaire d'ajout -->
+    <div class="mb-4">
+        <h2>Ajouter une adresse IP</h2>
+        <form asp-action="AddIp" method="post" style="max-width:400px;">
+            <div class="form-group">
+                <label for="NewIp">Nouvelle adresse IP :</label>
+                <input type="text" class="form-control" id="ip" name="Ip" placeholder="ex : 192.168.1.12 ou ::1" required />
+            </div>
+
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger">
+                    @TempData["Error"]
+                </div>
+            }
+
+            <button type="submit" class="btn btn-primary mt-2">Ajouter</button>
+        </form>
+    </div>
+
+    <hr />
+
+    <!-- Listes côte à côte -->
+    <div class="row">
+        <!-- IPv4 -->
+        <div class="col-md-6">
+            <h2>Liste IPv4</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Adresse IP</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var ip in Model.IpV4)
+                    {
+                        <tr>
+                            <td>@ip</td>
+                            <td>
+                                <form asp-action="DeleteIp" method="post" style="display:inline;">
+                                    <input type="hidden" name="Ip" value="@ip" />
+                                    <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <!-- IPv6 -->
+        <div class="col-md-6">
+            <h2>Liste IPv6</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Adresse IP</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var ip in Model.IpV6)
+                    {
+                        <tr>
+                            <td>@ip</td>
+                            <td>
+                                <form asp-action="DeleteIp" method="post" style="display:inline;">
+                                    <input type="hidden" name="Ip" value="@ip" />
+                                    <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
