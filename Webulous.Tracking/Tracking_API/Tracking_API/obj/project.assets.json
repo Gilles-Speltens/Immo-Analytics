@@ -36,6 +36,16 @@
             "related": ".pdb;.xml"
           }
         }
+      },
+      "Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Common.dll": {}
+        }
       }
     }
   },
@@ -75,10 +85,16 @@
         "microsoft.openapi.2.0.0.nupkg.sha512",
         "microsoft.openapi.nuspec"
       ]
+    },
+    "Common/1.0.0": {
+      "type": "project",
+      "path": "../../Common/Common.csproj",
+      "msbuildProject": "../../Common/Common.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net10.0": [
+      "Common >= 1.0.0",
       "Microsoft.AspNetCore.OpenApi >= 10.0.2"
     ]
   },
@@ -113,7 +129,11 @@
       "frameworks": {
         "net10.0": {
           "targetAlias": "net10.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Common\\Common.csproj": {
+              "projectPath": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Common\\Common.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -156,7 +176,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.AspNetCore": "(,10.0.32767]",
           "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",

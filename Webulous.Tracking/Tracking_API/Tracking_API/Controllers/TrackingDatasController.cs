@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Common;
+using Microsoft.AspNetCore.Mvc;
 using System.Text;
 using Tracking_API.Model;
-using Tracking_API.Model.Dto;
 
 namespace Tracking_API.Controllers
 {
@@ -30,7 +30,7 @@ namespace Tracking_API.Controllers
         public string[] GetIps()
         {
             
-            return _ipManager.getSafeList();
+            return _ipManager.GetSafeList();
         }
 
         [HttpPost("AddIp")]
@@ -38,7 +38,7 @@ namespace Tracking_API.Controllers
         {
             Console.WriteLine("Add : " + ip);
             _ipManager.AddIpToSafeList(ip);
-            return Ok(_ipManager.getSafeList());
+            return Ok(_ipManager.GetSafeList());
         }
 
         [HttpPost("DeleteIp")]
@@ -46,7 +46,7 @@ namespace Tracking_API.Controllers
         {
             Console.WriteLine("Delete : " + ip);
             _ipManager.RemoveIpToSafeList(ip);
-            return Ok(_ipManager.getSafeList());
+            return Ok(_ipManager.GetSafeList());
         }
     }
 }

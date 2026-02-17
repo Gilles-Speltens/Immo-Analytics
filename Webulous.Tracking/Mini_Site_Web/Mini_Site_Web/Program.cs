@@ -9,7 +9,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSession();
 
 builder.Services.AddSingleton(
-    new RequestLogService("https://localhost:7042/TrackingDatas")
+    new RequestLogService(builder.Configuration["APIPath"])
     );
 
 var app = builder.Build();

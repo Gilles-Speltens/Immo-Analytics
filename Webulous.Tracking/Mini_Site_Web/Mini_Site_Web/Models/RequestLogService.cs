@@ -1,4 +1,4 @@
-﻿using Mini_Site_Web.Models.Dto;
+﻿using Common;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Text.Json;
@@ -7,33 +7,36 @@ namespace Mini_Site_Web.Models
 {
     public class RequestLogService
     {
-        private readonly HttpClient client;
-        private string pathAPI;
+        private readonly HttpClient _client;
+        private string _pathAPI;
 
         public RequestLogService(string pathAPI)
         {
-            this.pathAPI = pathAPI;
-            client = new HttpClient();
+            this._pathAPI = pathAPI;
+            _client = new HttpClient();
         }
 
-        public async void sendLog(HttpContext context)
+        /// <summary>
+        /// Envoye une requête à l'API avec dans le corp de la requête les logs au format RequestLog
+        /// converti au JSON.
+        /// </summary>
+        /// <param name="context">Contexte HTTP de la requête en cours.</param>
+        public async void SendLog(HttpContext context)
         {
             try
             {
                 //Formatage des logs.
                 var logDto = await CreateRequestLog(context);
 
-                Console.WriteLine($"{logDto.UserId} - {logDto.Url} - {logDto.UrlReferrer} - {logDto.Action} - {logDto.LanguageBrowser} - {logDto.SessionId} - {logDto.UserAgent}\n");
-
                 var json = JsonSerializer.Serialize(logDto);
 
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                await client.PostAsync(pathAPI, content);
+                await _client.PostAsync(_pathAPI, content);
             }
             catch (Exception ex)
             {
-                //TODO Demander quoi faire si connection failed.
+                Console.WriteLine("Failed to send the Logs to the API");
             }
             
         }
@@ -46,7 +49,7 @@ namespace Mini_Site_Web.Models
         public async Task<RequestLogDto> CreateRequestLog(HttpContext context)
         {
             //Contenu du body sous forme de liste de strings.
-            var body = await getBody(context.Request);
+            var body = await GetBody(context.Request);
 
             var userId = context.Request.Cookies["uid"] ?? "null";
 
@@ -83,7 +86,7 @@ namespace Mini_Site_Web.Models
         /// </summary>
         /// <param name="request">La requête HTTP à lire.</param>
         /// <returns>Liste de lignes du corps de la requête, ou ["null"] si vide.</returns>
-        private async Task<List<string>> getBody(HttpRequest request)
+        private async Task<List<string>> GetBody(HttpRequest request)
         {
             var bodyLines = new List<string>();
 

@@ -9,7 +9,7 @@
     "Parameters": [
       {
         "Name": "log",
-        "Type": "Tracking_API.Model.Dto.RequestLogDto",
+        "Type": "Common.RequestLogDto",
         "IsRequired": true
       }
     ],

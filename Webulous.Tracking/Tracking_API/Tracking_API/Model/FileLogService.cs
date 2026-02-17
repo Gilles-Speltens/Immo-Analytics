@@ -1,8 +1,8 @@
-﻿using System.Collections.Concurrent;
+﻿using Common;
+using System.Collections.Concurrent;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
-using Tracking_API.Model.Dto;
 
 namespace Tracking_API.Model
 {
@@ -19,7 +19,7 @@ namespace Tracking_API.Model
 
         private DateTime _logFileTimeStamp;
 
-        private string _completePath;
+        private FileManager _fileManager;
 
         // En minutes
         private int _logFileRotationIntervalMinutes;
@@ -30,8 +30,6 @@ namespace Tracking_API.Model
         ConcurrentQueue<string> _logMessages = new ConcurrentQueue<string>();
 
         private CancellationTokenSource _cts = new CancellationTokenSource();
-
-        private PerformanceAnalyser _analyser;
 
         /// <summary>
         /// Initialise le service de log.
@@ -54,9 +52,7 @@ namespace Tracking_API.Model
             this._logFileRotationIntervalMinutes = rotationInterval;
             this._path = "Logs/tracking-";
             this._logFileTimeStamp = DateTime.Now;
-            this._completePath = String.Concat(_path, FilterCharacters(_logFileTimeStamp.ToString()), ".log");
-
-            this._analyser = new PerformanceAnalyser();
+            this._fileManager = new FileManager(String.Concat(_path, FilterCharacters(_logFileTimeStamp.ToString()), ".log"));
 
             StartBackgroundWriter();
         }
@@ -89,7 +85,7 @@ namespace Tracking_API.Model
                     {
                         DateTime time = DateTime.Now;
                         if (IsExpired(time)) RotateFile(time);
-                        if (!_logMessages.IsEmpty)WriteLogsFromQueue();
+                        if (!_logMessages.IsEmpty) await _fileManager.AppendFromQueue(_logMessages);
                     }
                     catch (Exception ex)
                     {
@@ -102,44 +98,13 @@ namespace Tracking_API.Model
         }
 
         /// <summary>
-        /// Vide la queue et écrit tous les logs dans le fichier courant.
-        /// Mesure également le temps d'exécution pour analyse.
-        /// </summary>
-        private void WriteLogsFromQueue()
-        {
-            // Début Analyse
-            int queueSize = _logMessages.Count;
-            TimeOnly start = TimeOnly.FromDateTime(DateTime.Now);
-            // Fin Analyse
-
-            var _fs = File.AppendText(_completePath);
-            while (_logMessages.TryDequeue(out var log))
-            {
-                _fs.Write(log);
-
-                _analyser.IncreaseLogs();
-            }
-
-            _fs.Flush();
-            _fs.Close();
-
-            // Début Analyse
-            TimeOnly end = TimeOnly.FromDateTime(DateTime.Now);
-            TimeSpan elapsed = end - start;
-            _analyser.AddQueue(queueSize, elapsed);
-            // Fin Analyse
-        }
-
-        /// <summary>
         /// Crée un nouveau fichier de log lorsque l'intervalle est dépassé.
         /// </summary>
         /// <param name="time">Timestamp courant.</param>
         private void RotateFile(DateTime time)
         {
             _logFileTimeStamp = time;
-            _completePath = String.Concat(_path, FilterCharacters(_logFileTimeStamp.ToString()), ".log");
-
-            _analyser.NewFile();
+            _fileManager.changePath(String.Concat(_path, FilterCharacters(_logFileTimeStamp.ToString()), ".log"));
         }
 
         private bool IsExpired(DateTime time)
@@ -155,7 +120,7 @@ namespace Tracking_API.Model
 
         private string Format(RequestLogDto log)
         {
-            return $"{DateTime.UtcNow} - {log.UserId} - {log.Url} - {log.UrlReferrer} - {log.Action} - {log.LanguageBrowser} - {log.SessionId} - {log.UserAgent}\n";
+            return $"{DateTime.UtcNow} - {log.UserId} - {log.Url} - {log.UrlReferrer} - {log.Action} - {log.LanguageBrowser} - {log.SessionId} - {log.UserAgent}";
         }
     }
 }

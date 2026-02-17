@@ -1,7 +1,14 @@
+using Interface_Gestion_API.Models;
+using System.Runtime;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.Configure<ApiSettings>(builder.Configuration);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddHttpClient();
 
 var app = builder.Build();
 

@@ -1,5 +1,6 @@
 using Interface_Gestion_API.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Net;
@@ -10,65 +11,110 @@ using System.Text.Json;
 
 namespace Interface_Gestion_API.Controllers
 {
+    /// <summary>
+    /// Controller principal de l'application qui gère l'affichage,
+    /// l'ajout et la suppression d'adresses IP via l'API externe.
+    /// </summary>
     public class HomeController : Controller
     {
-        private readonly HttpClient _client = new HttpClient();
-        private static readonly IpListViewModel _ipList = new IpListViewModel();
+        private readonly HttpClient _client;
+        private readonly IpListViewModel _ipList = new IpListViewModel();
+        private readonly string _APIPath;
+        private readonly ILogger<HomeController> _logger;
 
+        /// <summary>
+        /// Constructeur du controller avec injection de dépendances.
+        /// </summary>
+        /// <param name="options">Configuration API (ApiSettings)</param>
+        /// <param name="factory">Factory pour créer des HttpClient</param>
+        /// <param name="logger">Logger pour tracer les actions et erreurs</param>
+        public HomeController(IOptions<ApiSettings> options, IHttpClientFactory factory, ILogger<HomeController> logger)
+        {
+            this._client = factory.CreateClient();
+            this._APIPath = options.Value.APIPath;
+            this._logger = logger;
+        }
+
+        /// <summary>
+        /// Page principale affichant la liste des IPs.
+        /// Récupère la liste depuis l'API.
+        /// </summary>
+        /// <returns>Vue avec le modèle IpListViewModel</returns>
         public async Task<IActionResult> Index()
         {
-            if(!_ipList.IpV4.Any() && !_ipList.IpV6.Any())
-            {
-                var response = await _client.GetAsync("https://localhost:7042/TrackingDatas");
+            var response = await _client.GetAsync(_APIPath);
 
-                if (response.IsSuccessStatusCode)
-                {
-                    RefreshListIp(response);
-                }
+            if (response.IsSuccessStatusCode)
+            {
+                await RefreshListIp(response);
             }
 
             return View(_ipList);
         }
 
+        /// <summary>
+        /// Ajoute une IP à l'API externe via POST.
+        /// </summary>
+        /// <param name="ip">Adresse IP à ajouter</param>
+        /// <returns>Redirection vers Index</returns>
         [HttpPost]
         public async Task<IActionResult> AddIp(string ip)
         {
             if(checkIpValidity(ip))
             {
-                var json = JsonSerializer.Serialize(ip);
-
-                var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-                var response = await _client.PostAsync("https://localhost:7042/TrackingDatas/AddIp", content);
-
-                if (response.IsSuccessStatusCode)
+                try
                 {
-                    RefreshListIp(response);
+                    var json = JsonSerializer.Serialize(ip);
 
-                    // RedirectToAction pour éviter d'avoir des infos dans l'url.
-                    return RedirectToAction("Index");
+                    var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                    var path = String.Concat(_APIPath, "/AddIp");
+
+                    var response = await _client.PostAsync(path, content);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return RedirectToAction("Index");
+                    }
                 }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex.Message, "Erreur lors de l'appel API pour l'IP {Ip}", ip);
+                    TempData["Error"] = "API Injoignable";
+                }
+                
             }
 
             TempData["Error"] = "Adresse IP invalide";
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Supprime une IP de l'API externe via POST.
+        /// </summary>
+        /// <param name="ip">Adresse IP à supprimer</param>
+        /// <returns>Redirection vers Index</returns>
         [HttpPost]
         public async Task<IActionResult> DeleteIp(string ip)
         {
             if(checkIpValidity(ip))
             {
-                var json = JsonSerializer.Serialize(ip);
-
-                var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-                var response = await _client.PostAsync("https://localhost:7042/TrackingDatas/DeleteIp", content);
-
-                if (response.IsSuccessStatusCode)
+                try
                 {
-                    RefreshListIp(response);
+                    var json = JsonSerializer.Serialize(ip);
+
+                    var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                    var path = String.Concat(_APIPath, "/DeleteIp");
+
+                    var response = await _client.PostAsync(path, content);
                 }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex.ToString(), "Erreur lors de l'appel API pour l'IP {Ip}", ip);
+                    TempData["Error"] = "API Injoignable";
+                }
+                
             }
             return RedirectToAction("Index");
         }
@@ -79,7 +125,11 @@ namespace Interface_Gestion_API.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        private async void RefreshListIp(HttpResponseMessage response)
+        /// Met à jour le modèle IpListViewModel à partir de la réponse de l'API.
+        /// Sépare IPv4 et IPv6 et enlève le suffixe /32 ou /128 si nécessaire.
+        /// </summary>
+        /// <param name="response">Réponse HTTP de l'API contenant une liste JSON d'IP</param>
+        private async Task RefreshListIp(HttpResponseMessage response)
         {
             var list = await JsonSerializer.DeserializeAsync<List<string>>(
                 await response.Content.ReadAsStreamAsync()
@@ -116,6 +166,12 @@ namespace Interface_Gestion_API.Controllers
             }
         }
 
+        /// <summary>
+        /// Vérifie si une adresse IP ou un subnet est valide.
+        /// Supporte IPv4 et IPv6.
+        /// </summary>
+        /// <param name="ip">Adresse IP ou subnet au format "IP" ou "IP/Prefix"</param>
+        /// <returns>true si valide, false sinon</returns>
         private bool checkIpValidity(string ip)
         {
             if (string.IsNullOrWhiteSpace(ip))

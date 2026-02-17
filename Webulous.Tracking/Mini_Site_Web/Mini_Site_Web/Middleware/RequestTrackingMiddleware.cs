@@ -1,7 +1,4 @@
 ﻿using Mini_Site_Web.Models;
-using Mini_Site_Web.Models.Dto;
-using System.Text;
-using System.Text.Json;
 
 namespace Mini_Site_Web.Middleware
 {
@@ -34,7 +31,7 @@ namespace Mini_Site_Web.Middleware
         {
             if (context.Request.Method == "GET" || context.Request.Method == "POST")
             {
-                _logService.sendLog(context);
+                _logService.SendLog(context);
             }
 
             await _next(context);

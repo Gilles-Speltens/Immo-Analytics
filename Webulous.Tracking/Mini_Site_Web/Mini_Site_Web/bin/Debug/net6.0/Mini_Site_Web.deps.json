@@ -7,14 +7,30 @@
   "targets": {
     ".NETCoreApp,Version=v6.0": {
       "Mini_Site_Web/1.0.0": {
+        "dependencies": {
+          "Common": "1.0.0"
+        },
         "runtime": {
           "Mini_Site_Web.dll": {}
+        }
+      },
+      "Common/1.0.0": {
+        "runtime": {
+          "Common.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }
   },
   "libraries": {
     "Mini_Site_Web/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Common/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

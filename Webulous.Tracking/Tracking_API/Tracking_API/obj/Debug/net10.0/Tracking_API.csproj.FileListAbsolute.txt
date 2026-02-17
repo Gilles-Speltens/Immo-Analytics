@@ -68,3 +68,5 @@ C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Tracking_
 C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Tracking_API\Tracking_API\obj\Debug\net10.0\Tracking_API.pdb
 C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Tracking_API\Tracking_API\obj\Debug\net10.0\Tracking_API.genruntimeconfig.cache
 C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Tracking_API\Tracking_API\obj\Debug\net10.0\ref\Tracking_API.dll
+C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Tracking_API\Tracking_API\bin\Debug\net10.0\Common.dll
+C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Tracking_API\Tracking_API\bin\Debug\net10.0\Common.pdb
