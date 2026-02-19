@@ -61,7 +61,6 @@ C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Tracking_
 C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Tracking_API\Tracking_API\obj\Debug\net10.0\staticwebassets.development.json
 C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Tracking_API\Tracking_API\obj\Debug\net10.0\staticwebassets.build.endpoints.json
 C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Tracking_API\Tracking_API\obj\Debug\net10.0\swae.build.ex.cache
-C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Tracking_API\Tracking_API\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
 C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Tracking_API\Tracking_API\obj\Debug\net10.0\Tracking.C66B354D.Up2Date
 C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Tracking_API\Tracking_API\obj\Debug\net10.0\Tracking_API.dll
 C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Tracking_API\Tracking_API\obj\Debug\net10.0\refint\Tracking_API.dll
@@ -70,3 +69,5 @@ C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Tracking_
 C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Tracking_API\Tracking_API\obj\Debug\net10.0\ref\Tracking_API.dll
 C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Tracking_API\Tracking_API\bin\Debug\net10.0\Common.dll
 C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Tracking_API\Tracking_API\bin\Debug\net10.0\Common.pdb
+C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Tracking_API\Tracking_API\bin\Debug\net10.0\dotnet-tools.json
+C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Tracking_API\Tracking_API\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt

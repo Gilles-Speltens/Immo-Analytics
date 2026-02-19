@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Common;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Tracking_API.Model
@@ -10,15 +11,15 @@ namespace Tracking_API.Model
     public class IPManager
     {
         private readonly List<IPSubnet> _whiteList = new List<IPSubnet>();
-        private readonly FileManager _fileManager;
+        private readonly IFileManager _fileManager;
 
         /// <summary>
         /// Initialise l'IPManager et charge la whitelist depuis le fichier spécifié.
         /// </summary>
         /// <param name="whiteListPath">Chemin du fichier contenant la whitelist</param>
-        public IPManager(string whiteListPath)
+        public IPManager(IFileManager fileManager)
         {
-            _fileManager = new FileManager(whiteListPath);
+            _fileManager = fileManager;
 
             try
             {
@@ -37,7 +38,7 @@ namespace Tracking_API.Model
         /// <param name="ip">IP à ajouter</param>
         public void AddIpToSafeList(string ip)
         {
-            if (!_whiteList.Any(x => x.GetIp().Equals(ip)))
+            if (!_whiteList.Any(x => x.Matches(ip)))
             {
                 _whiteList.Add(new IPSubnet(ip));
                 SaveToFile();
@@ -63,24 +64,10 @@ namespace Tracking_API.Model
         /// Sauvegarde la liste mise à jour dans le fichier.
         /// </summary>
         /// <param name="ip">IP ou subnet à supprimer</param>
-        public void RemoveIpToSafeList(string ip)
+        public void RemoveIpFromSafeList(string ip)
         {
-            var parts = ip.Split('/');
-            if (parts.Length == 1)
-            {
-                if(ip.Contains(":"))
-                {
-                    _whiteList.RemoveAll(subnet => subnet.GetIp() == String.Concat(ip, "/128"));
-                } else
-                {
-                    _whiteList.RemoveAll(subnet => subnet.GetIp() == String.Concat(ip, "/32"));
-                }
-                SaveToFile();
-            } else
-            {
-                _whiteList.RemoveAll(subnet => subnet.GetIp() == ip);
-                SaveToFile();
-            }  
+            _whiteList.RemoveAll(subnet => subnet.Matches(ip));
+            SaveToFile();
         }
 
         /// Vérifie si une IP donnée appartient à la whitelist.

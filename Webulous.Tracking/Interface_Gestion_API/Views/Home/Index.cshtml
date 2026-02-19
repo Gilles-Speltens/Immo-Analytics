@@ -43,10 +43,10 @@
                     @foreach (var ip in Model.IpV4)
                     {
                         <tr>
-                            <td>@ip</td>
+                            <td>@ip.GetIp()</td>
                             <td>
                                 <form asp-action="DeleteIp" method="post" style="display:inline;">
-                                    <input type="hidden" name="Ip" value="@ip" />
+                                    <input type="hidden" name="Ip" value="@ip.GetIp()" />
                                     <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
                                 </form>
                             </td>
@@ -70,10 +70,10 @@
                     @foreach (var ip in Model.IpV6)
                     {
                         <tr>
-                            <td>@ip</td>
+                            <td>@ip.GetIp()</td>
                             <td>
                                 <form asp-action="DeleteIp" method="post" style="display:inline;">
-                                    <input type="hidden" name="Ip" value="@ip" />
+                                    <input type="hidden" name="Ip" value="@ip.GetIp()" />
                                     <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
                                 </form>
                             </td>

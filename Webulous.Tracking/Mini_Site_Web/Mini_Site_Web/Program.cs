@@ -3,14 +3,24 @@ using Mini_Site_Web.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddSession();
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddSession();
+builder.Services.AddHttpClient();
 
-builder.Services.AddSingleton(
-    new RequestLogService(builder.Configuration["APIPath"])
+builder.Services.AddSingleton(sp =>
+{
+    var config = sp.GetRequiredService<IConfiguration>();
+    var factory = sp.GetRequiredService<IHttpClientFactory>();
+
+    return new RequestLogService(
+        config["APIPath"],
+        factory,
+        config["LogPath"]
     );
+});
 
 var app = builder.Build();
 

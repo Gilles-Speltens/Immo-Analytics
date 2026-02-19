@@ -45,7 +45,7 @@ namespace Tracking_API.Controllers
         public IActionResult DeleteIp([FromBody] string ip)
         {
             Console.WriteLine("Delete : " + ip);
-            _ipManager.RemoveIpToSafeList(ip);
+            _ipManager.RemoveIpFromSafeList(ip);
             return Ok(_ipManager.GetSafeList());
         }
     }

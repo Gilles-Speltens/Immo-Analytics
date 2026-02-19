@@ -1,0 +1,9 @@
+C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Interface_Gestion_API\obj\Release\net10.0\PubTmp\Out\Interface_Gestion_API.exe
+C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Interface_Gestion_API\obj\Release\net10.0\PubTmp\Out\appsettings.Development.json
+C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Interface_Gestion_API\obj\Release\net10.0\PubTmp\Out\appsettings.json
+C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Interface_Gestion_API\obj\Release\net10.0\PubTmp\Out\Interface_Gestion_API.dll
+C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Interface_Gestion_API\obj\Release\net10.0\PubTmp\Out\Interface_Gestion_API.deps.json
+C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Interface_Gestion_API\obj\Release\net10.0\PubTmp\Out\Interface_Gestion_API.runtimeconfig.json
+C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Interface_Gestion_API\obj\Release\net10.0\PubTmp\Out\Interface_Gestion_API.pdb
+C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Interface_Gestion_API\obj\Release\net10.0\PubTmp\Out\Common.dll
+C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Interface_Gestion_API\obj\Release\net10.0\PubTmp\Out\Common.pdb

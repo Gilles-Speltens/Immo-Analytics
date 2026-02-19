@@ -1,9 +1,11 @@
-﻿namespace Interface_Gestion_API.Models
+﻿using Common;
+
+namespace Interface_Gestion_API.Models
 {
     public class IpListViewModel
     {
-        public List<string> IpV4 { get; set; } = new List<string>();
-        public List<string> IpV6 { get; set; } = new List<string>();
+        public List<IPSubnet> IpV4 { get; set; } = new List<IPSubnet>();
+        public List<IPSubnet> IpV6 { get; set; } = new List<IPSubnet>();
 
     }
 }

@@ -1,13 +1,13 @@
 using Interface_Gestion_API.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Net;
-using System.Net.Http;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
+using Common;
+using Common.Exceptions;
 
 namespace Interface_Gestion_API.Controllers
 {
@@ -47,6 +47,9 @@ namespace Interface_Gestion_API.Controllers
             if (response.IsSuccessStatusCode)
             {
                 await RefreshListIp(response);
+            } else
+            {
+                return RedirectToAction("Error");
             }
 
             return View(_ipList);
@@ -60,32 +63,8 @@ namespace Interface_Gestion_API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddIp(string ip)
         {
-            if(checkIpValidity(ip))
-            {
-                try
-                {
-                    var json = JsonSerializer.Serialize(ip);
+            await launchRequest(ip, "/AddIp");
 
-                    var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-                    var path = String.Concat(_APIPath, "/AddIp");
-
-                    var response = await _client.PostAsync(path, content);
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        return RedirectToAction("Index");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError(ex.Message, "Erreur lors de l'appel API pour l'IP {Ip}", ip);
-                    TempData["Error"] = "API Injoignable";
-                }
-                
-            }
-
-            TempData["Error"] = "Adresse IP invalide";
             return RedirectToAction("Index");
         }
 
@@ -97,25 +76,8 @@ namespace Interface_Gestion_API.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteIp(string ip)
         {
-            if(checkIpValidity(ip))
-            {
-                try
-                {
-                    var json = JsonSerializer.Serialize(ip);
-
-                    var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-                    var path = String.Concat(_APIPath, "/DeleteIp");
-
-                    var response = await _client.PostAsync(path, content);
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError(ex.ToString(), "Erreur lors de l'appel API pour l'IP {Ip}", ip);
-                    TempData["Error"] = "API Injoignable";
-                }
+            await launchRequest(ip, "/DeleteIp");
                 
-            }
             return RedirectToAction("Index");
         }
 
@@ -123,6 +85,36 @@ namespace Interface_Gestion_API.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        private async Task launchRequest(string ip, string path)
+        {
+            try
+            {
+                var ipSubnet = new IPSubnet(ip);
+
+                var json = JsonSerializer.Serialize(ipSubnet.GetIp());
+
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                var fullPath = String.Concat(_APIPath, path);
+
+                var response = await _client.PostAsync(fullPath, content);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new Exception("Aucune reponse reçu de l'API");
+                }
+            }
+            catch(InvalidIpException e)
+            {
+                TempData["Error"] = "Adresse IP invalide";
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.ToString(), "Erreur lors de l'appel à l'API");
+                TempData["Error"] = "API Injoignable";
+            }
         }
 
         /// Met à jour le modèle IpListViewModel à partir de la réponse de l'API.
@@ -135,33 +127,16 @@ namespace Interface_Gestion_API.Controllers
                 await response.Content.ReadAsStreamAsync()
             );
 
-            _ipList.IpV4 = new List<string>();
-            _ipList.IpV6 = new List<string>();
+            _ipList.IpV4 = new List<IPSubnet>();
+            _ipList.IpV6 = new List<IPSubnet>();
             foreach (var i in list)
             {
-                // Check if ipv4
-                if (i.IndexOf(":") == -1)
+                if(i.Contains(":"))
                 {
-                    var parts = i.Split('/');
-                    if(parts.Length == 2 && Int32.Parse(parts[1]) == 32)
-                    {
-                        _ipList.IpV4.Add(parts[0]);
-                    } else
-                    {
-                        _ipList.IpV4.Add(i);
-                    }
-                }
-                else
+                    _ipList.IpV6.Add(new IPSubnet(i));
+                } else
                 {
-                    var parts = i.Split('/');
-                    if (parts.Length == 2 && Int32.Parse(parts[1]) == 128)
-                    {
-                        _ipList.IpV6.Add(parts[0]);
-                    }
-                    else
-                    {
-                        _ipList.IpV6.Add(i);
-                    }
+                    _ipList.IpV4.Add(new IPSubnet(i));
                 }
             }
         }

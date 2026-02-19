@@ -7,7 +7,7 @@ namespace Tracking_API.Model
     /// <summary>
     /// Fournit des méthodes pour lire et écrire des fichiers texte.
     /// </summary>
-    public class FileManager
+    public class FileManager : IFileManager
     {
         private string _path;
 
@@ -54,7 +54,7 @@ namespace Tracking_API.Model
         /// Cette opération est synchrone.
         /// </summary>
         /// <param name="list">Liste de lignes à écrire dans le fichier</param>
-        public void OverwriteFromList(List<string> list)
+        public void OverwriteFromList(List<string>? list)
         {
             using (var fs = new StreamWriter(_path, false)) // false = overwrite
             {

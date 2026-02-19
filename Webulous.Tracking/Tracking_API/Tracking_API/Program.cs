@@ -11,7 +11,7 @@ builder.Services.AddOpenApi();
 
 builder.Services.AddSingleton<FileLogService>();
 builder.Services.AddSingleton(
-    new IPManager(builder.Configuration["PathToWhiteFile"])
+    new IPManager(new FileManager(builder.Configuration["PathToWhiteFile"]))
     );
 
 builder.Services.AddCors(options =>

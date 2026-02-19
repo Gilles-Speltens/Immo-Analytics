@@ -9,11 +9,13 @@ namespace Mini_Site_Web.Models
     {
         private readonly HttpClient _client;
         private string _pathAPI;
+        private string _path;
 
-        public RequestLogService(string pathAPI)
+        public RequestLogService(string pathAPI, IHttpClientFactory factory, string path)
         {
-            this._pathAPI = pathAPI;
-            _client = new HttpClient();
+            _pathAPI = pathAPI;
+            _client = factory.CreateClient();
+            _path = path;
         }
 
         /// <summary>
@@ -23,20 +25,28 @@ namespace Mini_Site_Web.Models
         /// <param name="context">Contexte HTTP de la requête en cours.</param>
         public async void SendLog(HttpContext context)
         {
-            try
+            //try
+            //{
+            //    //Formatage des logs.
+            //    var logDto = await CreateRequestLog(context);
+
+            //    var json = JsonSerializer.Serialize(logDto);
+
+            //    var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            //    await _client.PostAsync(_pathAPI, content);
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine("Failed to send the Logs to the API");
+            //}
+
+            //Provisoire :
+            var log = await CreateRequestLog(context);
+
+            using (var fs = File.AppendText(_path))
             {
-                //Formatage des logs.
-                var logDto = await CreateRequestLog(context);
-
-                var json = JsonSerializer.Serialize(logDto);
-
-                var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-                await _client.PostAsync(_pathAPI, content);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Failed to send the Logs to the API");
+                fs.WriteLine($"{DateTime.UtcNow} - {log.UserId} - {log.Url} - {log.UrlReferrer} - {log.Action} - {log.LanguageBrowser} - {log.SessionId} - {log.UserAgent}");
             }
             
         }
@@ -48,10 +58,16 @@ namespace Mini_Site_Web.Models
         /// <returns>Un objet RequestLogDto complet</returns>
         public async Task<RequestLogDto> CreateRequestLog(HttpContext context)
         {
+            var user_cookie_consent = context.Request.Cookies["user_cookie_consent"] == "true";
+            var session_cookie_consent = context.Request.Cookies["session_cookie_consent"] == "true";
+
+
             //Contenu du body sous forme de liste de strings.
             var body = await GetBody(context.Request);
 
-            var userId = context.Request.Cookies["uid"] ?? "null";
+            var userId = user_cookie_consent
+                ? (context.Request.Cookies["uid"] ?? "null")
+                : "null";
 
             var url = $"{context.Request.Scheme}://{context.Request.Host}{context.Request.Path}";
 
@@ -61,11 +77,17 @@ namespace Mini_Site_Web.Models
 
             var action = context.Request.Method == "POST"
                     ? string.Join(" | ", body)
-                    : "null";
+                    : "HITPAGE";
 
             var languageBrowser = Regex.Match(context.Request.Headers.AcceptLanguage, @"^[^,]*").Value;
 
-            var sessionId = context.Session?.Id ?? "null";
+            if (context.Session.GetString("init") == null)
+            {
+                context.Session.SetString("init", "true");
+            }
+            var sessionId = session_cookie_consent
+                ? (context.Session?.Id ?? "null")
+                : "null";
 
             var userAgent = context.Request.Headers["User-Agent"].FirstOrDefault() ?? "null";
 

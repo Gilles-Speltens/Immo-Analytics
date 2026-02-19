@@ -5,5 +5,6 @@
   <Project Path="Common/Common.csproj" Id="332ce3c9-dbc4-406c-bc04-7f3e7de509b4" />
   <Project Path="Interface_Gestion_API/Interface_Gestion_API.csproj" Id="08a0969c-002d-40e1-bf03-f7e1a6ff80f3" />
   <Project Path="Mini_Site_Web/Mini_Site_Web/Mini_Site_Web.csproj" />
+  <Project Path="Tracking_API.Tests/Tracking_API.Tests.csproj" Id="78e82a32-4fb9-474f-889d-88755924c90c" />
   <Project Path="Tracking_API/Tracking_API/Tracking_API.csproj" />
 </Solution>

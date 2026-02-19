@@ -27,7 +27,6 @@ C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Mini_Site
 C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Mini_Site_Web\Mini_Site_Web\obj\Debug\net6.0\staticwebassets.development.json
 C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Mini_Site_Web\Mini_Site_Web\obj\Debug\net6.0\staticwebassets.build.endpoints.json
 C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Mini_Site_Web\Mini_Site_Web\obj\Debug\net6.0\swae.build.ex.cache
-C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Mini_Site_Web\Mini_Site_Web\obj\Debug\net6.0\staticwebassets.upToDateCheck.txt
 C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Mini_Site_Web\Mini_Site_Web\obj\Debug\net6.0\Mini_Site_Web.dll
 C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Mini_Site_Web\Mini_Site_Web\obj\Debug\net6.0\refint\Mini_Site_Web.dll
 C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Mini_Site_Web\Mini_Site_Web\obj\Debug\net6.0\Mini_Site_Web.pdb
@@ -37,3 +36,5 @@ C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Mini_Site
 C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Mini_Site_Web\Mini_Site_Web\bin\Debug\net6.0\Common.dll
 C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Mini_Site_Web\Mini_Site_Web\bin\Debug\net6.0\Common.pdb
 C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Mini_Site_Web\Mini_Site_Web\obj\Debug\net6.0\Mini_Sit.A04FD02E.Up2Date
+C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Mini_Site_Web\Mini_Site_Web\bin\Debug\net6.0\dotnet-tools.json
+C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Mini_Site_Web\Mini_Site_Web\obj\Debug\net6.0\staticwebassets.upToDateCheck.txt
