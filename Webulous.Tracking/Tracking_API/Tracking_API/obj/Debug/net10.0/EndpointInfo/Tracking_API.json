@@ -18,32 +18,52 @@
         "tags": [
           "TrackingDatas"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RequestLogDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RequestLogDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/RequestLogDto"
-              }
-            }
-          },
-          "required": true
-        },
         "responses": {
           "200": {
             "description": "OK"
           }
         }
-      },
+      }
+    },
+    "/TrackingDatas/Ips": {
+      "get": {
+        "tags": [
+          "TrackingDatas"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/TrackingDatas/Domains": {
       "get": {
         "tags": [
           "TrackingDatas"
@@ -144,33 +164,67 @@
           }
         }
       }
-    }
-  },
-  "components": {
-    "schemas": {
-      "RequestLogDto": {
-        "type": "object",
-        "properties": {
-          "userId": {
-            "type": "string"
+    },
+    "/TrackingDatas/AddDomain": {
+      "post": {
+        "tags": [
+          "TrackingDatas"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "string"
+              }
+            }
           },
-          "url": {
-            "type": "string"
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/TrackingDatas/DeleteDomain": {
+      "post": {
+        "tags": [
+          "TrackingDatas"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "string"
+              }
+            }
           },
-          "urlReferrer": {
-            "type": "string"
-          },
-          "action": {
-            "type": "string"
-          },
-          "languageBrowser": {
-            "type": "string"
-          },
-          "sessionId": {
-            "type": "string"
-          },
-          "userAgent": {
-            "type": "string"
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }

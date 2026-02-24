@@ -1,0 +1,7 @@
+Configurer le chemin de l’API dans les fichiers appsettings.json des projets API_Tracker_Interface et Mini_Site_Web.
+
+Créer un fichier WhiteList.txt, puis ajouter dans le fichier appsettings.json du projet APITracker le chemin vers ce fichier WhiteList.txt ainsi que l'IP de l'interface de gestion de l'API.
+
+Donner les permissions d’écriture au dossier Logs se trouvant dans le projet APITracker.
+
+Pour pouvoir récupérer le user_id et la session_id, il faudra que l'utilisateur accepte les cookies nommé user_cookie_consent et session_cookie_consent 

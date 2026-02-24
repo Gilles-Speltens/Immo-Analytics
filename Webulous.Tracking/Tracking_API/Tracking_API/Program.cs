@@ -9,9 +9,15 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
+builder.Services.Configure<AdminSafeListOptions>(
+    builder.Configuration.GetSection("AdminSafeList"));
+
 builder.Services.AddSingleton<FileLogService>();
 builder.Services.AddSingleton(
-    new IPManager(new FileManager(builder.Configuration["PathToWhiteFile"]))
+    new IPManager(new FileManager(string.Concat(builder.Configuration["PathToWhiteFilesDirectory"], "\\IpsWhiteList.txt")))
+    );
+builder.Services.AddSingleton(
+    new DomainManager(new FileManager(string.Concat(builder.Configuration["PathToWhiteFilesDirectory"], "\\DomainsWhiteList.txt")))
     );
 
 builder.Services.AddCors(options =>

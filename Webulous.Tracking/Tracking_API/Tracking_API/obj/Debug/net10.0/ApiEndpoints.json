@@ -6,34 +6,24 @@
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
-    "Parameters": [
-      {
-        "Name": "log",
-        "Type": "Common.RequestLogDto",
-        "IsRequired": true
-      }
-    ],
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
     "ContainingType": "Tracking_API.Controllers.TrackingDatasController",
-    "Method": "GetIps",
-    "RelativePath": "TrackingDatas",
-    "HttpMethod": "GET",
+    "Method": "AddDomain",
+    "RelativePath": "TrackingDatas/AddDomain",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
+    "Parameters": [
       {
-        "Type": "System.String[]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
+        "Name": "domain",
+        "Type": "System.String",
+        "IsRequired": true
       }
-    ]
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "Tracking_API.Controllers.TrackingDatasController",
@@ -45,6 +35,22 @@
     "Parameters": [
       {
         "Name": "ip",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Tracking_API.Controllers.TrackingDatasController",
+    "Method": "DeleteDomain",
+    "RelativePath": "TrackingDatas/DeleteDomain",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "domain",
         "Type": "System.String",
         "IsRequired": true
       }
@@ -66,5 +72,45 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Tracking_API.Controllers.TrackingDatasController",
+    "Method": "GetDomains",
+    "RelativePath": "TrackingDatas/Domains",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.String[]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Tracking_API.Controllers.TrackingDatasController",
+    "Method": "GetIps",
+    "RelativePath": "TrackingDatas/Ips",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.String[]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   }
 ]

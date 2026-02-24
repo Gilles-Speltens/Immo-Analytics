@@ -50,7 +50,7 @@ namespace Tracking_API.Model
             }
                 
             this._logFileRotationIntervalMinutes = rotationInterval;
-            this._path = "Logs/tracking-";
+            this._path = string.Concat(configuration["PathToLogsDirectory"], "/ tracking-");
             this._logFileTimeStamp = DateTime.Now;
             this._fileManager = new FileManager(String.Concat(_path, FilterCharacters(_logFileTimeStamp.ToString()), ".log"));
 
@@ -120,7 +120,7 @@ namespace Tracking_API.Model
 
         private string Format(RequestLogDto log)
         {
-            return $"{DateTime.UtcNow} - {log.UserId} - {log.Url} - {log.UrlReferrer} - {log.Action} - {log.LanguageBrowser} - {log.SessionId} - {log.UserAgent}";
+            return $"{DateTime.Now} - {log.UserId} - {log.Url} - {log.UrlReferrer} - {log.Action} - {log.LanguageBrowser} - {log.SessionId} - {log.UserAgent}";
         }
     }
 }

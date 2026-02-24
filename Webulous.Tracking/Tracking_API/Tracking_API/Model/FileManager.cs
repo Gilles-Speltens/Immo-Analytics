@@ -65,6 +65,11 @@ namespace Tracking_API.Model
             }
         }
 
+        public void AppendText(string text)
+        {
+            File.AppendText(text + Environment.NewLine);
+        }
+
         /// <summary>
         /// Lit toutes les lignes du fichier et les retourne sous forme de tableau de chaînes.
         /// </summary>

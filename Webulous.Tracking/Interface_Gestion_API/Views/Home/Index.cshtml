@@ -1,6 +1,8 @@
-﻿@model IpListViewModel
+﻿@model WhiteListViewModel
 @{
-    ViewData["Title"] = "Gestion des adresses IP";
+    ViewData["Title"] = "Gestion des adresses IP et des Domaines";
+
+    string[] domains = { "ajrioeoio", "ahzeoiehroia", "aoiz"};
 }
 
 <div class="container">
@@ -82,5 +84,54 @@
                 </tbody>
             </table>
         </div>
+    </div>
+    <!-- Gestion des noms de domaine -->
+    <div class="mt-4">
+
+        <!-- Formulaire d'ajout de domaine -->
+        <div class="mb-4">
+            <h2>Ajouter un nom de domaine</h2>
+            <form asp-action="AddDomain" method="post" style="max-width:400px;">
+                <div class="form-group">
+                    <label for="NewDomain">Nouveau domaine :</label>
+                    <input type="text" class="form-control" id="domain" name="Domain" placeholder="ex : example.com" required />
+                </div>
+
+                @if (TempData["DomainError"] != null)
+                {
+                    <div class="alert alert-danger">
+                        @TempData["DomainError"]
+                    </div>
+                }
+
+                <button type="submit" class="btn btn-primary mt-2">Ajouter</button>
+            </form>
+        </div>
+
+        <!-- Tableau des domaines -->
+        <h2>Liste des noms de domaine</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nom de domaine</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var domain in Model.Domains)
+                {
+                    <tr>
+                        <td>@domain</td>
+                        <td>
+                            <form asp-action="DeleteDomain" method="post" style="display:inline;">
+                                <input type="hidden" name="Domain" value="@domain" />
+                                <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
     </div>
 </div>

@@ -17,8 +17,7 @@ builder.Services.AddSingleton(sp =>
 
     return new RequestLogService(
         config["APIPath"],
-        factory,
-        config["LogPath"]
+        factory
     );
 });
 

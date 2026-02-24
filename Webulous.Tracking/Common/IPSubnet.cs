@@ -30,6 +30,11 @@ namespace Common
         private readonly int _prefixLength;
 
         /// <summary>
+        /// Détermine si l'adresse IP est une IPv4(true) ou une IPv6(false).
+        /// </summary>
+        private readonly bool _isIPv4Address;
+
+        /// <summary>
         /// Crée un IPSubnet à partir d'une chaîne de caractères.
         /// La chaîne peut être une IP seule ("192.168.0.1") ou en CIDR ("192.168.0.0/24").
         /// </summary>
@@ -43,17 +48,19 @@ namespace Common
 
             string[] parts = value.Split('/');
 
+            _isIPv4Address = !parts[0].Contains(":");
+
             if (parts.Length == 1)
             {
                 // Pas de CIDR, traiter comme une IP unique
                 _ip = IPAddress.Parse(parts[0]);
                 _address = _ip.GetAddressBytes();
-                _prefixLength = _address.Length == 4 ? 32 : 128; // IPv4 -> /32, IPv6 -> /128
+                _prefixLength = _isIPv4Address ? 32 : 128;
             }
             else if (parts.Length == 2)
             {
                 var prefix = Convert.ToInt32(parts[1], 10);
-                int maxPrefix = parts[0].Contains(":") ? 128 : 32;
+                int maxPrefix = _isIPv4Address ? 32 : 128;
 
                 if (prefix < 0 || prefix > maxPrefix)
                     throw new InvalidIpException($"Prefix must be between 0 and {maxPrefix} for {(maxPrefix == 128 ? "IPv6" : "IPv4")}");
@@ -120,9 +127,7 @@ namespace Common
         /// <returns>IP + préfixe CIDR sous forme de string</returns>
         public string GetIp()
         {
-            int defaultPrefix = _ip.AddressFamily == AddressFamily.InterNetwork
-                    ? 32
-                    : 128;
+            int defaultPrefix = _isIPv4Address? 32 : 128;
 
             if(_prefixLength == defaultPrefix)
             {
@@ -158,9 +163,7 @@ namespace Common
             }
             else if (parts.Length == 1)
             {
-                int defaultPrefix = parsedIp.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork
-                    ? 32
-                    : 128;
+                int defaultPrefix = _isIPv4Address? 32 : 128;
 
                 return _ip.Equals(parsedIp) && _prefixLength == defaultPrefix;
             }

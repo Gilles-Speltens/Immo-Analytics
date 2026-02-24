@@ -18,9 +18,10 @@ namespace Interface_Gestion_API.Controllers
     public class HomeController : Controller
     {
         private readonly HttpClient _client;
-        private readonly IpListViewModel _ipList = new IpListViewModel();
+        private readonly WhiteListViewModel _whiteList = new WhiteListViewModel();
         private readonly string _APIPath;
-        private readonly ILogger<HomeController> _logger;
+        //private readonly ILogger<HomeController> _logger;
+        private readonly string _logPath;
 
         /// <summary>
         /// Constructeur du controller avec injection de dépendances.
@@ -28,11 +29,11 @@ namespace Interface_Gestion_API.Controllers
         /// <param name="options">Configuration API (ApiSettings)</param>
         /// <param name="factory">Factory pour créer des HttpClient</param>
         /// <param name="logger">Logger pour tracer les actions et erreurs</param>
-        public HomeController(IOptions<ApiSettings> options, IHttpClientFactory factory, ILogger<HomeController> logger)
+        public HomeController(IOptions<ApiSettings> options, IHttpClientFactory factory, IConfiguration config)
         {
             this._client = factory.CreateClient();
             this._APIPath = options.Value.APIPath;
-            this._logger = logger;
+            this._logPath = config["LogFilePath"];
         }
 
         /// <summary>
@@ -42,17 +43,24 @@ namespace Interface_Gestion_API.Controllers
         /// <returns>Vue avec le modèle IpListViewModel</returns>
         public async Task<IActionResult> Index()
         {
-            var response = await _client.GetAsync(_APIPath);
+            if (_whiteList.IpV4 == null && _whiteList.IpV6 == null && _whiteList.Domains == null)
+            {
+                var responseIps = await _client.GetAsync(string.Concat(_APIPath, "/Ips"));
+                var responseDomains = await _client.GetAsync(string.Concat(_APIPath, "/Domains"));
 
-            if (response.IsSuccessStatusCode)
-            {
-                await RefreshListIp(response);
-            } else
-            {
-                return RedirectToAction("Error");
+                if (responseIps.StatusCode == HttpStatusCode.OK && responseDomains.StatusCode == HttpStatusCode.OK)
+                {
+                    await RefreshListIp(responseIps);
+                    await RefreshListDomain(responseDomains);
+                }
+                else
+                {
+                    System.IO.File.AppendAllText(_logPath, "Chemin de l'API : " + _APIPath + Environment.NewLine);
+                    System.IO.File.AppendAllText(_logPath, "Réponse de l'API : " + responseIps.StatusCode + " / " + responseDomains.StatusCode + Environment.NewLine);
+                }
             }
 
-            return View(_ipList);
+            return View(_whiteList);
         }
 
         /// <summary>
@@ -63,7 +71,21 @@ namespace Interface_Gestion_API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddIp(string ip)
         {
-            await launchRequest(ip, "/AddIp");
+            try
+            {
+                var ipSubnet = new IPSubnet(ip);
+
+                var response = await launchRequest(ipSubnet.GetIp(), "/AddIp");
+
+                if (response != null)
+                {
+                    await RefreshListIp(response);
+                }
+            }
+            catch (InvalidIpException e)
+            {
+                TempData["Error"] = "Adresse IP invalide";
+            }
 
             return RedirectToAction("Index");
         }
@@ -76,8 +98,58 @@ namespace Interface_Gestion_API.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteIp(string ip)
         {
-            await launchRequest(ip, "/DeleteIp");
-                
+            try
+            {
+                var ipSubnet = new IPSubnet(ip);
+
+                var response = await launchRequest(ipSubnet.GetIp(), "/DeleteIp");
+
+                if (response != null)
+                {
+                    await RefreshListIp(response);
+                }
+            }
+            catch (InvalidIpException e)
+            {
+                TempData["Error"] = "Adresse IP invalide";
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        /// <summary>
+        /// Ajoute un Domaine à l'API externe via POST.
+        /// </summary>
+        /// <param name="ip">Domaine à ajouter</param>
+        /// <returns>Redirection vers Index</returns>
+        [HttpPost]
+        public async Task<IActionResult> AddDomain(string domain)
+        {
+            var response = await launchRequest(domain, "/AddDomain");
+
+            if (response != null)
+            {
+                await RefreshListDomain(response);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        /// <summary>
+        /// Supprime un domaine de l'API externe via POST.
+        /// </summary>
+        /// <param name="ip">Domaine à supprimer</param>
+        /// <returns>Redirection vers Index</returns>
+        [HttpPost]
+        public async Task<IActionResult> DeleteDomain(string domain)
+        {
+            var response = await launchRequest(domain, "/DeleteDomain");
+
+            if (response != null)
+            {
+                await RefreshListDomain(response);
+            }
+
             return RedirectToAction("Index");
         }
 
@@ -87,17 +159,16 @@ namespace Interface_Gestion_API.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        private async Task launchRequest(string ip, string path)
+        private async Task<HttpResponseMessage?> launchRequest(string value, string path)
         {
             try
             {
-                var ipSubnet = new IPSubnet(ip);
+                var fullPath = String.Concat(_APIPath, path);
 
-                var json = JsonSerializer.Serialize(ipSubnet.GetIp());
-
+                var json = JsonSerializer.Serialize(value);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                var fullPath = String.Concat(_APIPath, path);
+                Console.WriteLine(fullPath);
 
                 var response = await _client.PostAsync(fullPath, content);
 
@@ -105,15 +176,15 @@ namespace Interface_Gestion_API.Controllers
                 {
                     throw new Exception("Aucune reponse reçu de l'API");
                 }
-            }
-            catch(InvalidIpException e)
-            {
-                TempData["Error"] = "Adresse IP invalide";
+                
+                return response;
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.ToString(), "Erreur lors de l'appel à l'API");
+                System.IO.File.AppendAllText(_logPath, ex.Message + Environment.NewLine);
+                //_logger.LogError(ex.ToString(), "Erreur lors de l'appel à l'API");
                 TempData["Error"] = "API Injoignable";
+                return null;
             }
         }
 
@@ -123,73 +194,46 @@ namespace Interface_Gestion_API.Controllers
         /// <param name="response">Réponse HTTP de l'API contenant une liste JSON d'IP</param>
         private async Task RefreshListIp(HttpResponseMessage response)
         {
-            var list = await JsonSerializer.DeserializeAsync<List<string>>(
-                await response.Content.ReadAsStreamAsync()
-            );
-
-            _ipList.IpV4 = new List<IPSubnet>();
-            _ipList.IpV6 = new List<IPSubnet>();
-            foreach (var i in list)
+            var list = new List<string>();
+            if(response != null)
             {
-                if(i.Contains(":"))
+                list = await JsonSerializer.DeserializeAsync<List<string>>(
+                await response.Content.ReadAsStreamAsync()
+                );
+            }
+            
+            if(list != null)
+            {
+                _whiteList.IpV4 = new List<IPSubnet>();
+                _whiteList.IpV6 = new List<IPSubnet>();
+                foreach (var i in list)
                 {
-                    _ipList.IpV6.Add(new IPSubnet(i));
-                } else
-                {
-                    _ipList.IpV4.Add(new IPSubnet(i));
+                    if (i.Contains(":"))
+                    {
+                        _whiteList.IpV6.Add(new IPSubnet(i));
+                    }
+                    else
+                    {
+                        _whiteList.IpV4.Add(new IPSubnet(i));
+                    }
                 }
             }
         }
 
-        /// <summary>
-        /// Vérifie si une adresse IP ou un subnet est valide.
-        /// Supporte IPv4 et IPv6.
-        /// </summary>
-        /// <param name="ip">Adresse IP ou subnet au format "IP" ou "IP/Prefix"</param>
-        /// <returns>true si valide, false sinon</returns>
-        private bool checkIpValidity(string ip)
+        private async Task RefreshListDomain(HttpResponseMessage response)
         {
-            if (string.IsNullOrWhiteSpace(ip))
-                return false;
-
-            string[] parts = ip.Split('/');
-
-            if (parts.Length == 1 || parts.Length == 2)
+            var list = new List<string>();
+            if (response != null)
             {
-                if (!IPAddress.TryParse(parts[0], out var address))
-                {
-                    return false;
-                }
-
-                if (parts.Length == 2)
-                {
-                    if (!int.TryParse(parts[1], out int mask))
-                    {
-                        return false;
-                    }
-
-                    if (address.AddressFamily == AddressFamily.InterNetwork)
-                    {
-                        if (mask < 0 || mask > 32)
-                        {
-                            return false;
-                        }
-                    }
-                    else if (address.AddressFamily == AddressFamily.InterNetworkV6)
-                    {
-                        if (mask < 0 || mask > 128)
-                        {
-                            return false;
-                        }
-                    }
-                }
-            }
-            else
-            {
-                return false;
+                list = await JsonSerializer.DeserializeAsync<List<string>>(
+                await response.Content.ReadAsStreamAsync()
+                );
             }
 
-            return true;
+            if (list != null)
+            {
+                _whiteList.Domains = new List<string>(list);
+            }
         }
     }
 }

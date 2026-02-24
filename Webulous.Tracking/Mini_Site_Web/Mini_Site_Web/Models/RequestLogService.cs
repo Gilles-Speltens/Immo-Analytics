@@ -9,13 +9,11 @@ namespace Mini_Site_Web.Models
     {
         private readonly HttpClient _client;
         private string _pathAPI;
-        private string _path;
 
-        public RequestLogService(string pathAPI, IHttpClientFactory factory, string path)
+        public RequestLogService(string pathAPI, IHttpClientFactory factory)
         {
             _pathAPI = pathAPI;
             _client = factory.CreateClient();
-            _path = path;
         }
 
         /// <summary>
@@ -25,28 +23,20 @@ namespace Mini_Site_Web.Models
         /// <param name="context">Contexte HTTP de la requête en cours.</param>
         public async void SendLog(HttpContext context)
         {
-            //try
-            //{
-            //    //Formatage des logs.
-            //    var logDto = await CreateRequestLog(context);
-
-            //    var json = JsonSerializer.Serialize(logDto);
-
-            //    var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-            //    await _client.PostAsync(_pathAPI, content);
-            //}
-            //catch (Exception ex)
-            //{
-            //    Console.WriteLine("Failed to send the Logs to the API");
-            //}
-
-            //Provisoire :
-            var log = await CreateRequestLog(context);
-
-            using (var fs = File.AppendText(_path))
+            try
             {
-                fs.WriteLine($"{DateTime.UtcNow} - {log.UserId} - {log.Url} - {log.UrlReferrer} - {log.Action} - {log.LanguageBrowser} - {log.SessionId} - {log.UserAgent}");
+                //Formatage des logs.
+                var logDto = await CreateRequestLog(context);
+
+                var json = JsonSerializer.Serialize(logDto);
+
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                await _client.PostAsync(_pathAPI, content);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Failed to send the Logs to the API");
             }
             
         }
