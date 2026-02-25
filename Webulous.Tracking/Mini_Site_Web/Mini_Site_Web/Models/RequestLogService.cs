@@ -36,6 +36,7 @@ namespace Mini_Site_Web.Models
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 Console.WriteLine("Failed to send the Logs to the API");
             }
             
@@ -59,18 +60,6 @@ namespace Mini_Site_Web.Models
                 ? (context.Request.Cookies["uid"] ?? "null")
                 : "null";
 
-            var url = $"{context.Request.Scheme}://{context.Request.Host}{context.Request.Path}";
-
-            var urlReferrer = string.IsNullOrEmpty(context.Request.Headers.Referer)
-                                ? "null"
-                                : context.Request.Headers.Referer.ToString();
-
-            var action = context.Request.Method == "POST"
-                    ? string.Join(" | ", body)
-                    : "HITPAGE";
-
-            var languageBrowser = Regex.Match(context.Request.Headers.AcceptLanguage, @"^[^,]*").Value;
-
             if (context.Session.GetString("init") == null)
             {
                 context.Session.SetString("init", "true");
@@ -79,33 +68,39 @@ namespace Mini_Site_Web.Models
                 ? (context.Session?.Id ?? "null")
                 : "null";
 
+            var url = $"{context.Request.Scheme}://{context.Request.Host}{context.Request.Path}";
+
+            var urlReferrer = string.IsNullOrEmpty(context.Request.Headers.Referer)
+                                ? "null"
+                                : context.Request.Headers.Referer.ToString();
+
+            var action = context.Request.Method == "POST"
+                    ? body
+                    : "HITPAGE";
+
+            var languageBrowser = Regex.Match(context.Request.Headers.AcceptLanguage, @"^[^,]*").Value;
+
             var userAgent = context.Request.Headers["User-Agent"].FirstOrDefault() ?? "null";
 
             return new RequestLogDto
             {
                 UserId = userId,
+                SessionId = sessionId,
                 Url = url,
                 UrlReferrer = urlReferrer,
                 Action = action,
                 LanguageBrowser = languageBrowser,
-                SessionId = sessionId,
                 UserAgent = userAgent
             };
         }
 
-        /// <summary>
-        /// Lit le corps de la requête HTTP et renvoie chaque ligne sous forme de liste de string.
-        /// </summary>
-        /// <param name="request">La requête HTTP à lire.</param>
-        /// <returns>Liste de lignes du corps de la requête, ou ["null"] si vide.</returns>
-        private async Task<List<string>> GetBody(HttpRequest request)
+        private async Task<string> GetBody(HttpRequest request)
         {
             var bodyLines = new List<string>();
 
             if (request.ContentLength is null or 0)
             {
-                bodyLines.Add("null");
-                return bodyLines;
+                return "null";
             }
 
             request.EnableBuffering();
@@ -116,14 +111,8 @@ namespace Mini_Site_Web.Models
                 detectEncodingFromByteOrderMarks: false,
                 leaveOpen: true);
 
-            string? line;
-            while ((line = await reader.ReadLineAsync()) != null)
-            {
-                bodyLines.Add(line);
-            }
-
-            request.Body.Position = 0;
-            return bodyLines;
+            var bodyText = await reader.ReadToEndAsync();
+            return bodyText;
         }
     }
 }

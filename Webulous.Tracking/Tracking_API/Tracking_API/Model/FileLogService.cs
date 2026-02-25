@@ -120,7 +120,7 @@ namespace Tracking_API.Model
 
         private string Format(RequestLogDto log)
         {
-            return $"{DateTime.Now} - {log.UserId} - {log.Url} - {log.UrlReferrer} - {log.Action} - {log.LanguageBrowser} - {log.SessionId} - {log.UserAgent}";
+            return $"{DateTime.Now} - {log.UserId} - {log.SessionId} - {log.Url} - {log.UrlReferrer} - {log.Action} - {log.LanguageBrowser} - {log.UserAgent}";
         }
     }
 }

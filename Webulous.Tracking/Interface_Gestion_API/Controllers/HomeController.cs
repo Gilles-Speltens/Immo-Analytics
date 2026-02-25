@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System.Diagnostics;
 using System.Net;
-using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
 using Common;
@@ -22,6 +21,7 @@ namespace Interface_Gestion_API.Controllers
         private readonly string _APIPath;
         //private readonly ILogger<HomeController> _logger;
         private readonly string _logPath;
+        private readonly string _psw;
 
         /// <summary>
         /// Constructeur du controller avec injection de dépendances.
@@ -34,6 +34,7 @@ namespace Interface_Gestion_API.Controllers
             this._client = factory.CreateClient();
             this._APIPath = options.Value.APIPath;
             this._logPath = config["LogFilePath"];
+            this._psw = config["MotDePasse"];
         }
 
         /// <summary>
@@ -41,6 +42,7 @@ namespace Interface_Gestion_API.Controllers
         /// Récupère la liste depuis l'API.
         /// </summary>
         /// <returns>Vue avec le modèle IpListViewModel</returns>
+        [Authentication]
         public async Task<IActionResult> Index()
         {
             if (_whiteList.IpV4 == null && _whiteList.IpV6 == null && _whiteList.Domains == null)
@@ -61,6 +63,24 @@ namespace Interface_Gestion_API.Controllers
             }
 
             return View(_whiteList);
+        }
+
+        public ActionResult SignIn()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult SignIn(string pwd)
+        {
+            if (pwd.Equals(_psw))
+            {
+                HttpContext.Session.SetString("isAuthenticated", "true");
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.Error = "Mot de passe incorrect";
+            return View();
         }
 
         /// <summary>

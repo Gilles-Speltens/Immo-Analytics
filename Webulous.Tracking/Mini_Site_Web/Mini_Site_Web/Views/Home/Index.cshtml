@@ -121,6 +121,18 @@
     <script>
         setUserIdCookie()
 
+        fetch('/Home/Form', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            Name: 'Jean',
+            Email: 'jean@mail.com',
+            Message: 'Bonjour'
+          })
+        });
+
         document.querySelectorAll('.toggle-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 const targetId = btn.getAttribute('data-target');

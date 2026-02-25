@@ -1,0 +1,19 @@
+﻿<div class="d-flex justify-content-center align-items-center vh-100 bg-white flex-column">
+
+    <!-- Titre centré en noir -->
+    <h2 class="text-center text-dark mb-4">Authentification</h2>
+
+    <form method="post" action="/Home/SignIn" class="p-4 bg-white rounded shadow">
+        <div class="mb-3">
+            <label for="password" class="form-label">Mot de passe :</label>
+            <input type="password" id="password" name="pwd" class="form-control" required />
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Valider</button>
+    </form>
+
+    @if (ViewBag.Error != null)
+    {
+        <p class="text-danger mt-3">@ViewBag.Error</p>
+    }
+</div>

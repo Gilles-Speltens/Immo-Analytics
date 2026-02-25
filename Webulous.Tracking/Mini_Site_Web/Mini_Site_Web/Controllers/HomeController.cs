@@ -75,7 +75,7 @@ namespace Mini_Site_Web.Controllers
         /// Le nom ne reflète pas sa véritable fonction afin de ne pas alerter les bloqueurs de publicité.
         /// </summary>
         [HttpPost]
-        public IActionResult Validation(string testData)
+        public IActionResult Validation()
         {
             return new EmptyResult();
         }
