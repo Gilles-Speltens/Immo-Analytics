@@ -31,7 +31,7 @@ namespace Mini_Site_Web.Middleware
         {
             if (context.Request.Method == "GET" || context.Request.Method == "POST")
             {
-                _logService.SendLog(context);
+                await _logService.SendLog(context);
             }
 
             await _next(context);

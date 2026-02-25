@@ -21,7 +21,7 @@ namespace Mini_Site_Web.Models
         /// converti au JSON.
         /// </summary>
         /// <param name="context">Contexte HTTP de la requête en cours.</param>
-        public async void SendLog(HttpContext context)
+        public async Task SendLog(HttpContext context)
         {
             try
             {
