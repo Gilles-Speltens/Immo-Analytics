@@ -95,6 +95,16 @@
   },
   {
     "ContainingType": "Tracking_API.Controllers.TrackingDatasController",
+    "Method": "Health",
+    "RelativePath": "TrackingDatas/Health",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Tracking_API.Controllers.TrackingDatasController",
     "Method": "GetIps",
     "RelativePath": "TrackingDatas/Ips",
     "HttpMethod": "GET",

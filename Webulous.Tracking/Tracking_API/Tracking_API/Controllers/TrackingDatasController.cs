@@ -37,8 +37,15 @@ namespace Tracking_API.Controllers
             return NoContent();
         }
 
+        [HttpGet("Health")]
+        public ActionResult Health()
+        {
+            Console.WriteLine("test");
+            return Ok();
+        }
+
         [HttpGet("Ips")]
-        public string[] GetIps()
+        public string[]? GetIps()
         {
             var sendIp = HttpContext.Connection.RemoteIpAddress;
             if (IsAdminRequest())
@@ -48,12 +55,12 @@ namespace Tracking_API.Controllers
             else
             {
                 System.IO.File.AppendAllText(_errorPath, $"Tentative de récupération de la white list d'adresse ip via l'addresse {sendIp.ToString()} bloqué" + Environment.NewLine);
-                return new string[0];
+                return null;
             }
         }
 
         [HttpGet("Domains")]
-        public string[] GetDomains()
+        public string[]? GetDomains()
         {
             var sendIp = HttpContext.Connection.RemoteIpAddress;
             if (IsAdminRequest())
@@ -63,7 +70,7 @@ namespace Tracking_API.Controllers
             else
             {
                 System.IO.File.AppendAllText(_errorPath, $"Tentative de récupération de la white list d'adresse ip via l'addresse {sendIp.ToString()} bloqué" + Environment.NewLine);
-                return new string[0];
+                return null;
             }
         }
 

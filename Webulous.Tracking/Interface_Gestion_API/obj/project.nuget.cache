@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "+Q0wgj/lHrI=",
+  "dgSpecHash": "C1WAtV927mA=",
   "success": true,
   "projectFilePath": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Interface_Gestion_API\\Interface_Gestion_API.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\gille\\.nuget\\packages\\nlog\\6.1.0\\nlog.6.1.0.nupkg.sha512",
+    "C:\\Users\\gille\\.nuget\\packages\\nlog.extensions.logging\\6.1.1\\nlog.extensions.logging.6.1.1.nupkg.sha512",
+    "C:\\Users\\gille\\.nuget\\packages\\nlog.web.aspnetcore\\6.1.1\\nlog.web.aspnetcore.6.1.1.nupkg.sha512"
+  ],
   "logs": []
 }

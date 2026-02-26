@@ -10,4 +10,10 @@
     <ProjectReference Include="..\Common\Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="NLog" Version="6.1.0" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="6.1.1" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="6.1.1" />
+  </ItemGroup>
+
 </Project>

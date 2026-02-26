@@ -1,12 +1,14 @@
+using Common;
+using Common.Exceptions;
 using Interface_Gestion_API.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System.Diagnostics;
 using System.Net;
+using System.Net.NetworkInformation;
+using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
-using Common;
-using Common.Exceptions;
 
 namespace Interface_Gestion_API.Controllers
 {
@@ -19,9 +21,8 @@ namespace Interface_Gestion_API.Controllers
         private readonly HttpClient _client;
         private readonly WhiteListViewModel _whiteList = new WhiteListViewModel();
         private readonly string _APIPath;
-        //private readonly ILogger<HomeController> _logger;
-        private readonly string _logPath;
-        private readonly string _psw;
+        private readonly ILogger<HomeController> _logger;
+        private readonly AdminPasswordValidator _pswValidator;
 
         /// <summary>
         /// Constructeur du controller avec injection de dépendances.
@@ -29,12 +30,12 @@ namespace Interface_Gestion_API.Controllers
         /// <param name="options">Configuration API (ApiSettings)</param>
         /// <param name="factory">Factory pour créer des HttpClient</param>
         /// <param name="logger">Logger pour tracer les actions et erreurs</param>
-        public HomeController(IOptions<ApiSettings> options, IHttpClientFactory factory, IConfiguration config)
+        public HomeController(IOptions<ApiSettings> options, IHttpClientFactory factory, IConfiguration config, ILogger<HomeController> logger)
         {
             this._client = factory.CreateClient();
             this._APIPath = options.Value.APIPath;
-            this._logPath = config["LogFilePath"];
-            this._psw = config["MotDePasse"];
+            this._logger = logger;
+            _pswValidator = new AdminPasswordValidator(config["MotDePasse"]);
         }
 
         /// <summary>
@@ -45,41 +46,56 @@ namespace Interface_Gestion_API.Controllers
         [Authentication]
         public async Task<IActionResult> Index()
         {
-            if (_whiteList.IpV4 == null && _whiteList.IpV6 == null && _whiteList.Domains == null)
+            if (!_whiteList.IPv4.Any() && !_whiteList.IPv6.Any() && !_whiteList.Domains.Any())
             {
-                var responseIps = await _client.GetAsync(string.Concat(_APIPath, "/Ips"));
-                var responseDomains = await _client.GetAsync(string.Concat(_APIPath, "/Domains"));
+                try
+                {
+                    var responseIps = await _client.GetAsync(string.Concat(_APIPath, "/Ips"));
+                    var responseDomains = await _client.GetAsync(string.Concat(_APIPath, "/Domains"));
 
-                if (responseIps.StatusCode == HttpStatusCode.OK && responseDomains.StatusCode == HttpStatusCode.OK)
+                    if (responseIps.StatusCode == HttpStatusCode.OK && responseDomains.StatusCode == HttpStatusCode.OK)
+                    {
+                        await RefreshListIp(responseIps);
+                        await RefreshListDomain(responseDomains);
+                    }
+                    else
+                    {
+                        _logger.LogWarning("Réponse de l'API " + _APIPath + " : " + responseDomains.StatusCode);
+                    }
+                } catch (HttpRequestException ex)
                 {
-                    await RefreshListIp(responseIps);
-                    await RefreshListDomain(responseDomains);
-                }
-                else
-                {
-                    System.IO.File.AppendAllText(_logPath, "Chemin de l'API : " + _APIPath + Environment.NewLine);
-                    System.IO.File.AppendAllText(_logPath, "Réponse de l'API : " + responseIps.StatusCode + " / " + responseDomains.StatusCode + Environment.NewLine);
+                    _whiteList.IPv4.Clear();
+                    _whiteList.IPv6.Clear();
+                    _whiteList.Domains.Clear();
+                    _logger.LogError("Connection avec l'API perdue");
                 }
             }
 
             return View(_whiteList);
         }
 
-        public ActionResult SignIn()
+        public async Task<IActionResult> SignIn()
         {
+            var isAvailable = await IsApiAvailableAsync();
+
+            if (!isAvailable)
+            {
+                ViewBag.ConnectionError = "Connexion à l'API impossible";
+            }
+
             return View();
         }
 
         [HttpPost]
-        public ActionResult SignIn(string pwd)
+        public async Task<IActionResult> SignIn(string pwd)
         {
-            if (pwd.Equals(_psw))
+            if (_pswValidator.ValidPassword(pwd))
             {
                 HttpContext.Session.SetString("isAuthenticated", "true");
                 return RedirectToAction("Index");
             }
-
-            ViewBag.Error = "Mot de passe incorrect";
+            
+            ViewBag.PasswordError = "Mot de passe incorrect";
             return View();
         }
 
@@ -179,6 +195,19 @@ namespace Interface_Gestion_API.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        private async Task<bool> IsApiAvailableAsync()
+        {
+            try
+            {
+                var response = await _client.GetAsync($"{_APIPath}/Health");
+                return response.IsSuccessStatusCode;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         private async Task<HttpResponseMessage?> launchRequest(string value, string path)
         {
             try
@@ -194,15 +223,14 @@ namespace Interface_Gestion_API.Controllers
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    throw new Exception("Aucune reponse reçu de l'API");
+                    _logger.LogError("API injoignable");
                 }
                 
                 return response;
             }
             catch (Exception ex)
             {
-                System.IO.File.AppendAllText(_logPath, ex.Message + Environment.NewLine);
-                //_logger.LogError(ex.ToString(), "Erreur lors de l'appel à l'API");
+                _logger.LogError(ex.Message);
                 TempData["Error"] = "API Injoignable";
                 return null;
             }
@@ -214,30 +242,38 @@ namespace Interface_Gestion_API.Controllers
         /// <param name="response">Réponse HTTP de l'API contenant une liste JSON d'IP</param>
         private async Task RefreshListIp(HttpResponseMessage response)
         {
-            var list = new List<string>();
-            if(response != null)
+            try
             {
-                list = await JsonSerializer.DeserializeAsync<List<string>>(
-                await response.Content.ReadAsStreamAsync()
-                );
-            }
-            
-            if(list != null)
-            {
-                _whiteList.IpV4 = new List<IPSubnet>();
-                _whiteList.IpV6 = new List<IPSubnet>();
-                foreach (var i in list)
+                var list = new List<string>();
+                if (response != null)
                 {
-                    if (i.Contains(":"))
+                    list = await JsonSerializer.DeserializeAsync<List<string>>(
+                    await response.Content.ReadAsStreamAsync()
+                    );
+                }
+
+                if (list != null)
+                {
+                    _whiteList.IPv4 = new List<IPSubnet>();
+                    _whiteList.IPv6 = new List<IPSubnet>();
+                    foreach (var i in list)
                     {
-                        _whiteList.IpV6.Add(new IPSubnet(i));
-                    }
-                    else
-                    {
-                        _whiteList.IpV4.Add(new IPSubnet(i));
+                        if (i.Contains(":"))
+                        {
+                            _whiteList.IPv6.Add(new IPSubnet(i));
+                        }
+                        else
+                        {
+                            _whiteList.IPv4.Add(new IPSubnet(i));
+                        }
                     }
                 }
             }
+            catch (JsonException ex)
+            {
+                _logger.LogError("Réponse de l'API pas au format JSON");
+            }
+            
         }
 
         private async Task RefreshListDomain(HttpResponseMessage response)

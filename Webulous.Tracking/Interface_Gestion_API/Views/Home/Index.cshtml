@@ -1,8 +1,6 @@
 ﻿@model WhiteListViewModel
 @{
     ViewData["Title"] = "Gestion des adresses IP et des Domaines";
-
-    string[] domains = { "ajrioeoio", "ahzeoiehroia", "aoiz"};
 }
 
 <div class="container">
@@ -42,7 +40,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var ip in Model.IpV4)
+                    @foreach (var ip in Model.IPv4)
                     {
                         <tr>
                             <td>@ip.GetIp()</td>
@@ -69,7 +67,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var ip in Model.IpV6)
+                    @foreach (var ip in Model.IPv6)
                     {
                         <tr>
                             <td>@ip.GetIp()</td>

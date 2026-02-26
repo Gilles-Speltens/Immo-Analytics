@@ -1,0 +1,6 @@
+Request from remote IP address: ::1
+Forbidden request from remote IP address: ::1
+Ajout : 192.168.1.10
+Ajout : localhost
+Request from remote IP address: ::1
+Request from remote IP address: ::1

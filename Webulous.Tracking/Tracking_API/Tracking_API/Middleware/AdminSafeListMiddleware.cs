@@ -62,7 +62,8 @@ namespace Tracking_API.Middleware
                     context.Request.Path.Value.Contains("AddIp") ||
                     context.Request.Path.Value.Contains("DeleteIp") ||
                     context.Request.Path.Value.Contains("AddDomain") ||
-                    context.Request.Path.Value.Contains("DeleteDomain"))
+                    context.Request.Path.Value.Contains("DeleteDomain") ||
+                    context.Request.Path.Value.Contains("Health"))
                 {
                     if (remoteIp != null)
                     {
@@ -85,14 +86,7 @@ namespace Tracking_API.Middleware
 
                     if (remoteIp != null && remoteDomain.Any())
                     {
-                        if (_gestionIp.Equals(remoteIp))
-                        {
-                            badOrigin = false;
-                        }
-                        else
-                        {
-                            badOrigin = !_ipManager.IsInSafeList(remoteIp.ToString()) && !_domainManager.IsInSafeList(remoteDomain);
-                        }
+                        badOrigin = !_ipManager.IsInSafeList(remoteIp.ToString()) && !_domainManager.IsInSafeList(remoteDomain);
                     }
 
                     context.Items["ParsedBody"] = dto;

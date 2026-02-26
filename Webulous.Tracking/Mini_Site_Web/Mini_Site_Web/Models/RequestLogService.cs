@@ -1,7 +1,8 @@
 ﻿using Common;
+using System.Reflection.PortableExecutable;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 
 namespace Mini_Site_Web.Models
 {
@@ -34,7 +35,7 @@ namespace Mini_Site_Web.Models
 
                 await _client.PostAsync(_pathAPI, content);
             }
-            catch (Exception ex)
+            catch (HttpRequestException ex)
             {
                 Console.WriteLine(ex.Message);
                 Console.WriteLine("Failed to send the Logs to the API");
@@ -94,13 +95,20 @@ namespace Mini_Site_Web.Models
             };
         }
 
+        /// <summary>
+        /// Lit le corps d'une requête HTTP de manière asynchrone et filtre certaines clés.
+        /// </summary>
+        /// <param name="request">L'objet HttpRequest à lire.</param>
+        /// <returns>
+        /// Une chaîne représentant le corps filtré :
+        /// - "empty" si le corps filtré est vide
+        /// - sinon, le corps filtré sans les segments correspondant aux filtres
+        /// </returns>
         private async Task<string> GetBody(HttpRequest request)
         {
-            var bodyLines = new List<string>();
-
             if (request.ContentLength is null or 0)
             {
-                return "null";
+                return "empty";
             }
 
             request.EnableBuffering();
@@ -111,8 +119,73 @@ namespace Mini_Site_Web.Models
                 detectEncodingFromByteOrderMarks: false,
                 leaveOpen: true);
 
-            var bodyText = await reader.ReadToEndAsync();
-            return bodyText;
+            var body = await ReadAndFilters(reader, new[] { "JSONSerial" });
+
+            if (body.Equals("")) return "empty";
+
+            return body;
+        }
+
+        /// <summary>
+        /// Lit un StreamReader jusqu'à la fin du flux et ignore les segments contenant certaines chaînes.
+        /// </summary>
+        /// <param name="sr">StreamReader déjà initialisé sur le flux à lire.</param>
+        /// <param name="filters">Tableau de mots-clés à ignorer dans la lecture.</param>
+        /// <returns>
+        /// La chaîne concaténée de tous les segments lus, sans ceux correspondant aux filtres,
+        /// et sans le dernier caractère '&' si présent.
+        /// </returns>
+        private async Task<string> ReadAndFilters(StreamReader sr, string[] filters)
+        {
+            var str = "";
+            var param = "";
+
+            do
+            {
+                param = await ReadUntil(sr, '&');
+
+                var isInFilters = false;
+                foreach (var filter in filters)
+                {
+                    if (param.Contains(filter))
+                    {
+                        isInFilters = true; break;
+                    }
+                }
+
+                if (!isInFilters) str = string.Concat(str, param);
+            } while (!param.Equals("")) ;
+
+            if (!string.IsNullOrEmpty(str) && str.EndsWith("&"))
+            {
+                return str.Substring(0, str.Length - 1);
+            }
+
+            return str;
+        }
+
+        /// <summary>
+        /// Lit un StreamReader caractère par caractère jusqu'à atteindre un délimiteur.
+        /// </summary>
+        /// <param name="rd">StreamReader déjà initialisé sur le flux.</param>
+        /// <param name="delimiter">Caractère à utiliser comme limite de lecture.</param>
+        /// <returns>
+        /// Une chaîne contenant tous les caractères lus jusqu'au délimiteur inclus.
+        /// </returns>
+        private async Task<string> ReadUntil(StreamReader rd, char delimiter)
+        {
+            var sb = new StringBuilder();
+            var buffer = new char[1];
+
+            while (await rd.ReadAsync(buffer, 0, 1) > 0)
+            {
+                sb.Append(buffer[0]);
+
+                if (buffer[0] == delimiter)
+                    break;
+            }
+
+            return sb.ToString();
         }
     }
 }

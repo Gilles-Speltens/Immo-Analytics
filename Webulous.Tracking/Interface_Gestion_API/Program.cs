@@ -1,7 +1,13 @@
 using Interface_Gestion_API.Models;
+using NLog;
+using NLog.Web;
 using System.Runtime;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Logging.ClearProviders(); // Supprime les providers par défaut
+builder.Host.UseNLog();
+LogManager.Setup().LoadConfigurationFromFile("C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\nlog.config");
 
 builder.Services.Configure<ApiSettings>(builder.Configuration);
 

@@ -3,17 +3,23 @@
     <!-- Titre centré en noir -->
     <h2 class="text-center text-dark mb-4">Authentification</h2>
 
-    <form method="post" action="/Home/SignIn" class="p-4 bg-white rounded shadow">
+    @if (ViewBag.ConnectionError == null)
+    {
+        <form method="post" action="/Home/SignIn" class="p-4 bg-white rounded shadow">
         <div class="mb-3">
             <label for="password" class="form-label">Mot de passe :</label>
             <input type="password" id="password" name="pwd" class="form-control" required />
         </div>
 
         <button type="submit" class="btn btn-primary w-100">Valider</button>
-    </form>
+        </form>
 
-    @if (ViewBag.Error != null)
-    {
-        <p class="text-danger mt-3">@ViewBag.Error</p>
+        @if (ViewBag.PasswordError != null)
+        {
+            <p class="text-danger mt-3">@ViewBag.PasswordError</p>
+        }
+    } else {
+        <h3 class="text-danger mt-3">@ViewBag.ConnectionError</h3>
     }
+    
 </div>

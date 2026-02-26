@@ -73,6 +73,41 @@ namespace Tracking_API.Tests
             // mismatch IPv4 vs IPv6
             Assert.False(ipv6.Contains(addressIn));
         }
+        [Fact]
+        public void Contains_AllIPv4ShouldMatch()
+        {
+            var subnet = new IPSubnet("0.0.0.0/0");
+            var addressIn = IPAddress.Parse("192.168.1.5").GetAddressBytes();
+
+            Assert.True(subnet.Contains(addressIn));
+        }
+
+        [Fact]
+        public void Contains_AllIPv6ShouldMatch()
+        {
+            var subnet = new IPSubnet("::/0");
+            var addressIn = IPAddress.Parse("2001:db8::1").GetAddressBytes();
+
+            Assert.True(subnet.Contains(addressIn));
+        }
+
+        [Fact]
+        public void Contains_AllIPv4_Missmach()
+        {
+            var subnet = new IPSubnet("0.0.0.0/0");
+            var addressIn = IPAddress.Parse("2001:db8::1").GetAddressBytes();
+
+            Assert.False(subnet.Contains(addressIn));
+        }
+
+        [Fact]
+        public void Contains_AllIPv6_Missmach()
+        {
+            var subnet = new IPSubnet("::/0");
+            var addressIn = IPAddress.Parse("192.168.1.5").GetAddressBytes();
+
+            Assert.False(subnet.Contains(addressIn));
+        }
 
         [Fact]
         public void Matches_ShouldReturnTrue_ForExactIPv4WithPrefix()
