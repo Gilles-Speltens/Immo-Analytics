@@ -56,14 +56,7 @@ namespace Tracking_API.Middleware
             try
             {
                 //Si la requête concerne les whitelists
-                if (!context.Request.Path.StartsWithSegments("/TrackingDatas") ||
-                    context.Request.Path.Value.Contains("Ips") ||
-                    context.Request.Path.Value.Contains("Domains") ||
-                    context.Request.Path.Value.Contains("AddIp") ||
-                    context.Request.Path.Value.Contains("DeleteIp") ||
-                    context.Request.Path.Value.Contains("AddDomain") ||
-                    context.Request.Path.Value.Contains("DeleteDomain") ||
-                    context.Request.Path.Value.Contains("Health"))
+                if (context.Request.Path.StartsWithSegments("/Admin"))
                 {
                     if (remoteIp != null)
                     {

@@ -1,6 +1,10 @@
+Forbidden request from remote IP address: 127.0.0.1
+Ajout : 192.168.1.12
+Ajout : youtube.com
+Suppression : youtube.com
+Suppression : 192.168.1.12
 Request from remote IP address: ::1
-Forbidden request from remote IP address: ::1
+Ajout : 192.168.1.12
 Ajout : 192.168.1.10
-Ajout : localhost
-Request from remote IP address: ::1
-Request from remote IP address: ::1
+Ajout : youtube.com
+Suppression : youtube.com

@@ -18,11 +18,10 @@ namespace Interface_Gestion_API.Controllers
     /// </summary>
     public class HomeController : Controller
     {
-        private readonly HttpClient _client;
-        private readonly WhiteListViewModel _whiteList = new WhiteListViewModel();
-        private readonly string _APIPath;
         private readonly ILogger<HomeController> _logger;
         private readonly AdminPasswordValidator _pswValidator;
+        private readonly RequestApiService _apiService;
+        private readonly WhiteListManager _whiteListManager;
 
         /// <summary>
         /// Constructeur du controller avec injection de dépendances.
@@ -30,12 +29,12 @@ namespace Interface_Gestion_API.Controllers
         /// <param name="options">Configuration API (ApiSettings)</param>
         /// <param name="factory">Factory pour créer des HttpClient</param>
         /// <param name="logger">Logger pour tracer les actions et erreurs</param>
-        public HomeController(IOptions<ApiSettings> options, IHttpClientFactory factory, IConfiguration config, ILogger<HomeController> logger)
+        public HomeController(IConfiguration config, ILogger<HomeController> logger, RequestApiService apiService, WhiteListManager whiteListManager)
         {
-            this._client = factory.CreateClient();
-            this._APIPath = options.Value.APIPath;
             this._logger = logger;
             _pswValidator = new AdminPasswordValidator(config["MotDePasse"]);
+            _apiService = apiService;
+            _whiteListManager = whiteListManager;
         }
 
         /// <summary>
@@ -46,37 +45,36 @@ namespace Interface_Gestion_API.Controllers
         [Authentication]
         public async Task<IActionResult> Index()
         {
-            if (!_whiteList.IPv4.Any() && !_whiteList.IPv6.Any() && !_whiteList.Domains.Any())
+            if(_whiteListManager.IsEmpty())
             {
                 try
                 {
-                    var responseIps = await _client.GetAsync(string.Concat(_APIPath, "/Ips"));
-                    var responseDomains = await _client.GetAsync(string.Concat(_APIPath, "/Domains"));
+                    var ipsTask = _apiService.GetList("/Admin/Ips");
+                    var domainsTask = _apiService.GetList("/Admin/Domains");
 
-                    if (responseIps.StatusCode == HttpStatusCode.OK && responseDomains.StatusCode == HttpStatusCode.OK)
+                    await Task.WhenAll(ipsTask, domainsTask);
+
+                    var (responseIps, listIps) = await ipsTask;
+                    var (responseDomains, listDomains) = await domainsTask;
+
+                    if (responseIps == HttpStatusCode.OK && responseDomains == HttpStatusCode.OK)
                     {
-                        await RefreshListIp(responseIps);
-                        await RefreshListDomain(responseDomains);
+                        _whiteListManager.RefreshWhiteListIfEmpty(listIps, listDomains);
                     }
-                    else
-                    {
-                        _logger.LogWarning("Réponse de l'API " + _APIPath + " : " + responseDomains.StatusCode);
-                    }
-                } catch (HttpRequestException ex)
+                }
+                catch (HttpRequestException ex)
                 {
-                    _whiteList.IPv4.Clear();
-                    _whiteList.IPv6.Clear();
-                    _whiteList.Domains.Clear();
+                    _whiteListManager.ClearWhitelist();
                     _logger.LogError("Connection avec l'API perdue");
                 }
             }
 
-            return View(_whiteList);
+            return View(_whiteListManager.GetWhiteList());
         }
 
         public async Task<IActionResult> SignIn()
         {
-            var isAvailable = await IsApiAvailableAsync();
+            var isAvailable = await _apiService.IsApiAvailableAsync();
 
             if (!isAvailable)
             {
@@ -111,12 +109,7 @@ namespace Interface_Gestion_API.Controllers
             {
                 var ipSubnet = new IPSubnet(ip);
 
-                var response = await launchRequest(ipSubnet.GetIp(), "/AddIp");
-
-                if (response != null)
-                {
-                    await RefreshListIp(response);
-                }
+                await LaunchAndRefresh(ipSubnet.GetIp(), "/Admin/AddIp");
             }
             catch (InvalidIpException e)
             {
@@ -138,12 +131,7 @@ namespace Interface_Gestion_API.Controllers
             {
                 var ipSubnet = new IPSubnet(ip);
 
-                var response = await launchRequest(ipSubnet.GetIp(), "/DeleteIp");
-
-                if (response != null)
-                {
-                    await RefreshListIp(response);
-                }
+                await LaunchAndRefresh(ipSubnet.GetIp(), "/Admin/DeleteIp");
             }
             catch (InvalidIpException e)
             {
@@ -161,12 +149,8 @@ namespace Interface_Gestion_API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddDomain(string domain)
         {
-            var response = await launchRequest(domain, "/AddDomain");
 
-            if (response != null)
-            {
-                await RefreshListDomain(response);
-            }
+            await LaunchAndRefresh(domain, "/Admin/AddDomain");
 
             return RedirectToAction("Index");
         }
@@ -179,12 +163,7 @@ namespace Interface_Gestion_API.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteDomain(string domain)
         {
-            var response = await launchRequest(domain, "/DeleteDomain");
-
-            if (response != null)
-            {
-                await RefreshListDomain(response);
-            }
+            await LaunchAndRefresh(domain, "/Admin/DeleteDomain");
 
             return RedirectToAction("Index");
         }
@@ -195,101 +174,30 @@ namespace Interface_Gestion_API.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        private async Task<bool> IsApiAvailableAsync()
+        private async Task LaunchAndRefresh (string value, string path)
         {
             try
             {
-                var response = await _client.GetAsync($"{_APIPath}/Health");
-                return response.IsSuccessStatusCode;
-            }
-            catch
-            {
-                return false;
-            }
-        }
+                var (responseStatus, list) = await _apiService.LaunchPostAsync(value, path);
 
-        private async Task<HttpResponseMessage?> launchRequest(string value, string path)
-        {
-            try
-            {
-                var fullPath = String.Concat(_APIPath, path);
-
-                var json = JsonSerializer.Serialize(value);
-                var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-                Console.WriteLine(fullPath);
-
-                var response = await _client.PostAsync(fullPath, content);
-
-                if (!response.IsSuccessStatusCode)
+                if (responseStatus == HttpStatusCode.OK)
                 {
-                    _logger.LogError("API injoignable");
-                }
-                
-                return response;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex.Message);
-                TempData["Error"] = "API Injoignable";
-                return null;
-            }
-        }
-
-        /// Met à jour le modèle IpListViewModel à partir de la réponse de l'API.
-        /// Sépare IPv4 et IPv6 et enlève le suffixe /32 ou /128 si nécessaire.
-        /// </summary>
-        /// <param name="response">Réponse HTTP de l'API contenant une liste JSON d'IP</param>
-        private async Task RefreshListIp(HttpResponseMessage response)
-        {
-            try
-            {
-                var list = new List<string>();
-                if (response != null)
-                {
-                    list = await JsonSerializer.DeserializeAsync<List<string>>(
-                    await response.Content.ReadAsStreamAsync()
-                    );
-                }
-
-                if (list != null)
-                {
-                    _whiteList.IPv4 = new List<IPSubnet>();
-                    _whiteList.IPv6 = new List<IPSubnet>();
-                    foreach (var i in list)
+                    if (path.Contains("Domain"))
                     {
-                        if (i.Contains(":"))
-                        {
-                            _whiteList.IPv6.Add(new IPSubnet(i));
-                        }
-                        else
-                        {
-                            _whiteList.IPv4.Add(new IPSubnet(i));
-                        }
+                        _whiteListManager.RefreshDomainList(list);
+                    }
+                    else
+                    {
+                        _whiteListManager.RefreshIpList(list);
                     }
                 }
             }
-            catch (JsonException ex)
+            catch (HttpRequestException e)
             {
-                _logger.LogError("Réponse de l'API pas au format JSON");
+                _whiteListManager.ClearWhitelist();
+                _logger.LogError("Connection avec l'API perdue");
             }
             
-        }
-
-        private async Task RefreshListDomain(HttpResponseMessage response)
-        {
-            var list = new List<string>();
-            if (response != null)
-            {
-                list = await JsonSerializer.DeserializeAsync<List<string>>(
-                await response.Content.ReadAsStreamAsync()
-                );
-            }
-
-            if (list != null)
-            {
-                _whiteList.Domains = new List<string>(list);
-            }
         }
     }
 }

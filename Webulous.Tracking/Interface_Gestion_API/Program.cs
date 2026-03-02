@@ -1,4 +1,6 @@
+using Common;
 using Interface_Gestion_API.Models;
+using Microsoft.AspNetCore.Identity;
 using NLog;
 using NLog.Web;
 using System.Runtime;
@@ -7,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Logging.ClearProviders(); // Supprime les providers par défaut
 builder.Host.UseNLog();
-LogManager.Setup().LoadConfigurationFromFile("C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\nlog.config");
+LogManager.Setup().LoadConfigurationFromFile(builder.Configuration["NLogConfigPath"]);
 
 builder.Services.Configure<ApiSettings>(builder.Configuration);
 
@@ -15,6 +17,24 @@ builder.Services.Configure<ApiSettings>(builder.Configuration);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddHttpClient();
+
+builder.Services.AddSingleton(sp =>
+{
+    var factory = sp.GetRequiredService<IHttpClientFactory>();
+    var apiPath = builder.Configuration["APIPath"];
+
+    return new RequestApiService(apiPath, factory);
+});
+
+builder.Services.AddScoped(sp =>
+{
+    return new WhiteListManager(new WhiteListViewModel
+    {
+        IPv4 = new List<IPSubnet>(),
+        IPv6 = new List<IPSubnet>(),
+        Domains = new List<string>()
+    });
+});
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();

@@ -1,5 +1,119 @@
 [
   {
+    "ContainingType": "Tracking_API.Controllers.AdminController",
+    "Method": "AddDomain",
+    "RelativePath": "Admin/AddDomain",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "domain",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Tracking_API.Controllers.AdminController",
+    "Method": "AddIp",
+    "RelativePath": "Admin/AddIp",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ip",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Tracking_API.Controllers.AdminController",
+    "Method": "DeleteDomain",
+    "RelativePath": "Admin/DeleteDomain",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "domain",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Tracking_API.Controllers.AdminController",
+    "Method": "DeleteIp",
+    "RelativePath": "Admin/DeleteIp",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ip",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Tracking_API.Controllers.AdminController",
+    "Method": "GetDomains",
+    "RelativePath": "Admin/Domains",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.String[]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Tracking_API.Controllers.AdminController",
+    "Method": "Health",
+    "RelativePath": "Admin/Health",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Tracking_API.Controllers.AdminController",
+    "Method": "GetIps",
+    "RelativePath": "Admin/Ips",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.String[]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "Tracking_API.Controllers.TrackingDatasController",
     "Method": "PostRequest",
     "RelativePath": "TrackingDatas",
@@ -8,119 +122,5 @@
     "Order": 0,
     "Parameters": [],
     "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Tracking_API.Controllers.TrackingDatasController",
-    "Method": "AddDomain",
-    "RelativePath": "TrackingDatas/AddDomain",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "domain",
-        "Type": "System.String",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Tracking_API.Controllers.TrackingDatasController",
-    "Method": "AddIp",
-    "RelativePath": "TrackingDatas/AddIp",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "ip",
-        "Type": "System.String",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Tracking_API.Controllers.TrackingDatasController",
-    "Method": "DeleteDomain",
-    "RelativePath": "TrackingDatas/DeleteDomain",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "domain",
-        "Type": "System.String",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Tracking_API.Controllers.TrackingDatasController",
-    "Method": "DeleteIp",
-    "RelativePath": "TrackingDatas/DeleteIp",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "ip",
-        "Type": "System.String",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Tracking_API.Controllers.TrackingDatasController",
-    "Method": "GetDomains",
-    "RelativePath": "TrackingDatas/Domains",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.String[]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "Tracking_API.Controllers.TrackingDatasController",
-    "Method": "Health",
-    "RelativePath": "TrackingDatas/Health",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Tracking_API.Controllers.TrackingDatasController",
-    "Method": "GetIps",
-    "RelativePath": "TrackingDatas/Ips",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.String[]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
   }
 ]
