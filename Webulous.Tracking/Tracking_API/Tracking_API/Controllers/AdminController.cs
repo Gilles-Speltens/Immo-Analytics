@@ -13,14 +13,14 @@ namespace Tracking_API.Controllers
         private IPManager _ipManager;
         private DomainManager _domainManager;
         private readonly IPAddress _gestionIp;
-        private readonly string _errorPath;
+        private readonly ILogger<AdminController> _logger;
 
-        public AdminController(IPManager ipManager, DomainManager domainManager, IConfiguration config)
+        public AdminController(IPManager ipManager, DomainManager domainManager, IConfiguration config, ILogger<AdminController> logger)
         {
             _ipManager = ipManager;
             _domainManager = domainManager;
             _gestionIp = IPAddress.Parse(config["AdminSafeList:InterfaceIP"]);
-            _errorPath = config["PathToErrorLogsFile"];
+            _logger = logger;
         }
 
         [HttpGet("Health")]
@@ -39,7 +39,7 @@ namespace Tracking_API.Controllers
             }
             else
             {
-                System.IO.File.AppendAllText(_errorPath, $"Tentative de récupération de la white list d'adresse ip via l'addresse {sendIp.ToString()} bloqué" + Environment.NewLine);
+                _logger.LogWarning($"Tentative de récupération de la white list d'adresse ip via l'addresse {sendIp.ToString()} bloqué");
                 return null;
             }
         }
@@ -54,7 +54,7 @@ namespace Tracking_API.Controllers
             }
             else
             {
-                System.IO.File.AppendAllText(_errorPath, $"Tentative de récupération de la white list d'adresse ip via l'addresse {sendIp.ToString()} bloqué" + Environment.NewLine);
+                _logger.LogWarning($"Tentative de récupération de la white list d'adresse ip via l'addresse {sendIp.ToString()} bloqué");
                 return null;
             }
         }
@@ -65,13 +65,12 @@ namespace Tracking_API.Controllers
             var sendIp = HttpContext.Connection.RemoteIpAddress;
             if (IsAdminRequest())
             {
-                System.IO.File.AppendAllText(_errorPath, "Ajout : " + ip + Environment.NewLine);
                 _ipManager.AddIpToSafeList(ip);
                 return Ok(_ipManager.GetSafeList());
             }
             else
             {
-                System.IO.File.AppendAllText(_errorPath, $"Tentative d'ajout de l'ip {ip} via l'addresse {sendIp.ToString()} bloqué" + Environment.NewLine);
+                _logger.LogWarning($"Tentative d'ajout de l'ip {ip} via l'addresse {sendIp.ToString()} bloqué");
                 return NoContent();
             }
 
@@ -83,13 +82,12 @@ namespace Tracking_API.Controllers
             var sendIp = HttpContext.Connection.RemoteIpAddress;
             if (IsAdminRequest())
             {
-                System.IO.File.AppendAllText(_errorPath, "Suppression : " + ip + Environment.NewLine);
                 _ipManager.RemoveIpFromSafeList(ip);
                 return Ok(_ipManager.GetSafeList());
             }
             else
             {
-                System.IO.File.AppendAllText(_errorPath, $"Tentative de suppression de l'ip {ip} via l'addresse {sendIp.ToString()} rejeté" + Environment.NewLine);
+                _logger.LogWarning($"Tentative de suppression de l'ip {ip} via l'addresse {sendIp.ToString()} bloqué");
                 return NoContent();
             }
         }
@@ -100,13 +98,12 @@ namespace Tracking_API.Controllers
             var sendIp = HttpContext.Connection.RemoteIpAddress;
             if (IsAdminRequest())
             {
-                System.IO.File.AppendAllText(_errorPath, "Ajout : " + domain + Environment.NewLine);
                 _domainManager.AddDomainToSafeList(domain);
                 return Ok(_domainManager.GetSafeList());
             }
             else
             {
-                System.IO.File.AppendAllText(_errorPath, $"Tentative d'ajout du domaine {domain} via l'addresse {sendIp.ToString()} bloqué" + Environment.NewLine);
+                _logger.LogWarning($"Tentative d'ajout du domaine {domain} via l'addresse {sendIp.ToString()} bloqué");
                 return NoContent();
             }
         }
@@ -117,13 +114,12 @@ namespace Tracking_API.Controllers
             var sendIp = HttpContext.Connection.RemoteIpAddress;
             if (IsAdminRequest())
             {
-                System.IO.File.AppendAllText(_errorPath, "Suppression : " + domain + Environment.NewLine);
                 _domainManager.RemoveDomainFromSafeList(domain);
                 return Ok(_domainManager.GetSafeList());
             }
             else
             {
-                System.IO.File.AppendAllText(_errorPath, $"Tentative d'ajout du domaine {domain} via l'addresse {sendIp.ToString()} bloqué" + Environment.NewLine);
+                _logger.LogWarning($"Tentative de suppression du domaine {domain} via l'addresse {sendIp.ToString()} bloqué");
                 return NoContent();
             }
 

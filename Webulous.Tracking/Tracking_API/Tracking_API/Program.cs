@@ -1,7 +1,13 @@
 using Tracking_API.Model;
 using Tracking_API.Middleware;
+using NLog;
+using NLog.Web;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Logging.ClearProviders(); // Supprime les providers par défaut
+builder.Host.UseNLog();
+LogManager.Setup().LoadConfigurationFromFile(builder.Configuration["NLogConfigPath"]);
 
 // Add services to the container.
 

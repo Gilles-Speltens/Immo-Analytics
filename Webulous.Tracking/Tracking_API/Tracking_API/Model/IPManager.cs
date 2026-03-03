@@ -21,14 +21,7 @@ namespace Tracking_API.Model
         {
             _fileManager = fileManager;
 
-            try
-            {
-                AddIpsToSafeList(_fileManager.ReadFile());
-            } catch (FileNotFoundException e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            
+            AddIpsToSafeList(_fileManager.ReadFile());
         }
 
         /// <summary>

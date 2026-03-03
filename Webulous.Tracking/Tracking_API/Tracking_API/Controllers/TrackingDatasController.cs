@@ -20,11 +20,11 @@ namespace Tracking_API.Controllers
         [HttpPost]
         public ActionResult PostRequest()
         {
-            var dto = HttpContext.Items["ParsedBody"] as RequestLogDto;
-            if (dto == null)
-                return BadRequest("DTO manquant");
+            var body = HttpContext.Request.Body;
+            if (body == null)
+                return BadRequest("null body");
 
-            _logService.AddEntryToQueue(dto);
+            _logService.AddEntryToQueue(body);
 
             return NoContent();
         }

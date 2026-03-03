@@ -27,7 +27,7 @@ namespace Tracking_API.Model
         //Une année max
         private int _maxMinutes = 525600;
 
-        ConcurrentQueue<string> _logMessages = new ConcurrentQueue<string>();
+        ConcurrentQueue<byte[]> _logMessages = new ConcurrentQueue<byte[]>();
 
         private CancellationTokenSource _cts = new CancellationTokenSource();
 
@@ -52,7 +52,7 @@ namespace Tracking_API.Model
             this._logFileRotationIntervalMinutes = rotationInterval;
             this._path = string.Concat(configuration["PathToLogsDirectory"], "/ tracking-");
             this._logFileTimeStamp = DateTime.Now;
-            this._fileManager = new FileManager(String.Concat(_path, FilterCharacters(_logFileTimeStamp.ToString()), ".log"));
+            this._fileManager = new FileManager(String.Concat(_path, FilterCharacters(_logFileTimeStamp.ToString("yyyyMMddHHmmss")), ".log"));
 
             StartBackgroundWriter();
         }
@@ -62,11 +62,12 @@ namespace Tracking_API.Model
         /// Méthode appelée par les requêtes HTTP (Producteur).
         /// </summary>
         /// <param name="log">DTO contenant les informations de la requête.</param>
-        public void AddEntryToQueue(RequestLogDto log)
+        public async Task AddEntryToQueue(Stream body)
         {
-            string stringLog = Format(log);
+            using var ms = new MemoryStream();
+            await body.CopyToAsync(ms);
 
-            _logMessages.Enqueue(stringLog);
+            _logMessages.Enqueue(ms.ToArray());
         }
 
         /// <summary>
@@ -81,16 +82,10 @@ namespace Tracking_API.Model
             {
                 while (!_cts.Token.IsCancellationRequested)
                 {
-                    try
-                    {
-                        DateTime time = DateTime.Now;
-                        if (IsExpired(time)) RotateFile(time);
-                        if (!_logMessages.IsEmpty) await _fileManager.AppendFromQueue(_logMessages);
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message);
-                    }
+                    DateTime time = DateTime.Now;
+                    if (IsExpired(time)) RotateFile(time);
+                    if (!_logMessages.IsEmpty) await _fileManager.AppendFromQueue(_logMessages);
+
                     // 1 seconde de sleep.
                     await Task.Delay(1000, _cts.Token);
                 }
@@ -104,7 +99,7 @@ namespace Tracking_API.Model
         private void RotateFile(DateTime time)
         {
             _logFileTimeStamp = time;
-            _fileManager.changePath(String.Concat(_path, FilterCharacters(_logFileTimeStamp.ToString()), ".log"));
+            _fileManager.ChangePath(String.Concat(_path, FilterCharacters(_logFileTimeStamp.ToString("yyyyMMddHHmmss")), ".log"));
         }
 
         private bool IsExpired(DateTime time)
@@ -116,11 +111,6 @@ namespace Tracking_API.Model
         {
             string d = Regex.Replace(date, @"\D", "");
             return d.Remove(d.Length - 2, 2);
-        }
-
-        private string Format(RequestLogDto log)
-        {
-            return $"{DateTime.Now} - {log.UserId} - {log.SessionId} - {log.Url} - {log.UrlReferrer} - {log.Action} - {log.LanguageBrowser} - {log.UserAgent}";
         }
     }
 }

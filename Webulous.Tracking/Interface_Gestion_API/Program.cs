@@ -1,9 +1,7 @@
 using Common;
 using Interface_Gestion_API.Models;
-using Microsoft.AspNetCore.Identity;
 using NLog;
 using NLog.Web;
-using System.Runtime;
 
 var builder = WebApplication.CreateBuilder(args);
 

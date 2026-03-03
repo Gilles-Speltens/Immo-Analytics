@@ -9,7 +9,9 @@
       "Tracking_API/1.0.0": {
         "dependencies": {
           "Common": "1.0.0",
-          "Microsoft.AspNetCore.OpenApi": "10.0.2"
+          "Microsoft.AspNetCore.OpenApi": "10.0.2",
+          "NLog": "6.1.1",
+          "NLog.Web.AspNetCore": "6.1.2"
         },
         "runtime": {
           "Tracking_API.dll": {}
@@ -31,6 +33,36 @@
           "lib/net8.0/Microsoft.OpenApi.dll": {
             "assemblyVersion": "2.0.0.0",
             "fileVersion": "2.0.0.0"
+          }
+        }
+      },
+      "NLog/6.1.1": {
+        "runtime": {
+          "lib/netstandard2.1/NLog.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.1.1.5033"
+          }
+        }
+      },
+      "NLog.Extensions.Logging/6.1.2": {
+        "dependencies": {
+          "NLog": "6.1.1"
+        },
+        "runtime": {
+          "lib/net10.0/NLog.Extensions.Logging.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.1.2.810"
+          }
+        }
+      },
+      "NLog.Web.AspNetCore/6.1.2": {
+        "dependencies": {
+          "NLog.Extensions.Logging": "6.1.2"
+        },
+        "runtime": {
+          "lib/net10.0/NLog.Web.AspNetCore.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.1.2.1383"
           }
         }
       },
@@ -63,6 +95,27 @@
       "sha512": "sha512-GGYLfzV/G/ct80OZ45JxnWP7NvMX1BCugn/lX7TH5o0lcVaviavsLMTxmFV2AybXWjbi3h6FF1vgZiTK6PXndw==",
       "path": "microsoft.openapi/2.0.0",
       "hashPath": "microsoft.openapi.2.0.0.nupkg.sha512"
+    },
+    "NLog/6.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-TCIwfAQX2IpZDnqs/+c5jCPnveCG8M6/wFmUk2odjRl0xiocfe4B+4qIvRbVbazSxcS28+Zu14pFeRJE9yAQAQ==",
+      "path": "nlog/6.1.1",
+      "hashPath": "nlog.6.1.1.nupkg.sha512"
+    },
+    "NLog.Extensions.Logging/6.1.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-CDak9fN3yqDrmFth5OX/8WpRdEhHOHDK9O4Lej4oWG0r9MygEKfwZXgl1F5ixSnz0Sk3aW/3a/irjtttJUGDDw==",
+      "path": "nlog.extensions.logging/6.1.2",
+      "hashPath": "nlog.extensions.logging.6.1.2.nupkg.sha512"
+    },
+    "NLog.Web.AspNetCore/6.1.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-PLXSRq7SYKhneMMd7+Ds4/gOVg++CDNpdN67ke6gp837aW4e70aQWuhMFHVL4YnFpO1UL+5QGEHP4w9wKZfwtg==",
+      "path": "nlog.web.aspnetcore/6.1.2",
+      "hashPath": "nlog.web.aspnetcore.6.1.2.nupkg.sha512"
     },
     "Common/1.0.0": {
       "type": "project",

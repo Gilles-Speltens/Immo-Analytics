@@ -1,14 +1,29 @@
-﻿using Common;
-using System.Net;
+﻿using System.Net;
 using System.Text;
 using System.Text.Json;
 
 namespace Interface_Gestion_API.Models
 {
+    /// <summary>
+    /// Service responsable des appels HTTP vers l'API distante.
+    /// 
+    /// Permet :
+    /// - De récupérer des listes via requêtes GET
+    /// - D'envoyer des données via POST
+    /// - De vérifier la disponibilité de l'API
+    /// 
+    /// Utilise IHttpClientFactory pour la gestion du HttpClient.
+    /// </summary>
     public class RequestApiService
     {
         private string _apiPath;
         private HttpClient _client;
+
+        /// <summary>
+        /// Initialise une nouvelle instance du service d'appel API.
+        /// </summary>
+        /// <param name="apiPath">URL de base de l'API.</param>
+        /// <param name="factory">Factory permettant de créer un HttpClient.</param>
 
         public RequestApiService(string apiPath, IHttpClientFactory factory)
         {
@@ -16,27 +31,16 @@ namespace Interface_Gestion_API.Models
             _client = factory.CreateClient();
         }
 
-        //public async Task<(HttpStatusCode StatusCode, WhiteListViewModel? WhiteList)> GetWhiteListAsync()
-        //{
-        //    var ipsTask = _client.GetAsync($"{_apiPath}/Admin/Ips");
-        //    var domainsTask = _client.GetAsync($"{_apiPath}/Admin/Domains");
-
-        //    await Task.WhenAll(ipsTask, domainsTask);
-
-        //    var responseIps = await ipsTask;
-        //    var responseDomains = await domainsTask;
-
-        //    if (responseIps.StatusCode != HttpStatusCode.OK)
-        //        return (responseIps.StatusCode, null);
-
-        //    if (responseDomains.StatusCode != HttpStatusCode.OK)
-        //        return (responseDomains.StatusCode, null);
-
-        //    var whiteList = await CreateWhiteList(responseDomains, responseIps);
-
-        //    return (HttpStatusCode.OK, whiteList);
-        //}
-
+        /// <summary>
+        /// Effectue une requête GET vers un endpoint spécifique et retourne
+        /// le code HTTP ainsi qu'une liste de chaînes désérialisée.
+        /// </summary>
+        /// <param name="path">Chemin relatif de l'endpoint.</param>
+        /// <returns>
+        /// Un tuple contenant :
+        /// - StatusCode : le code HTTP retourné par l'API
+        /// - list : la liste désérialisée depuis la réponse JSON
+        /// </returns>
         public async Task<(HttpStatusCode StatusCode, List<string> list)> GetList(string path)
         {
             var response = await _client.GetAsync(String.Concat($"{_apiPath}", path));
@@ -44,6 +48,12 @@ namespace Interface_Gestion_API.Models
             return (response.StatusCode, await CreateList(response));
         }
 
+        /// <summary>
+        /// Vérifie si l'API est disponible via un endpoint de santé.
+        /// </summary>
+        /// <returns>
+        /// <c>true</c> si l'API répond avec un code succès ; sinon <c>false</c>.
+        /// </returns>
         public async Task<bool> IsApiAvailableAsync()
         {
             try
@@ -57,6 +67,16 @@ namespace Interface_Gestion_API.Models
             }
         }
 
+        /// <summary>
+        /// Effectue une requête POST vers un endpoint spécifique avec un corps JSON.
+        /// </summary>
+        /// <param name="value">Valeur à sérialiser et envoyer dans le corps de la requête.</param>
+        /// <param name="path">Chemin relatif de l'endpoint.</param>
+        /// <returns>
+        /// Un tuple contenant :
+        /// - Le code HTTP retourné par l'API
+        /// - La liste de chaînes désérialisée depuis la réponse JSON
+        /// </returns>
         public async Task<(HttpStatusCode, List<string>)> LaunchPostAsync(string value, string path)
         {
             var fullPath = String.Concat(_apiPath, path);
@@ -68,8 +88,6 @@ namespace Interface_Gestion_API.Models
 
             return (response.StatusCode, await CreateList(response));
         }
-
-        
 
         private async Task<List<string>> CreateList(HttpResponseMessage response)
         {

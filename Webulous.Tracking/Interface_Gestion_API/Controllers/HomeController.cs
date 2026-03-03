@@ -72,6 +72,15 @@ namespace Interface_Gestion_API.Controllers
             return View(_whiteListManager.GetWhiteList());
         }
 
+        /// <summary>
+        /// Affiche la page de connexion.
+        /// 
+        /// Vérifie au préalable si l'API est disponible.
+        /// Si l'API n'est pas joignable, un message d'erreur est envoyé à la vue.
+        /// </summary>
+        /// <returns>
+        /// La vue de connexion.
+        /// </returns>
         public async Task<IActionResult> SignIn()
         {
             var isAvailable = await _apiService.IsApiAvailableAsync();
@@ -84,6 +93,19 @@ namespace Interface_Gestion_API.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Traite la soumission du formulaire de connexion.
+        /// 
+        /// Vérifie la validité du mot de passe.
+        /// Si le mot de passe est valide il y a une redirection vers l'action "Index".
+        /// 
+        /// Sinon, un message d'erreur est renvoyé à la vue.
+        /// </summary>
+        /// <param name="pwd">Mot de passe saisi par l'utilisateur.</param>
+        /// <returns>
+        /// Redirection vers Index si authentification réussie,
+        /// sinon réaffiche la vue avec un message d'erreur.
+        /// </returns>
         [HttpPost]
         public async Task<IActionResult> SignIn(string pwd)
         {

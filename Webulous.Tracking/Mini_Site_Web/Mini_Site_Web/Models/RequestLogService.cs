@@ -10,9 +10,11 @@ namespace Mini_Site_Web.Models
     {
         private readonly HttpClient _client;
         private string _pathAPI;
+        private readonly string _domain;
 
         public RequestLogService(string pathAPI, IHttpClientFactory factory)
         {
+            _domain = Regex.Match(pathAPI, @"^(?:https?:\/\/)?([^\/:?#]+)").Groups[1].Value;
             _pathAPI = pathAPI;
             _client = factory.CreateClient();
         }
@@ -33,7 +35,12 @@ namespace Mini_Site_Web.Models
 
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                await _client.PostAsync(_pathAPI, content);
+                var request = new HttpRequestMessage(HttpMethod.Post, _pathAPI);
+                request.Content = content;
+
+                request.Headers.Add("Domain", _domain);
+
+                await _client.SendAsync(request);
             }
             catch (HttpRequestException ex)
             {
@@ -52,10 +59,6 @@ namespace Mini_Site_Web.Models
         {
             var user_cookie_consent = context.Request.Cookies["user_cookie_consent"] == "true";
             var session_cookie_consent = context.Request.Cookies["session_cookie_consent"] == "true";
-
-
-            //Contenu du body sous forme de liste de strings.
-            var body = await GetBody(context.Request);
 
             var userId = user_cookie_consent
                 ? (context.Request.Cookies["uid"] ?? "null")
@@ -76,7 +79,7 @@ namespace Mini_Site_Web.Models
                                 : context.Request.Headers.Referer.ToString();
 
             var action = context.Request.Method == "POST"
-                    ? body
+                    ? await GetBody(context.Request)
                     : "HITPAGE";
 
             var languageBrowser = Regex.Match(context.Request.Headers.AcceptLanguage, @"^[^,]*").Value;

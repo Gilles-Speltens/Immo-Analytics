@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Concurrent;
+using System.Text;
 
 namespace Tracking_API.Model
 {
@@ -17,18 +18,28 @@ namespace Tracking_API.Model
         /// <param name="path">Chemin du fichier à gérer</param>
         public FileManager(string path)
         {
-            _path = path; 
+            _path = path;
         }
 
         /// <summary>
         /// Change le chemin du fichier à gérer.
         /// </summary>
         /// <param name="newPath">Nouveau chemin du fichier</param>
-        public void changePath(string newPath)
+        public void ChangePath(string newPath)
         {
-            if (newPath != null)
+            if (string.IsNullOrEmpty(newPath))
+                return;
+
+            using (var fs = new StreamWriter(_path, append: true, encoding: Encoding.UTF8))
             {
-                _path = newPath;
+                fs.Write("]");
+            }
+
+            _path = newPath;
+
+            using (var fs = new StreamWriter(_path, append: false, encoding: Encoding.UTF8))
+            {
+                fs.Write("[\n");
             }
         }
 
@@ -38,15 +49,27 @@ namespace Tracking_API.Model
         /// </summary>
         /// <param name="queue">Queue contenant les lignes à ajouter</param>
         /// <returns>Task représentant l'opération asynchrone</returns>
-        public async Task AppendFromQueue(ConcurrentQueue<string> queue)
+        public async Task AppendFromQueue(ConcurrentQueue<byte[]> queue)
         {
-            await using (var fs = File.AppendText(_path))
+            if (queue.IsEmpty)
+                return;
+
+            await using var fs = new FileStream(
+                _path,
+                FileMode.Append,
+                FileAccess.Write,
+                FileShare.Read,
+                bufferSize: 64 * 1024,
+                FileOptions.Asynchronous);
+
+            while (queue.TryDequeue(out var line))
             {
-                while (queue.TryDequeue(out var line))
-                {
-                    await fs.WriteLineAsync(line);
-                }
+                await fs.WriteAsync("   "u8.ToArray());
+                await fs.WriteAsync(line);
+                await fs.WriteAsync(",\n"u8.ToArray());
             }
+
+            await fs.FlushAsync();
         }
 
         /// <summary>
