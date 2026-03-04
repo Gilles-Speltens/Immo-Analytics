@@ -11,6 +11,7 @@ namespace Tracking_API.Model
     public class FileManager : IFileManager
     {
         private string _path;
+        private byte[] _newLine = Encoding.UTF8.GetBytes("\n");
 
         /// <summary>
         /// Initialise le FileManager avec un chemin de fichier.
@@ -30,25 +31,17 @@ namespace Tracking_API.Model
             if (string.IsNullOrEmpty(newPath))
                 return;
 
-            using (var fs = new StreamWriter(_path, append: true, encoding: Encoding.UTF8))
-            {
-                fs.Write("]");
-            }
-
             _path = newPath;
-
-            using (var fs = new StreamWriter(_path, append: false, encoding: Encoding.UTF8))
-            {
-                fs.Write("[\n");
-            }
         }
 
         /// <summary>
-        /// Ajoute les lignes d'une ConcurrentQueue dans le fichier de manière asynchrone.
-        /// Les lignes sont écrites dans l'ordre du dequeuing.
+        /// Vide la ConcurrentQueue et écrit son contenu à la fin du fichier courant.
+        /// 
+        /// - Chaque élément de la queue est un tableau de bytes représentant une ligne JSON.
+        /// - Les lignes sont écrites en UTF8 telles quelles (aucune conversion string).
+        /// - Une nouvelle ligne (\n) est ajoutée après chaque entrée.
+        /// - Le fichier est ouvert uniquement le temps du flush puis refermé.
         /// </summary>
-        /// <param name="queue">Queue contenant les lignes à ajouter</param>
-        /// <returns>Task représentant l'opération asynchrone</returns>
         public async Task AppendFromQueue(ConcurrentQueue<byte[]> queue)
         {
             if (queue.IsEmpty)
@@ -64,9 +57,8 @@ namespace Tracking_API.Model
 
             while (queue.TryDequeue(out var line))
             {
-                await fs.WriteAsync("   "u8.ToArray());
                 await fs.WriteAsync(line);
-                await fs.WriteAsync(",\n"u8.ToArray());
+                await fs.WriteAsync(_newLine);
             }
 
             await fs.FlushAsync();
@@ -96,10 +88,16 @@ namespace Tracking_API.Model
         /// <summary>
         /// Lit toutes les lignes du fichier et les retourne sous forme de tableau de chaînes.
         /// </summary>
-        /// <returns>Tableau de chaînes contenant toutes les lignes du fichier</returns>
+        /// <returns>Tableau de chaînes contenant toutes les lignes du fichier ou un tableau vide si le fichier n'existe pas</returns>
         public string[] ReadFile()
         {
-            return File.ReadAllLines(_path);
+            if(File.Exists(_path))
+            {
+                return File.ReadAllLines(_path);
+            } else
+            {
+                return new string[0];
+            }
         }
     }
 }

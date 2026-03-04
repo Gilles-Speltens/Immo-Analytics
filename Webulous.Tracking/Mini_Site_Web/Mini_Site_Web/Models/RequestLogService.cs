@@ -60,6 +60,8 @@ namespace Mini_Site_Web.Models
             var user_cookie_consent = context.Request.Cookies["user_cookie_consent"] == "true";
             var session_cookie_consent = context.Request.Cookies["session_cookie_consent"] == "true";
 
+            var date = DateTime.UtcNow;
+
             var userId = user_cookie_consent
                 ? (context.Request.Cookies["uid"] ?? "null")
                 : "null";
@@ -88,6 +90,7 @@ namespace Mini_Site_Web.Models
 
             return new RequestLogDto
             {
+                Date = date,
                 UserId = userId,
                 SessionId = sessionId,
                 Url = url,

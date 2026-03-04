@@ -59,13 +59,6 @@ namespace Tracking_API.Middleware
                 //Si la requête concerne les whitelists
                 if (context.Request.Path.StartsWithSegments("/TrackingDatas"))
                 {
-                    //var dto = await JsonSerializer.DeserializeAsync<RequestLogDto>(context.Request.Body);
-
-                    //context.Request.Body.Position = 0;
-
-                    //var match = Regex.Match(dto.Url, @"^(?:https?:\/\/)?([^\/:?#]+)");
-                    //var remoteDomain = match.Groups[1].Value;
-
                     var remoteDomain = context.Request.Headers["Domain"].FirstOrDefault();
 
                     if (remoteIp != null && remoteDomain.Length != 0)

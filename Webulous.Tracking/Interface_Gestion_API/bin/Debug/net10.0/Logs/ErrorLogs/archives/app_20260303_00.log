@@ -1,0 +1,4 @@
+2026-03-03 09:26:44.0793 | WARN | Tracking_API.Middleware.AdminSafeListMiddleware | Forbidden Request from remote IP address: ::1 
+2026-03-03 10:58:12.3660 | WARN | Tracking_API.Middleware.AdminSafeListMiddleware | Forbidden Request from remote IP address: ::1 
+2026-03-03 10:58:12.3660 | WARN | Tracking_API.Middleware.AdminSafeListMiddleware | Forbidden Request from remote IP address: ::1 
+2026-03-03 10:58:12.5387 | WARN | Tracking_API.Middleware.AdminSafeListMiddleware | Forbidden Request from remote IP address: ::1 

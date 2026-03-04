@@ -3,7 +3,9 @@
     public enum UserActions
     {
         UNKNOWN,
-        HITPAGE,
-        OTHER
+        ESTATSE_BROWSING,
+        CONTACT_REQUEST,
+        EXTERNAL_LINK,
+        BUTTON_CLICK
     }
 }

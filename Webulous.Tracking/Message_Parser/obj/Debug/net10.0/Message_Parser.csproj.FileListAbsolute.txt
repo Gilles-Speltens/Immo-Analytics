@@ -1,0 +1,15 @@
+C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Message_Parser\bin\Debug\net10.0\Message_Parser.exe
+C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Message_Parser\bin\Debug\net10.0\Message_Parser.deps.json
+C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Message_Parser\bin\Debug\net10.0\Message_Parser.runtimeconfig.json
+C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Message_Parser\bin\Debug\net10.0\Message_Parser.dll
+C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Message_Parser\bin\Debug\net10.0\Message_Parser.pdb
+C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Message_Parser\obj\Debug\net10.0\Message_Parser.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Message_Parser\obj\Debug\net10.0\Message_Parser.AssemblyInfoInputs.cache
+C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Message_Parser\obj\Debug\net10.0\Message_Parser.AssemblyInfo.cs
+C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Message_Parser\obj\Debug\net10.0\Message_Parser.csproj.CoreCompileInputs.cache
+C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Message_Parser\obj\Debug\net10.0\Message_Parser.sourcelink.json
+C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Message_Parser\obj\Debug\net10.0\Message_Parser.dll
+C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Message_Parser\obj\Debug\net10.0\refint\Message_Parser.dll
+C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Message_Parser\obj\Debug\net10.0\Message_Parser.pdb
+C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Message_Parser\obj\Debug\net10.0\Message_Parser.genruntimeconfig.cache
+C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Message_Parser\obj\Debug\net10.0\ref\Message_Parser.dll

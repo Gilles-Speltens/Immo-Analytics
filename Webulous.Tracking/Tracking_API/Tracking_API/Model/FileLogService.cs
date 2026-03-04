@@ -99,6 +99,7 @@ namespace Tracking_API.Model
         private void RotateFile(DateTime time)
         {
             _logFileTimeStamp = time;
+
             _fileManager.ChangePath(String.Concat(_path, FilterCharacters(_logFileTimeStamp.ToString("yyyyMMddHHmmss")), ".log"));
         }
 
