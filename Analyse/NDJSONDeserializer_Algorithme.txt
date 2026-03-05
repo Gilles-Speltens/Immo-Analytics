@@ -1,0 +1,34 @@
+Début : 05-03-26 14:51:26
+Fin : 05-03-26 14:51:26
+Durée : 00:00:00.0938702
+Nombre de ligne parsées : 10.000
+Nombre de documents parsées : 5
+Nombre de lignes par document : 2000
+
+Début : 05-03-26 15:02:03
+Fin : 05-03-26 15:02:04
+Durée : 00:00:01.5958400
+Nombre de ligne parsées : 10.000
+Nombre de documents parsées : 100
+Nombre de lignes par document : 100
+
+Début : 05-03-26 15:08:11
+Fin : 05-03-26 15:08:11
+Durée : 00:00:00.5880819
+Nombre de ligne parsées : 100.000
+Nombre de documents parsées : 5
+Nombre de lignes par document : 20.000
+
+Début : 05-03-26 15:09:44
+Fin : 05-03-26 15:09:44
+Durée : 00:00:00.5600117
+Nombre de ligne parsées : 100000
+Nombre de documents parsées : 1
+Nombre de lignes par document : 100.000
+
+Début : 05-03-26 15:10:51
+Fin : 05-03-26 15:10:53
+Durée : 00:00:02.3569007
+Nombre de ligne parsées : 500000
+Nombre de documents parsées : 5
+Nombre de lignes par document : 100.000

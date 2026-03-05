@@ -2,13 +2,8 @@ using Common;
 using Common.Exceptions;
 using Interface_Gestion_API.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
 using System.Diagnostics;
 using System.Net;
-using System.Net.NetworkInformation;
-using System.Net.Sockets;
-using System.Text;
-using System.Text.Json;
 
 namespace Interface_Gestion_API.Controllers
 {

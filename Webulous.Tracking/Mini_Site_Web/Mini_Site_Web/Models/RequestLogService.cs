@@ -57,8 +57,8 @@ namespace Mini_Site_Web.Models
         /// <returns>Un objet RequestLogDto complet</returns>
         public async Task<RequestLogDto> CreateRequestLog(HttpContext context)
         {
-            var user_cookie_consent = context.Request.Cookies["user_cookie_consent"] == "true";
-            var session_cookie_consent = context.Request.Cookies["session_cookie_consent"] == "true";
+            var user_cookie_consent = true;//context.Request.Cookies["user_cookie_consent"] == "true";
+            var session_cookie_consent = true;//context.Request.Cookies["session_cookie_consent"] == "true";
 
             var date = DateTime.UtcNow;
 

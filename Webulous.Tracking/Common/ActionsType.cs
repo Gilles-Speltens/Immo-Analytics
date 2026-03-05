@@ -1,6 +1,6 @@
 ﻿namespace Common
 {
-    public enum UserActions
+    public enum ActionsType
     {
         UNKNOWN,
         ESTATSE_BROWSING,
