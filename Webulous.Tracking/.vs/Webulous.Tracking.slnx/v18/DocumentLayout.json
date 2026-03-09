@@ -3,6 +3,18 @@
   "WorkspaceRootPath": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{7989639B-72BB-4170-B191-38746071A157}|Message_Parser\\Message_Parser.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\message_parser\\model\\reposiroties\\sessionsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7989639B-72BB-4170-B191-38746071A157}|Message_Parser\\Message_Parser.csproj|solutionrelative:message_parser\\model\\reposiroties\\sessionsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7989639B-72BB-4170-B191-38746071A157}|Message_Parser\\Message_Parser.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\message_parser\\model\\reposiroties\\usersrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7989639B-72BB-4170-B191-38746071A157}|Message_Parser\\Message_Parser.csproj|solutionrelative:message_parser\\model\\reposiroties\\usersrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7989639B-72BB-4170-B191-38746071A157}|Message_Parser\\Message_Parser.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\message_parser\\model\\reposiroties\\baserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7989639B-72BB-4170-B191-38746071A157}|Message_Parser\\Message_Parser.csproj|solutionrelative:message_parser\\model\\reposiroties\\baserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{7989639B-72BB-4170-B191-38746071A157}|Message_Parser\\Message_Parser.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\message_parser\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7989639B-72BB-4170-B191-38746071A157}|Message_Parser\\Message_Parser.csproj|solutionrelative:message_parser\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -18,30 +30,69 @@
       "DocumentGroups": [
         {
           "DockedWidth": 325,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BaseRepository.cs",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Message_Parser\\Model\\Reposiroties\\BaseRepository.cs",
+              "RelativeDocumentMoniker": "Message_Parser\\Model\\Reposiroties\\BaseRepository.cs",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Message_Parser\\Model\\Reposiroties\\BaseRepository.cs",
+              "RelativeToolTip": "Message_Parser\\Model\\Reposiroties\\BaseRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-09T15:24:21.93Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "SessionsRepository.cs",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Message_Parser\\Model\\Reposiroties\\SessionsRepository.cs",
+              "RelativeDocumentMoniker": "Message_Parser\\Model\\Reposiroties\\SessionsRepository.cs",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Message_Parser\\Model\\Reposiroties\\SessionsRepository.cs",
+              "RelativeToolTip": "Message_Parser\\Model\\Reposiroties\\SessionsRepository.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAB4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-09T15:01:17.935Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UsersRepository.cs",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Message_Parser\\Model\\Reposiroties\\UsersRepository.cs",
+              "RelativeDocumentMoniker": "Message_Parser\\Model\\Reposiroties\\UsersRepository.cs",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Message_Parser\\Model\\Reposiroties\\UsersRepository.cs",
+              "RelativeToolTip": "Message_Parser\\Model\\Reposiroties\\UsersRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAABHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-09T14:48:23.789Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Message_Parser\\Program.cs",
               "RelativeDocumentMoniker": "Message_Parser\\Program.cs",
               "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Message_Parser\\Program.cs",
               "RelativeToolTip": "Message_Parser\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-05T13:29:20.81Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "NDJSONDeserializer.cs",
               "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Message_Parser\\Model\\NDJSONDeserializer.cs",
               "RelativeDocumentMoniker": "Message_Parser\\Model\\NDJSONDeserializer.cs",
               "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Message_Parser\\Model\\NDJSONDeserializer.cs",
               "RelativeToolTip": "Message_Parser\\Model\\NDJSONDeserializer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAA8AAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAACsAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-05T13:14:54.876Z",
               "EditorCaption": ""

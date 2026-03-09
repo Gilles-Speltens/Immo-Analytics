@@ -1,12 +1,26 @@
 ﻿using Dapper;
+using Message_Parser.Entities;
 using Message_Parser.Model;
+using Message_Parser.Model.Reposiroties;
 using MySqlConnector;
 
-//using var db = new MySqlConnection("server=localhost;user=root;password=1234;database=AnalyticsDB;");
-//db.Open();
+var db = DBConnection.Instance;
+var sessionRepo = new SessionsRepository();
+var userRepo = new UsersRepository();
 
-//Console.WriteLine(db.ToString());
+var list = new List<Session>();
 
-var json = new NDJSONDeserializer("C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Logs");
+for (int i = 0; i < 10000; i++)
+{
+    list.Add(new Session { Id = i.ToString(), UserId = "a", Duration = DateTime.UtcNow });
+}
+ 
 
-var logs = await json.DeserializeAll();
+//userRepo.Insert("a");
+await sessionRepo.BulkInsert(list, null);
+
+db.Execute("delete from sessions;");
+
+//var json = new NDJSONDeserializer("C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Logs");
+
+//var logs = await json.DeserializeAll();

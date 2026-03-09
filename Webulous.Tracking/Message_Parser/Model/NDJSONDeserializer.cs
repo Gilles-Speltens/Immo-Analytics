@@ -21,19 +21,26 @@ namespace Message_Parser.Model
             {
                 var file = files[i];
 
-                using (StreamReader sr = new StreamReader(file))
+                logs.Concat(await DeserializeFile(file));     
+            }
+            return logs;
+        }
+
+        public async Task<List<RequestLogDto>> DeserializeFile(string path)
+        {
+            var logs = new List<RequestLogDto>();
+            using (StreamReader sr = new StreamReader(path))
+            {
+                var line = await sr.ReadLineAsync();
+                while (line != null && !line.Equals(""))
                 {
-                    var line = await sr.ReadLineAsync();
-                    while (line != null && !line.Equals(""))
+                    var log = JsonSerializer.Deserialize<RequestLogDto>(line);
+                    if (log != null)
                     {
-                        var log = JsonSerializer.Deserialize<RequestLogDto>(line);
-                        if(log != null)
-                        {
-                            logs.Add(log);
-                        }
-                        line = await sr.ReadLineAsync();
+                        logs.Add(log);
                     }
-                }                   
+                    line = await sr.ReadLineAsync();
+                }
             }
             return logs;
         }
