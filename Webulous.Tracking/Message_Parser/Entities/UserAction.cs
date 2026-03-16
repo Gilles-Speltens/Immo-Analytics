@@ -7,16 +7,14 @@ namespace Message_Parser.Entities
 {
     public class UserAction
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         public DateTime Time { get; set; }
 
-        public string PageId { get; set; } = null!;
+        public int PageId { get; set; }
 
         public ActionsType ActionType { get; set; }
 
         public string? ActionParameter { get; set; }
-
-        public HitPage? HitPage { get; set; }
     }
 }

@@ -7,19 +7,22 @@ using MySqlConnector;
 var db = DBConnection.Instance;
 var sessionRepo = new SessionsRepository();
 var userRepo = new UsersRepository();
+var hitpageRepo = new HitPageRepository();
+var userActions = new UserActionsRepository();
+var websiteRepo = new WebsiteRepository();
 
-var list = new List<Session>();
+var list = new List<Website>();
 
 for (int i = 0; i < 10000; i++)
 {
-    list.Add(new Session { Id = i.ToString(), UserId = "a", Duration = DateTime.UtcNow });
+    list.Add(new Website { Domain = i.ToString(), DateWhenAdded = DateTime.UtcNow, Certify = true});
 }
- 
 
-//userRepo.Insert("a");
-await sessionRepo.BulkInsert(list, null);
+//await userActions.BulkInsert(list, null);
 
-db.Execute("delete from sessions;");
+await websiteRepo.BulkInsert(list, null);
+
+//db.Execute("delete from Hit_Page;");
 
 //var json = new NDJSONDeserializer("C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Logs");
 

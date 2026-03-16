@@ -6,7 +6,7 @@ namespace Message_Parser.Entities
 {
     public class HitPage
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         public DateTime Time { get; set; }
 
@@ -18,14 +18,10 @@ namespace Message_Parser.Entities
 
         public string? LanguageBrowser { get; set; }
 
-        public string Website { get; set; } = null!;
-
         public string UserAction { get; set; } = null!;
 
-        public Session? Session { get; set; }
+        public string? Session { get; set; }
 
-        public Website? WebSite { get; set; }
-
-        public ICollection<UserAction>? UserActions { get; set; }
+        public string Website { get; set; }
     }
 }

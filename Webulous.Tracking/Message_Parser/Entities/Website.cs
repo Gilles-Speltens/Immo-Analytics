@@ -11,7 +11,5 @@ namespace Message_Parser.Entities
         public DateTime DateWhenAdded { get; set; }
 
         public bool Certify { get; set; }
-
-        public ICollection<HitPage>? HitPages { get; set; }
     }
 }
