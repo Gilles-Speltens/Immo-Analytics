@@ -29,7 +29,7 @@ namespace Mini_Site_Web.Middleware
         /// <param name="context">Contexte HTTP de la requête en cours.</param>
         public async Task Invoke(HttpContext context)
         {
-            if (context.Request.Method == "GET" || context.Request.Method == "POST")
+            if (context.Request.Method == "GET")
             {
                 await _logService.SendLog(context);
             }

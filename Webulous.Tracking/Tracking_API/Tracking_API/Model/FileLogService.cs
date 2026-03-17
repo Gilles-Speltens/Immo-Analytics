@@ -50,7 +50,7 @@ namespace Tracking_API.Model
             }
                 
             this._logFileRotationIntervalMinutes = rotationInterval;
-            this._path = string.Concat(configuration["PathToLogsDirectory"], "/ tracking-");
+            this._path = string.Concat(configuration["PathToLogsDirectory"], "/tracking-");
             this._logFileTimeStamp = DateTime.Now;
             this._fileManager = new FileManager(String.Concat(_path, FilterCharacters(_logFileTimeStamp.ToString("yyyyMMddHHmmss")), ".log"));
 

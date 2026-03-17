@@ -10,6 +10,10 @@ namespace Message_Parser.Model.Reposiroties
 {
     internal class SessionsRepository : BaseRepository
     {
+        public SessionsRepository(MySqlConnection connection)
+        : base(connection)
+        {
+        }
         public bool Insert(Session session)
         {
             int rows = _connection.Execute(
@@ -22,6 +26,11 @@ namespace Message_Parser.Model.Reposiroties
         public Task<int> BulkInsert(List<Session> sessions, IDbTransaction? transaction)
         {
             return BulkInsertInternal(sessions, BatchInsert, transaction);
+        }
+
+        public async Task<bool> Contains(int id)
+        {
+            return _connection.Execute("SELECT 1 FROM Session WHERE id = (@Id)", new { Id = id }) == 1;
         }
 
         private async Task<int> BatchInsert(List<Session> batch, IDbTransaction? transaction)

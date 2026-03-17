@@ -8,8 +8,13 @@ namespace Message_Parser.Model.Reposiroties
 {
     internal abstract class BaseRepository
     {
-        protected readonly MySqlConnection _connection = DBConnection.Instance;
+        protected readonly MySqlConnection _connection;
         protected readonly int _batchSize = 1000;
+
+        public BaseRepository(MySqlConnection connection)
+        {
+            _connection = connection;
+        }
 
         protected async Task<int> BulkInsertInternal<T>(
             List<T> items,

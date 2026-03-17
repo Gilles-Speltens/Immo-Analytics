@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using Common;
 using Microsoft.AspNetCore.Mvc;
 using Mini_Site_Web.Models;
 
@@ -6,13 +7,12 @@ namespace Mini_Site_Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly List<Collaborator> _collaborators;
         private readonly List<House> _houses;
+        private readonly RequestLogService _logService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(RequestLogService logService)
         {
-            _logger = logger;
             _collaborators = new()
             {
                 new Collaborator { Name = "Marie Martin", Phone = "04 99 99 99", PhotoUrl = "/images/collaborators/collaborator1.jpg" },
@@ -51,6 +51,8 @@ namespace Mini_Site_Web.Controllers
                     ImageUrl = "/images/houses/house4.jpg"
                 }
             };
+
+            _logService = logService;
         }
 
         public IActionResult Index()
@@ -69,20 +71,17 @@ namespace Mini_Site_Web.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        /// <summary>
-        /// Faux contrôleur servent simplement à être contactés lors des useractions,
-        /// afin que le middleware puisse intercepter la requête.
-        /// Le nom ne reflète pas sa véritable fonction afin de ne pas alerter les bloqueurs de publicité.
-        /// </summary>
         [HttpPost]
-        public IActionResult Validation()
+        public async Task<IActionResult> ContactButton()
         {
+            await _logService.SendLog(HttpContext, ActionsType.BUTTON_CLICK, null);
             return new EmptyResult();
         }
 
         [HttpPost]
-        public IActionResult Form(string Name, string Email, string Message)
+        public async Task<IActionResult> Form(string Name, string Email, string Message)
         {
+            await _logService.SendLog(HttpContext, ActionsType.CONTACT_REQUEST, Name);
             return new EmptyResult();
         }
     }

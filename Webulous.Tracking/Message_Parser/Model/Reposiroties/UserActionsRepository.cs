@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Message_Parser.Entities;
+using MySqlConnector;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,6 +10,10 @@ namespace Message_Parser.Model.Reposiroties
 {
     internal class UserActionsRepository : BaseRepository
     {
+        public UserActionsRepository(MySqlConnection connection)
+        : base(connection)
+        {
+        }
         public bool Insert(UserAction userAction)
         {
             int rows = _connection.Execute(

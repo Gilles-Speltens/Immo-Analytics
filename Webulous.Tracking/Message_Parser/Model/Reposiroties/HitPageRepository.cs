@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Message_Parser.Entities;
+using MySqlConnector;
 using System.Data;
 using System.Text;
 
@@ -7,6 +8,10 @@ namespace Message_Parser.Model.Reposiroties
 {
     internal class HitPageRepository : BaseRepository
     {
+        public HitPageRepository(MySqlConnection connection)
+        : base(connection)
+        {
+        }
         public bool Insert(HitPage hitpage)
         {
             int rows = _connection.Execute(
@@ -19,6 +24,11 @@ namespace Message_Parser.Model.Reposiroties
         public Task<int> BulkInsert(List<HitPage> hitPages, IDbTransaction? transaction)
         {
             return BulkInsertInternal(hitPages, BatchInsert, transaction);
+        }
+
+        public async Task<bool> Contains(int id)
+        {
+            return _connection.Execute("SELECT 1 FROM Hit_Page WHERE id = (@Id)", new { Id = id }) == 1;
         }
 
         private async Task<int> BatchInsert(List<HitPage> batch, IDbTransaction? transaction)

@@ -2,7 +2,6 @@
 using Message_Parser.Entities;
 using Message_Parser.Model;
 using Message_Parser.Model.Reposiroties;
-using MySqlConnector;
 
 var db = DBConnection.Instance;
 var sessionRepo = new SessionsRepository();
@@ -19,8 +18,6 @@ for (int i = 0; i < 10000; i++)
 }
 
 //await userActions.BulkInsert(list, null);
-
-await websiteRepo.BulkInsert(list, null);
 
 //db.Execute("delete from Hit_Page;");
 

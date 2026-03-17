@@ -133,7 +133,7 @@
 
                 // Envoie POST pour tracker l'action du boutton contact
                 const action = btn.getAttribute('data-action') || 'bouton inconnu';
-                fetch('/Home/Validation', {
+                fetch('/Home/ContactButton', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

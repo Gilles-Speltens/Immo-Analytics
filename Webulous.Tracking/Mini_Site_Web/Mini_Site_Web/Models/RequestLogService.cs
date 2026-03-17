@@ -20,17 +20,35 @@ namespace Mini_Site_Web.Models
         }
 
         /// <summary>
-        /// Envoye une requête à l'API avec dans le corp de la requête les logs au format RequestLog
-        /// converti au JSON.
+        /// Converti le context en un RequestLogDto puis l'envoie à l'API via la classe SendLog(RequestLogDto logDto).
         /// </summary>
         /// <param name="context">Contexte HTTP de la requête en cours.</param>
         public async Task SendLog(HttpContext context)
         {
+            //Formatage des logs.
+            var logDto = await CreateRequestLog(context, null, null);
+            await SendLog(logDto);
+        }
+
+        /// <summary>
+        /// Converti le context en un RequestLogDto puis l'envoie à l'API via la classe SendLog(RequestLogDto logDto).
+        /// </summary>
+        /// <param name="context">Contexte HTTP de la requête en cours.</param>
+        public async Task SendLog(HttpContext context, ActionsType? action, string? actionParam)
+        {
+            //Formatage des logs.
+            var logDto = await CreateRequestLog(context, action, actionParam);
+            await SendLog(logDto);
+        }
+
+        /// <summary>
+        /// Envoie les logs au format JSON via une requête POST à l'API de tracking.
+        /// </summary>
+        /// <param name="logDto">Les logs envoyé à l'API</param>
+        public async Task SendLog(RequestLogDto logDto)
+        {
             try
             {
-                //Formatage des logs.
-                var logDto = await CreateRequestLog(context);
-
                 var json = JsonSerializer.Serialize(logDto);
 
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -47,7 +65,7 @@ namespace Mini_Site_Web.Models
                 Console.WriteLine(ex.Message);
                 Console.WriteLine("Failed to send the Logs to the API");
             }
-            
+
         }
 
         /// <summary>
@@ -55,7 +73,7 @@ namespace Mini_Site_Web.Models
         /// </summary>
         /// <param name="context">Contexte HTTP de la requête en cours.</param>
         /// <returns>Un objet RequestLogDto complet</returns>
-        public async Task<RequestLogDto> CreateRequestLog(HttpContext context)
+        private async Task<RequestLogDto> CreateRequestLog(HttpContext context, ActionsType? actionType, string? actionParam)
         {
             var user_cookie_consent = true;//context.Request.Cookies["user_cookie_consent"] == "true";
             var session_cookie_consent = true;//context.Request.Cookies["session_cookie_consent"] == "true";
@@ -80,9 +98,20 @@ namespace Mini_Site_Web.Models
                                 ? "null"
                                 : context.Request.Headers.Referer.ToString();
 
-            var action = context.Request.Method == "POST"
-                    ? await GetBody(context.Request)
-                    : "HITPAGE";
+            var action = ActionsType.HITPAGE;
+
+            if(context.Request.Method == "POST")
+            {
+                if(actionType != null)
+                {
+                    action = actionType.Value;
+                } else
+                {
+                    action = ActionsType.UNKNOWN;
+                }
+            }
+
+            var actionParameters = actionParam != null ? actionParam : "null";
 
             var languageBrowser = Regex.Match(context.Request.Headers.AcceptLanguage, @"^[^,]*").Value;
 
@@ -96,6 +125,7 @@ namespace Mini_Site_Web.Models
                 Url = url,
                 UrlReferrer = urlReferrer,
                 Action = action,
+                ActionParameters = actionParameters,
                 LanguageBrowser = languageBrowser,
                 UserAgent = userAgent
             };
