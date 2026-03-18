@@ -9,11 +9,11 @@ namespace Message_Parser.Entities
     {
         public int? Id { get; set; }
 
-        public DateTime Time { get; set; }
+        public required DateTime Time { get; set; }
 
-        public int PageId { get; set; }
+        public required int PageId { get; set; }
 
-        public ActionsType ActionType { get; set; }
+        public required ActionsType ActionType { get; set; }
 
         public string? ActionParameter { get; set; }
     }

@@ -15,7 +15,7 @@ namespace Message_Parser.Model.Reposiroties
         public bool Insert(HitPage hitpage)
         {
             int rows = _connection.Execute(
-                "INSERT INTO Hit_Page (Time, Url, Referrer, Language_Browser, Session_Id, Website) VALUES (@Time, @Url, @Referrer, @LanguageBrowser, @SessionId, @Website)",
+                "INSERT INTO Hit_Page (Time, Session_Id, Url, Referrer, Site_Id) VALUES (@Time, @SessionId, @Url, @Referrer, @SiteId)",
                 hitpage);
 
             return rows == 1;
@@ -38,19 +38,18 @@ namespace Message_Parser.Model.Reposiroties
 
             for (int i = 0; i < batch.Count; i++)
             {
-                sqlValues.Append($"(@Time{i}, @Url{i}, @Referrer{i}, @LanguageBrowser{i}, @SessionId{i}, @Website{i}),");
+                sqlValues.Append($"(@Time{i}, @SessionId{i}, @Url{i}, @Referrer{i}, @LanguageBrowser{i}, @SiteId{i}),");
 
                 parameters.Add($"Time{i}", batch[i].Time);
+                parameters.Add($"SessionId{i}", batch[i].SessionId);
                 parameters.Add($"Url{i}", batch[i].Url);
                 parameters.Add($"Referrer{i}", batch[i].Referrer);
-                parameters.Add($"LanguageBrowser{i}", batch[i].LanguageBrowser);
-                parameters.Add($"SessionId{i}", batch[i].SessionId);
-                parameters.Add($"Website{i}", batch[i].Website);
+                parameters.Add($"Website{i}", batch[i].SiteId);
             }
 
             sqlValues.Length--;
 
-            var sql = $"INSERT INTO Hit_Page (Time, Url, Referrer, Language_Browser, Session_Id, Website) VALUES {sqlValues}";
+            var sql = $"INSERT INTO Hit_Page (Time, Session_Id, Url, Referrer, Site_Id) VALUES {sqlValues}";
 
             return await _connection.ExecuteAsync(sql, parameters, transaction);
         }

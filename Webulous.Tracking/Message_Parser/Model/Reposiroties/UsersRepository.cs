@@ -12,11 +12,11 @@ namespace Message_Parser.Model.Reposiroties
         : base(connection)
         {
         }
-        public bool Insert(string guid)
+        public bool Insert(User user)
         {
             int rows = _connection.Execute(
-                "INSERT INTO Users (Id) VALUES (@Id)",
-                new { Id = guid });
+                "INSERT INTO Users (Ip, Id) VALUES (@Ip, @Id)",
+                user);
 
             return rows == 1;
         }
@@ -26,9 +26,15 @@ namespace Message_Parser.Model.Reposiroties
             return BulkInsertInternal(users, BatchInsert, transaction);
         }
 
-        public async Task<bool> Contains(int guid)
+        public async Task<List<User>> GetAll()
         {
-            return _connection.Execute("SELECT 1 FROM Users WHERE id = (@Id)", new {Id = guid}) == 1;
+            var users = await _connection.QueryAsync<User>("SELECT * FROM Users");
+            return users.ToList();
+        }
+
+        public async Task<bool> Contains(int ip)
+        {
+            return _connection.Execute("SELECT 1 FROM Users WHERE ip = (@Ip)", new {Ip = ip}) == 1;
         }
 
         private async Task<int> BatchInsert(List<User> batch, IDbTransaction? transaction)
@@ -38,13 +44,14 @@ namespace Message_Parser.Model.Reposiroties
 
             for (int i = 0; i < batch.Count; i++)
             {
-                sqlValues.Append($"(@Id{i}),");
+                sqlValues.Append($"(@Ip{i}, @Id{i}),");
+                parameters.Add($"Ip{i}", batch[i].Ip);
                 parameters.Add($"Id{i}", batch[i].Id);
             }
 
             sqlValues.Length--;
 
-            var sql = $"INSERT INTO Users (Id) VALUES {sqlValues}";
+            var sql = $"INSERT INTO Users (Ip, Id) VALUES {sqlValues}";
 
             return await _connection.ExecuteAsync(sql, parameters, transaction);
         }

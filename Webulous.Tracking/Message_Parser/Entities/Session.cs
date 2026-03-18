@@ -6,11 +6,13 @@ namespace Message_Parser.Entities
 {
     public class Session
     {
-        public string Id { get; set; }
+        public required string Id { get; set; }
 
         public string? UserId { get; set; }
-
-        public DateTime? Duration { get; set; }
+        public required string LanguageBrowser { get; set; }
+        public required string UserAgent { get; set; }
+        public DateTime? Begin { get; set; }
+        public DateTime? End { get; set; }
 
     }
 }
