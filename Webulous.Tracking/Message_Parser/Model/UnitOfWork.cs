@@ -2,6 +2,7 @@
 using Message_Parser.Entities;
 using Message_Parser.Model.Reposiroties;
 using MySqlConnector;
+using System.Text.RegularExpressions;
 
 namespace Message_Parser.Model
 {
@@ -9,30 +10,35 @@ namespace Message_Parser.Model
     {
         private MySqlConnection _db;
         private SessionsRepository _sessionRepo;
-        private UsersRepository _userRepo;
         private HitPageRepository _hitpageRepo;
         private UserActionsRepository _userActionsRepo;
-        private SiteRepository _websiteRepo;
+        private SiteRepository _siteRepo;
 
         public UnitOfWork()
         {
             _db = DBConnection.Instance;
             _sessionRepo = new SessionsRepository(_db);
-            _userRepo = new UsersRepository(_db);
             _hitpageRepo = new HitPageRepository(_db);
             _userActionsRepo = new UserActionsRepository(_db);
-            _websiteRepo = new SiteRepository(_db);
+            _siteRepo = new SiteRepository(_db);
         }
 
         //public async Task<bool> bulkInsertLogs(List<RequestLogDto> logs)
         //{
         //    _db.Open();
+
+        //    List<Site> sites = new List<Site>();
         //    foreach (RequestLogDto log in logs)
         //    {
-        //        var userId = log.UserId;
-        //        var sessionId = log.SessionId;
-        //        HitPage hitPage = new HitPage { Time = log.Date, Url = log.Url, Referrer = log.UrlReferrer, LanguageBrowser = log.LanguageBrowser, Session = log.SessionId, Website =  };
+        //        var domain = Regex.Match(log.Url, @"^(?:https?:\/\/)?([^\/:?#]+)").Groups[1].Value;
+        //        var dateWhenAdded = DateTime.UtcNow;
+        //        var certify = false;
+        //        Site site = new Site { Domain = domain, DateWhenAdded = dateWhenAdded, Certify = certify };
+
+        //        sites.Add(site);
         //    }
+
+            
         //}
     }
 }

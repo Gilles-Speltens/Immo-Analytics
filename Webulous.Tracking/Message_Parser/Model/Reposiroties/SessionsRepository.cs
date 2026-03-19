@@ -17,15 +17,15 @@ namespace Message_Parser.Model.Reposiroties
         public bool Insert(Session session)
         {
             int rows = _connection.Execute(
-                "INSERT INTO Sessions (Id, UserId, Language_Browser, User_Agent, Begin, End) VALUES (@Id, @UserId, @LanguageBrowser, @UserAgent, @Begin, @End)",
+                "INSERT INTO Sessions (Id, SessionId, SiteId, UserId, UserIp, Language_Browser, User_Agent, SessionStart, SessionEnd) VALUES (@Id, @SessionId, @SiteId, @UserId, @UserIp, @LanguageBrowser, @UserAgent, @SessionStart, @SessionEnd)",
                 session);
 
             return rows == 1;
         }
 
-        public Task<int> BulkInsert(List<Session> sessions, IDbTransaction? transaction)
+        public Task<List<int>> BulkUpsert(List<Session> sessions, IDbTransaction? transaction)
         {
-            return BulkInsertInternal(sessions, BatchInsert, transaction);
+            return BulkUpsertInternal(sessions, BatchUpsert, transaction);
         }
 
         public async Task<List<Session>> GetAll()
@@ -39,28 +39,56 @@ namespace Message_Parser.Model.Reposiroties
             return _connection.Execute("SELECT 1 FROM Session WHERE id = (@Id)", new { Id = id }) == 1;
         }
 
-        private async Task<int> BatchInsert(List<Session> batch, IDbTransaction? transaction)
+        private async Task<List<int>> BatchUpsert(List<Session> batch, IDbTransaction? transaction)
         {
             var sqlValues = new StringBuilder();
             var parameters = new DynamicParameters();
 
             for (int i = 0; i < batch.Count; i++)
             {
-                sqlValues.Append($"(@Id{i}, @UserId{i}, @LanguageBrowser{i}, @UserAgent{i}, @Begin{i}, @End{i}),");
+                sqlValues.Append($"(@SessionId{i}, @SiteId{i}, @UserId{i}, @UserIp{i}, @LanguageBrowser{i}, @UserAgent{i}, @SessionStart{i}, @SessionEnd{i}),");
 
-                parameters.Add($"Id{i}", batch[i].Id);
+                parameters.Add($"SessionId{i}", batch[i].SessionId);
+                parameters.Add($"SiteId{i}", batch[i].SiteId);
                 parameters.Add($"UserId{i}", batch[i].UserId);
+                parameters.Add($"UserIp{i}", batch[i].UserIp);
                 parameters.Add($"LanguageBrowser{i}", batch[i].LanguageBrowser);
                 parameters.Add($"UserAgent{i}", batch[i].UserAgent);
-                parameters.Add($"Begin{i}", batch[i].Begin);
-                parameters.Add($"End{i}", batch[i].End);
+                parameters.Add($"SessionStart{i}", batch[i].SessionStart);
+                parameters.Add($"SessionEnd{i}", batch[i].SessionEnd);
             }
 
             sqlValues.Length--;
 
-            var sql = $"INSERT INTO Sessions (@Id, @UserId, @LanguageBrowser, @UserAgent, @Begin, @End) VALUES {sqlValues}";
+            // !!! Fonctionne uniquement avec MariaDB 10.5 (2020)
+            var sql = $"""
+                INSERT INTO Sessions (Session_Id, Site_Id, User_Id, User_Ip, Language_Browser, User_Agent, Session_Start, Session_End)
+                VALUES {sqlValues}
+                ON DUPLICATE KEY UPDATE
+                    Language_Browser = Language_Browser
+                RETURNING Id;
+                """;
 
-            return await _connection.ExecuteAsync(sql, parameters, transaction);
+            return (await _connection.QueryAsync<int>(sql, parameters, transaction)).ToList();
+
+            // Si non utiliser ceci (plus lent de 20%) : !!!!!!!!! buggé à changer !!!!!!!!!
+            //var sql = $"""
+            //    INSERT INTO Sessions (Session_Id, Site_Id, User_Id, User_Ip, Language_Browser, User_Agent, Session_Start, Session_End)
+            //    VALUES {sqlValues}
+            //    ON DUPLICATE KEY UPDATE
+            //        Language_Browser = Language_Browser
+            //    """;
+
+            //await _connection.QueryAsync<int>(sql, parameters, transaction);
+
+            //var userIp = batch.Select(x => x.UserIp).ToList();
+
+            //var ids = (await _connection.QueryAsync<int>(
+            //    "SELECT Id FROM Sessions WHERE User_Ip IN @UserIp",
+            //    new { UserIp = userIp },
+            //    transaction)).ToList();
+
+            //return ids;
         }
     }
 }

@@ -21,9 +21,9 @@ namespace Message_Parser.Model.Reposiroties
             return rows == 1;
         }
 
-        public Task<int> BulkInsert(List<Site> sites, IDbTransaction? transaction)
+        public Task<List<int>> BulkUpsert(List<Site> sites, IDbTransaction? transaction)
         {
-            return BulkInsertInternal(sites, BatchInsert, transaction);
+            return BulkUpsertInternal(sites, BatchUpsert, transaction);
         }
 
         public async Task<bool> Contains(string id)
@@ -31,7 +31,7 @@ namespace Message_Parser.Model.Reposiroties
             return _connection.Execute("SELECT 1 FROM Site WHERE id = (@Id)", new { Id = id }) == 1;
         }
 
-        private async Task<int> BatchInsert(List<Site> batch, IDbTransaction? transaction)
+        private async Task<List<int>> BatchUpsert(List<Site> batch, IDbTransaction? transaction)
         {
             var sqlValues = new StringBuilder();
             var parameters = new DynamicParameters();
@@ -48,9 +48,36 @@ namespace Message_Parser.Model.Reposiroties
 
             sqlValues.Length--;
 
-            var sql = $"INSERT INTO Site (Id, Domain, Date_When_Added, Certify) VALUES {sqlValues}";
+            // !!! Fonctionne uniquement avec MariaDB 10.5 (2020)
+            var sql = $"""
+                INSERT INTO Site (Id, Domain, Date_When_Added, Certify) 
+                VALUES {sqlValues}
+                ON DUPLICATE KEY UPDATE
+                    Domain = Domain
+                RETURNING Id;
+                """;
 
-            return await _connection.ExecuteAsync(sql, parameters, transaction);
+            return (await _connection.QueryAsync<int>(sql, parameters, transaction)).ToList();
+
+            // Si non utiliser ceci (plus lent de 20%) :
+
+            //var sql = $"""
+            //    INSERT INTO Site (Id, Domain, Date_When_Added, Certify)
+            //    VALUES {sqlValues}
+            //    ON DUPLICATE KEY UPDATE
+            //        Domain = Domain
+            //    """;
+
+            //await _connection.QueryAsync<int>(sql, parameters, transaction);
+
+            //var domains = batch.Select(x => x.Domain).ToList();
+
+            //var ids = (await _connection.QueryAsync<int>(
+            //    "SELECT Id FROM Site WHERE Domain IN @Domains",
+            //    new { Domains = domains },
+            //    transaction)).ToList();
+
+            //return ids;
         }
     }
 }

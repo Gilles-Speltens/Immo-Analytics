@@ -23,12 +23,12 @@ namespace Message_Parser.Model.Reposiroties
             return rows == 1;
         }
 
-        public Task<int> BulkInsert(List<UserAction> userAction, IDbTransaction? transaction)
+        public Task<List<int>> BulkInsert(List<UserAction> userAction, IDbTransaction? transaction)
         {
-            return BulkInsertInternal(userAction, BatchInsert, transaction);
+            return BulkUpsertInternal(userAction, BatchUpsert, transaction);
         }
 
-        private async Task<int> BatchInsert(List<UserAction> batch, IDbTransaction? transaction)
+        private async Task<List<int>> BatchUpsert(List<UserAction> batch, IDbTransaction? transaction)
         {
             var sqlValues = new StringBuilder();
             var parameters = new DynamicParameters();
@@ -47,7 +47,8 @@ namespace Message_Parser.Model.Reposiroties
 
             var sql = $"INSERT INTO User_Actions (Time, Page_Id, Action_Type, Action_Parameter) VALUES {sqlValues}";
 
-            return await _connection.ExecuteAsync(sql, parameters, transaction);
+            //return await _connection.ExecuteAsync(sql, parameters, transaction);
+            return new List<int>();
         }
     }
 }

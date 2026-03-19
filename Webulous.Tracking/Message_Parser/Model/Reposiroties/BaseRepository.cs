@@ -16,22 +16,22 @@ namespace Message_Parser.Model.Reposiroties
             _connection = connection;
         }
 
-        protected async Task<int> BulkInsertInternal<T>(
+        protected async Task<List<int>> BulkUpsertInternal<T>(
             List<T> items,
-            Func<List<T>, IDbTransaction?, Task<int>> batchInsert,
+            Func<List<T>, IDbTransaction?, Task<List<int>>> batchUpsert,
             IDbTransaction? transaction)
         {
-            if (!items.Any()) return 0;
+            List<int> idAdded = new List<int>();
 
-            int total = 0;
+            if (!items.Any()) return idAdded;
 
             for (int i = 0; i < items.Count; i += _batchSize)
             {
                 var batch = items.Skip(i).Take(_batchSize).ToList();
-                total += await batchInsert(batch, transaction);
+                idAdded.AddRange(await batchUpsert(batch, transaction));
             }
 
-            return total;
+            return idAdded;
         }
     }
 }
