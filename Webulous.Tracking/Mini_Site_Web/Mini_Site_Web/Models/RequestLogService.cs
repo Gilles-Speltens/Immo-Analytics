@@ -81,8 +81,10 @@ namespace Mini_Site_Web.Models
             var date = DateTime.UtcNow;
 
             var userId = user_cookie_consent
-                ? (context.Request.Cookies["uid"] ?? "null")
-                : "null";
+                ? (context.Request.Cookies["uid"] ?? null)
+                : null;
+
+            var userIp = context.Connection.RemoteIpAddress.ToString();
 
             if (context.Session.GetString("init") == null)
             {
@@ -90,12 +92,12 @@ namespace Mini_Site_Web.Models
             }
             var sessionId = session_cookie_consent
                 ? (context.Session?.Id ?? "null")
-                : "null";
+                : null;
 
             var url = $"{context.Request.Scheme}://{context.Request.Host}{context.Request.Path}";
 
             var urlReferrer = string.IsNullOrEmpty(context.Request.Headers.Referer)
-                                ? "null"
+                                ? null
                                 : context.Request.Headers.Referer.ToString();
 
             var action = ActionsType.HITPAGE;
@@ -111,8 +113,6 @@ namespace Mini_Site_Web.Models
                 }
             }
 
-            var actionParameters = actionParam != null ? actionParam : "null";
-
             var languageBrowser = Regex.Match(context.Request.Headers.AcceptLanguage, @"^[^,]*").Value;
 
             var userAgent = context.Request.Headers["User-Agent"].FirstOrDefault() ?? "null";
@@ -121,11 +121,12 @@ namespace Mini_Site_Web.Models
             {
                 Date = date,
                 UserId = userId,
+                UserIp = userIp,
                 SessionId = sessionId,
                 Url = url,
                 UrlReferrer = urlReferrer,
                 Action = action,
-                ActionParameters = actionParameters,
+                ActionParameters = actionParam,
                 LanguageBrowser = languageBrowser,
                 UserAgent = userAgent
             };

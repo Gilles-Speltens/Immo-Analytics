@@ -1,14 +1,13 @@
 CREATE TABLE `site` (
-  `id` integer PRIMARY KEY AUTO_INCREMENT,
-  `domain` varchar(255) NOT NULL,
+  `domain` varchar(255) PRIMARY KEY,
   `date_when_added` timestamp NOT NULL,
   `certify` bool DEFAULT false
 );
 
 CREATE TABLE `sessions` (
-  `id` integer PRIMARY KEY AUTO_INCREMENT,
-  `session_id` varchar(32) NOT NULL,
-  `site_id` integer NOT NULL,
+  `id` integer PRIMARY KEY,
+  `session_id` varchar(32),
+  `site` varchar(255) NOT NULL,
   `user_id` varchar(32),
   `user_ip` varchar(45) NOT NULL,
   `language_browser` varchar(255) NOT NULL,
@@ -18,7 +17,7 @@ CREATE TABLE `sessions` (
 );
 
 CREATE TABLE `hit_page` (
-  `id` integer PRIMARY KEY AUTO_INCREMENT,
+  `id` integer PRIMARY KEY ,
   `time` timestamp NOT NULL,
   `session_pk` integer NOT NULL,
   `url` text NOT NULL,
@@ -33,13 +32,13 @@ CREATE TABLE `user_actions` (
   `action_parameter` varchar(255)
 );
 
-CREATE UNIQUE INDEX `sessions_index_session_site` ON `sessions` (`session_id`, `site_id`);
+CREATE UNIQUE INDEX `sessions_index_session_site` ON `sessions` (`session_id`, `site`);
 
 ALTER TABLE `user_actions` ADD FOREIGN KEY (`page_id`) REFERENCES `hit_page` (`id`);
 
 ALTER TABLE `hit_page` ADD FOREIGN KEY (`session_pk`) REFERENCES `sessions` (`id`);
 
-ALTER TABLE `sessions` ADD FOREIGN KEY (`site_id`) REFERENCES `site` (`id`);
-ALTER TABLE `sessions` ADD CONSTRAINT `unique_session_site_constraint` UNIQUE (`session_id`, `site_id`);
+ALTER TABLE `sessions` ADD FOREIGN KEY (`site`) REFERENCES `site` (`domain`);
+ALTER TABLE `sessions` ADD CONSTRAINT `unique_session_site_constraint` UNIQUE (`session_id`, `site`);
 
 ALTER TABLE `site` ADD CONSTRAINT `unique_domain_constraint` UNIQUE (`domain`);

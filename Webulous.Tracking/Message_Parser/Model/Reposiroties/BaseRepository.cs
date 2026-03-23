@@ -1,8 +1,5 @@
 ﻿using MySqlConnector;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Text;
 
 namespace Message_Parser.Model.Reposiroties
 {
@@ -16,22 +13,22 @@ namespace Message_Parser.Model.Reposiroties
             _connection = connection;
         }
 
-        protected async Task<List<int>> BulkUpsertInternal<T>(
+        protected async Task<int> BulkInsertInternal<T>(
             List<T> items,
-            Func<List<T>, IDbTransaction?, Task<List<int>>> batchUpsert,
+            Func<List<T>, IDbTransaction?, Task<int>> batchInsert,
             IDbTransaction? transaction)
         {
-            List<int> idAdded = new List<int>();
+            if (!items.Any()) return 0;
 
-            if (!items.Any()) return idAdded;
+            int total = 0;
 
             for (int i = 0; i < items.Count; i += _batchSize)
             {
                 var batch = items.Skip(i).Take(_batchSize).ToList();
-                idAdded.AddRange(await batchUpsert(batch, transaction));
+                total += await batchInsert(batch, transaction);
             }
 
-            return idAdded;
+            return total;
         }
     }
 }

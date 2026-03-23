@@ -6,7 +6,6 @@ namespace Message_Parser.Entities
 {
     public class Site
     {
-        public int Id { get; set; }
         public required string Domain { get; set; }
 
         public required DateTime DateWhenAdded { get; set; }

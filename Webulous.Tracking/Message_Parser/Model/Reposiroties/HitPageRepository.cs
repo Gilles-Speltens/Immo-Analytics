@@ -21,9 +21,9 @@ namespace Message_Parser.Model.Reposiroties
             return rows == 1;
         }
 
-        public Task<List<int>> BulkInsert(List<HitPage> hitPages, IDbTransaction? transaction)
+        public Task<int> BulkInsert(List<HitPage> hitPages, IDbTransaction? transaction)
         {
-            return BulkUpsertInternal(hitPages, BatchUpsert, transaction);
+            return BulkInsertInternal(hitPages, BatchInsert, transaction);
         }
 
         public async Task<bool> Contains(int id)
@@ -31,7 +31,33 @@ namespace Message_Parser.Model.Reposiroties
             return _connection.Execute("SELECT 1 FROM Hit_Page WHERE id = (@Id)", new { Id = id }) == 1;
         }
 
-        private async Task<List<int>> BatchUpsert(List<HitPage> batch, IDbTransaction? transaction)
+        public int GetLastId()
+        {
+            return _connection.QuerySingle<int>("SELECT MAX(id) FROM Hit_Page");
+        }
+
+        public List<int> GetLastHitPageOfSessionOredered(List<Session> sessions)
+        {
+            var sessionsId = sessions.Select(s => s.Id).ToList();
+
+            var sql = """
+                SELECT hp.id
+                FROM Hit_Page hp
+                JOIN (
+                    SELECT session_pk, MAX(time) AS max_time
+                    FROM Hit_Page
+                    WHERE session_pk IN @sessionIds
+                    GROUP BY session_pk
+                ) last_hp
+                ON hp.session_pk = last_hp.session_pk
+                AND hp.time = last_hp.max_time
+                ORDER BY hp.session_pk
+                """;
+
+            return _connection.Query<int>(sql).ToList();
+        }
+
+        private async Task<int> BatchInsert(List<HitPage> batch, IDbTransaction? transaction)
         {
             var sqlValues = new StringBuilder();
             var parameters = new DynamicParameters();
@@ -50,9 +76,7 @@ namespace Message_Parser.Model.Reposiroties
 
             var sql = $"INSERT INTO Hit_Page (Time, Session_Pk, Url, Referrer) VALUES {sqlValues}";
 
-            //return await _connection.ExecuteAsync(sql, parameters, transaction);
-
-            return new List<int>();
+            return await _connection.ExecuteAsync(sql, parameters, transaction);
         }
     }
 }
