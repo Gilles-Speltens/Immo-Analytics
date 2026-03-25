@@ -20,8 +20,8 @@ namespace Message_Parser.Model
             for (int i = 0; i < files.Length-1; i++)
             {
                 var file = files[i];
-
-                logs.Concat(await DeserializeFile(file));     
+                var temp = await DeserializeFile(file);
+                logs = logs.Concat(temp).ToList();
             }
             return logs;
         }

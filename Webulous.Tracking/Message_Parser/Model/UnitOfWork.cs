@@ -14,12 +14,8 @@ namespace Message_Parser.Model
         private UserActionsRepository _userActionsRepo;
         private SiteRepository _siteRepo;
 
-        private Dictionary<Session, int> _ongoingSessions = new Dictionary<Session, int>(); //with last hitpage of the session as the value
-        private int _sessionExpirationTime = 20;
-
-        private int _lastHitPageId;
-
-        public UnitOfWork()
+        private LogProcessingService _logProcessingService;
+        public UnitOfWork(int sessionExpirationTime)
         {
             _db = DBConnection.Instance;
             _sessionRepo = new SessionsRepository(_db);
@@ -27,79 +23,57 @@ namespace Message_Parser.Model
             _userActionsRepo = new UserActionsRepository(_db);
             _siteRepo = new SiteRepository(_db);
 
-            List<Session> tempSessions = _sessionRepo.GetAllAfterDateOrdered(DateTime.UtcNow.AddMinutes(-(_sessionExpirationTime)));
-            List<int> tempHitPages = _hitpageRepo.GetLastHitPageOfSessionOredered(tempSessions);
+            var existingDomains = new HashSet<string>(_siteRepo.GetAllDomain());
+            var tempSessions = _hitpageRepo.GetSessionsAfterDateWithLastHitpage(DateTime.UtcNow.AddMinutes(-(sessionExpirationTime)));
+            var lastHitPageId = _hitpageRepo.GetLastId() ?? 0;
+            var lastSessionId = _sessionRepo.GetLastId() ?? 0;
 
-            for (int i = 0; i < tempHitPages.Count; i++)
+            var ongoingSessions = new Dictionary<(string sessionId, string domain), (Session session, int lastHitPageId)>();
+
+            foreach (var sessionHit in tempSessions)
             {
-                _ongoingSessions.Add(tempSessions[i], tempHitPages[i]);
+                var session = sessionHit.Key;
+                
+                if (session.SessionId != null)
+                {
+                    var hitpage = sessionHit.Value;
+                    ongoingSessions.Add((session.SessionId, session.Site), (session, sessionHit.Value));
+                }
             }
 
-            _lastHitPageId = _hitpageRepo.GetLastId();
+            _logProcessingService = new LogProcessingService(existingDomains, ongoingSessions, lastHitPageId, lastSessionId);
         }
 
         public async Task<bool> bulkInsertLogs(List<RequestLogDto> logs)
         {
-            _db.Open();
+            _logProcessingService.ProcessLogs(logs);
+            var newSites = _logProcessingService.GetSites();
+            var newSessions = _logProcessingService.GetSessions();
+            var newHitPages = _logProcessingService.GetHitPages();
+            var userActions = _logProcessingService.GetUserActions();
 
-            List<Site> sites = new List<Site>();
-            List<Session> sessions = new List<Session>();
-            List<HitPage> hitPage = new List<HitPage>();
-            List<UserAction> userActions = new List<UserAction>();
-            foreach (RequestLogDto log in logs)
+            using (_db)
             {
-                var domain = Regex.Match(log.Url, @"^(?:https?:\/\/)?([^\/:?#]+)").Groups[1].Value;
-                var dateWhenAdded = DateTime.UtcNow;
-                var certify = false;
-                Site site = new Site { Domain = domain, DateWhenAdded = dateWhenAdded, Certify = certify };
+                _db.Open();
 
-                sites.Add(site);
-
-                int idSessionTable;
-                if (!_ongoingSessions.Any(s =>
-                        s.Key.SessionId == log.SessionId
-                        && s.Key.Site == domain
-                    ))
+                using (var transaction = _db.BeginTransaction())
                 {
-                    //TODO UPDATE SessionsEnd
-                    idSessionTable = 0;
-                }
-                else
-                {
-                    idSessionTable = _ongoingSessions.Last().Key.Id++;
-                    var session = log.SessionId;
-                    var siteFk = domain;
-                    var userId = log.UserId;
-                    var userIp = log.UserIp;
-                    var language = log.LanguageBrowser;
-                    var userAgent = log.UserAgent;
-                    var start = log.Date;
-
-                    var s = new Session { Id = idSessionTable, SessionId = session, Site = siteFk, UserId = userId, UserIp = userIp, LanguageBrowser = language, UserAgent = userAgent, SessionStart = start, SessionEnd = start };
-                    sessions.Add(s);
-                }
-
-                var hitPageId = 0;
-                if (log.Action == ActionsType.HITPAGE || log.SessionId == null)
-                {
-                    _lastHitPageId += 1;
-                    hitPageId = _lastHitPageId;
-                    var time = log.Date;
-                    var url = log.Url;
-                    var referrer = log.UrlReferrer;
-
-                    var hit = new HitPage { Id = _lastHitPageId, Time = time, SessionPk = idSessionTable, Url = url, Referrer = referrer };
-                    hitPage.Add(hit);
-
-                    if (log.SessionId != null)
+                    try
                     {
-                        _ongoingSessions.Add(sessions.Last(), hitPageId);
-                    }
-                }
+                        await _siteRepo.BulkInsert(newSites, transaction);
+                        await _sessionRepo.BulkInsert(newSessions, transaction);
+                        await _hitpageRepo.BulkInsert(newHitPages, transaction);
+                        await _userActionsRepo.BulkInsert(userActions, transaction);
 
-                if (log.Action != ActionsType.HITPAGE)
-                {
-                    
+                        transaction.Commit();
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Exception : " + ex.Message.ToString());
+                        transaction.Rollback();
+                        return false;
+                    }
                 }
             }
         }

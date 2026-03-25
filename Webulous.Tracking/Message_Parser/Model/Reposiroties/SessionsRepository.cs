@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Message_Parser.Model.Reposiroties
 {
@@ -36,13 +37,26 @@ namespace Message_Parser.Model.Reposiroties
 
         public async Task<bool> Contains(int id)
         {
-            return _connection.Execute("SELECT 1 FROM Session WHERE id = (@Id)", new { Id = id }) == 1;
+            return _connection.Execute("SELECT 1 FROM Sessions WHERE id = (@Id)", new { Id = id }) == 1;
         }
 
         public List<Session> GetAllAfterDateOrdered(DateTime date)
         {
-            var sessions = _connection.Query<Session>("SELECT * FROM Session WHERE Session_Start >= (@Date) ORDER BY Session_Start", date);
+            var sessions = _connection.Query<Session>("SELECT * FROM Sessions WHERE Session_Start >= (@Date) ORDER BY Session_Start", date);
             return sessions.ToList();
+        }
+
+        public void UpdateUserIdDateEnd(Session session)
+        {
+            var sql = _connection.Query<int>("""
+                UPDATE Sessions
+                SET Session_End = @SessionEnd, User_Id = @UserId
+                WHERE Session_Id = @SessionId AND Site = @Site
+                """, new { SessionEnd = session.SessionEnd, UserId = session.UserId, SessionId = session.SessionId, Site = session.Site });
+        }
+        public int? GetLastId()
+        {
+            return _connection.QuerySingle<int?>("SELECT MAX(id) FROM Sessions");
         }
 
         private async Task<int> BatchInsert(List<Session> batch, IDbTransaction? transaction)
@@ -68,7 +82,7 @@ namespace Message_Parser.Model.Reposiroties
             sqlValues.Length--;
 
             var sql = $"""
-                INSERT INTO Sessions (Session_Id, Site, User_Id, User_Ip, Language_Browser, User_Agent, Session_Start, Session_End)
+                INSERT INTO Sessions (Id, Session_Id, Site, User_Id, User_Ip, Language_Browser, User_Agent, Session_Start, Session_End)
                 VALUES {sqlValues}
                 """;
 

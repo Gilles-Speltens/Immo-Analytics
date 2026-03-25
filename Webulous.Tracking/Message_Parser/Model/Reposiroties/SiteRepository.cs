@@ -31,6 +31,11 @@ namespace Message_Parser.Model.Reposiroties
             return _connection.Execute("SELECT 1 FROM Site WHERE domain = (@Domain)", new { Domain = domain }) == 1;
         }
 
+        public List<string> GetAllDomain()
+        {
+            return _connection.Query<string>("SELECT Domain FROM Site").ToList();
+        }
+
         private async Task<int> BatchInsert(List<Site> batch, IDbTransaction? transaction)
         {
             var sqlValues = new StringBuilder();

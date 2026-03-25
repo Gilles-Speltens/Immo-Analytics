@@ -6,9 +6,9 @@ CREATE TABLE `site` (
 
 CREATE TABLE `sessions` (
   `id` integer PRIMARY KEY,
-  `session_id` varchar(32),
+  `session_id` varchar(36),
   `site` varchar(255) NOT NULL,
-  `user_id` varchar(32),
+  `user_id` varchar(36),
   `user_ip` varchar(45) NOT NULL,
   `language_browser` varchar(255) NOT NULL,
   `user_agent` varchar(255) NOT NULL,
