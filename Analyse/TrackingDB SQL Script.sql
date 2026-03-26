@@ -28,7 +28,7 @@ CREATE TABLE `user_actions` (
   `id` integer PRIMARY KEY AUTO_INCREMENT,
   `time` timestamp NOT NULL,
   `page_id` integer NOT NULL,
-  `action_type` enum('UNKNOWN','ESTATSE_BROWSING','CONTACT_REQUEST', 'EXTERNAL_LINK', 'BUTTON_CLICK') NOT NULL,
+  `action_type` enum('UNKNOWN','HITPAGE', 'ESTATSE_BROWSING','CONTACT_REQUEST', 'EXTERNAL_LINK', 'BUTTON_CLICK') NOT NULL,
   `action_parameter` varchar(255)
 );
 

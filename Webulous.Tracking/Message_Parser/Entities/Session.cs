@@ -15,17 +15,5 @@ namespace Message_Parser.Entities
         public required string UserAgent { get; set; }
         public DateTime SessionStart { get; set; }
         public DateTime? SessionEnd { get; set; }
-
-        public override bool Equals(object? obj)
-        {
-            Session? session = obj as Session;
-            if (session == null) { return false; }
-            return this.Id == session.Id;
-        }
-
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
     }
 }

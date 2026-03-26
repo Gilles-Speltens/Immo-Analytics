@@ -41,17 +41,27 @@ namespace Message_Parser.Model
             _userActions = new List<UserAction>();
             foreach (RequestLogDto log in logs)
             {
+                //Ajouter le nouveau site via un Upsert.
                 var domain = SiteProcessing(log);
 
-                Session curSessionPk;
-                bool newSession = SessionsProcessing(log, domain, out curSessionPk);
+                //Ajouter la nouvelle session uniquement si elle ne ce trouve pas dans _ongoingSessions
+                Session curSession;
+                bool newSession = SessionsProcessing(log, domain, out curSession);
 
+                //Ajouter un nouvel hitpage si action == hitpage ou si l'action n'a pas de session et doit donc créer une nouvelle hitpage sur laquel se lier.
                 int hitPageId = 0;
                 if (log.Action == ActionsType.HITPAGE || log.SessionId == null)
                 {
-                    hitPageId = HitpageProcessing(log, curSessionPk, newSession);
+                    hitPageId = HitpageProcessing(log, curSession);
                 }
 
+                //Si nouvelle session créée et si la session n'est pas une session autogénéré (session-less) l'ajouter à la liste des session à garder en mémoire _ongoingSessions.
+                if (log.SessionId != null && newSession)
+                {
+                    _ongoingSessions.Add((curSession.SessionId, curSession.Site), (curSession, hitPageId));
+                }
+
+                //Ajouter une action lier à un hitpage.
                 if (log.Action != ActionsType.HITPAGE)
                 {
                     ActionProcessing(log, domain, hitPageId);
@@ -112,10 +122,11 @@ namespace Message_Parser.Model
                 _sessions.Add(ongoingSession.Id, ongoingSession);
                 newSession = true;
             }
+            
             return newSession;
         }
 
-        private int HitpageProcessing(RequestLogDto log, Session curSession, bool newSession)
+        private int HitpageProcessing(RequestLogDto log, Session curSession)
         {
             _lastHitPageId += 1;
             var hitPageId = _lastHitPageId;
@@ -125,11 +136,6 @@ namespace Message_Parser.Model
 
             var hit = new HitPage { Id = _lastHitPageId, Time = time, SessionPk = curSession.Id, Url = url, Referrer = referrer };
             _hitPages.Add(hit);
-
-            if (log.SessionId != null && newSession)
-            {
-                _ongoingSessions.Add((curSession.SessionId, curSession.Site),(curSession, hitPageId));
-            }
 
             return hitPageId;
         }
