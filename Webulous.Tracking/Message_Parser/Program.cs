@@ -14,6 +14,8 @@ var processor = new NDJSONProcessor(new LogFileDeserializer(), new LogWriter(arc
 var files = Directory.GetFiles(trackingDir);
 List<RequestLogDto> logs = await processor.ProcessAllFilesAsync(files);
 
+//----------------------------------
+
 var uow = new UnitOfWork(20, "server=localhost;user=root;password=1234;database=AnalyticsDB;");
 
 var result = await uow.bulkInsertLogs(logs);
