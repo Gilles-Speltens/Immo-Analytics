@@ -8,27 +8,45 @@ using System.Text;
 
 namespace Message_Parser.Model.Reposiroties
 {
+    /// <summary>
+    /// Repository responsable de l’accès aux données de la table User_Actions.
+    /// Permet l’insertion simple et en batch des actions utilisateurs.
+    /// </summary>
     internal class UserActionsRepository : BaseRepository
     {
-        public UserActionsRepository(MySqlConnection connection)
-        : base(connection)
+        /// <summary>
+        /// Insère une action utilisateur en base de données.
+        /// </summary>
+        /// <param name="userAction">Action utilisateur à insérer.</param>
+        /// <returns>True si l’insertion a réussi.</returns>
+        public bool Insert(UserAction userAction, MySqlConnection connection)
         {
-        }
-        public bool Insert(UserAction userAction)
-        {
-            int rows = _connection.Execute(
+            int rows = connection.Execute(
                 "INSERT INTO User_Actions (Time, Page_Id, Action_Type, Action_Parameter) VALUES (@Time, @PageId, @ActionType, @ActionParameter)",
                 userAction);
 
             return rows == 1;
         }
 
-        public Task<int> BulkInsert(List<UserAction> userAction, IDbTransaction? transaction)
+        /// <summary>
+        /// Insère une liste d’actions utilisateur en base de données en utilisant des batchs.
+        /// </summary>
+        /// <param name="userAction">Liste des actions utilisateur.</param>
+        /// <param name="transaction">Transaction SQL optionnelle.</param>
+        /// <returns>Nombre total de lignes insérées.</returns>
+        public Task<int> BulkInsert(List<UserAction> userAction, IDbTransaction? transaction, MySqlConnection connection)
         {
-            return BulkInsertInternal(userAction, BatchInsert, transaction);
+            return BulkInsertInternal(userAction, BatchInsert, transaction, connection);
         }
 
-        private async Task<int> BatchInsert(List<UserAction> batch, IDbTransaction? transaction)
+        /// <summary>
+        /// Méthode interne permettant d’insérer un batch d’actions utilisateur
+        /// en construisant une requête SQL multi-values.
+        /// </summary>
+        /// <param name="batch">Batch d’actions utilisateur.</param>
+        /// <param name="transaction">Transaction SQL optionnelle.</param>
+        /// <returns>Nombre de lignes insérées.</returns>
+        private async Task<int> BatchInsert(List<UserAction> batch, IDbTransaction? transaction, MySqlConnection connection)
         {
             var sqlValues = new StringBuilder();
             var parameters = new DynamicParameters();
@@ -47,7 +65,7 @@ namespace Message_Parser.Model.Reposiroties
 
             var sql = $"INSERT INTO User_Actions (Time, Page_Id, Action_Type, Action_Parameter) VALUES {sqlValues}";
 
-            return await _connection.ExecuteAsync(sql, parameters, transaction);
+            return await connection.ExecuteAsync(sql, parameters, transaction);
         }
     }
 }

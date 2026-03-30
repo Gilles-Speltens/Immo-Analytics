@@ -2,31 +2,31 @@
 using Message_Parser.Entities;
 using Message_Parser.Model.Reposiroties;
 using MySqlConnector;
-using System.Text.RegularExpressions;
 
 namespace Message_Parser.Model
 {
     internal class UnitOfWork
     {
-        private MySqlConnection _db;
+        private DBConnection _connectionManager;
         private SessionsRepository _sessionRepo;
         private HitPageRepository _hitpageRepo;
         private UserActionsRepository _userActionsRepo;
         private SiteRepository _siteRepo;
 
         private LogProcessingService _logProcessingService;
-        public UnitOfWork(int sessionExpirationTime)
+        public UnitOfWork(int sessionExpirationTime, string connectionString)
         {
-            _db = DBConnection.Instance;
-            _sessionRepo = new SessionsRepository(_db);
-            _hitpageRepo = new HitPageRepository(_db);
-            _userActionsRepo = new UserActionsRepository(_db);
-            _siteRepo = new SiteRepository(_db);
+            _connectionManager = new DBConnection(connectionString);
+            _sessionRepo = new SessionsRepository();
+            _hitpageRepo = new HitPageRepository();
+            _userActionsRepo = new UserActionsRepository();
+            _siteRepo = new SiteRepository();
 
-            var existingDomains = new HashSet<string>(_siteRepo.GetAllDomain());
-            var tempSessions = _hitpageRepo.GetSessionsAfterDateWithLastHitpage(DateTime.UtcNow.AddMinutes(-(sessionExpirationTime)));
-            var lastHitPageId = _hitpageRepo.GetLastId() ?? 0;
-            var lastSessionId = _sessionRepo.GetLastId() ?? 0;
+            MySqlConnection tempConnection = _connectionManager.CreateConnection();
+            var existingDomains = new HashSet<string>(_siteRepo.GetAllDomain(tempConnection));
+            var tempSessions = _hitpageRepo.GetSessionsAfterDateWithLastHitpage(DateTime.UtcNow.AddMinutes(-(sessionExpirationTime)), tempConnection);
+            var lastHitPageId = _hitpageRepo.GetLastId(tempConnection) ?? 0;
+            var lastSessionId = _sessionRepo.GetLastId(tempConnection) ?? 0;
 
             var ongoingSessions = new Dictionary<(string sessionId, string domain), (Session session, int lastHitPageId)>();
 
@@ -52,18 +52,19 @@ namespace Message_Parser.Model
             var newHitPages = _logProcessingService.GetHitPages();
             var userActions = _logProcessingService.GetUserActions();
 
-            using (_db)
+            var connection = _connectionManager.CreateConnection();
+            using (connection)
             {
-                _db.Open();
+                connection.Open();
 
-                using (var transaction = _db.BeginTransaction())
+                using (var transaction = connection.BeginTransaction())
                 {
                     try
                     {
-                        await _siteRepo.BulkInsert(newSites, transaction);
-                        await _sessionRepo.BulkInsert(newSessions, transaction);
-                        await _hitpageRepo.BulkInsert(newHitPages, transaction);
-                        await _userActionsRepo.BulkInsert(userActions, transaction);
+                        await _siteRepo.BulkInsert(newSites, transaction, connection);
+                        await _sessionRepo.BulkInsert(newSessions, transaction, connection);
+                        await _hitpageRepo.BulkInsert(newHitPages, transaction, connection);
+                        await _userActionsRepo.BulkInsert(userActions, transaction, connection);
 
                         transaction.Commit();
                         return true;

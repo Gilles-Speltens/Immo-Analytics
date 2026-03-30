@@ -4,15 +4,16 @@ namespace Message_Parser.Model
 {
     internal class DBConnection
     {
-        private static readonly Lazy<MySqlConnection> _lazyConnection =
-        new Lazy<MySqlConnection>(() =>
+        private readonly string _connectionString;
+
+        public DBConnection(string connectionString)
         {
-            var conn = new MySqlConnection("server=localhost;user=root;password=1234;database=AnalyticsDB;");
-            return conn;
-        });
+            _connectionString = connectionString;
+        }
 
-        private DBConnection() { }
-
-        public static MySqlConnection Instance => _lazyConnection.Value;
+        public MySqlConnection CreateConnection()
+        {
+            return new MySqlConnection(_connectionString);
+        }
     }
 }

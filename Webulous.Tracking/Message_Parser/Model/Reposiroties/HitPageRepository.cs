@@ -8,58 +8,67 @@ using static System.Collections.Specialized.BitVector32;
 
 namespace Message_Parser.Model.Reposiroties
 {
+    /// <summary>
+    /// Repository responsable de l’accès aux données de la table Hit_Page.
+    /// Permet l’insertion simple, l’insertion en batch, la récupération d’informations
+    /// liées aux hit pages et aux sessions.
+    /// </summary>
     internal class HitPageRepository : BaseRepository
     {
-        public HitPageRepository(MySqlConnection connection)
-        : base(connection)
+        /// <summary>
+        /// Insère une HitPage en base de données.
+        /// </summary>
+        /// <param name="hitpage">Objet HitPage à insérer.</param>
+        /// <returns>True si l’insertion a réussi.</returns>
+        public bool Insert(HitPage hitpage, MySqlConnection connection)
         {
-        }
-        public bool Insert(HitPage hitpage)
-        {
-            int rows = _connection.Execute(
+            int rows = connection.Execute(
                 "INSERT INTO Hit_Page (Id, Time, Session_Pk, Url, Referrer) VALUES (@Id, @Time, @SessionPk, @Url, @Referrer)",
                 hitpage);
 
             return rows == 1;
         }
 
-        public Task<int> BulkInsert(List<HitPage> hitPages, IDbTransaction? transaction)
+        /// <summary>
+        /// Insère une liste de HitPage en base de données en utilisant des batchs.
+        /// </summary>
+        /// <param name="hitPages">Liste des HitPages.</param>
+        /// <param name="transaction">Transaction SQL optionnelle.</param>
+        /// <returns>Nombre total de lignes insérées.</returns>
+        public Task<int> BulkInsert(List<HitPage> hitPages, IDbTransaction? transaction, MySqlConnection connection)
         {
-            return BulkInsertInternal(hitPages, BatchInsert, transaction);
+            return BulkInsertInternal(hitPages, BatchInsert, transaction, connection);
         }
 
-        public async Task<bool> Contains(int id)
+        /// <summary>
+        /// Vérifie si une HitPage avec un Id donné existe en base.
+        /// </summary>
+        /// <param name="id">Identifiant de la HitPage.</param>
+        /// <returns>True si elle existe.</returns>
+        public async Task<bool> Contains(int id, MySqlConnection connection)
         {
-            return _connection.Execute("SELECT 1 FROM Hit_Page WHERE id = (@Id)", new { Id = id }) == 1;
+            return connection.Execute("SELECT 1 FROM Hit_Page WHERE id = (@Id)", new { Id = id }) == 1;
         }
 
-        public int? GetLastId()
+        /// <summary>
+        /// Récupère le dernier Id (maximum) présent dans la table Hit_Page.
+        /// </summary>
+        /// <returns>Le dernier Id ou null si la table est vide.</returns>
+        public int? GetLastId(MySqlConnection connection)
         {
-            return _connection.QuerySingle<int?>("SELECT MAX(id) FROM Hit_Page");
+            return connection.QuerySingle<int?>("SELECT MAX(id) FROM Hit_Page");
         }
 
-        public List<int> GetLastHitPageOfSessionOredered(List<Session> sessions)
-        {
-            var sessionsId = sessions.Select(s => s.Id).ToList();
-
-            var sql = """
-                SELECT hp.id
-                FROM Hit_Page hp
-                JOIN (
-                    SELECT session_pk, MAX(time) AS max_time
-                    FROM Hit_Page
-                    WHERE session_pk IN @SessionsId
-                    GROUP BY session_pk
-                ) last_hp
-                ON hp.session_pk = last_hp.session_pk
-                AND hp.time = last_hp.max_time
-                ORDER BY hp.session_pk
-                """;
-
-            return _connection.Query<int>(sql, new { SessionsId = sessionsId }).ToList();
-        }
-
-        public List<KeyValuePair<Session, int>> GetSessionsAfterDateWithLastHitpage(DateTime date)
+        /// <summary>
+        /// Récupère les sessions après une certaine date avec leur dernière HitPage.
+        /// </summary>
+        /// <param name="date">Date minimale de début de session.</param>
+        /// <returns>
+        /// Liste de couples :
+        /// - Session
+        /// - Id de la dernière HitPage
+        /// </returns>
+        public List<KeyValuePair<Session, int>> GetSessionsAfterDateWithLastHitpage(DateTime date, MySqlConnection connection)
         {
             var sql = """
                 SELECT s.Id, s.Session_Id, s.Site, s.User_Id, s.User_Ip, s.Language_Browser, s.User_Agent, s.Session_Start, s.Session_End, hp.Id AS HitPageId
@@ -75,7 +84,7 @@ namespace Message_Parser.Model.Reposiroties
                     JOIN Sessions s ON s.Id = hp.session_pk;
                 """;
 
-            var dico = _connection.Query(sql, date)
+            var dico = connection.Query(sql, date)
                         .Select(s => new KeyValuePair<Session, int>(
                             new Session { Id = s.Id, 
                                 SessionId = s.Session_Id, 
@@ -92,7 +101,14 @@ namespace Message_Parser.Model.Reposiroties
             return dico;
         }
 
-        private async Task<int> BatchInsert(List<HitPage> batch, IDbTransaction? transaction)
+        /// <summary>
+        /// Méthode interne permettant d’insérer un batch de HitPages
+        /// en construisant une requête SQL multi-values.
+        /// </summary>
+        /// <param name="batch">Batch de HitPages.</param>
+        /// <param name="transaction">Transaction SQL optionnelle.</param>
+        /// <returns>Nombre de lignes insérées.</returns>
+        private async Task<int> BatchInsert(List<HitPage> batch, IDbTransaction? transaction, MySqlConnection connection)
         {
             var sqlValues = new StringBuilder();
             var parameters = new DynamicParameters();
@@ -112,7 +128,7 @@ namespace Message_Parser.Model.Reposiroties
 
             var sql = $"INSERT INTO Hit_Page (Id, Time, Session_Pk, Url, Referrer) VALUES {sqlValues}";
 
-            return await _connection.ExecuteAsync(sql, parameters, transaction);
+            return await connection.ExecuteAsync(sql, parameters, transaction);
         }
     }
 }

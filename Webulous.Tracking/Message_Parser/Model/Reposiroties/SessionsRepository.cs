@@ -9,57 +9,87 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Message_Parser.Model.Reposiroties
 {
+    /// <summary>
+    /// Repository responsable de l’accès aux données de la table Sessions.
+    /// Gère les opérations CRUD et les insertions en batch.
+    /// </summary>
     internal class SessionsRepository : BaseRepository
     {
-        public SessionsRepository(MySqlConnection connection)
-        : base(connection)
+        /// <summary>
+        /// Insère une session en base de données.
+        /// </summary>
+        /// <param name="session">Session à insérer.</param>
+        /// <returns>True si l’insertion a réussi.</returns>
+        public bool Insert(Session session, MySqlConnection connection)
         {
-        }
-        public bool Insert(Session session)
-        {
-            int rows = _connection.Execute(
+            int rows = connection.Execute(
                 "INSERT INTO Sessions (Id, SessionId, Site, UserId, UserIp, Language_Browser, User_Agent, SessionStart, SessionEnd) VALUES (@Id, @SessionId, @Site, @UserId, @UserIp, @LanguageBrowser, @UserAgent, @SessionStart, @SessionEnd)",
                 session);
 
             return rows == 1;
         }
 
-        public Task<int> BulkInsert(List<Session> sessions, IDbTransaction? transaction)
+        /// <summary>
+        /// Insère une liste de sessions en base de données en utilisant des batchs.
+        /// </summary>
+        /// <param name="sessions">Liste des sessions.</param>
+        /// <param name="transaction">Transaction SQL optionnelle.</param>
+        /// <returns>Nombre total de lignes insérées.</returns>
+        public Task<int> BulkInsert(List<Session> sessions, IDbTransaction? transaction, MySqlConnection connection)
         {
-            return BulkInsertInternal(sessions, BatchInsert, transaction);
+            return BulkInsertInternal(sessions, BatchInsert, transaction, connection);
         }
 
-        public async Task<List<Session>> GetAll()
+        /// <summary>
+        /// Récupère toutes les sessions présentes en base de données.
+        /// </summary>
+        /// <returns>Liste de toutes les sessions.</returns>
+        public async Task<List<Session>> GetAll(MySqlConnection connection)
         {
-            var sessions = await _connection.QueryAsync<Session>("SELECT * FROM Sessions");
+            var sessions = await connection.QueryAsync<Session>("SELECT * FROM Sessions");
             return sessions.ToList();
         }
 
-        public async Task<bool> Contains(int id)
+        /// <summary>
+        /// Vérifie si une session avec un Id donné existe en base.
+        /// </summary>
+        /// <param name="id">Identifiant de la session.</param>
+        /// <returns>True si la session existe.</returns>
+        public async Task<bool> Contains(int id, MySqlConnection connection)
         {
-            return _connection.Execute("SELECT 1 FROM Sessions WHERE id = (@Id)", new { Id = id }) == 1;
+            return connection.Execute("SELECT 1 FROM Sessions WHERE id = (@Id)", new { Id = id }) == 1;
         }
 
-        public List<Session> GetAllAfterDateOrdered(DateTime date)
+        /// <summary>
+        /// Met à jour la date de fin de session et l’utilisateur associé.
+        /// </summary>
+        /// <param name="session">Session contenant les nouvelles valeurs.</param>
+        public void UpdateUserIdDateEnd(Session session, MySqlConnection connection)
         {
-            var sessions = _connection.Query<Session>("SELECT * FROM Sessions WHERE Session_Start >= (@Date) ORDER BY Session_Start", date);
-            return sessions.ToList();
-        }
-
-        public void UpdateUserIdDateEnd(Session session)
-        {
-            var sql = _connection.Query<int>("""
+            var sql = connection.Query<int>("""
                 UPDATE Sessions
                 SET Session_End = @SessionEnd, User_Id = @UserId
                 WHERE Session_Id = @SessionId AND Site = @Site
                 """, new { SessionEnd = session.SessionEnd, UserId = session.UserId, SessionId = session.SessionId, Site = session.Site });
         }
-        public int? GetLastId()
+
+        /// <summary>
+        /// Récupère le dernier Id (maximum) présent dans la table Sessions.
+        /// </summary>
+        /// <returns>Le dernier Id ou null si la table est vide.</returns>
+        public int? GetLastId(MySqlConnection connection)
         {
-            return _connection.QuerySingle<int?>("SELECT MAX(id) FROM Sessions");
+            return connection.QuerySingle<int?>("SELECT MAX(id) FROM Sessions");
         }
 
-        private async Task<int> BatchInsert(List<Session> batch, IDbTransaction? transaction)
+        /// <summary>
+        /// Méthode interne permettant d’insérer un batch de sessions
+        /// via une requête SQL multi-values.
+        /// </summary>
+        /// <param name="batch">Batch de sessions.</param>
+        /// <param name="transaction">Transaction SQL optionnelle.</param>
+        /// <returns>Nombre de lignes insérées.</returns>
+        private async Task<int> BatchInsert(List<Session> batch, IDbTransaction? transaction, MySqlConnection connection)
         {
             var sqlValues = new StringBuilder();
             var parameters = new DynamicParameters();
@@ -86,7 +116,7 @@ namespace Message_Parser.Model.Reposiroties
                 VALUES {sqlValues}
                 """;
 
-            return await _connection.ExecuteAsync(sql, parameters, transaction);
+            return await connection.ExecuteAsync(sql, parameters, transaction);
         }
     }
 }
