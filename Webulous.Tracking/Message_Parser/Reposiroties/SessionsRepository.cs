@@ -7,7 +7,7 @@ using System.Data;
 using System.Text;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace Message_Parser.Model.Reposiroties
+namespace Message_Parser.Reposiroties
 {
     /// <summary>
     /// Repository responsable de l’accès aux données de la table Sessions.

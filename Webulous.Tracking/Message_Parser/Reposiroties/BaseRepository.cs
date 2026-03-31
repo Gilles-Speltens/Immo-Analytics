@@ -1,7 +1,7 @@
 ﻿using MySqlConnector;
 using System.Data;
 
-namespace Message_Parser.Model.Reposiroties
+namespace Message_Parser.Reposiroties
 {
     /// <summary>
     /// Classe de base pour les repositories MySQL / MariaDB.

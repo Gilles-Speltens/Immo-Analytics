@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using static System.Collections.Specialized.BitVector32;
 
-namespace Message_Parser.Model.Reposiroties
+namespace Message_Parser.Reposiroties
 {
     /// <summary>
     /// Repository responsable de l’accès aux données de la table Hit_Page.

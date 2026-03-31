@@ -1,9 +1,10 @@
 ﻿using Common;
 using Message_Parser.Entities;
-using Message_Parser.Model.Reposiroties;
+using Message_Parser.Reposiroties;
+using Message_Parser.Services;
 using MySqlConnector;
 
-namespace Message_Parser.Model
+namespace Message_Parser.Data
 {
     internal class UnitOfWork
     {
@@ -23,7 +24,7 @@ namespace Message_Parser.Model
             _siteRepo = new SiteRepository();
 
             MySqlConnection tempConnection = _connectionManager.CreateConnection();
-            var existingDomains = new HashSet<string>(_siteRepo.GetAllDomain(tempConnection));
+            
             var tempSessions = _hitpageRepo.GetSessionsAfterDateWithLastHitpage(DateTime.UtcNow.AddMinutes(-(sessionExpirationTime)), tempConnection);
             var lastHitPageId = _hitpageRepo.GetLastId(tempConnection) ?? 0;
             var lastSessionId = _sessionRepo.GetLastId(tempConnection) ?? 0;
@@ -41,7 +42,7 @@ namespace Message_Parser.Model
                 }
             }
 
-            _logProcessingService = new LogProcessingService(existingDomains, ongoingSessions, lastHitPageId, lastSessionId);
+            _logProcessingService = new LogProcessingService(ongoingSessions, lastHitPageId, lastSessionId);
         }
 
         public async Task<bool> bulkInsertLogs(List<RequestLogDto> logs)

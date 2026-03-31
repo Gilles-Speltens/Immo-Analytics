@@ -1,6 +1,6 @@
 ﻿using MySqlConnector;
 
-namespace Message_Parser.Model
+namespace Message_Parser.Data
 {
     internal class DBConnection
     {

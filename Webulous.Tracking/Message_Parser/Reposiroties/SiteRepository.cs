@@ -4,7 +4,7 @@ using MySqlConnector;
 using System.Data;
 using System.Text;
 
-namespace Message_Parser.Model.Reposiroties
+namespace Message_Parser.Reposiroties
 {
     /// <summary>
     /// Repository responsable de l’accès aux données de la table Site.

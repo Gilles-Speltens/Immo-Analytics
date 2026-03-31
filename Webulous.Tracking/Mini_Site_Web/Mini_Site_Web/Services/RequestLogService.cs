@@ -4,7 +4,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 
-namespace Mini_Site_Web.Models
+namespace Mini_Site_Web.Services
 {
     public class RequestLogService
     {

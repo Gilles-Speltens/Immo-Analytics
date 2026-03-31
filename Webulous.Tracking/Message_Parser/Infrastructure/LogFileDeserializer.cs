@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 
-namespace Message_Parser.Model
+namespace Message_Parser.Infrastructure
 {
     /// <summary>
     /// Classe responsable de la lecture d’un fichier de logs et de la

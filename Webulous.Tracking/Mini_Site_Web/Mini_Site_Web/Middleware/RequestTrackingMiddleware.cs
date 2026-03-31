@@ -1,4 +1,4 @@
-﻿using Mini_Site_Web.Models;
+﻿using Mini_Site_Web.Services;
 
 namespace Mini_Site_Web.Middleware
 {

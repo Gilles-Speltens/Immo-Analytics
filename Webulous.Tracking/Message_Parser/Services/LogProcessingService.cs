@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Message_Parser.Model
+namespace Message_Parser.Services
 {
     internal class LogProcessingService
     {
@@ -14,15 +14,13 @@ namespace Message_Parser.Model
         private int _lastHitPageId;
         private int _lastSessionId;
 
-        private HashSet<string> _existingDomains;
         private List<Site> _sites;
         private Dictionary<int, Session> _sessions;
         private List<HitPage> _hitPages;
         private List<UserAction> _userActions;
 
-        public LogProcessingService(HashSet<string> existingDomains, Dictionary<(string sessionId, string domain), (Session, int)> ongoingSessions, int lastHitPageId, int lastSessionId) 
+        public LogProcessingService(Dictionary<(string sessionId, string domain), (Session, int)> ongoingSessions, int lastHitPageId, int lastSessionId) 
         {
-            _existingDomains = existingDomains;
             _ongoingSessions = ongoingSessions;
             _lastHitPageId = lastHitPageId;
             _lastSessionId = lastSessionId;
@@ -76,11 +74,7 @@ namespace Message_Parser.Model
             var certify = false;
             Site site = new Site { Domain = domain, DateWhenAdded = dateWhenAdded, Certify = certify };
 
-            if (!_existingDomains.Contains(site.Domain))
-            {
-                _sites.Add(site);
-                _existingDomains.Add(site.Domain);
-            }
+            _sites.Add(site);
 
             return domain;
         }
