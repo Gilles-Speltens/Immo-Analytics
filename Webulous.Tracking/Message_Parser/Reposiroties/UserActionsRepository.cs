@@ -12,7 +12,7 @@ namespace Message_Parser.Reposiroties
     /// Repository responsable de l’accès aux données de la table User_Actions.
     /// Permet l’insertion simple et en batch des actions utilisateurs.
     /// </summary>
-    internal class UserActionsRepository : BaseRepository
+    public class UserActionsRepository : BaseRepository
     {
         /// <summary>
         /// Insère une action utilisateur en base de données.

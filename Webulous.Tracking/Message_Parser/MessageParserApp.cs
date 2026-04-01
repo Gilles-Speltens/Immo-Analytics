@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Message_Parser
 {
-    internal class MessageParserApp
+    public class MessageParserApp
     {
         private string _archiveDir;
         private string _invalidDir;
@@ -38,11 +38,12 @@ namespace Message_Parser
                 List<RequestLogDto> logs = await _processor.ProcessFileAsync(_files[i]);
 
                 var sucess = await _unitOfWork.bulkInsertLogs(logs);
-                
-                if(sucess)
+
+                if (sucess)
                 {
                     _processor.MoveToArchive();
-                } else
+                }
+                else
                 {
                     Console.WriteLine("Error");
                     //Log error;

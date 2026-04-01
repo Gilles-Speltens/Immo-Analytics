@@ -13,7 +13,7 @@ namespace Message_Parser.Reposiroties
     /// Repository responsable de l’accès aux données de la table Sessions.
     /// Gère les opérations CRUD et les insertions en batch.
     /// </summary>
-    internal class SessionsRepository : BaseRepository
+    public class SessionsRepository : BaseRepository
     {
         /// <summary>
         /// Insère une session en base de données.

@@ -1,5 +1,5 @@
 using Mini_Site_Web.Middleware;
-using Mini_Site_Web.Models;
+using Mini_Site_Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

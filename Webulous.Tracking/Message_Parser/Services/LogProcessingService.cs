@@ -7,17 +7,17 @@ using System.Text.RegularExpressions;
 
 namespace Message_Parser.Services
 {
-    internal class LogProcessingService
+    public class LogProcessingService
     {
-        private Dictionary<(string sessionId, string domain), (Session session, int lastHitPage)> _ongoingSessions = new Dictionary<(string sessionId, string domain), (Session, int)>(); //with last hitpage and the session as the value
+        private Dictionary<(string sessionId, string domain), (Session session, int lastHitPage)> _ongoingSessions; //with last hitpage and the session as the value
 
         private int _lastHitPageId;
         private int _lastSessionId;
 
-        private List<Site> _sites;
-        private Dictionary<int, Session> _sessions;
-        private List<HitPage> _hitPages;
-        private List<UserAction> _userActions;
+        private List<Site> _sites = new List<Site>();
+        private Dictionary<int, Session> _sessions = new Dictionary<int, Session>();
+        private List<HitPage> _hitPages = new List<HitPage>();
+        private List<UserAction> _userActions = new List<UserAction>();
 
         public LogProcessingService(Dictionary<(string sessionId, string domain), (Session, int)> ongoingSessions, int lastHitPageId, int lastSessionId) 
         {
@@ -46,9 +46,10 @@ namespace Message_Parser.Services
                 Session curSession;
                 bool newSession = SessionsProcessing(log, domain, out curSession);
 
-                //Ajouter un nouvel hitpage si action == hitpage ou si l'action n'a pas de session et doit donc créer une nouvelle hitpage sur laquel se lier.
+                //Ajouter un nouvel hitpage si action == hitpage ou si l'action n'a pas de session et doit donc créer une nouvelle hitpage sur laquel se lier ou si l'action a une session mais pas de hitapage.
                 int hitPageId = 0;
-                if (log.Action == ActionsType.HITPAGE || log.SessionId == null)
+                bool sessionHaveHitpage = _ongoingSessions.TryGetValue((curSession.SessionId, curSession.Site), out _);
+                if (log.Action == ActionsType.HITPAGE || log.SessionId == null || !sessionHaveHitpage)
                 {
                     hitPageId = HitpageProcessing(log, curSession);
                 }
@@ -69,7 +70,11 @@ namespace Message_Parser.Services
 
         private string SiteProcessing(RequestLogDto log)
         {
-            var domain = Regex.Match(log.Url, @"^(?:https?:\/\/)?([^\/:?#]+)").Groups[1].Value;
+            var url = log.Url;
+            if (!url.StartsWith("http"))
+                url = "http://" + url;
+
+            var domain = new Uri(url).Host.Replace("www.", "");
             var dateWhenAdded = DateTime.UtcNow;
             var certify = false;
             Site site = new Site { Domain = domain, DateWhenAdded = dateWhenAdded, Certify = certify };

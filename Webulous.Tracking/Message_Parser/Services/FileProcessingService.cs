@@ -10,7 +10,7 @@ namespace Message_Parser.Services
     /// Elle lit les fichiers, désérialise les logs, archive les logs valides,
     /// écrit les logs invalides et supprime les fichiers traités.
     /// </summary>
-    internal class FileProcessingService
+    public class FileProcessingService
     {
         private readonly string _archiveDirectory;
         private readonly string _invalidDirectory;

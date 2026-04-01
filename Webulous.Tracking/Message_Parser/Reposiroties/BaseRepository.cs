@@ -7,7 +7,7 @@ namespace Message_Parser.Reposiroties
     /// Classe de base pour les repositories MySQL / MariaDB.
     /// Fournit des fonctionnalités communes comme l’insertion en batch (Bulk Insert).
     /// </summary>
-    internal abstract class BaseRepository
+    public abstract class BaseRepository
     {
         protected readonly int _batchSize = 1000;
 

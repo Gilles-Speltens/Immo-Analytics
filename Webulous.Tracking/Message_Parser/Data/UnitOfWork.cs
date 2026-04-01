@@ -6,7 +6,7 @@ using MySqlConnector;
 
 namespace Message_Parser.Data
 {
-    internal class UnitOfWork
+    public class UnitOfWork
     {
         private DBConnection _connectionManager;
         private SessionsRepository _sessionRepo;

@@ -13,7 +13,7 @@ namespace Message_Parser.Reposiroties
     /// Permet l’insertion simple, l’insertion en batch, la récupération d’informations
     /// liées aux hit pages et aux sessions.
     /// </summary>
-    internal class HitPageRepository : BaseRepository
+    public class HitPageRepository : BaseRepository
     {
         /// <summary>
         /// Insère une HitPage en base de données.

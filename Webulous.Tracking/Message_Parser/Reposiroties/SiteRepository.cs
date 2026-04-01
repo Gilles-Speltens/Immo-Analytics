@@ -10,7 +10,7 @@ namespace Message_Parser.Reposiroties
     /// Repository responsable de l’accès aux données de la table Site.
     /// Permet l’insertion simple, l’insertion en batch et la récupération des domaines.
     /// </summary>
-    internal class SiteRepository : BaseRepository
+    public class SiteRepository : BaseRepository
     {
         /// <summary>
         /// Insère un site en base de données.

@@ -13,7 +13,7 @@ namespace Message_Parser.Infrastructure
     /// - logs valides dans des fichiers d’archive
     /// - logs invalides dans des fichiers séparés avec gestion de taille
     /// </summary>
-    internal class LogWriter
+    public class LogWriter
     {
         private readonly long _maxSizeKb;
         private int _currentId;

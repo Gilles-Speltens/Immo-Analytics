@@ -123,9 +123,33 @@
               "target": "Package",
               "version": "[2.1.66, )"
             },
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[10.0.5, )"
+            },
+            "Microsoft.Extensions.Configuration.FileExtensions": {
+              "target": "Package",
+              "version": "[10.0.5, )"
+            },
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[10.0.5, )"
+            },
+            "Microsoft.Extensions.Hosting": {
+              "target": "Package",
+              "version": "[10.0.5, )"
+            },
             "MySqlConnector": {
               "target": "Package",
               "version": "[2.5.0, )"
+            },
+            "NLog": {
+              "target": "Package",
+              "version": "[6.1.2, )"
+            },
+            "NLog.Config": {
+              "target": "Package",
+              "version": "[4.7.15, )"
             }
           },
           "imports": [

@@ -1,19 +1,35 @@
-﻿using Common;
-using Message_Parser.Data;
-using Message_Parser.Services;
-using Message_Parser.Infrastructure;
-using Message_Parser;
+﻿using Message_Parser;
+using Microsoft.Extensions.Configuration;
+using NLog;
 
 var start = DateTime.Now;
 
-var trackingDir = "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Logs";
-var archiveDir = "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Logs\\Archive";
-var invalidDir = "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Logs\\Invalid";
-var workingDir = "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Logs\\Work";
+var builder = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
-MessageParserApp app = new MessageParserApp(trackingDir, archiveDir, invalidDir, workingDir, 20, "server=localhost;user=root;password=1234;database=AnalyticsDB;");
+IConfiguration config = builder.Build();
+
+LogManager.Setup().LoadConfigurationFromFile(config["NLogConfigPath"]);
+var logger = LogManager.GetCurrentClassLogger();
+
+
+// Charger le fichier NLog.config
+LogManager.Setup().LoadConfigurationFromFile(config["NLogConfigPath"]);
+
+var trackingDir = config["trackingDirectory"];
+var archiveDir = config["archiveDirectory"];
+var invalidDir = config["invalidDirectory"];
+var workingDir = config["workingDirectory"];
+int sessionTime = int.Parse(config["sessionDuration"]);
+var connection = config["DBConnection"];
+
+
+MessageParserApp app = new MessageParserApp(trackingDir, archiveDir, invalidDir, workingDir, sessionTime, connection);
 
 await app.InsertLogs();
+
+logger.Warn("test");
 
 var end = DateTime.Now;
 Console.WriteLine(end - start);

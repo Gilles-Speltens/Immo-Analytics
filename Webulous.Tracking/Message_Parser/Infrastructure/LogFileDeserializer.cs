@@ -11,7 +11,7 @@ namespace Message_Parser.Infrastructure
     /// désérialisation de chaque ligne en objet RequestLogDto.
     /// Les logs valides et invalides sont séparés.
     /// </summary>
-    internal class LogFileDeserializer
+    public class LogFileDeserializer
     {
         /// <summary>
         /// Lit un fichier ligne par ligne de manière asynchrone et tente

@@ -2,7 +2,7 @@
 
 namespace Message_Parser.Data
 {
-    internal class DBConnection
+    public class DBConnection
     {
         private readonly string _connectionString;
 
