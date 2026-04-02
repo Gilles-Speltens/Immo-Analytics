@@ -1,6 +1,7 @@
 ﻿using Message_Parser;
 using Microsoft.Extensions.Configuration;
 using NLog;
+using NLog.Config;
 
 var start = DateTime.Now;
 
@@ -10,12 +11,13 @@ var builder = new ConfigurationBuilder()
 
 IConfiguration config = builder.Build();
 
-LogManager.Setup().LoadConfigurationFromFile(config["NLogConfigPath"]);
-var logger = LogManager.GetCurrentClassLogger();
+var nlogConfigPath = config["NLogConfigPath"];
+LogManager.Configuration = new XmlLoggingConfiguration(nlogConfigPath);
+
+Logger logger = LogManager.GetCurrentClassLogger();
 
 
-// Charger le fichier NLog.config
-LogManager.Setup().LoadConfigurationFromFile(config["NLogConfigPath"]);
+logger.Warn("Application démarrée");
 
 var trackingDir = config["trackingDirectory"];
 var archiveDir = config["archiveDirectory"];
@@ -24,12 +26,11 @@ var workingDir = config["workingDirectory"];
 int sessionTime = int.Parse(config["sessionDuration"]);
 var connection = config["DBConnection"];
 
-
-MessageParserApp app = new MessageParserApp(trackingDir, archiveDir, invalidDir, workingDir, sessionTime, connection);
+MessageParserApp app = new MessageParserApp(trackingDir, archiveDir, invalidDir, workingDir, sessionTime, connection, logger);
 
 await app.InsertLogs();
 
-logger.Warn("test");
+logger.Warn("Application terminée");
 
 var end = DateTime.Now;
 Console.WriteLine(end - start);

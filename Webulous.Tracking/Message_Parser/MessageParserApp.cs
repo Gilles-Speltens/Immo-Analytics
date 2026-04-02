@@ -1,10 +1,7 @@
 ﻿using Common;
 using Message_Parser.Data;
-using Message_Parser.Infrastructure;
 using Message_Parser.Services;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using NLog;
 
 namespace Message_Parser
 {
@@ -19,7 +16,9 @@ namespace Message_Parser
         private UnitOfWork _unitOfWork;
         private FileProcessingService _processor;
 
-        public MessageParserApp(string trackingDir, string archiveDir, string invalidDir, string workingDir, int sessionTime, string connection)
+        private Logger _logger;
+
+        public MessageParserApp(string trackingDir, string archiveDir, string invalidDir, string workingDir, int sessionTime, string connection, Logger logger)
         {
             _archiveDir = archiveDir;
             _invalidDir = invalidDir;
@@ -29,25 +28,32 @@ namespace Message_Parser
 
             _unitOfWork = new UnitOfWork(sessionTime, connection);
             _processor = new FileProcessingService(_archiveDir, _invalidDir, _workingDir, 100);
+
+            _logger = logger;
         }
 
         public async Task InsertLogs()
         {
-            for (int i = 0;  i < _files.Length-1; i++)
+            if (Directory.GetFiles(_workingDir).Any())
             {
-                List<RequestLogDto> logs = await _processor.ProcessFileAsync(_files[i]);
-
-                var sucess = await _unitOfWork.bulkInsertLogs(logs);
-
-                if (sucess)
+                _logger.Warn("Le dossier de travail '{workingDir}' n'est pas vide au démarrage. Des fichiers n'ont probablement pas été traités lors d'une exécution précédente.", _workingDir);
+            }
+            else
+            {
+                for (int i = 0; i < _files.Length - 1; i++)
                 {
-                    _processor.MoveToArchive();
-                }
-                else
-                {
-                    Console.WriteLine("Error");
-                    //Log error;
-                    break;
+                    
+                    List<RequestLogDto> logs = await _processor.ProcessFileAsync(_files[i]);
+
+                    var error = await _unitOfWork.bulkInsertLogs(logs);
+                    if (error == null)
+                    {
+                        _processor.MoveToArchive();
+                    } else
+                    {
+                        _logger.Error("Erreur lors du traitement du fichier \"" + _files[i] + "\" | " + error);
+                        break;
+                    }
                 }
             }
         }

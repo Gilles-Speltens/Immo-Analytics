@@ -45,7 +45,7 @@ namespace Message_Parser.Data
             _logProcessingService = new LogProcessingService(ongoingSessions, lastHitPageId, lastSessionId);
         }
 
-        public async Task<bool> bulkInsertLogs(List<RequestLogDto> logs)
+        public async Task<string?> bulkInsertLogs(List<RequestLogDto> logs)
         {
             _logProcessingService.ProcessLogs(logs);
             var newSites = _logProcessingService.GetSites();
@@ -68,13 +68,13 @@ namespace Message_Parser.Data
                         await _userActionsRepo.BulkInsert(userActions, transaction, connection);
 
                         transaction.Commit();
-                        return true;
+                        return null;
                     }
-                    catch (Exception ex)
+                    catch (MySqlException ex)
                     {
                         Console.WriteLine("Exception : " + ex.Message.ToString());
                         transaction.Rollback();
-                        return false;
+                        return ex.Message.ToString();
                     }
                 }
             }
