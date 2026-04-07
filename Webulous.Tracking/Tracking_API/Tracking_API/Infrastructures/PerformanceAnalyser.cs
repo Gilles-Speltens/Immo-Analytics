@@ -1,4 +1,4 @@
-﻿namespace Tracking_API.Model
+﻿namespace Tracking_API.Infrastructures
 {
     public class PerformanceAnalyser
     {

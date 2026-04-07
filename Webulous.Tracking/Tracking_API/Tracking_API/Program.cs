@@ -1,7 +1,8 @@
-using Tracking_API.Model;
+using Tracking_API.Infrastructures;
 using Tracking_API.Middleware;
 using NLog;
 using NLog.Web;
+using Tracking_API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

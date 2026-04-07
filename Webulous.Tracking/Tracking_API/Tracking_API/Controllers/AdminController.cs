@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Net;
-using Tracking_API.Model;
+using Tracking_API.Infrastructures;
 using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
 
 namespace Tracking_API.Controllers
@@ -98,7 +98,7 @@ namespace Tracking_API.Controllers
             var sendIp = HttpContext.Connection.RemoteIpAddress;
             if (IsAdminRequest())
             {
-                _ipManager.AddIpToSafeList(ip);
+                _ipManager.Add(ip);
                 return Ok(_ipManager.GetSafeList());
             }
             else
@@ -118,7 +118,7 @@ namespace Tracking_API.Controllers
             var sendIp = HttpContext.Connection.RemoteIpAddress;
             if (IsAdminRequest())
             {
-                _ipManager.RemoveIpFromSafeList(ip);
+                _ipManager.Remove(ip);
                 return Ok(_ipManager.GetSafeList());
             }
             else
@@ -137,7 +137,7 @@ namespace Tracking_API.Controllers
             var sendIp = HttpContext.Connection.RemoteIpAddress;
             if (IsAdminRequest())
             {
-                _domainManager.AddDomainToSafeList(domain);
+                _domainManager.Add(domain);
                 return Ok(_domainManager.GetSafeList());
             }
             else
@@ -156,7 +156,7 @@ namespace Tracking_API.Controllers
             var sendIp = HttpContext.Connection.RemoteIpAddress;
             if (IsAdminRequest())
             {
-                _domainManager.RemoveDomainFromSafeList(domain);
+                _domainManager.Remove(domain);
                 return Ok(_domainManager.GetSafeList());
             }
             else

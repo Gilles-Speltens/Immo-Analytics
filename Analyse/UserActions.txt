@@ -1,0 +1,8 @@
+HitPage : /
+EstateBrowsing : ToSell&EstateType&Locality&MinPrice&MaxPrice&BedroomNb&Furnished&InvestmentProperty&EstateReference&OrderBy
+ExternalLink : Link
+ContactRequest : ?
+EstimationRequest : ?
+DownloadFile : FileName
+ButtonClick : Description
+PrintReport : / ?

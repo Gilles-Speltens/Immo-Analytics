@@ -1,4 +1,4 @@
-﻿namespace Tracking_API.Model
+﻿namespace Tracking_API.Services
 {
     /// <summary>
     /// Interface utiliser pour faciliter le testing de la classe IPManager avec des mocks.

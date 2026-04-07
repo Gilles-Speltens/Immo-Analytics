@@ -2,7 +2,7 @@
 using System.Collections.Concurrent;
 using System.Text;
 
-namespace Tracking_API.Model
+namespace Tracking_API.Services
 {
 
     /// <summary>

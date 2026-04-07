@@ -48,6 +48,9 @@ namespace Common
 
             string[] parts = value.Split('/');
 
+            if (!IPAddress.TryParse(parts[0], out _))
+                throw new InvalidIpException("Invalid CIDR notation");
+
             _isIPv4Address = !parts[0].Contains(":");
 
             if (parts.Length == 1)
@@ -59,7 +62,9 @@ namespace Common
             }
             else if (parts.Length == 2)
             {
-                var prefix = Convert.ToInt32(parts[1], 10);
+                bool convert = int.TryParse(parts[1], out int prefix);
+                if (!convert) throw new InvalidIpException("Invalid CIDR notation");
+
                 int maxPrefix = _isIPv4Address ? 32 : 128;
 
                 if (prefix < 0 || prefix > maxPrefix)

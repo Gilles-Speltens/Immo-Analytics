@@ -1,14 +1,18 @@
 ﻿using Common;
 using Message_Parser.Infrastructure;
-using System.Text.Json;
 using System.Text.RegularExpressions;
 
 namespace Message_Parser.Services
 {
     /// <summary>
-    /// Classe responsable du traitement des fichiers NDJSON.
-    /// Elle lit les fichiers, désérialise les logs, archive les logs valides,
-    /// écrit les logs invalides et supprime les fichiers traités.
+    /// Service responsable du traitement des fichiers NDJSON contenant des logs.
+    /// 
+    /// Fonctionnalités principales :
+    /// - Lecture et désérialisation des fichiers de logs
+    /// - Séparation des logs valides et invalides
+    /// - Écriture des logs invalides dans un répertoire dédié
+    /// - Archivage ou déplacement des fichiers traités
+    /// - Suppression des fichiers après traitement si nécessaire
     /// </summary>
     public class FileProcessingService
     {
@@ -21,8 +25,10 @@ namespace Message_Parser.Services
         /// <summary>
         /// Initialise une nouvelle instance de <see cref="FileProcessingService"/>.
         /// </summary>
-        /// <param name="reader">Lecteur permettant de désérialiser les fichiers NDJSON.</param>
-        /// <param name="writer">Writer permettant d’écrire les logs archivés et invalides.</param>
+        /// <param name="archiveDirectory">Répertoire de destination pour les fichiers archivés.</param>
+        /// <param name="invalidDirectory">Répertoire contenant les logs invalides.</param>
+        /// <param name="workDirectory">Répertoire de travail pour les fichiers en cours de traitement.</param>
+        /// <param name="maxSizeKb">Taille maximale des fichiers de logs invalides.</param>
         public FileProcessingService(string archiveDirectory, string invalidDirectory, string workDirectory, long maxSizeKb)
         {
             _archiveDirectory = archiveDirectory;
@@ -32,6 +38,13 @@ namespace Message_Parser.Services
             _writer = new LogWriter(invalidDirectory, maxSizeKb);
         }
 
+        /// <summary>
+        /// Traite une liste de fichiers NDJSON.
+        /// 
+        /// Attention : le dernier fichier de la liste n'est pas traité volontairement.
+        /// </summary>
+        /// <param name="files">Liste des chemins de fichiers à traiter.</param>
+        /// <returns>Liste agrégée de tous les logs valides extraits.</returns>
         public async Task<List<RequestLogDto>> ProcessAllFilesAsync(string[] files)
         {
             var allLogs = new List<RequestLogDto>();
@@ -44,6 +57,15 @@ namespace Message_Parser.Services
             return allLogs;
         }
 
+        /// <summary>
+        /// Traite un fichier NDJSON :
+        /// - Désérialise les logs
+        /// - Sépare logs valides et invalides
+        /// - Écrit les logs invalides
+        /// - Déplace ou supprime le fichier selon le cas
+        /// </summary>
+        /// <param name="file">Chemin du fichier à traiter.</param>
+        /// <returns>Liste des logs valides extraits du fichier.</returns>
         public async Task<List<RequestLogDto>> ProcessFileAsync(string file)
         {
             var validLogs = new List<RequestLogDto>();
@@ -66,6 +88,9 @@ namespace Message_Parser.Services
             return validLogs;
         }
 
+        /// <summary>
+        /// Déplace tous les fichiers du répertoire de travail vers le répertoire d’archive.
+        /// </summary>
         public void MoveToArchive()
         {
             var files = Directory.GetFiles(_workDirectory);

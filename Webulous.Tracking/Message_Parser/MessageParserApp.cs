@@ -5,6 +5,16 @@ using NLog;
 
 namespace Message_Parser
 {
+    /// <summary>
+    /// Point d’entrée applicatif pour le traitement des fichiers de logs.
+    ///
+    /// Responsabilités :
+    /// - Récupérer les fichiers à traiter
+    /// - Orchestrer leur traitement via FileProcessingService
+    /// - Insérer les logs en base de données via UnitOfWork
+    /// - Gérer les erreurs et le logging
+    /// - Déclencher l’archivage des fichiers traités
+    /// </summary>
     public class MessageParserApp
     {
         private string _archiveDir;
@@ -18,6 +28,16 @@ namespace Message_Parser
 
         private Logger _logger;
 
+        /// <summary>
+        /// Initialise l'application de parsing des logs.
+        /// </summary>
+        /// <param name="trackingDir">Répertoire contenant les fichiers bruts à traiter.</param>
+        /// <param name="archiveDir">Répertoire de destination pour les fichiers archivés.</param>
+        /// <param name="invalidDir">Répertoire pour les logs invalides.</param>
+        /// <param name="workingDir">Répertoire temporaire de traitement.</param>
+        /// <param name="sessionTime">Durée de session utilisée côté base de données.</param>
+        /// <param name="connection">Chaîne de connexion à la base de données.</param>
+        /// <param name="logger">Logger utilisé pour tracer les événements et erreurs.</param>
         public MessageParserApp(string trackingDir, string archiveDir, string invalidDir, string workingDir, int sessionTime, string connection, Logger logger)
         {
             _archiveDir = archiveDir;
@@ -31,6 +51,17 @@ namespace Message_Parser
 
             _logger = logger;
         }
+
+        /// <summary>
+        /// Lance le traitement et l’insertion des logs en base.
+        ///
+        /// Workflow :
+        /// 1. Vérifie si le dossier de travail est vide
+        /// 2. Traite chaque fichier (sauf le dernier, potentiellement en cours d’écriture)
+        /// 3. Insère les logs en base
+        /// 4. Archive les fichiers si succès
+        /// 5. Stoppe le traitement en cas d’erreur
+        /// </summary>
 
         public async Task InsertLogs()
         {

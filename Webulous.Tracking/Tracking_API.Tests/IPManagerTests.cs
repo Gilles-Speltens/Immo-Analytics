@@ -1,5 +1,6 @@
 ﻿using Moq;
-using Tracking_API.Model;
+using Tracking_API.Infrastructures;
+using Tracking_API.Services;
 
 namespace Tracking_API.Tests
 {

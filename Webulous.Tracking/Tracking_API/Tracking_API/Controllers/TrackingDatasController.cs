@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Tracking_API.Model;
+using Tracking_API.Services;
 
 namespace Tracking_API.Controllers
 {

@@ -4,7 +4,7 @@ using System.Net;
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
-using Tracking_API.Model;
+using Tracking_API.Infrastructures;
 
 namespace Tracking_API.Middleware
 {

@@ -7,9 +7,25 @@ using System.Text.RegularExpressions;
 
 namespace Message_Parser.Services
 {
+    /// <summary>
+    /// Service responsable de la transformation des logs bruts en entités métier :
+    /// - Sites
+    /// - Sessions
+    /// - HitPages (pages visitées)
+    /// - Actions utilisateurs
+    ///
+    /// Il maintient également un état des sessions en cours (_ongoingSessions)
+    /// afin de reconstruire correctement la navigation utilisateur.
+    /// </summary>
     public class LogProcessingService
     {
-        private Dictionary<(string sessionId, string domain), (Session session, int lastHitPage)> _ongoingSessions; //with last hitpage and the session as the value
+        /// <summary>
+        /// Sessions en cours, indexées par (SessionId, Domain).
+        /// Contient :
+        /// - la session en cours
+        /// - l'identifiant de la dernière page visitée (HitPage)
+        /// </summary>
+        private Dictionary<(string sessionId, string domain), (Session session, int lastHitPage)> _ongoingSessions;
 
         private int _lastHitPageId;
         private int _lastSessionId;
@@ -19,6 +35,12 @@ namespace Message_Parser.Services
         private List<HitPage> _hitPages = new List<HitPage>();
         private List<UserAction> _userActions = new List<UserAction>();
 
+        /// <summary>
+        /// Initialise une nouvelle instance du service de traitement des logs.
+        /// </summary>
+        /// <param name="ongoingSessions">Sessions encore actives provenant d’un traitement précédent.</param>
+        /// <param name="lastHitPageId">Dernier identifiant de HitPage utilisé.</param>
+        /// <param name="lastSessionId">Dernier identifiant de Session utilisé.</param>
         public LogProcessingService(Dictionary<(string sessionId, string domain), (Session, int)> ongoingSessions, int lastHitPageId, int lastSessionId) 
         {
             _ongoingSessions = ongoingSessions;
@@ -31,6 +53,17 @@ namespace Message_Parser.Services
         public List<HitPage> GetHitPages() { return _hitPages; }
         public List<UserAction> GetUserActions() { return _userActions; }
 
+        /// <summary>
+        /// Traite une liste de logs et reconstruit les entités métier associées.
+        ///
+        /// Pipeline de traitement pour chaque log :
+        /// 1. Détermination du site (domain)
+        /// 2. Gestion de la session (création ou mise à jour)
+        /// 3. Création éventuelle d’une HitPage
+        /// 4. Ajout dans les sessions actives (_ongoingSessions)
+        /// 5. Création d’une action utilisateur (si applicable)
+        /// </summary>
+        /// <param name="logs">Logs à traiter.</param>
         public void ProcessLogs(List<RequestLogDto> logs)
         {
             _sites = new List<Site>();
@@ -68,6 +101,10 @@ namespace Message_Parser.Services
             }
         }
 
+        /// <summary>
+        /// Extrait le domaine depuis l'URL du log et crée une entité Site.
+        /// </summary>
+        /// <returns>Le domaine normalisé.</returns>
         private string SiteProcessing(RequestLogDto log)
         {
             var url = log.Url;
@@ -84,6 +121,14 @@ namespace Message_Parser.Services
             return domain;
         }
 
+        /// <summary>
+        /// Gère la création ou mise à jour d’une session.
+        ///
+        /// Cas :
+        /// - Session existante → mise à jour (UserId, SessionEnd)
+        /// - Nouvelle session → création avec nouvel ID
+        /// </summary>
+        /// <returns>True si une nouvelle session a été créée.</returns>
         private bool SessionsProcessing(RequestLogDto log, string domain, out Session ongoingSession)
         {
             var newSession = false;
@@ -125,6 +170,10 @@ namespace Message_Parser.Services
             return newSession;
         }
 
+        /// <summary>
+        /// Crée une nouvelle HitPage (page visitée) associée à une session.
+        /// </summary>
+        /// <returns>Identifiant de la HitPage créée.</returns>
         private int HitpageProcessing(RequestLogDto log, Session curSession)
         {
             _lastHitPageId += 1;
@@ -139,6 +188,14 @@ namespace Message_Parser.Services
             return hitPageId;
         }
 
+        /// <summary>
+        /// Crée une action utilisateur liée à une HitPage.
+        ///
+        /// Si une session existe déjà :
+        /// → on rattache à la dernière HitPage connue
+        /// Sinon :
+        /// → on utilise la HitPage créée dans ce cycle
+        /// </summary>
         private void ActionProcessing(RequestLogDto log, string domain, int hitPageId)
         {
             var time = log.Date;

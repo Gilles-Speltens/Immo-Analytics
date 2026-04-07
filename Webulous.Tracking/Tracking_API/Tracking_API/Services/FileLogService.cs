@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Tracking_API.Model
+namespace Tracking_API.Services
 {
     /// <summary>
     /// Service responsable de la gestion des logs dans un fichier.
