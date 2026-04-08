@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{7292E324-734A-2B99-CBFD-9E05168DDB54}|Tracking_API\\Tracking_API\\Tracking_API.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\tracking_api\\tracking_api\\infrastructures\\whitelistmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7292E324-734A-2B99-CBFD-9E05168DDB54}|Tracking_API\\Tracking_API\\Tracking_API.csproj|solutionrelative:tracking_api\\tracking_api\\infrastructures\\whitelistmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{7292E324-734A-2B99-CBFD-9E05168DDB54}|Tracking_API\\Tracking_API\\Tracking_API.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\tracking_api\\tracking_api\\middleware\\adminsafelistmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7292E324-734A-2B99-CBFD-9E05168DDB54}|Tracking_API\\Tracking_API\\Tracking_API.csproj|solutionrelative:tracking_api\\tracking_api\\middleware\\adminsafelistmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7292E324-734A-2B99-CBFD-9E05168DDB54}|Tracking_API\\Tracking_API\\Tracking_API.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\tracking_api\\tracking_api\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7292E324-734A-2B99-CBFD-9E05168DDB54}|Tracking_API\\Tracking_API\\Tracking_API.csproj|solutionrelative:tracking_api\\tracking_api\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7292E324-734A-2B99-CBFD-9E05168DDB54}|Tracking_API\\Tracking_API\\Tracking_API.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\tracking_api\\tracking_api\\infrastructures\\whitelistmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7292E324-734A-2B99-CBFD-9E05168DDB54}|Tracking_API\\Tracking_API\\Tracking_API.csproj|solutionrelative:tracking_api\\tracking_api\\infrastructures\\whitelistmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{332CE3C9-DBC4-406C-BC04-7F3E7DE509B4}|Common\\Common.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\common\\ipsubnet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -90,8 +90,20 @@
       "DocumentGroups": [
         {
           "DockedWidth": 325,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 3,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AdminSafeListMiddleware.cs",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Tracking_API\\Tracking_API\\Middleware\\AdminSafeListMiddleware.cs",
+              "RelativeDocumentMoniker": "Tracking_API\\Tracking_API\\Middleware\\AdminSafeListMiddleware.cs",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Tracking_API\\Tracking_API\\Middleware\\AdminSafeListMiddleware.cs",
+              "RelativeToolTip": "Tracking_API\\Tracking_API\\Middleware\\AdminSafeListMiddleware.cs",
+              "ViewState": "AgIAADkAAAAAAAAAAAAYwE4AAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-07T10:00:42.048Z"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 4,
@@ -102,8 +114,7 @@
               "RelativeToolTip": "Tracking_API\\Tracking_API\\Infrastructures\\DomainManager.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-07T14:14:52.236Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-07T14:14:52.236Z"
             },
             {
               "$type": "Document",
@@ -115,18 +126,17 @@
               "RelativeToolTip": "Common\\IPSubnet.cs",
               "ViewState": "AgIAAIoAAAAAAAAAAAAQwJcAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-07T13:43:59.886Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-07T13:43:59.886Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "WhitelistManager.cs",
               "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Tracking_API\\Tracking_API\\Infrastructures\\WhitelistManager.cs",
               "RelativeDocumentMoniker": "Tracking_API\\Tracking_API\\Infrastructures\\WhitelistManager.cs",
               "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Tracking_API\\Tracking_API\\Infrastructures\\WhitelistManager.cs",
               "RelativeToolTip": "Tracking_API\\Tracking_API\\Infrastructures\\WhitelistManager.cs",
-              "ViewState": "AgIAACMAAAAAAAAAAAAswB8AAAA4AAAAAAAAAA==",
+              "ViewState": "AgIAACsAAAAAAAAAAAAwwB8AAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-07T12:24:14.16Z",
               "EditorCaption": ""
@@ -141,12 +151,11 @@
               "RelativeToolTip": "Tracking_API\\Tracking_API\\Infrastructures\\IPManager.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-07T09:08:53.348Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-07T09:08:53.348Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "AdminController.cs",
               "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Tracking_API\\Tracking_API\\Controllers\\AdminController.cs",
               "RelativeDocumentMoniker": "Tracking_API\\Tracking_API\\Controllers\\AdminController.cs",
@@ -154,8 +163,7 @@
               "RelativeToolTip": "Tracking_API\\Tracking_API\\Controllers\\AdminController.cs",
               "ViewState": "AgIAADsAAAAAAAAAAAA3wJ8AAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-07T12:12:08.837Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-07T12:12:08.837Z"
             },
             {
               "$type": "Document",
@@ -167,21 +175,7 @@
               "RelativeToolTip": "Tracking_API\\Tracking_API\\Services\\FileLogService.cs",
               "ViewState": "AgIAAEgAAAAAAAAAAAAkwFYAAABeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-07T09:06:41.59Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AdminSafeListMiddleware.cs",
-              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Tracking_API\\Tracking_API\\Middleware\\AdminSafeListMiddleware.cs",
-              "RelativeDocumentMoniker": "Tracking_API\\Tracking_API\\Middleware\\AdminSafeListMiddleware.cs",
-              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Tracking_API\\Tracking_API\\Middleware\\AdminSafeListMiddleware.cs",
-              "RelativeToolTip": "Tracking_API\\Tracking_API\\Middleware\\AdminSafeListMiddleware.cs",
-              "ViewState": "AgIAACUAAAAAAAAAAAApwEEAAABxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-07T10:00:42.048Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-07T09:06:41.59Z"
             },
             {
               "$type": "Document",
@@ -193,8 +187,7 @@
               "RelativeToolTip": "Tracking_API\\Tracking_API\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-07T09:09:38.844Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-07T09:09:38.844Z"
             },
             {
               "$type": "Document",
@@ -206,8 +199,7 @@
               "RelativeToolTip": "Tracking_API\\Tracking_API\\Services\\IFileManager.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-07T09:08:51.277Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-07T09:08:51.277Z"
             },
             {
               "$type": "Document",
@@ -219,8 +211,7 @@
               "RelativeToolTip": "Tracking_API\\Tracking_API\\Services\\FileManager.cs",
               "ViewState": "AgIAAFIAAAAAAAAAAAAkwEsAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-07T09:08:37.163Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-07T09:08:37.163Z"
             },
             {
               "$type": "Document",
@@ -232,8 +223,7 @@
               "RelativeToolTip": "Tracking_API\\Tracking_API\\Infrastructures\\PerformanceAnalyser.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-07T09:08:56.954Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-07T09:08:56.954Z"
             },
             {
               "$type": "Document",
@@ -245,8 +235,7 @@
               "RelativeToolTip": "Common\\ActionsType.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-07T07:35:03.538Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-07T07:35:03.538Z"
             },
             {
               "$type": "Document",
@@ -258,8 +247,7 @@
               "RelativeToolTip": "Message_Parser\\Services\\FileProcessingService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-07T06:58:42.258Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-07T06:58:42.258Z"
             },
             {
               "$type": "Document",
@@ -283,8 +271,7 @@
               "RelativeToolTip": "Message_Parser\\Data\\UnitOfWork.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAAC8AAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-02T07:37:30.133Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-02T07:37:30.133Z"
             },
             {
               "$type": "Document",
@@ -296,8 +283,7 @@
               "RelativeToolTip": "Message_Parser\\MessageParserApp.cs",
               "ViewState": "AgIAABoAAAAAAAAAAAAAwEAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-02T07:31:08.961Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-02T07:31:08.961Z"
             },
             {
               "$type": "Document",
@@ -309,8 +295,7 @@
               "RelativeToolTip": "Message_Parser\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-01T09:51:06.564Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-01T09:51:06.564Z"
             },
             {
               "$type": "Document",
@@ -322,8 +307,7 @@
               "RelativeToolTip": "Message_Parser\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-04-01T09:45:48.337Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-01T09:45:48.337Z"
             },
             {
               "$type": "Document",
@@ -335,8 +319,7 @@
               "RelativeToolTip": "Message_Parser\\Services\\LogProcessingService.cs",
               "ViewState": "AgIAAEcAAAAAAAAAAAAswMUAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-01T08:59:48.764Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-01T08:59:48.764Z"
             },
             {
               "$type": "Document",

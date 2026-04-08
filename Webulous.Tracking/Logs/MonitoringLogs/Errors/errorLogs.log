@@ -74,3 +74,6 @@
    at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2026-04-07 16:34:38.8999 | WARN | Tracking_API.Middleware.AdminSafeListMiddleware | Forbidden Request from remote IP address: ::1 
+2026-04-07 16:34:42.0863 | WARN | Tracking_API.Middleware.AdminSafeListMiddleware | Forbidden Request from remote IP address: ::1 
+2026-04-07 16:34:42.9708 | WARN | Tracking_API.Middleware.AdminSafeListMiddleware | Forbidden Request from remote IP address: ::1 

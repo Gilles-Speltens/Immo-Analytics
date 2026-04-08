@@ -1,8 +1,4 @@
 ﻿using Common;
-using System.Collections;
-using System.Collections.Generic;
-using System.Net;
-using System.Reflection.Metadata.Ecma335;
 using Tracking_API.Services;
 
 namespace Tracking_API.Infrastructures
