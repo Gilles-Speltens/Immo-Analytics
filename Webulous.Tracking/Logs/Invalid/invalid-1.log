@@ -1,7 +1,0 @@
-aueropauzer
-aueropauzer
-aueropauzer
-[24-03-26 13:17:10] 127.0.0.1 | BUTTON_CLICK | http://youtube:5198/Home/ContactButton | http://localhost:5198/ | abcdefgh-1384-4736-985e-c1868be18835 | abcdefgh-ae2f-932e-0d7c-30a84f957708 | TEST | fr | Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:148.0) Gecko/20100101 Firefox/148.0
-{"Date":"2026-03-24T13:07:15.9204754Z","UserId":"abcdefgh-1384-4736-985e-c1868be18835","UserIp":"127.0.0.1","SessionId":"abcdefgh-ae2f-932e-0d7c-30a84f957708","Url":"http://youtube/Home/ContactButton","UrlReferrer":"http://youtube:5198/","Action":5,"ActionParameters":CONTACT,"LanguageBrowser":"fr","UserAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:148.0) Gecko/20100101 Firefox/148.0"}
-{"Date":"2026-03-24T13:07:15.9204754Z","UserId":"abcdefgh-1384-4736-985e-c1868be18835","UserIp":"127.0.0.1","SessionId":"abcdefgh-ae2f-932e-0d7c-30a84f957708","Url":"http://youtube/Home","UrlReferrer":"http://youtube:5198/","Action":5,"ActionParameters":CONTACT,"LanguageBrowser":"fr","UserAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:148.0) Gecko/20100101 Firefox/148.0"}
-azeazeaze

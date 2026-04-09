@@ -3,40 +3,100 @@
   "WorkspaceRootPath": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7292E324-734A-2B99-CBFD-9E05168DDB54}|Tracking_API\\Tracking_API\\Tracking_API.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\tracking_api\\tracking_api\\infrastructures\\whitelistmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7292E324-734A-2B99-CBFD-9E05168DDB54}|Tracking_API\\Tracking_API\\Tracking_API.csproj|solutionrelative:tracking_api\\tracking_api\\infrastructures\\whitelistmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7989639B-72BB-4170-B191-38746071A157}|Message_Parser\\Message_Parser.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\message_parser\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7989639B-72BB-4170-B191-38746071A157}|Message_Parser\\Message_Parser.csproj|solutionrelative:message_parser\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7292E324-734A-2B99-CBFD-9E05168DDB54}|Tracking_API\\Tracking_API\\Tracking_API.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\tracking_api\\tracking_api\\middleware\\adminsafelistmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7292E324-734A-2B99-CBFD-9E05168DDB54}|Tracking_API\\Tracking_API\\Tracking_API.csproj|solutionrelative:tracking_api\\tracking_api\\middleware\\adminsafelistmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7292E324-734A-2B99-CBFD-9E05168DDB54}|Tracking_API\\Tracking_API\\Tracking_API.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\tracking_api\\tracking_api\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7292E324-734A-2B99-CBFD-9E05168DDB54}|Tracking_API\\Tracking_API\\Tracking_API.csproj|solutionrelative:tracking_api\\tracking_api\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{332CE3C9-DBC4-406C-BC04-7F3E7DE509B4}|Common\\Common.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\common\\ipsubnet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{332CE3C9-DBC4-406C-BC04-7F3E7DE509B4}|Common\\Common.csproj|solutionrelative:common\\ipsubnet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7292E324-734A-2B99-CBFD-9E05168DDB54}|Tracking_API\\Tracking_API\\Tracking_API.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\tracking_api\\tracking_api\\infrastructures\\domainmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7292E324-734A-2B99-CBFD-9E05168DDB54}|Tracking_API\\Tracking_API\\Tracking_API.csproj|solutionrelative:tracking_api\\tracking_api\\infrastructures\\domainmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7292E324-734A-2B99-CBFD-9E05168DDB54}|Tracking_API\\Tracking_API\\Tracking_API.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\tracking_api\\tracking_api\\infrastructures\\ipmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7292E324-734A-2B99-CBFD-9E05168DDB54}|Tracking_API\\Tracking_API\\Tracking_API.csproj|solutionrelative:tracking_api\\tracking_api\\infrastructures\\ipmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7989639B-72BB-4170-B191-38746071A157}|Message_Parser\\Message_Parser.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\message_parser\\services\\logprocessingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7989639B-72BB-4170-B191-38746071A157}|Message_Parser\\Message_Parser.csproj|solutionrelative:message_parser\\services\\logprocessingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7989639B-72BB-4170-B191-38746071A157}|Message_Parser\\Message_Parser.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\message_parser\\messageparserapp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7989639B-72BB-4170-B191-38746071A157}|Message_Parser\\Message_Parser.csproj|solutionrelative:message_parser\\messageparserapp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7989639B-72BB-4170-B191-38746071A157}|Message_Parser\\Message_Parser.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\message_parser\\data\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7989639B-72BB-4170-B191-38746071A157}|Message_Parser\\Message_Parser.csproj|solutionrelative:message_parser\\data\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7292E324-734A-2B99-CBFD-9E05168DDB54}|Tracking_API\\Tracking_API\\Tracking_API.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\tracking_api\\tracking_api\\services\\ifilemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7292E324-734A-2B99-CBFD-9E05168DDB54}|Tracking_API\\Tracking_API\\Tracking_API.csproj|solutionrelative:tracking_api\\tracking_api\\services\\ifilemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7989639B-72BB-4170-B191-38746071A157}|Message_Parser\\Message_Parser.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\message_parser\\reposiroties\\hitpagerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7989639B-72BB-4170-B191-38746071A157}|Message_Parser\\Message_Parser.csproj|solutionrelative:message_parser\\reposiroties\\hitpagerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7292E324-734A-2B99-CBFD-9E05168DDB54}|Tracking_API\\Tracking_API\\Tracking_API.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\tracking_api\\tracking_api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{7292E324-734A-2B99-CBFD-9E05168DDB54}|Tracking_API\\Tracking_API\\Tracking_API.csproj|solutionrelative:tracking_api\\tracking_api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{08A0969C-002D-40E1-BF03-F7E1A6FF80F3}|Interface_Gestion_API\\Interface_Gestion_API.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\interface_gestion_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{08A0969C-002D-40E1-BF03-F7E1A6FF80F3}|Interface_Gestion_API\\Interface_Gestion_API.csproj|solutionrelative:interface_gestion_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{08A0969C-002D-40E1-BF03-F7E1A6FF80F3}|Interface_Gestion_API\\Interface_Gestion_API.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\interface_gestion_api\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{08A0969C-002D-40E1-BF03-F7E1A6FF80F3}|Interface_Gestion_API\\Interface_Gestion_API.csproj|solutionrelative:interface_gestion_api\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{08A0969C-002D-40E1-BF03-F7E1A6FF80F3}|Interface_Gestion_API\\Interface_Gestion_API.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\interface_gestion_api\\services\\requestapiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{08A0969C-002D-40E1-BF03-F7E1A6FF80F3}|Interface_Gestion_API\\Interface_Gestion_API.csproj|solutionrelative:interface_gestion_api\\services\\requestapiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{08A0969C-002D-40E1-BF03-F7E1A6FF80F3}|Interface_Gestion_API\\Interface_Gestion_API.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\interface_gestion_api\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{08A0969C-002D-40E1-BF03-F7E1A6FF80F3}|Interface_Gestion_API\\Interface_Gestion_API.csproj|solutionrelative:interface_gestion_api\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{08A0969C-002D-40E1-BF03-F7E1A6FF80F3}|Interface_Gestion_API\\Interface_Gestion_API.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\interface_gestion_api\\models\\authenticationattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{08A0969C-002D-40E1-BF03-F7E1A6FF80F3}|Interface_Gestion_API\\Interface_Gestion_API.csproj|solutionrelative:interface_gestion_api\\models\\authenticationattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{08A0969C-002D-40E1-BF03-F7E1A6FF80F3}|Interface_Gestion_API\\Interface_Gestion_API.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\interface_gestion_api\\infrastructures\\adminpasswordvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{08A0969C-002D-40E1-BF03-F7E1A6FF80F3}|Interface_Gestion_API\\Interface_Gestion_API.csproj|solutionrelative:interface_gestion_api\\infrastructures\\adminpasswordvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{08A0969C-002D-40E1-BF03-F7E1A6FF80F3}|Interface_Gestion_API\\Interface_Gestion_API.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\interface_gestion_api\\models\\apisettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{08A0969C-002D-40E1-BF03-F7E1A6FF80F3}|Interface_Gestion_API\\Interface_Gestion_API.csproj|solutionrelative:interface_gestion_api\\models\\apisettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{08A0969C-002D-40E1-BF03-F7E1A6FF80F3}|Interface_Gestion_API\\Interface_Gestion_API.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\interface_gestion_api\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{08A0969C-002D-40E1-BF03-F7E1A6FF80F3}|Interface_Gestion_API\\Interface_Gestion_API.csproj|solutionrelative:interface_gestion_api\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{08A0969C-002D-40E1-BF03-F7E1A6FF80F3}|Interface_Gestion_API\\Interface_Gestion_API.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\interface_gestion_api\\views\\home\\signin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{08A0969C-002D-40E1-BF03-F7E1A6FF80F3}|Interface_Gestion_API\\Interface_Gestion_API.csproj|solutionrelative:interface_gestion_api\\views\\home\\signin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{08A0969C-002D-40E1-BF03-F7E1A6FF80F3}|Interface_Gestion_API\\Interface_Gestion_API.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\interface_gestion_api\\services\\whitelistmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{08A0969C-002D-40E1-BF03-F7E1A6FF80F3}|Interface_Gestion_API\\Interface_Gestion_API.csproj|solutionrelative:interface_gestion_api\\services\\whitelistmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7292E324-734A-2B99-CBFD-9E05168DDB54}|Tracking_API\\Tracking_API\\Tracking_API.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\tracking_api\\tracking_api\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7292E324-734A-2B99-CBFD-9E05168DDB54}|Tracking_API\\Tracking_API\\Tracking_API.csproj|solutionrelative:tracking_api\\tracking_api\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7989639B-72BB-4170-B191-38746071A157}|Message_Parser\\Message_Parser.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\message_parser\\infrastructure\\logfiledeserializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7989639B-72BB-4170-B191-38746071A157}|Message_Parser\\Message_Parser.csproj|solutionrelative:message_parser\\infrastructure\\logfiledeserializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{332CE3C9-DBC4-406C-BC04-7F3E7DE509B4}|Common\\Common.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\common\\actionstype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{332CE3C9-DBC4-406C-BC04-7F3E7DE509B4}|Common\\Common.csproj|solutionrelative:common\\actionstype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7989639B-72BB-4170-B191-38746071A157}|Message_Parser\\Message_Parser.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\message_parser\\services\\fileprocessingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7989639B-72BB-4170-B191-38746071A157}|Message_Parser\\Message_Parser.csproj|solutionrelative:message_parser\\services\\fileprocessingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7989639B-72BB-4170-B191-38746071A157}|Message_Parser\\Message_Parser.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\message_parser\\data\\dbconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7989639B-72BB-4170-B191-38746071A157}|Message_Parser\\Message_Parser.csproj|solutionrelative:message_parser\\data\\dbconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7989639B-72BB-4170-B191-38746071A157}|Message_Parser\\Message_Parser.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\message_parser\\services\\logprocessingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7989639B-72BB-4170-B191-38746071A157}|Message_Parser\\Message_Parser.csproj|solutionrelative:message_parser\\services\\logprocessingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7989639B-72BB-4170-B191-38746071A157}|Message_Parser\\Message_Parser.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\message_parser\\entities\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7989639B-72BB-4170-B191-38746071A157}|Message_Parser\\Message_Parser.csproj|solutionrelative:message_parser\\entities\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7292E324-734A-2B99-CBFD-9E05168DDB54}|Tracking_API\\Tracking_API\\Tracking_API.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\tracking_api\\tracking_api\\infrastructures\\ipmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7292E324-734A-2B99-CBFD-9E05168DDB54}|Tracking_API\\Tracking_API\\Tracking_API.csproj|solutionrelative:tracking_api\\tracking_api\\infrastructures\\ipmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{332CE3C9-DBC4-406C-BC04-7F3E7DE509B4}|Common\\Common.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\common\\ipsubnet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{332CE3C9-DBC4-406C-BC04-7F3E7DE509B4}|Common\\Common.csproj|solutionrelative:common\\ipsubnet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7292E324-734A-2B99-CBFD-9E05168DDB54}|Tracking_API\\Tracking_API\\Tracking_API.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\tracking_api\\tracking_api\\services\\filemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -47,6 +107,22 @@
       "RelativeMoniker": "D:0:0:{7292E324-734A-2B99-CBFD-9E05168DDB54}|Tracking_API\\Tracking_API\\Tracking_API.csproj|solutionrelative:tracking_api\\tracking_api\\services\\filelogservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{7292E324-734A-2B99-CBFD-9E05168DDB54}|Tracking_API\\Tracking_API\\Tracking_API.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\tracking_api\\tracking_api\\infrastructures\\whitelistmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7292E324-734A-2B99-CBFD-9E05168DDB54}|Tracking_API\\Tracking_API\\Tracking_API.csproj|solutionrelative:tracking_api\\tracking_api\\infrastructures\\whitelistmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7292E324-734A-2B99-CBFD-9E05168DDB54}|Tracking_API\\Tracking_API\\Tracking_API.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\tracking_api\\tracking_api\\middleware\\adminsafelistmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7292E324-734A-2B99-CBFD-9E05168DDB54}|Tracking_API\\Tracking_API\\Tracking_API.csproj|solutionrelative:tracking_api\\tracking_api\\middleware\\adminsafelistmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7292E324-734A-2B99-CBFD-9E05168DDB54}|Tracking_API\\Tracking_API\\Tracking_API.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\tracking_api\\tracking_api\\infrastructures\\domainmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7292E324-734A-2B99-CBFD-9E05168DDB54}|Tracking_API\\Tracking_API\\Tracking_API.csproj|solutionrelative:tracking_api\\tracking_api\\infrastructures\\domainmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7292E324-734A-2B99-CBFD-9E05168DDB54}|Tracking_API\\Tracking_API\\Tracking_API.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\tracking_api\\tracking_api\\services\\ifilemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7292E324-734A-2B99-CBFD-9E05168DDB54}|Tracking_API\\Tracking_API\\Tracking_API.csproj|solutionrelative:tracking_api\\tracking_api\\services\\ifilemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{7292E324-734A-2B99-CBFD-9E05168DDB54}|Tracking_API\\Tracking_API\\Tracking_API.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\tracking_api\\tracking_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7292E324-734A-2B99-CBFD-9E05168DDB54}|Tracking_API\\Tracking_API\\Tracking_API.csproj|solutionrelative:tracking_api\\tracking_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -55,24 +131,8 @@
       "RelativeMoniker": "D:0:0:{7292E324-734A-2B99-CBFD-9E05168DDB54}|Tracking_API\\Tracking_API\\Tracking_API.csproj|solutionrelative:tracking_api\\tracking_api\\infrastructures\\performanceanalyser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{332CE3C9-DBC4-406C-BC04-7F3E7DE509B4}|Common\\Common.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\common\\actionstype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{332CE3C9-DBC4-406C-BC04-7F3E7DE509B4}|Common\\Common.csproj|solutionrelative:common\\actionstype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{7989639B-72BB-4170-B191-38746071A157}|Message_Parser\\Message_Parser.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\message_parser\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{7989639B-72BB-4170-B191-38746071A157}|Message_Parser\\Message_Parser.csproj|solutionrelative:message_parser\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7989639B-72BB-4170-B191-38746071A157}|Message_Parser\\Message_Parser.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\message_parser\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7989639B-72BB-4170-B191-38746071A157}|Message_Parser\\Message_Parser.csproj|solutionrelative:message_parser\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7989639B-72BB-4170-B191-38746071A157}|Message_Parser\\Message_Parser.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\message_parser\\messageparserapp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7989639B-72BB-4170-B191-38746071A157}|Message_Parser\\Message_Parser.csproj|solutionrelative:message_parser\\messageparserapp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7989639B-72BB-4170-B191-38746071A157}|Message_Parser\\Message_Parser.csproj|c:\\users\\gille\\desktop\\stage webulous\\immo-analytics\\webulous.tracking\\message_parser\\services\\fileprocessingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7989639B-72BB-4170-B191-38746071A157}|Message_Parser\\Message_Parser.csproj|solutionrelative:message_parser\\services\\fileprocessingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1AD244E0-696C-4A2A-31B1-1832C4FA60E4}|Config{1AD244E0-696C-4A2A-31B1-1832C4FA60E4}|C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\nlog.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
@@ -90,23 +150,353 @@
       "DocumentGroups": [
         {
           "DockedWidth": 325,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 18,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AdminSafeListMiddleware.cs",
-              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Tracking_API\\Tracking_API\\Middleware\\AdminSafeListMiddleware.cs",
-              "RelativeDocumentMoniker": "Tracking_API\\Tracking_API\\Middleware\\AdminSafeListMiddleware.cs",
-              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Tracking_API\\Tracking_API\\Middleware\\AdminSafeListMiddleware.cs",
-              "RelativeToolTip": "Tracking_API\\Tracking_API\\Middleware\\AdminSafeListMiddleware.cs",
-              "ViewState": "AgIAADkAAAAAAAAAAAAYwE4AAAANAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "HitPageRepository.cs",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Message_Parser\\Reposiroties\\HitPageRepository.cs",
+              "RelativeDocumentMoniker": "Message_Parser\\Reposiroties\\HitPageRepository.cs",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Message_Parser\\Reposiroties\\HitPageRepository.cs",
+              "RelativeToolTip": "Message_Parser\\Reposiroties\\HitPageRepository.cs",
+              "ViewState": "AgIAAC4AAAAAAAAAAAAQwEYAAABdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-07T10:00:42.048Z"
+              "WhenOpened": "2026-04-09T12:45:13.631Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Tracking_API\\Tracking_API\\appsettings.json",
+              "RelativeDocumentMoniker": "Tracking_API\\Tracking_API\\appsettings.json",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Tracking_API\\Tracking_API\\appsettings.json",
+              "RelativeToolTip": "Tracking_API\\Tracking_API\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-04-09T12:20:08.267Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "RequestApiService.cs",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Interface_Gestion_API\\Services\\RequestApiService.cs",
+              "RelativeDocumentMoniker": "Interface_Gestion_API\\Services\\RequestApiService.cs",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Interface_Gestion_API\\Services\\RequestApiService.cs",
+              "RelativeToolTip": "Interface_Gestion_API\\Services\\RequestApiService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-09T12:18:08.082Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ErrorViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Interface_Gestion_API\\Models\\ErrorViewModel.cs",
+              "RelativeDocumentMoniker": "Interface_Gestion_API\\Models\\ErrorViewModel.cs",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Interface_Gestion_API\\Models\\ErrorViewModel.cs",
+              "RelativeToolTip": "Interface_Gestion_API\\Models\\ErrorViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-09T12:18:06.994Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "AuthenticationAttribute.cs",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Interface_Gestion_API\\Models\\AuthenticationAttribute.cs",
+              "RelativeDocumentMoniker": "Interface_Gestion_API\\Models\\AuthenticationAttribute.cs",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Interface_Gestion_API\\Models\\AuthenticationAttribute.cs",
+              "RelativeToolTip": "Interface_Gestion_API\\Models\\AuthenticationAttribute.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-09T12:18:00.84Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "AdminPasswordValidator.cs",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Interface_Gestion_API\\Infrastructures\\AdminPasswordValidator.cs",
+              "RelativeDocumentMoniker": "Interface_Gestion_API\\Infrastructures\\AdminPasswordValidator.cs",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Interface_Gestion_API\\Infrastructures\\AdminPasswordValidator.cs",
+              "RelativeToolTip": "Interface_Gestion_API\\Infrastructures\\AdminPasswordValidator.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-09T12:17:22.936Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ApiSettings.cs",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Interface_Gestion_API\\Models\\ApiSettings.cs",
+              "RelativeDocumentMoniker": "Interface_Gestion_API\\Models\\ApiSettings.cs",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Interface_Gestion_API\\Models\\ApiSettings.cs",
+              "RelativeToolTip": "Interface_Gestion_API\\Models\\ApiSettings.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-09T12:17:18.912Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Interface_Gestion_API\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Interface_Gestion_API\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Interface_Gestion_API\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Interface_Gestion_API\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAGMAAAAAAAAAAAAAAI4AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-09T10:47:01.945Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "SignIn.cshtml",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Interface_Gestion_API\\Views\\Home\\SignIn.cshtml",
+              "RelativeDocumentMoniker": "Interface_Gestion_API\\Views\\Home\\SignIn.cshtml",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Interface_Gestion_API\\Views\\Home\\SignIn.cshtml",
+              "RelativeToolTip": "Interface_Gestion_API\\Views\\Home\\SignIn.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAABaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-09T10:46:53.801Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "WhiteListManager.cs",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Interface_Gestion_API\\Services\\WhiteListManager.cs",
+              "RelativeDocumentMoniker": "Interface_Gestion_API\\Services\\WhiteListManager.cs",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Interface_Gestion_API\\Services\\WhiteListManager.cs",
+              "RelativeToolTip": "Interface_Gestion_API\\Services\\WhiteListManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-09T10:14:21.065Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Interface_Gestion_API\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "Interface_Gestion_API\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Interface_Gestion_API\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "Interface_Gestion_API\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEAAAABNAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-09T09:51:12.023Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "DBConnection.cs",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Message_Parser\\Data\\DBConnection.cs",
+              "RelativeDocumentMoniker": "Message_Parser\\Data\\DBConnection.cs",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Message_Parser\\Data\\DBConnection.cs",
+              "RelativeToolTip": "Message_Parser\\Data\\DBConnection.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-08T09:45:13.332Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "ActionsType.cs",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Common\\ActionsType.cs",
+              "RelativeDocumentMoniker": "Common\\ActionsType.cs",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Common\\ActionsType.cs",
+              "RelativeToolTip": "Common\\ActionsType.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-07T07:35:03.538Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "LogFileDeserializer.cs",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Message_Parser\\Infrastructure\\LogFileDeserializer.cs",
+              "RelativeDocumentMoniker": "Message_Parser\\Infrastructure\\LogFileDeserializer.cs",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Message_Parser\\Infrastructure\\LogFileDeserializer.cs",
+              "RelativeToolTip": "Message_Parser\\Infrastructure\\LogFileDeserializer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-08T09:54:46.927Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "Session.cs",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Message_Parser\\Entities\\Session.cs",
+              "RelativeDocumentMoniker": "Message_Parser\\Entities\\Session.cs",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Message_Parser\\Entities\\Session.cs",
+              "RelativeToolTip": "Message_Parser\\Entities\\Session.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-08T08:38:11.583Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UnitOfWork.cs",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Message_Parser\\Data\\UnitOfWork.cs",
+              "RelativeDocumentMoniker": "Message_Parser\\Data\\UnitOfWork.cs",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Message_Parser\\Data\\UnitOfWork.cs",
+              "RelativeToolTip": "Message_Parser\\Data\\UnitOfWork.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAACCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-02T07:37:30.133Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MessageParserApp.cs",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Message_Parser\\MessageParserApp.cs",
+              "RelativeDocumentMoniker": "Message_Parser\\MessageParserApp.cs",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Message_Parser\\MessageParserApp.cs",
+              "RelativeToolTip": "Message_Parser\\MessageParserApp.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAAwEAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-02T07:31:08.961Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "FileProcessingService.cs",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Message_Parser\\Services\\FileProcessingService.cs",
+              "RelativeDocumentMoniker": "Message_Parser\\Services\\FileProcessingService.cs",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Message_Parser\\Services\\FileProcessingService.cs",
+              "RelativeToolTip": "Message_Parser\\Services\\FileProcessingService.cs",
+              "ViewState": "AgIAAFkAAAAAAAAAAAAgwAEAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-07T06:58:42.258Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Message_Parser\\Program.cs",
+              "RelativeDocumentMoniker": "Message_Parser\\Program.cs",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Message_Parser\\Program.cs",
+              "RelativeToolTip": "Message_Parser\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAB2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-01T09:51:06.564Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Interface_Gestion_API\\Program.cs",
+              "RelativeDocumentMoniker": "Interface_Gestion_API\\Program.cs",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Interface_Gestion_API\\Program.cs",
+              "RelativeToolTip": "Interface_Gestion_API\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-09T12:19:02.185Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "IPManager.cs",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Tracking_API\\Tracking_API\\Infrastructures\\IPManager.cs",
+              "RelativeDocumentMoniker": "Tracking_API\\Tracking_API\\Infrastructures\\IPManager.cs",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Tracking_API\\Tracking_API\\Infrastructures\\IPManager.cs",
+              "RelativeToolTip": "Tracking_API\\Tracking_API\\Infrastructures\\IPManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-07T09:08:53.348Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "LogProcessingService.cs",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Message_Parser\\Services\\LogProcessingService.cs",
+              "RelativeDocumentMoniker": "Message_Parser\\Services\\LogProcessingService.cs",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Message_Parser\\Services\\LogProcessingService.cs",
+              "RelativeToolTip": "Message_Parser\\Services\\LogProcessingService.cs",
+              "ViewState": "AgIAAL0AAAAAAAAAAAAIwB0AAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-01T08:59:48.764Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "IPSubnet.cs",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Common\\IPSubnet.cs",
+              "RelativeDocumentMoniker": "Common\\IPSubnet.cs",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Common\\IPSubnet.cs",
+              "RelativeToolTip": "Common\\IPSubnet.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACcAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-07T13:43:59.886Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Tracking_API\\Tracking_API\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "Tracking_API\\Tracking_API\\Controllers\\AdminController.cs",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Tracking_API\\Tracking_API\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "Tracking_API\\Tracking_API\\Controllers\\AdminController.cs",
+              "ViewState": "AgIAAFAAAAAAAAAAAAAgwGUAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-07T12:12:08.837Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "FileManager.cs",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Tracking_API\\Tracking_API\\Services\\FileManager.cs",
+              "RelativeDocumentMoniker": "Tracking_API\\Tracking_API\\Services\\FileManager.cs",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Tracking_API\\Tracking_API\\Services\\FileManager.cs",
+              "RelativeToolTip": "Tracking_API\\Tracking_API\\Services\\FileManager.cs",
+              "ViewState": "AgIAACsAAAAAAAAAAAAQwEsAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-07T09:08:37.163Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "FileLogService.cs",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Tracking_API\\Tracking_API\\Services\\FileLogService.cs",
+              "RelativeDocumentMoniker": "Tracking_API\\Tracking_API\\Services\\FileLogService.cs",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Tracking_API\\Tracking_API\\Services\\FileLogService.cs",
+              "RelativeToolTip": "Tracking_API\\Tracking_API\\Services\\FileLogService.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAQwFYAAABeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-07T09:06:41.59Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "WhitelistManager.cs",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Tracking_API\\Tracking_API\\Infrastructures\\WhitelistManager.cs",
+              "RelativeDocumentMoniker": "Tracking_API\\Tracking_API\\Infrastructures\\WhitelistManager.cs",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Tracking_API\\Tracking_API\\Infrastructures\\WhitelistManager.cs",
+              "RelativeToolTip": "Tracking_API\\Tracking_API\\Infrastructures\\WhitelistManager.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAQwDEAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-07T12:24:14.16Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
               "Title": "DomainManager.cs",
               "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Tracking_API\\Tracking_API\\Infrastructures\\DomainManager.cs",
               "RelativeDocumentMoniker": "Tracking_API\\Tracking_API\\Infrastructures\\DomainManager.cs",
@@ -118,68 +508,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "IPSubnet.cs",
-              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Common\\IPSubnet.cs",
-              "RelativeDocumentMoniker": "Common\\IPSubnet.cs",
-              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Common\\IPSubnet.cs",
-              "RelativeToolTip": "Common\\IPSubnet.cs",
-              "ViewState": "AgIAAIoAAAAAAAAAAAAQwJcAAAAUAAAAAAAAAA==",
+              "DocumentIndex": 27,
+              "Title": "AdminSafeListMiddleware.cs",
+              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Tracking_API\\Tracking_API\\Middleware\\AdminSafeListMiddleware.cs",
+              "RelativeDocumentMoniker": "Tracking_API\\Tracking_API\\Middleware\\AdminSafeListMiddleware.cs",
+              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Tracking_API\\Tracking_API\\Middleware\\AdminSafeListMiddleware.cs",
+              "RelativeToolTip": "Tracking_API\\Tracking_API\\Middleware\\AdminSafeListMiddleware.cs",
+              "ViewState": "AgIAADkAAAAAAAAAAAAYwE4AAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-07T13:43:59.886Z"
+              "WhenOpened": "2026-04-07T10:00:42.048Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "WhitelistManager.cs",
-              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Tracking_API\\Tracking_API\\Infrastructures\\WhitelistManager.cs",
-              "RelativeDocumentMoniker": "Tracking_API\\Tracking_API\\Infrastructures\\WhitelistManager.cs",
-              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Tracking_API\\Tracking_API\\Infrastructures\\WhitelistManager.cs",
-              "RelativeToolTip": "Tracking_API\\Tracking_API\\Infrastructures\\WhitelistManager.cs",
-              "ViewState": "AgIAACsAAAAAAAAAAAAwwB8AAAA4AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-07T12:24:14.16Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "IPManager.cs",
-              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Tracking_API\\Tracking_API\\Infrastructures\\IPManager.cs",
-              "RelativeDocumentMoniker": "Tracking_API\\Tracking_API\\Infrastructures\\IPManager.cs",
-              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Tracking_API\\Tracking_API\\Infrastructures\\IPManager.cs",
-              "RelativeToolTip": "Tracking_API\\Tracking_API\\Infrastructures\\IPManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-07T09:08:53.348Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AdminController.cs",
-              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Tracking_API\\Tracking_API\\Controllers\\AdminController.cs",
-              "RelativeDocumentMoniker": "Tracking_API\\Tracking_API\\Controllers\\AdminController.cs",
-              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Tracking_API\\Tracking_API\\Controllers\\AdminController.cs",
-              "RelativeToolTip": "Tracking_API\\Tracking_API\\Controllers\\AdminController.cs",
-              "ViewState": "AgIAADsAAAAAAAAAAAA3wJ8AAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-07T12:12:08.837Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "FileLogService.cs",
-              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Tracking_API\\Tracking_API\\Services\\FileLogService.cs",
-              "RelativeDocumentMoniker": "Tracking_API\\Tracking_API\\Services\\FileLogService.cs",
-              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Tracking_API\\Tracking_API\\Services\\FileLogService.cs",
-              "RelativeToolTip": "Tracking_API\\Tracking_API\\Services\\FileLogService.cs",
-              "ViewState": "AgIAAEgAAAAAAAAAAAAkwFYAAABeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-07T09:06:41.59Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 30,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Tracking_API\\Tracking_API\\Program.cs",
               "RelativeDocumentMoniker": "Tracking_API\\Tracking_API\\Program.cs",
@@ -191,7 +532,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 29,
               "Title": "IFileManager.cs",
               "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Tracking_API\\Tracking_API\\Services\\IFileManager.cs",
               "RelativeDocumentMoniker": "Tracking_API\\Tracking_API\\Services\\IFileManager.cs",
@@ -203,19 +544,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "FileManager.cs",
-              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Tracking_API\\Tracking_API\\Services\\FileManager.cs",
-              "RelativeDocumentMoniker": "Tracking_API\\Tracking_API\\Services\\FileManager.cs",
-              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Tracking_API\\Tracking_API\\Services\\FileManager.cs",
-              "RelativeToolTip": "Tracking_API\\Tracking_API\\Services\\FileManager.cs",
-              "ViewState": "AgIAAFIAAAAAAAAAAAAkwEsAAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-07T09:08:37.163Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 31,
               "Title": "PerformanceAnalyser.cs",
               "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Tracking_API\\Tracking_API\\Infrastructures\\PerformanceAnalyser.cs",
               "RelativeDocumentMoniker": "Tracking_API\\Tracking_API\\Infrastructures\\PerformanceAnalyser.cs",
@@ -227,31 +556,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "ActionsType.cs",
-              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Common\\ActionsType.cs",
-              "RelativeDocumentMoniker": "Common\\ActionsType.cs",
-              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Common\\ActionsType.cs",
-              "RelativeToolTip": "Common\\ActionsType.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-07T07:35:03.538Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "FileProcessingService.cs",
-              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Message_Parser\\Services\\FileProcessingService.cs",
-              "RelativeDocumentMoniker": "Message_Parser\\Services\\FileProcessingService.cs",
-              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Message_Parser\\Services\\FileProcessingService.cs",
-              "RelativeToolTip": "Message_Parser\\Services\\FileProcessingService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-07T06:58:42.258Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 33,
               "Title": "nlog.config",
               "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\nlog.config",
               "RelativeDocumentMoniker": "nlog.config",
@@ -263,43 +568,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "UnitOfWork.cs",
-              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Message_Parser\\Data\\UnitOfWork.cs",
-              "RelativeDocumentMoniker": "Message_Parser\\Data\\UnitOfWork.cs",
-              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Message_Parser\\Data\\UnitOfWork.cs",
-              "RelativeToolTip": "Message_Parser\\Data\\UnitOfWork.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAC8AAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-02T07:37:30.133Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "MessageParserApp.cs",
-              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Message_Parser\\MessageParserApp.cs",
-              "RelativeDocumentMoniker": "Message_Parser\\MessageParserApp.cs",
-              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Message_Parser\\MessageParserApp.cs",
-              "RelativeToolTip": "Message_Parser\\MessageParserApp.cs",
-              "ViewState": "AgIAABoAAAAAAAAAAAAAwEAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-02T07:31:08.961Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Message_Parser\\Program.cs",
-              "RelativeDocumentMoniker": "Message_Parser\\Program.cs",
-              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Message_Parser\\Program.cs",
-              "RelativeToolTip": "Message_Parser\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAA3AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-01T09:51:06.564Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 32,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Message_Parser\\appsettings.json",
               "RelativeDocumentMoniker": "Message_Parser\\appsettings.json",
@@ -311,19 +580,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "LogProcessingService.cs",
-              "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Message_Parser\\Services\\LogProcessingService.cs",
-              "RelativeDocumentMoniker": "Message_Parser\\Services\\LogProcessingService.cs",
-              "ToolTip": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Message_Parser\\Services\\LogProcessingService.cs",
-              "RelativeToolTip": "Message_Parser\\Services\\LogProcessingService.cs",
-              "ViewState": "AgIAAEcAAAAAAAAAAAAswMUAAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-01T08:59:48.764Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 34,
               "Title": "LogProcessingTests.cs",
               "DocumentMoniker": "C:\\Users\\gille\\Desktop\\Stage Webulous\\Immo-Analytics\\Webulous.Tracking\\Message_Parser.Tests\\LogProcessingTests.cs",
               "RelativeDocumentMoniker": "Message_Parser.Tests\\LogProcessingTests.cs",

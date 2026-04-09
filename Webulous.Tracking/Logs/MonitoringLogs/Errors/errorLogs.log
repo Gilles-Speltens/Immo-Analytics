@@ -1,79 +1,12 @@
-2026-04-07 15:41:39.0196 | ERROR | Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware | An unhandled exception has occurred while executing the request. System.FormatException: An invalid IP address was specified.
- ---> System.Net.Sockets.SocketException (10022): Un argument non valide a été fourni.
-   --- End of inner exception stack trace ---
-   at System.Net.IPAddressParser.Parse[TChar](ReadOnlySpan`1 ipSpan, Boolean tryParse)
-   at System.Net.IPAddress.Parse(String ipString)
-   at Common.IPSubnet..ctor(String value) in C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Common\IPSubnet.cs:line 56
-   at Interface_Gestion_API.Controllers.HomeController.AddIp(String ip) in C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Interface_Gestion_API\Controllers\HomeController.cs:line 127
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
---- End of stack trace from previous location ---
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
---- End of stack trace from previous location ---
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
-   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
-   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
-   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
-   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
-   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
-2026-04-07 15:44:37.5911 | ERROR | Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware | An unhandled exception has occurred while executing the request. System.FormatException: An invalid IP address was specified.
- ---> System.Net.Sockets.SocketException (10022): Un argument non valide a été fourni.
-   --- End of inner exception stack trace ---
-   at System.Net.IPAddressParser.Parse[TChar](ReadOnlySpan`1 ipSpan, Boolean tryParse)
-   at System.Net.IPAddress.Parse(String ipString)
-   at Common.IPSubnet..ctor(String value) in C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Common\IPSubnet.cs:line 56
-   at Interface_Gestion_API.Controllers.HomeController.AddIp(String ip) in C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Interface_Gestion_API\Controllers\HomeController.cs:line 127
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
---- End of stack trace from previous location ---
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
---- End of stack trace from previous location ---
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
-   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
-   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
-   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
-   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
-   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
-2026-04-07 15:50:31.9857 | ERROR | Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware | An unhandled exception has occurred while executing the request. System.FormatException: Could not find any recognizable digits.
-   at System.ParseNumbers.StringToInt(ReadOnlySpan`1 s, Int32 radix, Int32 flags, Int32& currPos)
-   at System.Convert.ToInt32(String value, Int32 fromBase)
-   at Common.IPSubnet..ctor(String value) in C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Common\IPSubnet.cs:line 65
-   at Interface_Gestion_API.Controllers.HomeController.AddIp(String ip) in C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Interface_Gestion_API\Controllers\HomeController.cs:line 127
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
---- End of stack trace from previous location ---
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
---- End of stack trace from previous location ---
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
-   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
-   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
-   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
-   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
-   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
-2026-04-07 16:34:38.8999 | WARN | Tracking_API.Middleware.AdminSafeListMiddleware | Forbidden Request from remote IP address: ::1 
-2026-04-07 16:34:42.0863 | WARN | Tracking_API.Middleware.AdminSafeListMiddleware | Forbidden Request from remote IP address: ::1 
-2026-04-07 16:34:42.9708 | WARN | Tracking_API.Middleware.AdminSafeListMiddleware | Forbidden Request from remote IP address: ::1 
+2026-04-09 12:22:29.6932 | ERROR | Interface_Gestion_API.Controllers.HomeController | Connection avec l'API perdue 
+2026-04-09 12:43:07.9695 | ERROR | Interface_Gestion_API.Controllers.HomeController | Connection avec l'API perdue 
+2026-04-09 12:43:47.9815 | ERROR | Interface_Gestion_API.Controllers.HomeController | Connection avec l'API perdue 
+2026-04-09 12:43:52.0734 | ERROR | Interface_Gestion_API.Controllers.HomeController | Connection avec l'API perdue 
+2026-04-09 12:49:12.6609 | ERROR | Interface_Gestion_API.Controllers.HomeController | Connection avec l'API perdue 
+2026-04-09 12:50:19.0502 | ERROR | Interface_Gestion_API.Controllers.HomeController | Connection avec l'API perdue 
+2026-04-09 12:50:23.1746 | ERROR | Interface_Gestion_API.Controllers.HomeController | Connection avec l'API perdue 
+2026-04-09 14:14:29.3970 | ERROR | Interface_Gestion_API.Controllers.HomeController | Connection avec l'API perdue 
+2026-04-09 14:14:33.5187 | ERROR | Interface_Gestion_API.Controllers.HomeController | Connection avec l'API perdue 
+2026-04-09 14:20:35.0722 | WARN | Tracking_API.Middleware.AdminSafeListMiddleware | Forbidden Request from remote IP address: ::1 
+2026-04-09 14:20:35.0722 | WARN | Tracking_API.Middleware.AdminSafeListMiddleware | Forbidden Request from remote IP address: ::1 
+2026-04-09 14:20:35.3473 | WARN | Tracking_API.Middleware.AdminSafeListMiddleware | Forbidden Request from remote IP address: ::1 

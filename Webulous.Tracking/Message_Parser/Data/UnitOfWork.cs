@@ -29,6 +29,11 @@ namespace Message_Parser.Data
             var lastHitPageId = _hitpageRepo.GetLastId(tempConnection) ?? 0;
             var lastSessionId = _sessionRepo.GetLastId(tempConnection) ?? 0;
 
+            foreach(var temp in  tempSessions)
+            {
+                Console.WriteLine(temp.Key.Id.ToString() + " " + temp.Value);
+            }
+
             var ongoingSessions = new Dictionary<(string sessionId, string domain), (Session session, int lastHitPageId)>();
 
             foreach (var sessionHit in tempSessions)

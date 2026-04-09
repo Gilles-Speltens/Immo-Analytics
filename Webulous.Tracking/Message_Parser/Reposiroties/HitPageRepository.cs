@@ -72,16 +72,16 @@ namespace Message_Parser.Reposiroties
         {
             var sql = """
                 SELECT s.Id, s.Session_Id, s.Site, s.User_Id, s.User_Ip, s.Language_Browser, s.User_Agent, s.Session_Start, s.Session_End, hp.Id AS HitPageId
-                FROM Hit_Page hp
-                    JOIN (
-                        SELECT session_pk, MAX(time) AS max_time
-                        FROM Hit_Page
-                        WHERE session_pk IN ( SELECT Id FROM Sessions WHERE Session_Start >= (@Date))
-                        GROUP BY session_pk
-                    ) last_hp
-                        ON hp.session_pk = last_hp.session_pk
-                        AND hp.time = last_hp.max_time
-                    JOIN Sessions s ON s.Id = hp.session_pk;
+                FROM sessions s
+                LEFT JOIN hit_page hp 
+                    ON hp.id = (
+                        SELECT hp2.id
+                        FROM hit_page hp2
+                        WHERE hp2.session_pk = s.id
+                        ORDER BY hp2.time DESC
+                        LIMIT 1
+                    )
+                WHERE s.session_start >= '2026-04-09 00:00:00';
                 """;
 
             var dico = connection.Query(sql, date)

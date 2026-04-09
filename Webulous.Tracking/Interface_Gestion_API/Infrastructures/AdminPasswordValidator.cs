@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace Interface_Gestion_API.Models
+namespace Interface_Gestion_API.Infrastructures
 {
     /// <summary>
     /// Classe responsable de la validation du mot de passe administrateur.

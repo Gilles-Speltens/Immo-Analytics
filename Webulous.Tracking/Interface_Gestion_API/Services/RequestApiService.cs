@@ -2,7 +2,7 @@
 using System.Text;
 using System.Text.Json;
 
-namespace Interface_Gestion_API.Models
+namespace Interface_Gestion_API.Services
 {
     /// <summary>
     /// Service responsable des appels HTTP vers l'API distante.

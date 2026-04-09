@@ -1,6 +1,8 @@
 using Common;
 using Common.Exceptions;
+using Interface_Gestion_API.Infrastructures;
 using Interface_Gestion_API.Models;
+using Interface_Gestion_API.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Net;
@@ -40,7 +42,7 @@ namespace Interface_Gestion_API.Controllers
         [Authentication]
         public async Task<IActionResult> Index()
         {
-            if(_whiteListManager.IsEmpty())
+            if (_whiteListManager.IsEmpty())
             {
                 try
                 {
@@ -60,6 +62,7 @@ namespace Interface_Gestion_API.Controllers
                 catch (HttpRequestException ex)
                 {
                     _whiteListManager.ClearWhitelist();
+                    ViewBag.ConnectionError = "Connection avec l'API perdue";
                     _logger.LogError("Connection avec l'API perdue");
                 }
             }

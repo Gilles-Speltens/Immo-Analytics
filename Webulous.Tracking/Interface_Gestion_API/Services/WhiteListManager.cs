@@ -1,9 +1,10 @@
 ﻿using Common;
+using Interface_Gestion_API.Models;
 using System.Collections;
 using System.Net;
 using System.Text.Json;
 
-namespace Interface_Gestion_API.Models
+namespace Interface_Gestion_API.Services
 {
     /// <summary>
     /// Gère la liste blanche (whitelist) contenant des adresses IP (IPv4, IPv6)
