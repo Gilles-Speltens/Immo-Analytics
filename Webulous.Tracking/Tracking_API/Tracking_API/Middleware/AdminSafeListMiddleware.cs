@@ -10,7 +10,7 @@ namespace Tracking_API.Middleware
 {
     /// <summary>
     /// Middleware ASP.NET Core qui filtre les requêtes HTTP
-    /// en fonction d'une liste blanche d'IP gérée par IPManager.
+    /// en fonction d'une liste blanche d'IP gérée par IPManager et de Domaine géré par DomainManager.
     /// </summary>
     public class AdminSafeListMiddleware
     {
@@ -26,6 +26,7 @@ namespace Tracking_API.Middleware
         /// <param name="next">Delegate pour la requête suivante dans le pipeline</param>
         /// <param name="logger">Logger pour consigner les informations et avertissements</param>
         /// <param name="ipManager">Gestionnaire de whitelist d'IP</param>
+        /// <param name="domainManager">Gestionnaire de whitelist de Domaines</param>
         public AdminSafeListMiddleware(
             RequestDelegate next,
             IPManager ipManager,
@@ -44,7 +45,7 @@ namespace Tracking_API.Middleware
         /// <summary>
         /// Méthode appelée par le pipeline ASP.NET Core pour chaque requête HTTP.
         /// Vérifie si l'adresse IP distante est autorisée par la whitelist.
-        /// Laisse authomitiquement passer les requêtes venant de l'interface de gestion de l'API.
+        /// Laisse automatiquement passer les requêtes venant de l'interface de gestion de l'API.
         /// </summary>
         /// <param name="context">Contexte HTTP de la requête</param>
         public async Task Invoke(HttpContext context)

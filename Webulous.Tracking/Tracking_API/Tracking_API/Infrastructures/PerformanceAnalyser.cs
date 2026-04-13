@@ -1,5 +1,8 @@
 ﻿namespace Tracking_API.Infrastructures
 {
+    /// <summary>
+    /// Class de test.
+    /// </summary>
     public class PerformanceAnalyser
     {
         private int _actualLogs = 0;

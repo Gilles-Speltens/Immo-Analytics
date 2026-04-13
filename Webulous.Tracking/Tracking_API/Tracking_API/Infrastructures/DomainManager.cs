@@ -6,8 +6,15 @@ namespace Tracking_API.Infrastructures
 {
 
     /// <summary>
-    /// Gère une liste blanche (whitelist) de domaines et leur persistance dans un fichier via <see cref="IFileManager"/>.
+    /// Implémentation concrète de <see cref="WhitelistManager{T}"/> pour la gestion
+    /// d'une liste blanche de noms de domaine.
     /// </summary>
+    /// <remarks>
+    /// Cette classe permet d'ajouter, de supprimer et de vérifier la présence
+    /// de domaines autorisés. Les comparaisons sont effectuées sans tenir compte
+    /// de la casse (case-insensitive) afin de garantir un comportement cohérent
+    /// avec les spécifications des noms de domaine.
+    /// </remarks>
     public class DomainManager : WhitelistManager<string>
     {
         public DomainManager(IFileManager fileManager) : base(fileManager) { }

@@ -6,6 +6,29 @@ using MySqlConnector;
 
 namespace Message_Parser.Data
 {
+    /// <summary>
+    /// Implémente le pattern <c>Unit of Work</c> pour coordonner les opérations
+    /// de traitement et de persistance des logs dans la base de données.
+    /// </summary>
+    /// <remarks>
+    /// Cette classe centralise :
+    /// <list type="bullet">
+    /// <item>
+    /// <description>La gestion de la connexion à la base de données MySQL.</description>
+    /// </item>
+    /// <item>
+    /// <description>La coordination des différents repositories.</description>
+    /// </item>
+    /// <item>
+    /// <description>Le traitement des logs via <see cref="LogProcessingService"/>.</description>
+    /// </item>
+    /// <item>
+    /// <description>L'exécution atomique des insertions grâce à une transaction.</description>
+    /// </item>
+    /// </list>
+    /// Le pattern garantit que toutes les opérations de persistance sont exécutées
+    /// comme une seule unité de travail, assurant ainsi la cohérence des données.
+    /// </remarks>
     public class UnitOfWork
     {
         private DBConnection _connectionManager;
@@ -15,6 +38,31 @@ namespace Message_Parser.Data
         private SiteRepository _siteRepo;
 
         private LogProcessingService _logProcessingService;
+
+        /// <summary>
+        /// Initialise une nouvelle instance de la classe <see cref="UnitOfWork"/>.
+        /// </summary>
+        /// <param name="sessionExpirationTime">
+        /// Durée d'expiration des sessions en minutes. Les sessions actives
+        /// après cette période sont considérées comme en cours.
+        /// </param>
+        /// <param name="connectionString">
+        /// Chaîne de connexion à la base de données MySQL.
+        /// </param>
+        /// <remarks>
+        /// Lors de l'initialisation, la classe :
+        /// <list type="number">
+        /// <item>
+        /// <description>Récupère les sessions en cours depuis la base de données.</description>
+        /// </item>
+        /// <item>
+        /// <description>Détermine les derniers identifiants utilisés pour les sessions et les pages visitées.</description>
+        /// </item>
+        /// <item>
+        /// <description>Initialise le <see cref="LogProcessingService"/> avec ces informations.</description>
+        /// </item>
+        /// </list>
+        /// </remarks>
         public UnitOfWork(int sessionExpirationTime, string connectionString)
         {
             _connectionManager = new DBConnection(connectionString);
@@ -50,6 +98,37 @@ namespace Message_Parser.Data
             _logProcessingService = new LogProcessingService(ongoingSessions, lastHitPageId, lastSessionId);
         }
 
+        /// <summary>
+        /// Traite une collection de logs et effectue leur insertion en base de données
+        /// de manière transactionnelle.
+        /// </summary>
+        /// <param name="logs">
+        /// Liste des objets <see cref="RequestLogDto"/> représentant les logs à traiter.
+        /// </param>
+        /// <returns>
+        /// <c>null</c> si l'opération s'est déroulée avec succès ; sinon, le message
+        /// d'erreur retourné par l'exception <see cref="MySqlException"/>.
+        /// </returns>
+        /// <remarks>
+        /// Les étapes de traitement sont les suivantes :
+        /// <list type="number">
+        /// <item>
+        /// <description>Analyse des logs via <see cref="LogProcessingService"/>.</description>
+        /// </item>
+        /// <item>
+        /// <description>Extraction des nouvelles entités : sites, sessions, pages visitées et actions utilisateurs.</description>
+        /// </item>
+        /// <item>
+        /// <description>Insertion en base de données dans une transaction unique.</description>
+        /// </item>
+        /// <item>
+        /// <description>Validation (commit) ou annulation (rollback) en cas d'erreur.</description>
+        /// </item>
+        /// </list>
+        /// </remarks>
+        /// <exception cref="ArgumentNullException">
+        /// Peut être levée si la liste <paramref name="logs"/> est nulle.
+        /// </exception>
         public async Task<string?> bulkInsertLogs(List<RequestLogDto> logs)
         {
             _logProcessingService.ProcessLogs(logs);
