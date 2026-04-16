@@ -27,6 +27,8 @@ namespace Tracking_API.Services
         //Une année max
         private int _maxMinutes = 525600;
 
+        private int _dequeuingInterval = 1000; //En milliseconde
+
         ConcurrentQueue<byte[]> _logMessages = new ConcurrentQueue<byte[]>();
 
         private CancellationTokenSource _cts = new CancellationTokenSource();
@@ -74,7 +76,7 @@ namespace Tracking_API.Services
         /// Lance une tâche (Consumer) en arrière-plan qui :
         /// - Vérifie la rotation du fichier
         /// - Vide la queue
-        /// - Attend 1 seconde entre chaque cycle
+        /// - Attend '_dequeuingInterval' seconde entre chaque cycle
         /// </summary>
         private void StartBackgroundWriter()
         {
@@ -87,7 +89,7 @@ namespace Tracking_API.Services
                     if (!_logMessages.IsEmpty) await _fileManager.AppendFromQueue(_logMessages);
 
                     // 1 seconde de sleep.
-                    await Task.Delay(1000, _cts.Token);
+                    await Task.Delay(_dequeuingInterval, _cts.Token);
                 }
             });
         }

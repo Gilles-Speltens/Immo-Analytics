@@ -4,11 +4,27 @@ CREATE TABLE `site` (
   `certify` bool DEFAULT false
 );
 
+CREATE TABLE `user_actions` (
+  `id` long PRIMARY KEY AUTO_INCREMENT,
+  `time` timestamp NOT NULL,
+  `page_id` long NOT NULL,
+  `action_type` enum('UNKNOWN','HITPAGE', 'ESTATE_SEARCH','CONTACT_REQUEST', 'CLIENT_ACTION') NOT NULL,
+  `action_parameter` varchar(255)
+);
+
+CREATE TABLE `hit_page` (
+  `id` long PRIMARY KEY,
+  `time` timestamp NOT NULL,
+  `session_pk` long NOT NULL,
+  `url` text NOT NULL,
+  `referrer` text
+);
+
 CREATE TABLE `sessions` (
-  `id` integer PRIMARY KEY,
-  `session_id` varchar(36),
+  `id` long PRIMARY KEY,
+  `session_id` varchar(32) NOT NULL,
   `site` varchar(255) NOT NULL,
-  `user_id` varchar(36),
+  `user_id` varchar(32),
   `user_ip` varchar(45) NOT NULL,
   `language_browser` varchar(255) NOT NULL,
   `user_agent` varchar(255) NOT NULL,
@@ -16,21 +32,14 @@ CREATE TABLE `sessions` (
   `session_end` timestamp
 );
 
-CREATE TABLE `hit_page` (
-  `id` integer PRIMARY KEY ,
-  `time` timestamp NOT NULL,
-  `session_pk` integer NOT NULL,
-  `url` text NOT NULL,
-  `referrer` text
+CREATE TABLE `file_monitoring` (
+  `file_name` char(25) PRIMARY KEY,
+  `speed` int,
+  `treated_logs` int DEFAULT 0,
+  `skipped_log` int DEFAULT 0,
+  `status` enum('TREATED', 'IN_PROCESS', 'FAILED') NOT NULL
 );
 
-CREATE TABLE `user_actions` (
-  `id` integer PRIMARY KEY AUTO_INCREMENT,
-  `time` timestamp NOT NULL,
-  `page_id` integer NOT NULL,
-  `action_type` enum('UNKNOWN','HITPAGE', 'ESTATSE_BROWSING','CONTACT_REQUEST', 'EXTERNAL_LINK', 'BUTTON_CLICK') NOT NULL,
-  `action_parameter` varchar(255)
-);
 
 CREATE UNIQUE INDEX `sessions_index_session_site` ON `sessions` (`session_id`, `site`);
 

@@ -137,6 +137,8 @@ namespace Message_Parser.Services
             if (_ongoingSessions.TryGetValue((log.SessionId, domain), out var value))
             {
                 ongoingSession = value.session;
+
+                // Update session data based on last log
                 ongoingSession.UserId = log.UserId;
                 ongoingSession.SessionEnd = log.Date;
 

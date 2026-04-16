@@ -1,8 +1,22 @@
 HitPage : /
-EstateBrowsing : ToSell&EstateType&Locality&MinPrice&MaxPrice&BedroomNb&Furnished&InvestmentProperty&EstateReference&OrderBy
+EstateSearch : ToSell&EstateType&Locality&MinPrice&MaxPrice&BedroomNb&Furnished&InvestmentProperty&EstateReference&OrderBy
 ExternalLink : Link
-ContactRequest : ?
-EstimationRequest : ?
-DownloadFile : FileName
+Share ?
+ContactRequest : Question / Estimation / InscriptionNvBiens : SearchParam&IdBien / InfoBien(précis) : IdBien / RdvBien : IdBien / InscriptionNewsLetter
+DownloadFile : FileUrl
 ButtonClick : Description
 PrintReport : / ?
+
+HitPage : /
+EstateSearch : SearchParamList
+ContactRequest : ContatctType, EstateId, SearchParam
+
+ClientAction : ClientActionType, TargetUrl
+	external-link
+	print
+	details
+	email
+	phone-call
+	virtual-visit
+	share
+	download
