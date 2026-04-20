@@ -55,7 +55,7 @@ namespace Message_Parser.Reposiroties
         /// </summary>
         /// <param name="id">Identifiant de la session.</param>
         /// <returns>True si la session existe.</returns>
-        public async Task<bool> Contains(int id, MySqlConnection connection)
+        public async Task<bool> Contains(long id, MySqlConnection connection)
         {
             return connection.Execute("SELECT 1 FROM Sessions WHERE id = (@Id)", new { Id = id }) == 1;
         }
@@ -66,7 +66,7 @@ namespace Message_Parser.Reposiroties
         /// <param name="session">Session contenant les nouvelles valeurs.</param>
         public void UpdateUserIdDateEnd(Session session, MySqlConnection connection)
         {
-            var sql = connection.Query<int>("""
+            var sql = connection.Query<long>("""
                 UPDATE Sessions
                 SET Session_End = @SessionEnd, User_Id = @UserId
                 WHERE Session_Id = @SessionId AND Site = @Site
@@ -77,9 +77,9 @@ namespace Message_Parser.Reposiroties
         /// Récupère le dernier Id (maximum) présent dans la table Sessions.
         /// </summary>
         /// <returns>Le dernier Id ou null si la table est vide.</returns>
-        public int? GetLastId(MySqlConnection connection)
+        public long? GetLastId(MySqlConnection connection)
         {
-            return connection.QuerySingle<int?>("SELECT MAX(id) FROM Sessions");
+            return connection.QuerySingle<long?>("SELECT MAX(id) FROM Sessions");
         }
 
         /// <summary>

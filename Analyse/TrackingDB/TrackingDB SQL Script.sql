@@ -4,27 +4,11 @@ CREATE TABLE `site` (
   `certify` bool DEFAULT false
 );
 
-CREATE TABLE `user_actions` (
-  `id` long PRIMARY KEY AUTO_INCREMENT,
-  `time` timestamp NOT NULL,
-  `page_id` long NOT NULL,
-  `action_type` enum('UNKNOWN','HITPAGE', 'ESTATE_SEARCH','CONTACT_REQUEST', 'CLIENT_ACTION') NOT NULL,
-  `action_parameter` varchar(255)
-);
-
-CREATE TABLE `hit_page` (
-  `id` long PRIMARY KEY,
-  `time` timestamp NOT NULL,
-  `session_pk` long NOT NULL,
-  `url` text NOT NULL,
-  `referrer` text
-);
-
 CREATE TABLE `sessions` (
-  `id` long PRIMARY KEY,
-  `session_id` varchar(32) NOT NULL,
+  `id` bigint PRIMARY KEY,
+  `session_id` varchar(36),
   `site` varchar(255) NOT NULL,
-  `user_id` varchar(32),
+  `user_id` varchar(36),
   `user_ip` varchar(45) NOT NULL,
   `language_browser` varchar(255) NOT NULL,
   `user_agent` varchar(255) NOT NULL,
@@ -32,11 +16,28 @@ CREATE TABLE `sessions` (
   `session_end` timestamp
 );
 
+CREATE TABLE `hit_page` (
+  `id` bigint PRIMARY KEY,
+  `time` timestamp NOT NULL,
+  `session_pk` bigint NOT NULL,
+  `url` text NOT NULL,
+  `referrer` text
+);
+
+CREATE TABLE `user_actions` (
+  `id` bigint PRIMARY KEY AUTO_INCREMENT,
+  `time` timestamp NOT NULL,
+  `page_id` bigint NOT NULL,
+  `action_type` enum('UNKNOWN','HITPAGE', 'ESTATE_SEARCH','CONTACT_REQUEST', 'CLIENT_ACTION') NOT NULL,
+  `action_parameter` varchar(255)
+);
+
 CREATE TABLE `file_monitoring` (
   `file_name` char(25) PRIMARY KEY,
+  `treated_date` timestamp not null,
   `speed` int,
   `treated_logs` int DEFAULT 0,
-  `skipped_log` int DEFAULT 0,
+  `skipped_logs` int DEFAULT 0,
   `status` enum('TREATED', 'IN_PROCESS', 'FAILED') NOT NULL
 );
 

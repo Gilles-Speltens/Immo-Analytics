@@ -1,0 +1,12 @@
+2026-04-09 12:22:29.6932 | ERROR | Interface_Gestion_API.Controllers.HomeController | Connection avec l'API perdue 
+2026-04-09 12:43:07.9695 | ERROR | Interface_Gestion_API.Controllers.HomeController | Connection avec l'API perdue 
+2026-04-09 12:43:47.9815 | ERROR | Interface_Gestion_API.Controllers.HomeController | Connection avec l'API perdue 
+2026-04-09 12:43:52.0734 | ERROR | Interface_Gestion_API.Controllers.HomeController | Connection avec l'API perdue 
+2026-04-09 12:49:12.6609 | ERROR | Interface_Gestion_API.Controllers.HomeController | Connection avec l'API perdue 
+2026-04-09 12:50:19.0502 | ERROR | Interface_Gestion_API.Controllers.HomeController | Connection avec l'API perdue 
+2026-04-09 12:50:23.1746 | ERROR | Interface_Gestion_API.Controllers.HomeController | Connection avec l'API perdue 
+2026-04-09 14:14:29.3970 | ERROR | Interface_Gestion_API.Controllers.HomeController | Connection avec l'API perdue 
+2026-04-09 14:14:33.5187 | ERROR | Interface_Gestion_API.Controllers.HomeController | Connection avec l'API perdue 
+2026-04-09 14:20:35.0722 | WARN | Tracking_API.Middleware.AdminSafeListMiddleware | Forbidden Request from remote IP address: ::1 
+2026-04-09 14:20:35.0722 | WARN | Tracking_API.Middleware.AdminSafeListMiddleware | Forbidden Request from remote IP address: ::1 
+2026-04-09 14:20:35.3473 | WARN | Tracking_API.Middleware.AdminSafeListMiddleware | Forbidden Request from remote IP address: ::1 

@@ -36,6 +36,7 @@ namespace Message_Parser.Data
         private HitPageRepository _hitpageRepo;
         private UserActionsRepository _userActionsRepo;
         private SiteRepository _siteRepo;
+        private MonitoringRepository _fileMonitoring;
 
         private LogProcessingService _logProcessingService;
 
@@ -70,6 +71,7 @@ namespace Message_Parser.Data
             _hitpageRepo = new HitPageRepository();
             _userActionsRepo = new UserActionsRepository();
             _siteRepo = new SiteRepository();
+            _fileMonitoring = new MonitoringRepository();
 
             MySqlConnection tempConnection = _connectionManager.CreateConnection();
             
@@ -82,7 +84,7 @@ namespace Message_Parser.Data
                 Console.WriteLine(temp.Key.Id.ToString() + " " + temp.Value);
             }
 
-            var ongoingSessions = new Dictionary<(string sessionId, string domain), (Session session, int lastHitPageId)>();
+            var ongoingSessions = new Dictionary<(string sessionId, string domain), (Session session, long lastHitPageId)>();
 
             foreach (var sessionHit in tempSessions)
             {
@@ -129,8 +131,9 @@ namespace Message_Parser.Data
         /// <exception cref="ArgumentNullException">
         /// Peut être levée si la liste <paramref name="logs"/> est nulle.
         /// </exception>
-        public async Task<string?> bulkInsertLogs(List<RequestLogDto> logs)
+        public async Task<string?> bulkInsertLogs(List<RequestLogDto> logs, FileMonitoring fileMonitoring, int nbInvalidLog)
         {
+
             _logProcessingService.ProcessLogs(logs);
             var newSites = _logProcessingService.GetSites();
             var newSessions = _logProcessingService.GetSessions();
@@ -152,16 +155,39 @@ namespace Message_Parser.Data
                         await _userActionsRepo.BulkInsert(userActions, transaction, connection);
 
                         transaction.Commit();
+
+                        fileMonitoring.Speed = (int)(DateTime.UtcNow - fileMonitoring.TreatementDate).TotalMilliseconds;
+                        fileMonitoring.Status = FileStatus.TREATED;
+                        fileMonitoring.TreatedLogs = logs.Count;
+                        fileMonitoring.SkippedLogs = nbInvalidLog;
+
+                        _fileMonitoring.Update(fileMonitoring, connection);
+
                         return null;
                     }
                     catch (MySqlException ex)
                     {
                         Console.WriteLine("Exception : " + ex.Message.ToString());
                         transaction.Rollback();
+
+                        fileMonitoring.Speed = (int)(DateTime.UtcNow - fileMonitoring.TreatementDate).TotalMilliseconds;
+                        fileMonitoring.Status = FileStatus.FAILED;
+                        fileMonitoring.TreatedLogs = 0;
+                        fileMonitoring.SkippedLogs = nbInvalidLog;
+
+                        _fileMonitoring.Update(fileMonitoring, connection);
+
                         return ex.Message.ToString();
                     }
                 }
             }
+        }
+
+        public void InsertIntoMonitoring(FileMonitoring monitoring)
+        {
+            var connection = _connectionManager.CreateConnection();
+
+            _fileMonitoring.Insert(monitoring, connection);
         }
     }
 }

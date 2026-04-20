@@ -50,7 +50,89 @@ namespace Message_Parser.Infrastructure
 
             try
             {
-                return JsonSerializer.Deserialize<RequestLogDto>(line);
+                var dto = new RequestLogDto();
+                var reader = new Utf8JsonReader(Encoding.UTF8.GetBytes(line));
+
+                var seenProps = new HashSet<string>();
+
+                while (reader.Read())
+                {
+                    //Only if property
+                    if (reader.TokenType == JsonTokenType.PropertyName)
+                    {
+                        string propName = reader.GetString()!;
+
+                        //If already in the HashSet
+                        if (!seenProps.Add(propName)) return null;
+
+                        //Move to value
+                        reader.Read();
+                        
+                        switch (propName)
+                        {
+                            case "Date":
+                                dto.Date = reader.GetDateTime();
+                                break;
+
+                            case "UserId":
+                                dto.UserId = reader.TokenType == JsonTokenType.Null ? null : reader.GetString();
+                                break;
+
+                            case "UserIp":
+                                dto.UserIp = reader.GetString()!;
+                                break;
+
+                            case "SessionId":
+                                dto.SessionId = reader.TokenType == JsonTokenType.Null ? null : reader.GetString();
+                                break;
+
+                            case "Url":
+                                dto.Url = reader.GetString()!;
+                                break;
+
+                            case "UrlReferrer":
+                                dto.UrlReferrer = reader.TokenType == JsonTokenType.Null ? null : reader.GetString();
+                                break;
+
+                            case "Action":
+                                if (reader.TokenType == JsonTokenType.Null)
+                                    return null;
+
+                                int actionValue = reader.GetInt32();
+
+                                // Check the Enum
+                                if (!Enum.IsDefined(typeof(ActionsType), actionValue))
+                                    return null;
+
+                                dto.Action = (ActionsType)actionValue;
+                                break;
+
+                            case "ActionParameters":
+                                dto.ActionParameters = reader.TokenType == JsonTokenType.Null ? null : reader.GetString();
+                                break;
+
+                            case "LanguageBrowser":
+                                dto.LanguageBrowser = reader.GetString()!;
+                                break;
+
+                            case "UserAgent":
+                                dto.UserAgent = reader.GetString()!;
+                                break;
+
+                            default:
+                                return null;
+                        }
+                    }
+                }
+
+                if (dto.Date == default || dto.UserIp == null || dto.Url == null || dto.Action == null || dto.LanguageBrowser == null || dto.UserAgent == null)
+                    return null;
+
+                return dto;
+            }
+            catch (NullReferenceException)
+            {
+                return null;
             }
             catch (JsonException)
             {

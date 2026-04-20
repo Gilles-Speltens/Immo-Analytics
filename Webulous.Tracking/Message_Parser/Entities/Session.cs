@@ -6,7 +6,7 @@ namespace Message_Parser.Entities
 {
     public class Session
     {
-        public required int Id { get; set; }
+        public required long Id { get; set; }
         public string? SessionId { get; set; }
         public required string Site { get; set; }
         public string? UserId { get; set; }

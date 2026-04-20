@@ -68,7 +68,7 @@ namespace Message_Parser.Reposiroties
         /// - Session
         /// - Id de la dernière HitPage
         /// </returns>
-        public List<KeyValuePair<Session, int>> GetSessionsAfterDateWithLastHitpage(DateTime date, MySqlConnection connection)
+        public List<KeyValuePair<Session, long>> GetSessionsAfterDateWithLastHitpage(DateTime date, MySqlConnection connection)
         {
             var sql = """
                 SELECT s.Id, s.Session_Id, s.Site, s.User_Id, s.User_Ip, s.Language_Browser, s.User_Agent, s.Session_Start, s.Session_End, hp.Id AS HitPageId
@@ -85,7 +85,7 @@ namespace Message_Parser.Reposiroties
                 """;
 
             var dico = connection.Query(sql, date)
-                        .Select(s => new KeyValuePair<Session, int>(
+                        .Select(s => new KeyValuePair<Session, long>(
                             new Session { Id = s.Id, 
                                 SessionId = s.Session_Id, 
                                 Site = s.Site, 

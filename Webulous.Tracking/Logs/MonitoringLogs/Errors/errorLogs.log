@@ -1,12 +1,6 @@
-2026-04-09 12:22:29.6932 | ERROR | Interface_Gestion_API.Controllers.HomeController | Connection avec l'API perdue 
-2026-04-09 12:43:07.9695 | ERROR | Interface_Gestion_API.Controllers.HomeController | Connection avec l'API perdue 
-2026-04-09 12:43:47.9815 | ERROR | Interface_Gestion_API.Controllers.HomeController | Connection avec l'API perdue 
-2026-04-09 12:43:52.0734 | ERROR | Interface_Gestion_API.Controllers.HomeController | Connection avec l'API perdue 
-2026-04-09 12:49:12.6609 | ERROR | Interface_Gestion_API.Controllers.HomeController | Connection avec l'API perdue 
-2026-04-09 12:50:19.0502 | ERROR | Interface_Gestion_API.Controllers.HomeController | Connection avec l'API perdue 
-2026-04-09 12:50:23.1746 | ERROR | Interface_Gestion_API.Controllers.HomeController | Connection avec l'API perdue 
-2026-04-09 14:14:29.3970 | ERROR | Interface_Gestion_API.Controllers.HomeController | Connection avec l'API perdue 
-2026-04-09 14:14:33.5187 | ERROR | Interface_Gestion_API.Controllers.HomeController | Connection avec l'API perdue 
-2026-04-09 14:20:35.0722 | WARN | Tracking_API.Middleware.AdminSafeListMiddleware | Forbidden Request from remote IP address: ::1 
-2026-04-09 14:20:35.0722 | WARN | Tracking_API.Middleware.AdminSafeListMiddleware | Forbidden Request from remote IP address: ::1 
-2026-04-09 14:20:35.3473 | WARN | Tracking_API.Middleware.AdminSafeListMiddleware | Forbidden Request from remote IP address: ::1 
+2026-04-20 11:19:13.8197 | WARN | Message_Parser.Program | Le dossier de travail 'C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Logs\Work' n'est pas vide au démarrage. Des fichiers n'ont probablement pas été traités lors d'une exécution précédente. 
+2026-04-20 12:12:28.9633 | ERROR | Message_Parser.Program | Erreur lors du traitement du fichier "C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Logs\tracking-202604091422.log" | Data too long for column 'session_id' at row 1 
+2026-04-20 12:24:54.2664 | ERROR | Message_Parser.Program | Erreur lors du traitement du fichier "C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Logs\tracking-202604091422.log" | Column 'session_id' cannot be null 
+2026-04-20 12:30:26.5503 | ERROR | Message_Parser.Program | Erreur lors du traitement du fichier "C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Logs\tracking-202604091422.log" | Column 'user_ip' cannot be null 
+2026-04-20 14:12:47.0269 | ERROR | Message_Parser.Program | Erreur lors du traitement du fichier "C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Logs\tracking-202604091434.log" | Data truncated for column 'action_type' at row 1 
+2026-04-20 14:16:52.7655 | ERROR | Message_Parser.Program | Erreur lors du traitement du fichier "C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Logs\tracking-202604091422.log" | Incorrect datetime value: '0001-01-01 00:00:00' for column `analyticsdb`.`hit_page`.`time` at row 6 

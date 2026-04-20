@@ -6,9 +6,9 @@ namespace Message_Parser.Entities
 {
     public class HitPage
     {
-        public int? Id { get; set; }
+        public long? Id { get; set; }
         public required DateTime Time { get; set; }
-        public int SessionPk { get; set; }
+        public long SessionPk { get; set; }
         public required string Url { get; set; }
         public string? Referrer { get; set; }
     }

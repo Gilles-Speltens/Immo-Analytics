@@ -1,5 +1,6 @@
 ﻿using Common;
 using Message_Parser.Data;
+using Message_Parser.Entities;
 using Message_Parser.Services;
 using NLog;
 
@@ -73,10 +74,22 @@ namespace Message_Parser
             {
                 for (int i = 0; i < _files.Length - 1; i++)
                 {
-                    
-                    List<RequestLogDto> logs = await _processor.ProcessFileAsync(_files[i]);
+                    string filePath = _files[i];
+                    string fileName = Path.GetFileName(filePath);
+                    var monitoring = new FileMonitoring
+                    {
+                        FileName = fileName,
+                        TreatementDate = DateTime.UtcNow,
+                        Speed = null,
+                        Status = FileStatus.IN_PROCESS,
+                    };
+                    _unitOfWork.InsertIntoMonitoring(monitoring);
 
-                    var error = await _unitOfWork.bulkInsertLogs(logs);
+                    var result = await _processor.ProcessFileAsync(_files[i]);
+                    List<RequestLogDto> logs = result.validLogs;
+                    int nbInvalidLogs = result.invalidLogs;
+
+                    var error = await _unitOfWork.bulkInsertLogs(logs, monitoring, nbInvalidLogs);
                     if (error == null)
                     {
                         _processor.MoveToArchive();

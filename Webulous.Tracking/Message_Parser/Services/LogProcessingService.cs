@@ -25,13 +25,13 @@ namespace Message_Parser.Services
         /// - la session en cours
         /// - l'identifiant de la dernière page visitée (HitPage)
         /// </summary>
-        private Dictionary<(string sessionId, string domain), (Session session, int lastHitPage)> _ongoingSessions;
+        private Dictionary<(string sessionId, string domain), (Session session, long lastHitPage)> _ongoingSessions;
 
-        private int _lastHitPageId;
-        private int _lastSessionId;
+        private long _lastHitPageId;
+        private long _lastSessionId;
 
         private List<Site> _sites = new List<Site>();
-        private Dictionary<int, Session> _sessions = new Dictionary<int, Session>();
+        private Dictionary<long, Session> _sessions = new Dictionary<long, Session>();
         private List<HitPage> _hitPages = new List<HitPage>();
         private List<UserAction> _userActions = new List<UserAction>();
 
@@ -41,7 +41,7 @@ namespace Message_Parser.Services
         /// <param name="ongoingSessions">Sessions encore actives provenant d’un traitement précédent.</param>
         /// <param name="lastHitPageId">Dernier identifiant de HitPage utilisé.</param>
         /// <param name="lastSessionId">Dernier identifiant de Session utilisé.</param>
-        public LogProcessingService(Dictionary<(string sessionId, string domain), (Session, int)> ongoingSessions, int lastHitPageId, int lastSessionId) 
+        public LogProcessingService(Dictionary<(string sessionId, string domain), (Session, long)> ongoingSessions, long lastHitPageId, long lastSessionId) 
         {
             _ongoingSessions = ongoingSessions;
             _lastHitPageId = lastHitPageId;
@@ -67,7 +67,7 @@ namespace Message_Parser.Services
         public void ProcessLogs(List<RequestLogDto> logs)
         {
             _sites = new List<Site>();
-            _sessions = new Dictionary<int, Session>();
+            _sessions = new Dictionary<long, Session>();
             _hitPages = new List<HitPage>();
             _userActions = new List<UserAction>();
             foreach (RequestLogDto log in logs)
@@ -80,7 +80,7 @@ namespace Message_Parser.Services
                 bool newSession = SessionsProcessing(log, domain, out curSession);
 
                 //Ajouter un nouvel hitpage si action == hitpage ou si l'action n'a pas de session et doit donc créer une nouvelle hitpage sur laquel se lier ou si l'action a une session mais pas de hitapage.
-                int hitPageId = 0;
+                long hitPageId = 0;
                 bool sessionHaveHitpage = _ongoingSessions.TryGetValue((curSession.SessionId, curSession.Site), out _);
                 if (log.Action == ActionsType.HITPAGE || log.SessionId == null || !sessionHaveHitpage)
                 {
@@ -108,6 +108,7 @@ namespace Message_Parser.Services
         private string SiteProcessing(RequestLogDto log)
         {
             var url = log.Url;
+            if (url == null) return "unknown";
             if (!url.StartsWith("http"))
                 url = "http://" + url;
 
@@ -176,7 +177,7 @@ namespace Message_Parser.Services
         /// Crée une nouvelle HitPage (page visitée) associée à une session.
         /// </summary>
         /// <returns>Identifiant de la HitPage créée.</returns>
-        private int HitpageProcessing(RequestLogDto log, Session curSession)
+        private long HitpageProcessing(RequestLogDto log, Session curSession)
         {
             _lastHitPageId += 1;
             var hitPageId = _lastHitPageId;
@@ -198,12 +199,12 @@ namespace Message_Parser.Services
         /// Sinon :
         /// → on utilise la HitPage créée dans ce cycle
         /// </summary>
-        private void ActionProcessing(RequestLogDto log, string domain, int hitPageId)
+        private void ActionProcessing(RequestLogDto log, string domain, long hitPageId)
         {
             var time = log.Date;
             var actionType = log.Action;
             var actionParam = log.ActionParameters;
-            int pageId;
+            long pageId;
             if (_ongoingSessions.TryGetValue((log.SessionId, domain), out var value))
             {
                 // Récupère la dernière hitpage de la session.

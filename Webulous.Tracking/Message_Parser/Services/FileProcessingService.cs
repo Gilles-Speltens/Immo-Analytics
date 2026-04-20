@@ -39,25 +39,6 @@ namespace Message_Parser.Services
         }
 
         /// <summary>
-        /// Traite une liste de fichiers NDJSON.
-        /// 
-        /// Attention : le dernier fichier de la liste n'est pas traité volontairement.
-        /// </summary>
-        /// <param name="files">Liste des chemins de fichiers à traiter.</param>
-        /// <returns>Liste agrégée de tous les logs valides extraits.</returns>
-        public async Task<List<RequestLogDto>> ProcessAllFilesAsync(string[] files)
-        {
-            var allLogs = new List<RequestLogDto>();
-
-            for (int i = 0; i < files.Length - 1; i++)
-            {
-                allLogs.AddRange(await ProcessFileAsync(files[i]));
-            }
-
-            return allLogs;
-        }
-
-        /// <summary>
         /// Traite un fichier NDJSON :
         /// - Désérialise les logs
         /// - Sépare logs valides et invalides
@@ -66,7 +47,7 @@ namespace Message_Parser.Services
         /// </summary>
         /// <param name="file">Chemin du fichier à traiter.</param>
         /// <returns>Liste des logs valides extraits du fichier.</returns>
-        public async Task<List<RequestLogDto>> ProcessFileAsync(string file)
+        public async Task<(List<RequestLogDto> validLogs, int invalidLogs)> ProcessFileAsync(string file)
         {
             var validLogs = new List<RequestLogDto>();
             List<string> invalidLogs = new List<string>();
@@ -77,6 +58,7 @@ namespace Message_Parser.Services
 
             if (invalidLogs.Any())
             {
+                Console.WriteLine(invalidLogs.Count);
                 await _writer.WriteInvalidLogsAsync(invalidLogs, _invalidDirectory);
                 await _writer.WriteProcessingLogAsync(file, _workDirectory, validLogs);
                 File.Delete(file);
@@ -85,7 +67,7 @@ namespace Message_Parser.Services
                 MoveFile(file, _workDirectory, "processing-");
             }
 
-            return validLogs;
+            return (validLogs, invalidLogs.Count);
         }
 
         /// <summary>

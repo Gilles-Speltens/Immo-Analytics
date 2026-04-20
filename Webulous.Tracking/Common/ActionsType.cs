@@ -4,9 +4,8 @@
     {
         UNKNOWN,
         HITPAGE,
-        ESTATSE_BROWSING,
+        ESTATE_SEARCH,
         CONTACT_REQUEST,
-        EXTERNAL_LINK,
-        BUTTON_CLICK
+        CLIENT_ACTION
     }
 }
