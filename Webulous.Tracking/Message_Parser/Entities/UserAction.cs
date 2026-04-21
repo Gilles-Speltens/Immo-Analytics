@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Common;
+using Common.UserActions;
 
 namespace Message_Parser.Entities
 {

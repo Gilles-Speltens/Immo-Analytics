@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-using Common;
+using Common.UserActions;
 using Microsoft.AspNetCore.Mvc;
 using Mini_Site_Web.Models;
 using Mini_Site_Web.Services;
@@ -75,7 +75,7 @@ namespace Mini_Site_Web.Controllers
         [HttpPost]
         public async Task<IActionResult> ContactButton()
         {
-            await _logService.SendLog(HttpContext, ActionsType.BUTTON_CLICK, null);
+            await _logService.SendLog(HttpContext, ActionsType.CLIENT_ACTION, null);
             return new EmptyResult();
         }
 

@@ -58,7 +58,6 @@ namespace Message_Parser.Services
 
             if (invalidLogs.Any())
             {
-                Console.WriteLine(invalidLogs.Count);
                 await _writer.WriteInvalidLogsAsync(invalidLogs, _invalidDirectory);
                 await _writer.WriteProcessingLogAsync(file, _workDirectory, validLogs);
                 File.Delete(file);

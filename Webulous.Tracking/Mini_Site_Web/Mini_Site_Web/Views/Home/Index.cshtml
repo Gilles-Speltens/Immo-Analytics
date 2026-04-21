@@ -132,30 +132,29 @@
                 }
 
                 // Envoie POST pour tracker l'action du boutton contact
-                const action = btn.getAttribute('data-action') || 'bouton inconnu';
-                fetch('/Home/ContactButton', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]')?.value || ''
-                    },
-                    body: action
-                }).catch(err => console.error('Erreur tracking :', err));
+                // const action = btn.getAttribute('data-action') || 'bouton inconnu';
+                // fetch('/Home/ContactButton', {
+                //     method: 'POST',
+                //     headers: {
+                //         'Content-Type': 'application/json',
+                //         'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]')?.value || ''
+                //     },
+                //     body: action
+                // }).catch(err => console.error('Erreur tracking :', err));
             });
         });
 
         // Envoie POST pour tracker l'action du clique sur les liens.
-        document.querySelectorAll('a.track-link').forEach(link => {
-            link.addEventListener('click', (e) => {
-                const href = link.getAttribute('href') || 'unknown';
+        // document.querySelectorAll('a.track-link').forEach(link => {
+        //     link.addEventListener('click', (e) => {
+        //         const href = link.getAttribute('href') || 'unknown';
 
-                const token = document.querySelector('input[name="__RequestVerificationToken"]')?.value || '';
+        //         const token = document.querySelector('input[name="__RequestVerificationToken"]')?.value || '';
 
-                const data = JSON.stringify({ href });
+        //         const data = JSON.stringify({ href });
 
-                navigator.sendBeacon('/Home/Validation', new Blob([data], { type: 'application/json' }));
-            });
-        });
-
+        //         navigator.sendBeacon('/Home/Validation', new Blob([data], { type: 'application/json' }));
+        //     });
+        // });
     </script>
 }

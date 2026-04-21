@@ -1,4 +1,6 @@
-﻿namespace Common
+﻿using Common.UserActions;
+
+namespace Common
 {
     public class RequestLogDto
     {

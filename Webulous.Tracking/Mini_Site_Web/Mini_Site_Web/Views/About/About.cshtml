@@ -11,4 +11,53 @@
 
         Nous comprenons que chaque transaction immobilière est unique, c’est pourquoi nous nous engageons à vous fournir des conseils avisés sur les tendances du marché, les prix compétitifs, ainsi que sur tous les aspects juridiques.
     </p>
+
+    <p><a href="javascript:print();" class="w-action--print">print</a></p>
+
+    <p><a href="tel:+3299999999" class="red w-action--phone-call">phone-call</a></p>
+
+    <p>
+        <a class="btn btn-primary w-action--map" target="_blank" href="https://www.google.com/maps?q=Rue+Konkel+105+Boîte+16+-+1150+Bruxelles">
+            <span> Localiser sur la carte</span>
+            <i class="fa-regular fa-map-location-dot" aria-hidden="true"></i>
+        </a>
+    </p>
+
+    <button type="submit" class="btn btn-primary btn-form-post w-action--button">
+        <span>Envoyer</span>
+        <i class="far fa-long-arrow-right" aria-hidden="true"></i>
+    </button>
+
+    <a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fwww.hendrix.be%2Fresidentiel%2Fbien%2Fmaison%2F%25C3%25A0%2520vendre%2FGenappe%2F7616244%3Fpagename%3D%2Fresidentiel%2Fbien%26estateid%3D7616244" rel="nofollow" class="btn btn-sm w-action--share" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;"><i class="fab fa-facebook"></i>facebook</a>
+
+    <button></button>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        // Sélectionne tous les éléments ayant une classe contenant "w-action--"
+        const elements = document.querySelectorAll('[class*="w-action--"]');
+
+        elements.forEach(function (el) {
+
+            // Trouver la classe qui commence par "w-action--"
+            const actionClass = Array.from(el.classList).find(cls => cls.startsWith('w-action--'));
+
+            if (!actionClass) return;
+
+            // Récupérer le nom après "--"
+            const actionName = actionClass.split('--')[1];
+
+            // Récupérer le href
+            const href = el.getAttribute('href');
+
+            // Ajouter un listener sans bloquer les autres comportements
+            el.addEventListener('click', function () {
+                console.log('action:', actionName);
+                console.log('href:', href);
+            }, false);
+
+        });
+
+    });
+</script>
