@@ -28,8 +28,8 @@ CREATE TABLE `user_actions` (
   `id` bigint PRIMARY KEY AUTO_INCREMENT,
   `time` timestamp NOT NULL,
   `page_id` bigint NOT NULL,
-  `action_type` enum('UNKNOWN','HITPAGE', 'ESTATE_SEARCH','CONTACT_REQUEST', 'CLIENT_ACTION') NOT NULL,
-  `action_parameter` varchar(255)
+  `type` enum('UNKNOWN','HITPAGE', 'ESTATE_SEARCH','CONTACT_REQUEST', 'CLIENT_ACTION') NOT NULL,
+  `parameter` json
 );
 
 CREATE TABLE `file_monitoring` (

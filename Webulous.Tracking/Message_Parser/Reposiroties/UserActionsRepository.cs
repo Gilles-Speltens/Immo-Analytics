@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
+using System.Text.Json;
 
 namespace Message_Parser.Reposiroties
 {
@@ -53,17 +54,18 @@ namespace Message_Parser.Reposiroties
 
             for (int i = 0; i < batch.Count; i++)
             {
-                sqlValues.Append($"(@Time{i}, @PageId{i}, @ActionType{i}, @ActionParameter{i}),");
+                sqlValues.Append($"(@Time{i}, @PageId{i}, @ActionParameter{i})");
 
                 parameters.Add($"Time{i}", batch[i].Time);
                 parameters.Add($"PageId{i}", batch[i].PageId);
-                parameters.Add($"ActionType{i}", batch[i].ActionType);
-                parameters.Add($"ActionParameter{i}", batch[i].ActionParameter);
+
+                var json = JsonSerializer.Serialize(batch[i].ActionParameter);
+                parameters.Add($"Parameters{i}", json);
             }
 
             sqlValues.Length--;
 
-            var sql = $"INSERT INTO User_Actions (Time, Page_Id, Action_Type, Action_Parameter) VALUES {sqlValues}";
+            var sql = $"INSERT INTO User_Actions (Time, Page_Id, Parameter) VALUES {sqlValues}";
 
             return await connection.ExecuteAsync(sql, parameters, transaction);
         }

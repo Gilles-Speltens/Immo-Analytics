@@ -13,8 +13,6 @@ namespace Message_Parser.Entities
 
         public required long PageId { get; set; }
 
-        public required ActionsType ActionType { get; set; }
-
-        public string? ActionParameter { get; set; }
+        public required UserActionsBase ActionParameter { get; set; }
     }
 }

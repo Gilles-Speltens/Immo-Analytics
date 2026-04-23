@@ -28,9 +28,46 @@
         <i class="far fa-long-arrow-right" aria-hidden="true"></i>
     </button>
 
-    <a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fwww.hendrix.be%2Fresidentiel%2Fbien%2Fmaison%2F%25C3%25A0%2520vendre%2FGenappe%2F7616244%3Fpagename%3D%2Fresidentiel%2Fbien%26estateid%3D7616244" rel="nofollow" class="btn btn-sm w-action--share" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;"><i class="fab fa-facebook"></i>facebook</a>
+    <div class="card card-body shadow-sm">
+        <form method="post" action="/Home/EstateInfoForm">
+    
+            <div class="mb-2">
+                <label class="form-label">Type de transaction</label>
+                <select class="form-control" name="toSell">
+                    <option value="false">Acheter</option>
+                    <option value="true">Vendre</option>
+                </select>
+            </div>
 
-    <button></button>
+            <div class="mb-2">
+                <label class="form-label">Type de bien</label>
+                <input type="text" class="form-control" name="estateType" placeholder="Maison, Appartement..." />
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label">Localité</label>
+                <input type="text" class="form-control" name="locality" placeholder="Ville ou code postal" />
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label">Prix minimum</label>
+                <input type="number" class="form-control" name="minPrice" />
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label">Prix maximum</label>
+                <input type="number" class="form-control" name="maxPrice" />
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label">Nombre de chambres</label>
+                <input type="number" class="form-control" name="bedroomNb" />
+            </div>
+
+            <button type="submit" class="btn btn-success btn-sm w-100">Envoyer</button>
+        </form>
+    </div>
+
 </div>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -53,11 +90,20 @@
 
             // Ajouter un listener sans bloquer les autres comportements
             el.addEventListener('click', function () {
-                console.log('action:', actionName);
-                console.log('href:', href);
+                    console.log('action:', actionName);
+                    console.log('href:', href);
+                
+                    fetch('/Home/ContactButton', {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            clientAction: actionName,
+                            targetUrl: href
+                        }),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
             }, false);
-
         });
-
     });
 </script>

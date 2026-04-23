@@ -83,7 +83,7 @@ namespace Message_Parser.Services
                 //Ajouter un nouvel hitpage si action == hitpage ou si l'action n'a pas de session et doit donc créer une nouvelle hitpage sur laquel se lier ou si l'action a une session mais pas de hitapage.
                 long hitPageId = 0;
                 bool sessionHaveHitpage = _ongoingSessions.TryGetValue((curSession.SessionId, curSession.Site), out _);
-                if (log.Action == ActionsType.HITPAGE || log.SessionId == null || !sessionHaveHitpage)
+                if (log.ActionParameters == null || log.SessionId == null || !sessionHaveHitpage)
                 {
                     hitPageId = HitpageProcessing(log, curSession);
                 }
@@ -95,7 +95,7 @@ namespace Message_Parser.Services
                 }
 
                 //Ajouter une action lier à un hitpage.
-                if (log.Action != ActionsType.HITPAGE)
+                if (log.ActionParameters != null)
                 {
                     ActionProcessing(log, domain, hitPageId);
                 }
@@ -203,7 +203,6 @@ namespace Message_Parser.Services
         private void ActionProcessing(RequestLogDto log, string domain, long hitPageId)
         {
             var time = log.Date;
-            var actionType = log.Action;
             var actionParam = log.ActionParameters;
             long pageId;
             if (_ongoingSessions.TryGetValue((log.SessionId, domain), out var value))
@@ -215,7 +214,7 @@ namespace Message_Parser.Services
             {
                 pageId = hitPageId;
             }
-            var action = new UserAction { Id = null, Time = time, PageId = pageId, ActionType = actionType, ActionParameter = actionParam };
+            var action = new UserAction { Id = null, Time = time, PageId = pageId, ActionParameter = actionParam };
 
             _userActions.Add(action);
         }

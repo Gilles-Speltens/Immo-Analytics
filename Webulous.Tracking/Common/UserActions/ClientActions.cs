@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Common.UserActions
 {
-    public class ClientActionParameters : ActionParametersBase
+    public class ClientActions : UserActionsBase
     {
-        public ClientActionType ActionType;
-        public string? details;
+        public ClientActionType ActionType { get; set; }
+        public string? Details { get; set; }
     }
 }

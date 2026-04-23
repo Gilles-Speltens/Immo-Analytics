@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
+using Newtonsoft.Json;
 
 namespace Message_Parser.Infrastructure
 {
@@ -95,21 +96,38 @@ namespace Message_Parser.Infrastructure
                                 dto.UrlReferrer = reader.TokenType == JsonTokenType.Null ? null : reader.GetString();
                                 break;
 
-                            case "Action":
-                                if (reader.TokenType == JsonTokenType.Null)
-                                    return null;
+                            //case "Action":
+                            //    if (reader.TokenType == JsonTokenType.Null)
+                            //        return null;
 
-                                int actionValue = reader.GetInt32();
+                            //    int actionValue = reader.GetInt32();
 
-                                // Check the Enum
-                                if (!Enum.IsDefined(typeof(ActionsType), actionValue))
-                                    return null;
+                            //    // Check the Enum
+                            //    if (!Enum.IsDefined(typeof(ActionsType), actionValue))
+                            //        return null;
 
-                                dto.Action = (ActionsType)actionValue;
-                                break;
+                            //    dto.Action = (ActionsType)actionValue;
+                            //    break;
 
-                            case "ActionParameters":
-                                dto.ActionParameters = reader.TokenType == JsonTokenType.Null ? null : reader.GetString();
+                            //case "ActionParameters":
+                            //    var stringActionParam = reader.TokenType == JsonTokenType.Null ? null : reader.GetString();
+
+                            //    if (dto.Action == null) return null;
+                            //    dto.ActionParameters = dto.Action switch
+                            //    {
+                            //        ActionsType.CLIENT_ACTION => JsonSerializer.Deserialize<ClientActionParameters>(stringActionParam),
+                            //        ActionsType.CONTACT_REQUEST => JsonSerializer.Deserialize<ContactRequestParameters>(stringActionParam),
+                            //        ActionsType.ESTATE_SEARCH => JsonSerializer.Deserialize<EstateSearchParameters>(stringActionParam),
+                            //        _ => null
+                            //    };
+                            //    break;
+                            case "UserActions":
+                                var stringActionParam = reader.TokenType == JsonTokenType.Null ? null : reader.GetString();
+
+                                if(stringActionParam != null)
+                                {
+                                    dto.ActionParameters = JsonConvert.DeserializeObject<UserActionsBase>(stringActionParam);
+                                }
                                 break;
 
                             case "LanguageBrowser":
@@ -126,7 +144,7 @@ namespace Message_Parser.Infrastructure
                     }
                 }
 
-                if (dto.Date == default || dto.UserIp == null || dto.Url == null || dto.Action == null || dto.LanguageBrowser == null || dto.UserAgent == null)
+                if (dto.Date == default || dto.UserIp == null || dto.Url == null || dto.LanguageBrowser == null || dto.UserAgent == null)
                     return null;
 
                 return dto;
@@ -135,7 +153,7 @@ namespace Message_Parser.Infrastructure
             {
                 return null;
             }
-            catch (JsonException)
+            catch (Newtonsoft.Json.JsonException)
             {
                 return null;
             }

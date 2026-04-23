@@ -8,6 +8,7 @@ namespace Common.UserActions
 {
     public enum ClientActionType
     {
+        UNKNOWN,
         EXTERNAL_LINK,
         PRINT,
         DETAILS,

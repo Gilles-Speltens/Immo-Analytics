@@ -1,5 +1,6 @@
 ﻿using Common;
 using Common.UserActions;
+using Newtonsoft.Json;
 using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Text.Json;
@@ -27,7 +28,7 @@ namespace Mini_Site_Web.Services
         public async Task SendLog(HttpContext context)
         {
             //Formatage des logs.
-            var logDto = await CreateRequestLog(context, null, null);
+            var logDto = await CreateRequestLog(context, null);
             await SendLog(logDto);
         }
 
@@ -35,10 +36,10 @@ namespace Mini_Site_Web.Services
         /// Converti le context en un RequestLogDto puis l'envoie à l'API via la classe SendLog(RequestLogDto logDto).
         /// </summary>
         /// <param name="context">Contexte HTTP de la requête en cours.</param>
-        public async Task SendLog(HttpContext context, ActionsType? action, string? actionParam)
+        public async Task SendLog(HttpContext context, UserActionsBase? actionParam)
         {
             //Formatage des logs.
-            var logDto = await CreateRequestLog(context, action, actionParam);
+            var logDto = await CreateRequestLog(context, actionParam);
             await SendLog(logDto);
         }
 
@@ -50,7 +51,13 @@ namespace Mini_Site_Web.Services
         {
             try
             {
-                var json = JsonSerializer.Serialize(logDto);
+                //Utilisation de Newtonsoft.Json car System.Text.Json ne gère pas le polymorphisme en .NET 6
+                var settings = new JsonSerializerSettings
+                {
+                    TypeNameHandling = TypeNameHandling.Auto
+                };
+
+                var json = JsonConvert.SerializeObject(logDto, settings);
 
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
@@ -74,7 +81,7 @@ namespace Mini_Site_Web.Services
         /// </summary>
         /// <param name="context">Contexte HTTP de la requête en cours.</param>
         /// <returns>Un objet RequestLogDto complet</returns>
-        private async Task<RequestLogDto> CreateRequestLog(HttpContext context, ActionsType? actionType, string? actionParam)
+        private async Task<RequestLogDto> CreateRequestLog(HttpContext context, UserActionsBase? actionParam)
         {
             var user_cookie_consent = true;//context.Request.Cookies["user_cookie_consent"] == "true";
             var session_cookie_consent = true;//context.Request.Cookies["session_cookie_consent"] == "true";
@@ -101,18 +108,18 @@ namespace Mini_Site_Web.Services
                                 ? null
                                 : context.Request.Headers.Referer.ToString();
 
-            var action = ActionsType.HITPAGE;
+            //var action = ActionsType.HITPAGE;
 
-            if(context.Request.Method == "POST")
-            {
-                if(actionType != null)
-                {
-                    action = actionType.Value;
-                } else
-                {
-                    action = ActionsType.UNKNOWN;
-                }
-            }
+            //if(context.Request.Method == "POST")
+            //{
+            //    if(actionType != null)
+            //    {
+            //        action = actionType.Value;
+            //    } else
+            //    {
+            //        action = ActionsType.UNKNOWN;
+            //    }
+            //}
 
             var languageBrowser = Regex.Match(context.Request.Headers.AcceptLanguage, @"^[^,]*").Value;
 
@@ -126,8 +133,7 @@ namespace Mini_Site_Web.Services
                 SessionId = sessionId,
                 Url = url,
                 UrlReferrer = urlReferrer,
-                Action = action,
-                ActionParameters = actionParam,
+                UserActions = actionParam,
                 LanguageBrowser = languageBrowser,
                 UserAgent = userAgent
             };

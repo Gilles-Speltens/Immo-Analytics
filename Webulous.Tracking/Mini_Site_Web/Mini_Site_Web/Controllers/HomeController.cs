@@ -73,16 +73,59 @@ namespace Mini_Site_Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> ContactButton()
+        public async Task<IActionResult> ContactButton([FromBody]ClientActionViewModel action)
         {
-            await _logService.SendLog(HttpContext, ActionsType.CLIENT_ACTION, null);
+            ClientActionType actionType;
+            var details = action.TargetUrl;
+            switch (action.ClientAction)
+            {
+                case "external-link":
+                    actionType = ClientActionType.EXTERNAL_LINK;
+                    break;
+                case "print":
+                    actionType = ClientActionType.PRINT;
+                    break;
+                case "details":
+                    actionType = ClientActionType.DETAILS;
+                    break;
+                case "email":
+                    actionType = ClientActionType.EMAILS;
+                    break;
+                case "phone-call":
+                    actionType = ClientActionType.PHONE_CALL;
+                    break;
+                case "virtual-visit":
+                    actionType = ClientActionType.VIRTUAL_VISIT;
+                    break;
+                case "share":
+                    actionType = ClientActionType.SHARE;
+                    break;
+                case "download":
+                    actionType = ClientActionType.DOWNLOAD;
+                    break;
+                default:
+                    actionType = ClientActionType.UNKNOWN;
+                    break;
+            }
+            var param = new ClientActions { ActionType = actionType, Details = details };
+            _logService.SendLog(HttpContext, param);
             return new EmptyResult();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Form(string Name, string Email, string Message)
+        public async Task<IActionResult> ContactForm(string Name, string Email, string Message)
         {
-            await _logService.SendLog(HttpContext, ActionsType.CONTACT_REQUEST, Name);
+            var contact = new ContactRequestParameters { ConType = ContactType.STANDARD_INFO, EstateId = null, SearchParameters = null };
+            _logService.SendLog(HttpContext, contact);
+            return new EmptyResult();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EstateInfoForm(bool toSell, string estateType, string locality, int minPrice, int maxPrice, int bedroomNb)
+        {
+            var param = new EstateSearchs { ToSell = toSell, EstateType = estateType, Locality = locality, MinPrice = minPrice, MaxPrice = maxPrice, BedroomNb = bedroomNb };
+            var contact = new ContactRequestParameters { ConType = ContactType.NEW_ESTATES_NOTIFICATION, EstateId = null, SearchParameters = param };
+            _logService.SendLog(HttpContext, contact);
             return new EmptyResult();
         }
     }

@@ -12,11 +12,11 @@ namespace Message_Parser.Tests
     public class LogProcessingTests
     {
         private LogProcessingService CreateService(
-        Dictionary<(string sessionId, string domain), (Session, int)> ongoing = null,
+        Dictionary<(string sessionId, string domain), (Session, long)> ongoing = null,
         int lastHitPageId = 0,
         int lastSessionId = 0)
         {
-            ongoing ??= new Dictionary<(string, string), (Session, int)>();
+            ongoing ??= new Dictionary<(string, string), (Session, long)>();
             return new LogProcessingService(ongoing, lastHitPageId, lastSessionId);
         }
 

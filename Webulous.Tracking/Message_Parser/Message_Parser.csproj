@@ -20,6 +20,7 @@
 	<None Update="appsettings.json">
 		<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	</None>
+	<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
 	<PackageReference Include="NLog" Version="6.1.2" />
 	<PackageReference Include="NLog.Config" Version="4.7.15" />
   </ItemGroup>

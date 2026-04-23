@@ -10,8 +10,7 @@ namespace Common
         public string? SessionId { get; set; }
         public string Url { get; set; }
         public string? UrlReferrer { get; set; }
-        public ActionsType Action {  get; set; }
-        public string? ActionParameters { get; set; }
+        public UserActionsBase? UserActions { get; set; }
         public string LanguageBrowser { get; set; }
         public string UserAgent { get; set; }
     }
