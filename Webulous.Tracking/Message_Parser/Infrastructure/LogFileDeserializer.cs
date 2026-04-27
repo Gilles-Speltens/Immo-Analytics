@@ -1,10 +1,11 @@
 ﻿using Common;
 using Common.UserActions;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
-using Newtonsoft.Json;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Message_Parser.Infrastructure
 {
@@ -122,11 +123,16 @@ namespace Message_Parser.Infrastructure
                             //    };
                             //    break;
                             case "UserActions":
-                                var stringActionParam = reader.TokenType == JsonTokenType.Null ? null : reader.GetString();
-
-                                if(stringActionParam != null)
+                                if (reader.TokenType != JsonTokenType.Null)
                                 {
-                                    dto.ActionParameters = JsonConvert.DeserializeObject<UserActionsBase>(stringActionParam);
+                                    using var doc = JsonDocument.ParseValue(ref reader);
+                                    string rawJson = doc.RootElement.GetRawText();
+                                    dto.UserActions = JsonConvert.DeserializeObject<UserActionsBase>(
+                                        rawJson,
+                                        new JsonSerializerSettings //Pour convertir automatiquement le UserActionBase en une de ses sous classe.
+                                        {
+                                            TypeNameHandling = TypeNameHandling.Auto
+                                        });
                                 }
                                 break;
 
@@ -150,6 +156,10 @@ namespace Message_Parser.Infrastructure
                 return dto;
             }
             catch (NullReferenceException)
+            {
+                return null;
+            }
+            catch (System.Text.Json.JsonException)
             {
                 return null;
             }

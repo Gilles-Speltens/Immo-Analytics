@@ -28,7 +28,6 @@ CREATE TABLE `user_actions` (
   `id` bigint PRIMARY KEY AUTO_INCREMENT,
   `time` timestamp NOT NULL,
   `page_id` bigint NOT NULL,
-  `type` enum('UNKNOWN','HITPAGE', 'ESTATE_SEARCH','CONTACT_REQUEST', 'CLIENT_ACTION') NOT NULL,
   `parameter` json
 );
 
@@ -50,5 +49,3 @@ ALTER TABLE `hit_page` ADD FOREIGN KEY (`session_pk`) REFERENCES `sessions` (`id
 
 ALTER TABLE `sessions` ADD FOREIGN KEY (`site`) REFERENCES `site` (`domain`);
 ALTER TABLE `sessions` ADD CONSTRAINT `unique_session_site_constraint` UNIQUE (`session_id`, `site`);
-
-ALTER TABLE `site` ADD CONSTRAINT `unique_domain_constraint` UNIQUE (`domain`);

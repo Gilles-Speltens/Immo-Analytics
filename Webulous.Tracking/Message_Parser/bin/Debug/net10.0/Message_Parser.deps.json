@@ -15,7 +15,8 @@
           "Microsoft.Extensions.Configuration.Json": "10.0.5",
           "Microsoft.Extensions.Hosting": "10.0.5",
           "MySqlConnector": "2.5.0",
-          "NLog": "6.1.2"
+          "NLog": "6.1.2",
+          "Newtonsoft.Json": "13.0.4"
         },
         "runtime": {
           "Message_Parser.dll": {}
@@ -401,6 +402,14 @@
           }
         }
       },
+      "Newtonsoft.Json/13.0.4": {
+        "runtime": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "13.0.0.0",
+            "fileVersion": "13.0.4.30916"
+          }
+        }
+      },
       "NLog/6.1.2": {
         "runtime": {
           "lib/netstandard2.1/NLog.dll": {
@@ -649,6 +658,13 @@
       "sha512": "sha512-hoAwfHHF8DlRRqwHOhN3u1KLi+XbX/4LPS7Anfa+SYC97vRyIfdEOEEfj1L50q01Ik8aDNvmDrNmu/VPFiAiaQ==",
       "path": "mysqlconnector/2.5.0",
       "hashPath": "mysqlconnector.2.5.0.nupkg.sha512"
+    },
+    "Newtonsoft.Json/13.0.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pdgNNMai3zv51W5aq268sujXUyx7SNdE2bj1wZcWjAQrKMFZV260lbqYop1d2GM67JI1huLRwxo9ZqnfF/lC6A==",
+      "path": "newtonsoft.json/13.0.4",
+      "hashPath": "newtonsoft.json.13.0.4.nupkg.sha512"
     },
     "NLog/6.1.2": {
       "type": "package",

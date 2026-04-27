@@ -187,7 +187,7 @@ namespace Message_Parser.Data
         {
             var connection = _connectionManager.CreateConnection();
 
-            _fileMonitoring.Insert(monitoring, connection);
+            _fileMonitoring.Upsert(monitoring, connection);
         }
     }
 }

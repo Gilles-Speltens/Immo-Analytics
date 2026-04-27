@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Message_Parser.Entities;
 using MySqlConnector;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -23,7 +24,7 @@ namespace Message_Parser.Reposiroties
         public bool Insert(UserAction userAction, MySqlConnection connection)
         {
             int rows = connection.Execute(
-                "INSERT INTO User_Actions (Time, Page_Id, Action_Type, Action_Parameter) VALUES (@Time, @PageId, @ActionType, @ActionParameter)",
+                "INSERT INTO User_Actions (Time, Page_Id, Parameter) VALUES (@Time, @PageId, @ActionParameter)",
                 userAction);
 
             return rows == 1;
@@ -54,13 +55,20 @@ namespace Message_Parser.Reposiroties
 
             for (int i = 0; i < batch.Count; i++)
             {
-                sqlValues.Append($"(@Time{i}, @PageId{i}, @ActionParameter{i})");
+                sqlValues.Append($"(@Time{i}, @PageId{i}, @ActionParameter{i}),");
 
                 parameters.Add($"Time{i}", batch[i].Time);
                 parameters.Add($"PageId{i}", batch[i].PageId);
 
-                var json = JsonSerializer.Serialize(batch[i].ActionParameter);
-                parameters.Add($"Parameters{i}", json);
+                //Utilisation de Newtonsoft.Json car System.Text.Json ne gère pas le polymorphisme en .NET 6
+                var settings = new JsonSerializerSettings
+                {
+                    TypeNameHandling = TypeNameHandling.All
+                };
+
+                var json = JsonConvert.SerializeObject(batch[i].ActionParameter, settings);
+
+                parameters.Add($"ActionParameter{i}", json);
             }
 
             sqlValues.Length--;
