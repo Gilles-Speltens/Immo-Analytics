@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Interface_Gestion_API.Models
@@ -7,12 +8,11 @@ namespace Interface_Gestion_API.Models
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            //redirect if not authenticated
-            if (!(filterContext.HttpContext.Session.GetString("isAuthenticated") != null &&
-                filterContext.HttpContext.Session.GetString("isAuthenticated").Equals("true")))
+            var isAuthenticated = filterContext.HttpContext.Session.GetString("isAuthenticated");
+
+            if (isAuthenticated == null || !isAuthenticated.Equals("true"))
             {
-                string loginUrl = "/Home/SignIn";
-                filterContext.HttpContext.Response.Redirect(loginUrl, true);
+                filterContext.Result = new RedirectResult("/Home/SignIn");
             }
         }
     }

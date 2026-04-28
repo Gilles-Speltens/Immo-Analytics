@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Common.UserActions
 {
     public enum ClientActionType
     {
-        UNKNOWN,
+        UNKNOWN = 1,
         EXTERNAL_LINK,
         PRINT,
         DETAILS,

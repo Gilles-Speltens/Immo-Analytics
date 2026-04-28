@@ -10,7 +10,6 @@ PrintReport : / ?
 HitPage : /
 EstateSearch : SearchParamList
 ContactRequest : ContatctType, EstateId, SearchParam
-
 ClientAction : ClientActionType, TargetUrl
 	external-link
 	print

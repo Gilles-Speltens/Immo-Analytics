@@ -1,6 +1,7 @@
 ﻿using Common;
 using Common.UserActions;
 using Newtonsoft.Json;
+using System.Reflection;
 using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Text.Json;
@@ -137,6 +138,73 @@ namespace Mini_Site_Web.Services
                 LanguageBrowser = languageBrowser,
                 UserAgent = userAgent
             };
+        }
+
+        //private bool IsConsentGuid(HttpContext context)
+        //{
+        //    if (context.Request.Cookies != null && context.Request.Cookies["w-consent"] != null)
+
+        //    {
+
+        //        var cookieObj = context.Request.Cookies["w-consent"];
+
+        //        if (!string.IsNullOrEmpty(cookieObj))
+
+        //        {
+
+        //            //Format should be : "nv:2021120601_date:2021111_gc:1_pref:{GA:1_GM:1_YT:1_FPX:1_RAD:1}"
+
+        //            int pos1 = cookieObj.IndexOf('{');
+
+        //            int pos2 = cookieObj.IndexOf('}');
+
+        //            if (pos1 > 0 && pos2 > 0 && pos2 > pos1 && (pos1 + 1 < cookieObj.Length && (pos1 + (pos2 - pos1)) < cookieObj.Length))
+
+        //            {
+
+        //                string purposesVal = cookieObj.Substring(pos1 + 1, pos2 - pos1);
+
+        //                if (!string.IsNullOrEmpty(purposesVal))
+
+        //                {
+
+        //                    string[] splitPurposes = purposesVal.Split('_');
+
+        //                    if (splitPurposes != null && splitPurposes.Count() > 0)
+
+        //                    {
+
+        //                        foreach (string sp in splitPurposes)
+
+        //                        {
+
+        //                            if (!string.IsNullOrEmpty(sp) && sp.Contains(":1"))
+
+        //                            {
+
+        //                                string purposeName = sp.Split(':')[0];
+
+        //                                if (!string.IsNullOrEmpty(purposeName))
+
+        //                                    gdprConsentPurposes.AcceptedPurposes.Add(purposeName);
+
+        //                            }
+
+        //                        }
+
+        //                    }
+
+        //                }
+
+        //            }
+
+        //        }
+
+        //    }
+
+        //    ViewBag.AcceptedYTPurposes = gdprConsentPurposes.AcceptedPurposes.Contains("YT");
+
+        //    model.GDPRConsentPurpose = gdprConsentPurposes;
         }
     }
 }

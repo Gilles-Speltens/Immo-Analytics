@@ -196,9 +196,9 @@ namespace Message_Parser.Services
         /// Crée une action utilisateur liée à une HitPage.
         ///
         /// Si une session existe déjà :
-        /// → on rattache à la dernière HitPage connue
+        /// - on rattache à la dernière HitPage connue
         /// Sinon :
-        /// → on utilise la HitPage créée dans ce cycle
+        /// - on utilise la HitPage créée dans ce cycle
         /// </summary>
         private void ActionProcessing(RequestLogDto log, string domain, long hitPageId)
         {

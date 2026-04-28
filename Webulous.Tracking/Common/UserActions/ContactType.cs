@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Common.UserActions
 {
     public enum ContactType
     {
+        UNKNOWN = 1,
         STANDARD_INFO,
         CONTACT_ESTATE,
         EVALUATION,

@@ -109,6 +109,10 @@ namespace Interface_Gestion_API.Controllers
         {
             if (_pswValidator.ValidPassword(pwd))
             {
+                //Régénère la session
+                HttpContext.Session.Clear();
+                await HttpContext.Session.CommitAsync();
+
                 HttpContext.Session.SetString("isAuthenticated", "true");
                 return RedirectToAction("Index");
             }
@@ -123,6 +127,8 @@ namespace Interface_Gestion_API.Controllers
         /// <param name="ip">Adresse IP à ajouter</param>
         /// <returns>Redirection vers Index</returns>
         [HttpPost]
+        [Authentication]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddIp(string ip)
         {
             try
@@ -145,6 +151,8 @@ namespace Interface_Gestion_API.Controllers
         /// <param name="ip">Adresse IP à supprimer</param>
         /// <returns>Redirection vers Index</returns>
         [HttpPost]
+        [Authentication]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteIp(string ip)
         {
             try
@@ -167,6 +175,8 @@ namespace Interface_Gestion_API.Controllers
         /// <param name="ip">Domaine à ajouter</param>
         /// <returns>Redirection vers Index</returns>
         [HttpPost]
+        [Authentication]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddDomain(string domain)
         {
 
@@ -181,6 +191,8 @@ namespace Interface_Gestion_API.Controllers
         /// <param name="ip">Domaine à supprimer</param>
         /// <returns>Redirection vers Index</returns>
         [HttpPost]
+        [Authentication]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteDomain(string domain)
         {
             await LaunchAndRefresh(domain, "/Admin/DeleteDomain");
