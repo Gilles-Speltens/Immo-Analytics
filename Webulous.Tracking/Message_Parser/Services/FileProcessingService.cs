@@ -63,7 +63,7 @@ namespace Message_Parser.Services
                 File.Delete(file);
             } else
             {
-                MoveFile(file, _workDirectory, "processing-");
+                MoveFile(file, _workDirectory, "tracking-");
             }
 
             return (validLogs, invalidLogs.Count);

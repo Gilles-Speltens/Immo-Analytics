@@ -115,7 +115,7 @@ namespace Mini_Site_Web.Controllers
         [HttpPost]
         public async Task<IActionResult> ContactForm(string Name, string Email, string Message)
         {
-            var contact = new ContactRequestParameters { ConType = ContactType.STANDARD_INFO, EstateId = null, SearchParameters = null };
+            var contact = new ContactRequest { ConType = ContactType.STANDARD_INFO, EstateId = null, SearchParameters = null };
             _logService.SendLog(HttpContext, contact);
             return new EmptyResult();
         }
@@ -124,7 +124,7 @@ namespace Mini_Site_Web.Controllers
         public async Task<IActionResult> EstateInfoForm(bool toSell, string estateType, string locality, int minPrice, int maxPrice, int bedroomNb)
         {
             var param = new EstateSearchs { ToSell = toSell, EstateType = estateType, Locality = locality, MinPrice = minPrice, MaxPrice = maxPrice, BedroomNb = bedroomNb };
-            var contact = new ContactRequestParameters { ConType = ContactType.NEW_ESTATES_NOTIFICATION, EstateId = null, SearchParameters = param };
+            var contact = new ContactRequest { ConType = ContactType.NEW_ESTATES_NOTIFICATION, EstateId = null, SearchParameters = param };
             _logService.SendLog(HttpContext, contact);
             return new EmptyResult();
         }

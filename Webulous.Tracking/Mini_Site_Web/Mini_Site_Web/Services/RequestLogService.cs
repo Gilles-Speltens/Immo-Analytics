@@ -84,8 +84,8 @@ namespace Mini_Site_Web.Services
         /// <returns>Un objet RequestLogDto complet</returns>
         private async Task<RequestLogDto> CreateRequestLog(HttpContext context, UserActionsBase? actionParam)
         {
-            var user_cookie_consent = true;//context.Request.Cookies["user_cookie_consent"] == "true";
-            var session_cookie_consent = true;//context.Request.Cookies["session_cookie_consent"] == "true";
+            var user_cookie_consent = IsConsentGuid(context);
+            //var session_cookie_consent = true;
 
             var date = DateTime.UtcNow;
 
@@ -99,9 +99,7 @@ namespace Mini_Site_Web.Services
             {
                 context.Session.SetString("init", "true");
             }
-            var sessionId = session_cookie_consent
-                ? (context.Session?.Id ?? "null")
-                : null;
+            var sessionId = context.Session?.Id ?? null;
 
             var url = $"{context.Request.Scheme}://{context.Request.Host}{context.Request.Path}";
 
@@ -109,18 +107,20 @@ namespace Mini_Site_Web.Services
                                 ? null
                                 : context.Request.Headers.Referer.ToString();
 
-            //var action = ActionsType.HITPAGE;
+            var actionType = ActionsType.HITPAGE;
 
-            //if(context.Request.Method == "POST")
-            //{
-            //    if(actionType != null)
-            //    {
-            //        action = actionType.Value;
-            //    } else
-            //    {
-            //        action = ActionsType.UNKNOWN;
-            //    }
-            //}
+            switch(actionParam)
+            {
+                case ClientActions :
+                    actionType = ActionsType.CLIENT_ACTION;
+                    break;
+                case ContactRequest :
+                    actionType = ActionsType.CONTACT_REQUEST;
+                    break;
+                case EstateSearchs :
+                    actionType = ActionsType.ESTATE_SEARCH;
+                    break;
+            }
 
             var languageBrowser = Regex.Match(context.Request.Headers.AcceptLanguage, @"^[^,]*").Value;
 
@@ -134,77 +134,52 @@ namespace Mini_Site_Web.Services
                 SessionId = sessionId,
                 Url = url,
                 UrlReferrer = urlReferrer,
-                UserActions = actionParam,
+                ActionType = actionType,
+                ActionParameters = actionParam,
                 LanguageBrowser = languageBrowser,
                 UserAgent = userAgent
             };
         }
 
-        //private bool IsConsentGuid(HttpContext context)
-        //{
-        //    if (context.Request.Cookies != null && context.Request.Cookies["w-consent"] != null)
+        private bool IsConsentGuid(HttpContext context)
+        {
+            if (context.Request.Cookies != null && context.Request.Cookies["w-consent"] != null)
+            {
+                var cookieObj = context.Request.Cookies["w-consent"];
+                if (!string.IsNullOrEmpty(cookieObj))
+                {
+                    //Format should be : "nv:2021120601_date:2021111_gc:1_pref:{GA:1_GM:1_YT:1_FPX:1_RAD:1}"
+                    int pos1 = cookieObj.IndexOf('{');
+                    int pos2 = cookieObj.IndexOf('}');
 
-        //    {
+                    if (pos1 > 0 && pos2 > 0 && pos2 > pos1 && (pos1 + 1 < cookieObj.Length && (pos1 + (pos2 - pos1)) < cookieObj.Length))
+                    {
+                        string purposesVal = cookieObj.Substring(pos1 + 1, pos2 - pos1);
 
-        //        var cookieObj = context.Request.Cookies["w-consent"];
+                        if (!string.IsNullOrEmpty(purposesVal))
+                        {
+                            string[] splitPurposes = purposesVal.Split('_');
 
-        //        if (!string.IsNullOrEmpty(cookieObj))
+                            if (splitPurposes != null && splitPurposes.Count() > 0)
+                            {
+                                foreach (string sp in splitPurposes)
+                                {
+                                    if (!string.IsNullOrEmpty(sp) && sp.Contains("GA")) //Google Analytics
+                                    {
+                                        string concent = sp.Split(':')[1];
 
-        //        {
+                                        if (!string.IsNullOrEmpty(concent) && concent.Equals("1"))
+                                            return true;
 
-        //            //Format should be : "nv:2021120601_date:2021111_gc:1_pref:{GA:1_GM:1_YT:1_FPX:1_RAD:1}"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
 
-        //            int pos1 = cookieObj.IndexOf('{');
-
-        //            int pos2 = cookieObj.IndexOf('}');
-
-        //            if (pos1 > 0 && pos2 > 0 && pos2 > pos1 && (pos1 + 1 < cookieObj.Length && (pos1 + (pos2 - pos1)) < cookieObj.Length))
-
-        //            {
-
-        //                string purposesVal = cookieObj.Substring(pos1 + 1, pos2 - pos1);
-
-        //                if (!string.IsNullOrEmpty(purposesVal))
-
-        //                {
-
-        //                    string[] splitPurposes = purposesVal.Split('_');
-
-        //                    if (splitPurposes != null && splitPurposes.Count() > 0)
-
-        //                    {
-
-        //                        foreach (string sp in splitPurposes)
-
-        //                        {
-
-        //                            if (!string.IsNullOrEmpty(sp) && sp.Contains(":1"))
-
-        //                            {
-
-        //                                string purposeName = sp.Split(':')[0];
-
-        //                                if (!string.IsNullOrEmpty(purposeName))
-
-        //                                    gdprConsentPurposes.AcceptedPurposes.Add(purposeName);
-
-        //                            }
-
-        //                        }
-
-        //                    }
-
-        //                }
-
-        //            }
-
-        //        }
-
-        //    }
-
-        //    ViewBag.AcceptedYTPurposes = gdprConsentPurposes.AcceptedPurposes.Contains("YT");
-
-        //    model.GDPRConsentPurpose = gdprConsentPurposes;
+            return false;
         }
     }
 }

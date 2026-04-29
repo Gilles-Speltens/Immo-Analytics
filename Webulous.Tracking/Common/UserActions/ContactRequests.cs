@@ -1,7 +1,7 @@
 ﻿
 namespace Common.UserActions
 {
-    public class ContactRequestParameters : UserActionsBase
+    public class ContactRequest : UserActionsBase
     {
         public ContactType ConType { get; set; }
         public string? EstateId { get; set; }

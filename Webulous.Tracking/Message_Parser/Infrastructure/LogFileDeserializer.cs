@@ -97,18 +97,18 @@ namespace Message_Parser.Infrastructure
                                 dto.UrlReferrer = reader.TokenType == JsonTokenType.Null ? null : reader.GetString();
                                 break;
 
-                            //case "Action":
-                            //    if (reader.TokenType == JsonTokenType.Null)
-                            //        return null;
+                            case "ActionType":
+                                if (reader.TokenType == JsonTokenType.Null)
+                                    return null;
 
-                            //    int actionValue = reader.GetInt32();
+                                int actionValue = reader.GetInt32();
 
-                            //    // Check the Enum
-                            //    if (!Enum.IsDefined(typeof(ActionsType), actionValue))
-                            //        return null;
+                                // Check the Enum
+                                if (!Enum.IsDefined(typeof(ActionsType), actionValue))
+                                    return null;
 
-                            //    dto.Action = (ActionsType)actionValue;
-                            //    break;
+                                dto.ActionType = (ActionsType)actionValue;
+                                break;
 
                             //case "ActionParameters":
                             //    var stringActionParam = reader.TokenType == JsonTokenType.Null ? null : reader.GetString();
@@ -122,12 +122,13 @@ namespace Message_Parser.Infrastructure
                             //        _ => null
                             //    };
                             //    break;
-                            case "UserActions":
+
+                            case "ActionParameters":
                                 if (reader.TokenType != JsonTokenType.Null)
                                 {
                                     using var doc = JsonDocument.ParseValue(ref reader);
                                     string rawJson = doc.RootElement.GetRawText();
-                                    dto.UserActions = JsonConvert.DeserializeObject<UserActionsBase>(
+                                    dto.ActionParameters = JsonConvert.DeserializeObject<UserActionsBase>(
                                         rawJson,
                                         new JsonSerializerSettings //Pour convertir automatiquement le UserActionBase en une de ses sous classe.
                                         {
