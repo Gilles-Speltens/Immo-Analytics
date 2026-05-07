@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using Interface_Gestion_API.Controllers;
+using System.Net;
 using System.Text;
 using System.Text.Json;
 
@@ -61,7 +62,7 @@ namespace Interface_Gestion_API.Services
                 var response = await _client.GetAsync($"{_apiPath}/Admin/Health");
                 return response.IsSuccessStatusCode;
             }
-            catch (HttpRequestException)
+            catch (HttpRequestException ex)
             {
                 return false;
             }

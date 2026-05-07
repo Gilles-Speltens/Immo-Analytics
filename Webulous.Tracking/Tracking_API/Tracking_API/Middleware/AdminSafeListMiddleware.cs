@@ -86,7 +86,6 @@ namespace Tracking_API.Middleware
 
             if (badOrigin)
             {
-                _logger.LogWarning($"Forbidden Request from remote IP address: {remoteIp}", remoteIp);
                 context.Response.StatusCode = (int)HttpStatusCode.Forbidden;
                 return;
             }

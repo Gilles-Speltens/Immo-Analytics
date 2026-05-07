@@ -11,7 +11,7 @@ namespace Tracking_API.Services
     public class FileManager : IFileManager
     {
         private string _path;
-        private byte[] _newLine = Encoding.UTF8.GetBytes("\n");
+        private byte[] _newLine = Encoding.UTF8.GetBytes("\r\n");
 
         /// <summary>
         /// Initialise le FileManager avec un chemin de fichier.
