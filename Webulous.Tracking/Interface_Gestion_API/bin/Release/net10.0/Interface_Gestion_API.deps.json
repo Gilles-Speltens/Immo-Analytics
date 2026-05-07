@@ -8,10 +8,43 @@
     ".NETCoreApp,Version=v10.0": {
       "Interface_Gestion_API/1.0.0": {
         "dependencies": {
-          "Common": "1.0.0"
+          "Common": "1.0.0",
+          "NLog": "6.1.0",
+          "NLog.Extensions.Logging": "6.1.1",
+          "NLog.Web.AspNetCore": "6.1.1"
         },
         "runtime": {
           "Interface_Gestion_API.dll": {}
+        }
+      },
+      "NLog/6.1.0": {
+        "runtime": {
+          "lib/netstandard2.1/NLog.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.1.0.4914"
+          }
+        }
+      },
+      "NLog.Extensions.Logging/6.1.1": {
+        "dependencies": {
+          "NLog": "6.1.0"
+        },
+        "runtime": {
+          "lib/net10.0/NLog.Extensions.Logging.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.1.1.806"
+          }
+        }
+      },
+      "NLog.Web.AspNetCore/6.1.1": {
+        "dependencies": {
+          "NLog.Extensions.Logging": "6.1.1"
+        },
+        "runtime": {
+          "lib/net10.0/NLog.Web.AspNetCore.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.1.1.1378"
+          }
         }
       },
       "Common/1.0.0": {
@@ -29,6 +62,27 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "NLog/6.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-K4UdxS4fuJeCM0sm+JTXWoJgOtcXX7X5kvE94bR07UB8JOB6A2+ski7q1tf2qdv+N0H3gsoWtteScJCHa3+zpw==",
+      "path": "nlog/6.1.0",
+      "hashPath": "nlog.6.1.0.nupkg.sha512"
+    },
+    "NLog.Extensions.Logging/6.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-vSPYZGV77KRfDJP+V05OGRhKApfAtL9DyILdB5WDcWzBkx64AYjYnG1lf/kE2FS++6HdHhPtSCUJTSYOVQJNTg==",
+      "path": "nlog.extensions.logging/6.1.1",
+      "hashPath": "nlog.extensions.logging.6.1.1.nupkg.sha512"
+    },
+    "NLog.Web.AspNetCore/6.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-N6WM+l5qjd/JtyC/zqdy1rUCyxjyBl0gWtXOCpP+C4nbNwBty1ao4ZqrNv/GYh2IUS4M7jHgBU5gOUfAVCzAew==",
+      "path": "nlog.web.aspnetcore/6.1.1",
+      "hashPath": "nlog.web.aspnetcore.6.1.1.nupkg.sha512"
     },
     "Common/1.0.0": {
       "type": "project",

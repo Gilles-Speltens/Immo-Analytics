@@ -101,3 +101,6 @@ C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Interface
 C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Interface_Gestion_API\obj\Release\net10.0\Interface_Gestion_API.pdb
 C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Interface_Gestion_API\obj\Release\net10.0\Interface_Gestion_API.genruntimeconfig.cache
 C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Interface_Gestion_API\obj\Release\net10.0\ref\Interface_Gestion_API.dll
+C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Interface_Gestion_API\bin\Release\net10.0\NLog.dll
+C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Interface_Gestion_API\bin\Release\net10.0\NLog.Extensions.Logging.dll
+C:\Users\gille\Desktop\Stage Webulous\Immo-Analytics\Webulous.Tracking\Interface_Gestion_API\bin\Release\net10.0\NLog.Web.AspNetCore.dll
