@@ -14,6 +14,8 @@ Attention : ce dossier devra être partagé entre l’API et le MessageParser.
 
 Ajouter ensuite l’adresse IP de l’interfaceAdmin afin qu’elle puisse accéder à la WhiteList de l’API.
 
+Ajouter dans Program.cs app.UseSession(); et en dessous app.UseMiddleware<RequestTrackingMiddleware>();
+
 --- Message Parser ---
 Ajouter le chemin du dossier contenant les différents fichiers de logs créés précédemment au paramètre trackingDirectory.
 
