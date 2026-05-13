@@ -96,6 +96,8 @@ namespace Mini_Site_Web.Services
             // Convert UTC to the local CEST time
             var date = TimeZoneInfo.ConvertTimeFromUtc(timeUtc, cestZone);
 
+            // !!! TODO Initialiser le cookie avec guid quand il est null !!!
+            // + adapter le nom du cookie
             var userId = user_cookie_consent
                 ? (context.Request.Cookies["uid"] ?? null)
                 : null;
