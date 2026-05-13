@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Message_Parser.Data;
 using Message_Parser.Entities;
 using MySqlConnector;
 using System.Data;
@@ -23,7 +24,7 @@ namespace Message_Parser.Reposiroties
         public bool Insert(HitPage hitpage, MySqlConnection connection)
         {
             int rows = connection.Execute(
-                "INSERT INTO Hit_Page (Id, Time, Session_Pk, Url, Referrer) VALUES (@Id, @Time, @SessionPk, @Url, @Referrer)",
+                "INSERT INTO hit_page (id, time, session_pk, url, referrer) VALUES (@Id, @Time, @SessionPk, @Url, @Referrer)",
                 hitpage);
 
             return rows == 1;
@@ -47,7 +48,7 @@ namespace Message_Parser.Reposiroties
         /// <returns>True si elle existe.</returns>
         public async Task<bool> Contains(int id, MySqlConnection connection)
         {
-            return connection.Execute("SELECT 1 FROM Hit_Page WHERE id = (@Id)", new { Id = id }) == 1;
+            return connection.Execute("SELECT 1 FROM hit_page WHERE id = (@Id)", new { Id = id }) == 1;
         }
 
         /// <summary>
@@ -56,7 +57,7 @@ namespace Message_Parser.Reposiroties
         /// <returns>Le dernier Id ou null si la table est vide.</returns>
         public int? GetLastId(MySqlConnection connection)
         {
-            return connection.QuerySingle<int?>("SELECT MAX(id) FROM Hit_Page");
+            return connection.QuerySingle<int?>("SELECT MAX(id) FROM hit_page");
         }
 
         /// <summary>
@@ -71,7 +72,7 @@ namespace Message_Parser.Reposiroties
         public List<KeyValuePair<Session, long>> GetSessionsAfterDateWithLastHitpage(DateTime date, MySqlConnection connection)
         {
             var sql = """
-                SELECT s.Id, s.Session_Id, s.Site, s.User_Id, s.User_Ip, s.Language_Browser, s.User_Agent, s.Session_Start, s.Session_End, hp.Id AS HitPageId
+                SELECT s.id, s.session_id, s.site, s.user_id, s.user_ip, s.language_browser, s.user_agent, s.session_start, s.session_end, hp.id AS HitPageId
                 FROM sessions s
                 LEFT JOIN hit_page hp 
                     ON hp.id = (
@@ -81,22 +82,30 @@ namespace Message_Parser.Reposiroties
                         ORDER BY hp2.time DESC
                         LIMIT 1
                     )
-                WHERE s.session_start >= '2026-04-09 00:00:00';
+                WHERE s.session_start >= @Date;
                 """;
 
-            var dico = connection.Query(sql, date)
-                        .Select(s => new KeyValuePair<Session, long>(
-                            new Session { Id = s.Id, 
-                                SessionId = s.Session_Id, 
-                                Site = s.Site, 
-                                UserId = s.User_Id, 
-                                UserIp = s.User_Ip, 
-                                LanguageBrowser = s.Language_Browser, 
-                                UserAgent = s.User_Agent, 
-                                SessionStart = s.Session_Start, 
-                                SessionEnd = s.Session_End },
-                            s.HitPageId
-                            )).ToList();
+            var rows = connection.Query<SessionWithHitPage>(
+                sql,
+                new { Date = date });
+
+            var dico = rows
+                .Select(s => new KeyValuePair<Session, long>(
+                    new Session
+                    {
+                        Id = s.Id,
+                        SessionId = s.Session_Id,
+                        Site = s.Site,
+                        UserId = s.User_Id,
+                        UserIp = s.User_Ip,
+                        LanguageBrowser = s.Language_Browser,
+                        UserAgent = s.User_Agent,
+                        SessionStart = s.Session_Start,
+                        SessionEnd = s.Session_End
+                    },
+                    s.HitPageId
+                ))
+                .ToList();
 
             return dico;
         }
@@ -126,7 +135,7 @@ namespace Message_Parser.Reposiroties
 
             sqlValues.Length--;
 
-            var sql = $"INSERT INTO Hit_Page (Id, Time, Session_Pk, Url, Referrer) VALUES {sqlValues}";
+            var sql = $"INSERT INTO hit_page (id, time, session_pk, url, referrer) VALUES {sqlValues}";
 
             return await connection.ExecuteAsync(sql, parameters, transaction);
         }

@@ -10,7 +10,7 @@ namespace Message_Parser.Reposiroties
         public void Upsert(FileMonitoring monitoring, MySqlConnection connection)
         {
             connection.Execute("""
-                INSERT INTO File_Monitoring (file_name, treated_date, speed, treated_logs, skipped_logs, status)
+                INSERT INTO file_monitoring (file_name, treated_date, speed, treated_logs, skipped_logs, status)
                 VALUES (@FileName, @TreatementDate, @Speed, @TreatedLogs, @SkippedLogs, @Status)
                 ON DUPLICATE KEY UPDATE
                     treated_date = @TreatementDate,
@@ -21,7 +21,7 @@ namespace Message_Parser.Reposiroties
         public void Update(FileMonitoring monitoring, MySqlConnection connection)
         {
             connection.Execute("""
-                UPDATE File_Monitoring SET speed = @Speed, treated_logs = @TreatedLogs, skipped_logs = @SkippedLogs, status = @Status
+                UPDATE file_monitoring SET speed = @Speed, treated_logs = @TreatedLogs, skipped_logs = @SkippedLogs, status = @Status
                 WHERE file_name = @FileName
                 """,
                 monitoring);

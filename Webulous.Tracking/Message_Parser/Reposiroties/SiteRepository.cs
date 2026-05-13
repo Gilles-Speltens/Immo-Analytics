@@ -20,7 +20,7 @@ namespace Message_Parser.Reposiroties
         public bool Insert(Site site, MySqlConnection connection)
         {
             int rows = connection.Execute(
-                "INSERT INTO Site (Domain, Date_When_Added, Certify) VALUES (@Domain, @DateWhenAdded, @Certify)",
+                "INSERT INTO site (domain, date_when_added, certify) VALUES (@Domain, @DateWhenAdded, @Certify)",
                 site);
 
             return rows == 1;
@@ -44,7 +44,7 @@ namespace Message_Parser.Reposiroties
         /// <returns>True si le domaine existe.</returns>
         public async Task<bool> Contains(string domain, MySqlConnection connection)
         {
-            return connection.Execute("SELECT 1 FROM Site WHERE domain = (@Domain)", new { Domain = domain }) == 1;
+            return connection.Execute("SELECT 1 FROM site WHERE domain = (@Domain)", new { Domain = domain }) == 1;
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Message_Parser.Reposiroties
         /// <returns>Liste des domaines.</returns>
         public List<string> GetAllDomain(MySqlConnection connection)
         {
-            return connection.Query<string>("SELECT Domain FROM Site").ToList();
+            return connection.Query<string>("SELECT domain FROM site").ToList();
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Message_Parser.Reposiroties
             sqlValues.Length--;
 
             var sql = $"""
-                INSERT IGNORE INTO Site (Domain, Date_When_Added, Certify) 
+                INSERT IGNORE INTO site (domain, date_when_added, certify) 
                 VALUES {sqlValues}
                 """;
 

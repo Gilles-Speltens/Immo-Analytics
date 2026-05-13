@@ -1,0 +1,340 @@
+================================================================================
+  DOCUMENTATION - TRACKING_API
+  Projet ASP.NET Core 10 (.NET 10)
+  Date de création : 2026-05-13
+================================================================================
+
+
+--------------------------------------------------------------------------------
+  1. VUE D'ENSEMBLE
+--------------------------------------------------------------------------------
+
+Tracking_API est une API REST légère développée avec ASP.NET Core 10. Elle a
+pour rôle de recevoir des données de tracking provenant de clients web (pages
+HTML, applications, etc.) et de les persister dans des fichiers de log rotatifs.
+
+L'accès à l'API est sécurisé par un système de listes blanches (whitelists) :
+  - Une whitelist d'adresses IP (avec support de la notation CIDR)
+  - Une whitelist de noms de domaine
+
+Seules les requêtes dont l'IP ou le domaine est autorisé peuvent envoyer des
+données de tracking. Les routes d'administration sont quant à elles limitées
+à une unique IP de gestion configurable.
+
+
+--------------------------------------------------------------------------------
+  2. STACK TECHNIQUE
+--------------------------------------------------------------------------------
+
+  Framework       : ASP.NET Core 10 (net10.0)
+  Langage         : C#
+  Logging         : NLog 6.1.1 + NLog.Web.AspNetCore 6.1.2
+  OpenAPI/Swagger : Microsoft.AspNetCore.OpenApi 10.0.2
+  Dépendance      : Projet "Common" (référence locale, fourni séparément)
+
+
+--------------------------------------------------------------------------------
+  3. STRUCTURE DU PROJET
+--------------------------------------------------------------------------------
+
+  Tracking_API/
+  ├── Program.cs                          Point d'entrée et configuration DI
+  ├── appsettings.json                    Fichier de configuration
+  │
+  ├── Controllers/
+  │   ├── TrackingDatasController.cs      Endpoint de réception des données
+  │   └── AdminController.cs              Endpoints d'administration
+  │
+  ├── Middleware/
+  │   ├── AdminSafeListMiddleware.cs      Filtre IP/Domaine sur les requêtes
+  │   └── AdminSafeListOptions.cs         Options de configuration du middleware
+  │
+  ├── Services/
+  │   ├── IFileManager.cs                Interface de gestion de fichiers
+  │   ├── FileManager.cs                 Implémentation I/O fichiers
+  │   └── FileLogService.cs              Service de log (Producer/Consumer)
+  │
+  ├── Infrastructures/
+  │   ├── WhitelistManager.cs            Classe abstraite générique de whitelist
+  │   ├── IPManager.cs                   Whitelist d'adresses IP / plages CIDR
+  │   ├── DomainManager.cs               Whitelist de noms de domaine
+  │   └── PerformanceAnalyser.cs         Classe utilitaire de mesure (dev/test)
+  │
+  └── Logs/                              Répertoire des fichiers de log générés
+
+
+--------------------------------------------------------------------------------
+  4. CONFIGURATION (appsettings.json)
+--------------------------------------------------------------------------------
+
+  Clé                             Type     Description
+  ─────────────────────────────────────────────────────────────────────────────
+  LogFileRotationIntervalMinutes  int      Intervalle de rotation des fichiers
+                                           de log en minutes. Doit être > 0 et
+                                           <= 525600 (1 an).
+                                           Exemple : 5
+
+  PathToWhiteFilesDirectory       string   Chemin du répertoire contenant les
+                                           fichiers de whitelists :
+                                             - IpsWhiteList.txt
+                                             - DomainsWhiteList.txt
+					   Exemple : C:/Users/Desktop/Immo-Analytics/Webulous
+
+  PathToLogsDirectory             string   Chemin du répertoire où les fichiers
+                                           de log de tracking seront écrits.
+                                           Format du nom : tracking-YYYYMMDDHHMM.log
+					   Exemple : C:/Users/Desktop/Immo-Analytics/Webulous/Logs
+
+  NLogConfigPath                  string   Chemin absolu du fichier nlog.config
+                                           pour la configuration du logging NLog.
+					   Exemple : C:/Users/Desktop/Immo-Analytics/Webulous/Config
+
+  AdminSafeList:InterfaceIP       string   Adresse IP autorisée à accéder aux
+                                           routes d'administration.
+                                           Exemple : "::1" (localhost IPv6)
+
+--------------------------------------------------------------------------------
+  5. ENDPOINTS DE L'API
+--------------------------------------------------------------------------------
+
+  ── GROUPE : TrackingDatas ─────────────────────────────────────────────────
+
+  POST /TrackingDatas
+  ───────────────────
+  Description : Reçoit les données de tracking envoyées par un client.
+                Le body n'est pas désérialisé (optimisation CPU/GC) ;
+                le flux brut est transmis directement au FileLogService.
+
+  Accès       : Requiert que l'IP distante soit dans la whitelist IP
+                OU que le header "Domain" soit dans la whitelist de domaines.
+
+  Body        : Flux brut (JSON des logs au format de la classe RequestLogDto)
+
+  Réponses :
+    204 No Content  → Données acceptées et mises en queue
+    400 Bad Request → Body null
+    403 Forbidden   → IP et domaine non autorisés
+
+
+  ── GROUPE : Admin ────────────────────────────────────────────────────────
+
+  Accès       : Toutes les routes Admin sont accessibles uniquement depuis
+                l'IP définie dans AdminSafeList:InterfaceIP.
+                Les autres IPs reçoivent une réponse null / 204 No Content.
+
+  GET /Admin/Health
+  ─────────────────
+  Description : Vérifie que l'API est opérationnelle. Aucun contrôle d'accès.
+  Réponses    : 200 OK
+
+  GET /Admin/Ips
+  ──────────────
+  Description : Retourne la liste des IP actuellement dans la whitelist.
+  Réponses    :
+    200 OK → string[] (liste des IP/CIDR)
+    200 OK → null si l'IP de l'appelant n'est pas l'IP d'administration
+
+  GET /Admin/Domains
+  ──────────────────
+  Description : Retourne la liste des domaines actuellement dans la whitelist.
+  Réponses    :
+    200 OK → string[] (liste des domaines)
+    200 OK → null si non autorisé
+
+  POST /Admin/AddIp
+  ─────────────────
+  Description : Ajoute une adresse IP (ou plage CIDR) à la whitelist.
+  Body        : string (JSON) — ex: "192.168.1.1" ou "10.0.0.0/8"
+  Réponses    :
+    200 OK       → string[] (whitelist mise à jour)
+    204 No Content → si non autorisé
+
+  POST /Admin/DeleteIp
+  ────────────────────
+  Description : Supprime une adresse IP de la whitelist.
+  Body        : string (JSON) — ex: "192.168.1.1"
+  Réponses    :
+    200 OK       → string[] (whitelist mise à jour)
+    204 No Content → si non autorisé
+
+  POST /Admin/AddDomain
+  ─────────────────────
+  Description : Ajoute un nom de domaine à la whitelist.
+  Body        : string (JSON) — ex: "example.com"
+  Réponses    :
+    200 OK       → string[] (whitelist mise à jour)
+    204 No Content → si non autorisé
+
+  POST /Admin/DeleteDomain
+  ────────────────────────
+  Description : Supprime un nom de domaine de la whitelist.
+  Body        : string (JSON) — ex: "example.com"
+  Réponses    :
+    200 OK       → string[] (whitelist mise à jour)
+    204 No Content → si non autorisé
+
+
+--------------------------------------------------------------------------------
+  6. ARCHITECTURE ET COMPOSANTS CLÉS
+--------------------------------------------------------------------------------
+
+  6.1 Middleware - AdminSafeListMiddleware
+  ─────────────────────────────────────────
+  Inséré dans le pipeline ASP.NET Core après UseAuthorization().
+  Intercepte toutes les requêtes et applique la logique de filtrage suivante :
+
+    - Requêtes vers /TrackingDatas :
+        Autorisé si l'IP distante est dans IPManager
+        OU si le header "Domain" est dans DomainManager.
+        Les deux conditions sont en OU logique.
+
+    - Toutes les autres requêtes (routes Admin, etc.) :
+        Autorisé uniquement si l'IP distante correspond à AdminSafeList:InterfaceIP.
+
+    - En cas de refus : retourne HTTP 403 Forbidden sans appeler le handler suivant.
+
+  EnableBuffering() est appelé sur chaque requête pour permettre la relecture
+  du body si nécessaire.
+
+
+  6.2 Service - FileLogService (Producer/Consumer)
+  ─────────────────────────────────────────────────
+  Pattern architectural : Producer / Consumer avec ConcurrentQueue<byte[]>.
+
+  Producteur (thread HTTP) :
+    - La méthode AddEntryToQueue(Stream body) copie le body en mémoire
+      (MemoryStream) et enfile les bytes dans la ConcurrentQueue.
+    - Aucune désérialisation → gain de performance significatif.
+
+  Consommateur (background Task) :
+    - Tourne en boucle infinie (Task.Run) avec une pause de 1 seconde
+      entre chaque cycle (_dequeuingInterval = 1000 ms).
+    - À chaque cycle :
+        1. Vérifie si le fichier de log courant a expiré → rotation si besoin.
+        2. Si la queue est non vide → flush vers le fichier via FileManager.
+
+  Rotation des fichiers de log :
+    - Un nouveau fichier est créé lorsque l'intervalle configuré
+      (LogFileRotationIntervalMinutes) est écoulé depuis la création du fichier
+      courant.
+    - Nom du fichier : tracking-YYYYMMDDHHMM.log
+      (les secondes sont tronquées lors de la génération du nom).
+
+
+  6.3 Service - FileManager
+  ──────────────────────────
+  Encapsule les opérations I/O sur les fichiers. Implémente IFileManager.
+
+  Méthodes principales :
+    AppendFromQueue(ConcurrentQueue<byte[]>)
+      → Ouvre le fichier en mode Append, écrit chaque entrée de la queue
+        en UTF-8 suivie d'un \r\n, puis ferme le fichier.
+      → FileStream asynchrone avec buffer de 64 Ko.
+
+    OverwriteFromList(List<string>)
+      → Écrase le fichier avec la liste fournie (utilisé pour les whitelists).
+
+    ReadFile()
+      → Lit toutes les lignes d'un fichier. Retourne string[0] si le fichier
+        n'existe pas.
+
+    ChangePath(string)
+      → Met à jour le chemin du fichier géré (utilisé lors de la rotation).
+
+
+  6.4 Infrastructure - WhitelistManager<T> (abstrait)
+  ────────────────────────────────────────────────────
+  Classe de base générique pour la gestion des listes blanches.
+  Chargement initial depuis le fichier lors de l'instanciation.
+  Persiste automatiquement les modifications dans le fichier.
+
+  Méthodes publiques :
+    Add(string)        → Ajoute si absent, puis sauvegarde.
+    AddRange(string[]) → Appelle Add() pour chaque élément.
+    Remove(string)     → Supprime toutes les occurrences, puis sauvegarde.
+    IsInSafeList(string) → Retourne true si l'élément est autorisé.
+    GetSafeList()      → Retourne la liste sérialisée en string[].
+
+  Implémentations concrètes :
+    IPManager    → T = IPSubnet (type du projet Common).
+                   Supporte les adresses IP simples et les plages CIDR.
+                   La méthode Contains vérifie si l'IP est dans le sous-réseau.
+
+    DomainManager → T = string.
+                    Comparaison insensible à la casse (OrdinalIgnoreCase).
+
+
+  6.5 Dépendance - Projet Common
+  ───────────────────────────────
+  Le projet référence un projet externe "Common" (../Common/Common.csproj).
+  Ce projet fournit au minimum :
+    - La classe IPSubnet : représente une IP ou une plage CIDR.
+      Méthodes utilisées : Matches(string), Contains(string), GetIp().
+
+--------------------------------------------------------------------------------
+  7. LOGGING
+--------------------------------------------------------------------------------
+
+  Deux systèmes de logging coexistent :
+
+  NLog (logging applicatif) :
+    - Configuré via le fichier nlog.config (chemin dans appsettings.json).
+    - Remplace les providers de logging ASP.NET Core par défaut.
+    - Utilisé pour logger les tentatives d'accès non autorisées (LogWarning)
+      et les erreurs (LogError) dans AdminController et AdminSafeListMiddleware.
+
+  FileLogService (logging des données de tracking) :
+    - Écriture des payloads de tracking bruts dans des fichiers .log rotatifs.
+    - Fichiers nommés : tracking-YYYYMMDDHHMI.log
+    - Répertoire configurable via PathToLogsDirectory.
+    - Rotation toutes les N minutes (LogFileRotationIntervalMinutes).
+
+
+--------------------------------------------------------------------------------
+  8. DÉMARRAGE ET INSTALLATION
+--------------------------------------------------------------------------------
+
+  Prérequis :
+    - .NET 10 SDK installé
+    - Projet "Common" compilable et accessible au chemin ../Common/Common.csproj
+
+  Étapes :
+
+  1. Cloner / décompresser le projet.
+
+  2. Créer les fichiers de whitelist :
+       <PathToWhiteFilesDirectory>/IpsWhiteList.txt
+       <PathToWhiteFilesDirectory>/DomainsWhiteList.txt
+     (peuvent être vides initialement)
+
+  3. Créer le fichier nlog.config et le placer au chemin spécifié dans
+     NLogConfigPath.
+
+  4. Créer le répertoire de logs (PathToLogsDirectory).
+
+  5. Adapter appsettings.json avec les chemins corrects pour l'environnement
+     cible.
+
+  6. Lancer l'application :
+       dotnet run --project Tracking_API
+     Ou en production :
+       dotnet Tracking_API.dll
+
+--------------------------------------------------------------------------------
+  9. CLASSES ET RESPONSABILITÉS - RÉSUMÉ
+--------------------------------------------------------------------------------
+
+  Classe / Fichier              Responsabilité
+  ──────────────────────────────────────────────────────────────────────────
+  Program.cs                   Configuration DI, pipeline HTTP, CORS, NLog
+  TrackingDatasController      Reçoit les données de tracking (POST)
+  AdminController              Gestion CRUD des whitelists IP et domaines
+  AdminSafeListMiddleware      Filtre les requêtes par IP/Domaine
+  AdminSafeListOptions         POCO de configuration du middleware
+  FileLogService               Queue Producer/Consumer + rotation de fichiers
+  FileManager                  I/O fichiers (lecture, écriture, append)
+  IFileManager                 Interface pour mock/test de FileManager
+  WhitelistManager<T>          Logique générique de whitelist (CRUD + persist)
+  IPManager                    Whitelist IP avec support CIDR
+  DomainManager                Whitelist de domaines (case-insensitive)
+  PerformanceAnalyser          Utilitaire de mesure de performance (dev/test)

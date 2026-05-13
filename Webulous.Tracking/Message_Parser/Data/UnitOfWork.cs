@@ -1,8 +1,9 @@
-﻿using Common;
+﻿using Message_Parser.Data;
 using Message_Parser.Entities;
 using Message_Parser.Reposiroties;
 using Message_Parser.Services;
 using MySqlConnector;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Message_Parser.Data
 {
@@ -74,15 +75,19 @@ namespace Message_Parser.Data
             _fileMonitoring = new MonitoringRepository();
 
             MySqlConnection tempConnection = _connectionManager.CreateConnection();
-            
-            var tempSessions = _hitpageRepo.GetSessionsAfterDateWithLastHitpage(DateTime.UtcNow.AddMinutes(-(sessionExpirationTime)), tempConnection);
+
+            // Get current UTC time
+            DateTime timeUtc = DateTime.UtcNow;
+
+            // Find the target time zone for Belgium / CEST (UTC + 02:00 in summer)
+            TimeZoneInfo cestZone = TimeZoneInfo.FindSystemTimeZoneById("Central Europe Standard Time");
+
+            // Convert UTC to the local CEST time
+            var date = TimeZoneInfo.ConvertTimeFromUtc(timeUtc, cestZone);
+
+            var tempSessions = _hitpageRepo.GetSessionsAfterDateWithLastHitpage(date.AddMinutes(-(sessionExpirationTime)), tempConnection);
             var lastHitPageId = _hitpageRepo.GetLastId(tempConnection) ?? 0;
             var lastSessionId = _sessionRepo.GetLastId(tempConnection) ?? 0;
-
-            foreach(var temp in  tempSessions)
-            {
-                Console.WriteLine(temp.Key.Id.ToString() + " " + temp.Value);
-            }
 
             var ongoingSessions = new Dictionary<(string sessionId, string domain), (Session session, long lastHitPageId)>();
 
@@ -156,7 +161,16 @@ namespace Message_Parser.Data
 
                         transaction.Commit();
 
-                        fileMonitoring.Speed = (int)(DateTime.UtcNow - fileMonitoring.TreatementDate).TotalMilliseconds;
+                        // Get current UTC time
+                        DateTime timeUtc = DateTime.UtcNow;
+
+                        // Find the target time zone for Belgium / CEST (UTC + 02:00 in summer)
+                        TimeZoneInfo cestZone = TimeZoneInfo.FindSystemTimeZoneById("Central Europe Standard Time");
+
+                        // Convert UTC to the local CEST time
+                        var date = TimeZoneInfo.ConvertTimeFromUtc(timeUtc, cestZone);
+
+                        fileMonitoring.Speed = (int)(date - fileMonitoring.TreatementDate).TotalMilliseconds;
                         fileMonitoring.Status = FileStatus.TREATED;
                         fileMonitoring.TreatedLogs = logs.Count;
                         fileMonitoring.SkippedLogs = nbInvalidLog;
@@ -170,7 +184,16 @@ namespace Message_Parser.Data
                         Console.WriteLine("Exception : " + ex.Message.ToString());
                         transaction.Rollback();
 
-                        fileMonitoring.Speed = (int)(DateTime.UtcNow - fileMonitoring.TreatementDate).TotalMilliseconds;
+                        // Get current UTC time
+                        DateTime timeUtc = DateTime.UtcNow;
+
+                        // Find the target time zone for Belgium / CEST (UTC + 02:00 in summer)
+                        TimeZoneInfo cestZone = TimeZoneInfo.FindSystemTimeZoneById("Central Europe Standard Time");
+
+                        // Convert UTC to the local CEST time
+                        var date = TimeZoneInfo.ConvertTimeFromUtc(timeUtc, cestZone);
+
+                        fileMonitoring.Speed = (int)(date - fileMonitoring.TreatementDate).TotalMilliseconds;
                         fileMonitoring.Status = FileStatus.FAILED;
                         fileMonitoring.TreatedLogs = 0;
                         fileMonitoring.SkippedLogs = nbInvalidLog;

@@ -107,7 +107,7 @@ namespace Mini_Site_Web.Controllers
                     actionType = ClientActionType.UNKNOWN;
                     break;
             }
-            var param = new ClientActions { ActionType = actionType, Details = details };
+            var param = new ClientActions { ClientActionType = actionType, Details = details };
             _logService.SendLog(HttpContext, param);
             return new EmptyResult();
         }

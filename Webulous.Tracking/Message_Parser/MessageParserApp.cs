@@ -1,5 +1,4 @@
-﻿using Common;
-using Message_Parser.Data;
+﻿using Message_Parser.Data;
 using Message_Parser.Entities;
 using Message_Parser.Services;
 using NLog;
@@ -76,10 +75,20 @@ namespace Message_Parser
                 {
                     string filePath = _files[i];
                     string fileName = Path.GetFileName(filePath);
+
+                    // Get current UTC time
+                    DateTime timeUtc = DateTime.UtcNow;
+
+                    // Find the target time zone for Belgium / CEST (UTC + 02:00 in summer)
+                    TimeZoneInfo cestZone = TimeZoneInfo.FindSystemTimeZoneById("Central Europe Standard Time");
+
+                    // Convert UTC to the local CEST time
+                    var date = TimeZoneInfo.ConvertTimeFromUtc(timeUtc, cestZone);
+
                     var monitoring = new FileMonitoring
                     {
                         FileName = fileName,
-                        TreatementDate = DateTime.UtcNow,
+                        TreatementDate = date,
                         Speed = null,
                         Status = FileStatus.IN_PROCESS,
                     };

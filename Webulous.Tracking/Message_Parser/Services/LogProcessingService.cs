@@ -1,5 +1,5 @@
-﻿using Common;
-using Common.UserActions;
+﻿using Message_Parser.Data;
+using Message_Parser.Data.UserActions;
 using Message_Parser.Entities;
 using System;
 using System.Collections.Generic;
@@ -114,7 +114,15 @@ namespace Message_Parser.Services
                 url = "http://" + url;
 
             var domain = new Uri(url).Host.Replace("www.", "");
-            var dateWhenAdded = DateTime.UtcNow;
+
+            // Get current UTC time
+            DateTime timeUtc = DateTime.UtcNow;
+
+            // Find the target time zone for Belgium / CEST (UTC + 02:00 in summer)
+            TimeZoneInfo cestZone = TimeZoneInfo.FindSystemTimeZoneById("Central Europe Standard Time");
+
+            // Convert UTC to the local CEST time
+            var dateWhenAdded = TimeZoneInfo.ConvertTimeFromUtc(timeUtc, cestZone);
             var certify = false;
             Site site = new Site { Domain = domain, DateWhenAdded = dateWhenAdded, Certify = certify };
 

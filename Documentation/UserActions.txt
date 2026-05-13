@@ -1,0 +1,131 @@
+Types de UserAction
+
+1. HitPage : / (aucun paramètre)
+
+Représente un changement de page.
+Cette action est journalisée via les requêtes GET.
+
+------------------------------------------------------------------------
+
+2. EstateSearch : SearchParam
+
+Représente l’envoi d’un formulaire de recherche de biens ainsi que les
+filtres associés (SearchParam).
+
+Cette action est journalisée dans le contrôleur recevant le formulaire.
+
+------------------------------------------------------------------------
+
+3. ContactRequest : ContactType, EstateId (nullable), SearchParam (nullable)
+
+Représente l’envoi d’un formulaire de contact.
+
+Cette action est journalisée dans le contrôleur recevant le formulaire.
+
+------------------------------------------------------------------------
+
+4. ClientAction : ClientActionType, AdditionalInfo (href récupéré depuis les balises)
+
+Représente toutes les actions ne nécessitant aucune interaction directe
+avec le backend.
+
+Ces actions sont récupérées via un script JavaScript (ce trouvant dans Common.JavaScript sur le dépôt git) ajoutant un
+listener sur toutes les balises contenant une classe commençant par
+w-action.
+
+Ce listener est chargé d’envoyer une requête POST au backend à chaque
+clic sur le composant.
+
+La requête envoie : 
+- le type d’action effectué (suffixe situé après
+w-action--, correspondant à une valeur de ClientActionType)
+
+- des informations complémentaires récupérées depuis l’attribut
+href de la balise.
+
+Les données sont envoyées via une requête POST vers un contrôleur dédié
+nommé ContactButton, afin d’éviter d’être bloqué ou détecté par certains
+adblockers.
+
+Exemple :
+
+    <a href="tel:+3299999999" class="red w-action--phone-call">
+
+------------------------------------------------------------------------
+
+Structures de données
+
+SearchParam
+
+    public bool ToSell;
+    public string EstateType;
+    public string Locality;
+    public int MinPrice;
+    public int MaxPrice;
+    public int BedroomNb;
+
+------------------------------------------------------------------------
+
+ContactType
+
+    STANDARD_INFO
+    CONTACT_ESTATE
+    EVALUATION
+    NEW_ESTATES_NOTIFICATION
+
+Valeurs associées
+
+  ContactType                EstateId   SearchParam
+  -------------------------- ---------- -------------
+  STANDARD_INFO              null       null
+  CONTACT_ESTATE             not null   null
+  EVALUATION                 null       null
+  NEW_ESTATES_NOTIFICATION   null       not null
+
+------------------------------------------------------------------------
+
+ClientActionType
+
+    external-link
+    print
+    details
+    email
+    phone-call
+    virtual-visit
+    share
+    download
+
+------------------------------------------------------------------------
+
+Ajout d’une nouvelle UserAction
+
+Pour ajouter une nouvelle UserAction :
+
+1.  Ajouter une entrée dans l’enum ActionsType :
+    -   dans Data.UserActions du projet MessageParser ;
+    -   dans Common.DD.
+
+2.  Créer une nouvelle classe contenant les données à journaliser.
+
+3.  Mettre à jour l’enum correspondant dans la base de données de
+    tracking.
+
+4.  Ajouter la désérialisation correspondante dans la méthode :
+
+    Data.Infrastructure.LogFileDeserializer.Deserialize
+
+    dans le case "ActionParameters".
+
+------------------------------------------------------------------------
+
+Ajout d’un nouveau ClientActionType
+
+Pour ajouter un nouveau ClientActionType :
+
+1.  Ajouter une entrée dans l’enum ClientActionsType :
+    -   dans Data.UserActions du projet MessageParser ;
+    -   dans Common.DD.
+
+2.  Ajouter un case correspondant dans le contrôleur ContactButton de la
+    classe Home.
+

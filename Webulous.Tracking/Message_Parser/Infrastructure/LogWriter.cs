@@ -1,4 +1,4 @@
-﻿using Common;
+﻿using Message_Parser.Data;
 using Dapper;
 using System;
 using System.Collections.Generic;

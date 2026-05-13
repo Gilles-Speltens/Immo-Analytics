@@ -8,7 +8,7 @@ namespace Common.UserActions
 {
     public class ClientActions : UserActionsBase
     {
-        public ClientActionType ActionType { get; set; }
+        public ClientActionType ClientActionType { get; set; }
         public string? Details { get; set; }
     }
 }

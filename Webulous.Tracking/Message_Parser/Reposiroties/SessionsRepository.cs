@@ -23,7 +23,7 @@ namespace Message_Parser.Reposiroties
         public bool Insert(Session session, MySqlConnection connection)
         {
             int rows = connection.Execute(
-                "INSERT INTO Sessions (Id, SessionId, Site, UserId, UserIp, Language_Browser, User_Agent, SessionStart, SessionEnd) VALUES (@Id, @SessionId, @Site, @UserId, @UserIp, @LanguageBrowser, @UserAgent, @SessionStart, @SessionEnd)",
+                "INSERT INTO sessions (id, session_d, site, user_id, user_ip, language_browser, user_agent, session_start, session_end) VALUES (@Id, @SessionId, @Site, @UserId, @UserIp, @LanguageBrowser, @UserAgent, @SessionStart, @SessionEnd)",
                 session);
 
             return rows == 1;
@@ -46,7 +46,7 @@ namespace Message_Parser.Reposiroties
         /// <returns>Liste de toutes les sessions.</returns>
         public async Task<List<Session>> GetAll(MySqlConnection connection)
         {
-            var sessions = await connection.QueryAsync<Session>("SELECT * FROM Sessions");
+            var sessions = await connection.QueryAsync<Session>("SELECT * FROM sessions");
             return sessions.ToList();
         }
 
@@ -57,7 +57,7 @@ namespace Message_Parser.Reposiroties
         /// <returns>True si la session existe.</returns>
         public async Task<bool> Contains(long id, MySqlConnection connection)
         {
-            return connection.Execute("SELECT 1 FROM Sessions WHERE id = (@Id)", new { Id = id }) == 1;
+            return connection.Execute("SELECT 1 FROM sessions WHERE id = (@Id)", new { Id = id }) == 1;
         }
 
         /// <summary>
@@ -67,9 +67,9 @@ namespace Message_Parser.Reposiroties
         public void UpdateUserIdDateEnd(Session session, MySqlConnection connection)
         {
             var sql = connection.Query<long>("""
-                UPDATE Sessions
-                SET Session_End = @SessionEnd, User_Id = @UserId
-                WHERE Session_Id = @SessionId AND Site = @Site
+                UPDATE sessions
+                SET session_end = @SessionEnd, user_id = @UserId
+                WHERE session_id = @SessionId AND site = @Site
                 """, new { SessionEnd = session.SessionEnd, UserId = session.UserId, SessionId = session.SessionId, Site = session.Site });
         }
 
@@ -79,7 +79,7 @@ namespace Message_Parser.Reposiroties
         /// <returns>Le dernier Id ou null si la table est vide.</returns>
         public long? GetLastId(MySqlConnection connection)
         {
-            return connection.QuerySingle<long?>("SELECT MAX(id) FROM Sessions");
+            return connection.QuerySingle<long?>("SELECT MAX(id) FROM sessions");
         }
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace Message_Parser.Reposiroties
             sqlValues.Length--;
 
             var sql = $"""
-                INSERT INTO Sessions (Id, Session_Id, Site, User_Id, User_Ip, Language_Browser, User_Agent, Session_Start, Session_End)
+                INSERT INTO sessions (id, session_id, site, user_id, user_ip, language_browser, user_agent, session_start, session_end)
                 VALUES {sqlValues}
                 """;
 

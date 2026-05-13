@@ -21,10 +21,10 @@ builder.Services.Configure<AdminSafeListOptions>(
 
 builder.Services.AddSingleton<FileLogService>();
 builder.Services.AddSingleton(
-    new IPManager(new FileManager(string.Concat(builder.Configuration["PathToWhiteFilesDirectory"], "\\IpsWhiteList.txt")))
+    new IPManager(new FileManager(string.Concat(builder.Configuration["PathToWhiteFilesDirectory"], "/IpsWhiteList.txt")))
     );
 builder.Services.AddSingleton(
-    new DomainManager(new FileManager(string.Concat(builder.Configuration["PathToWhiteFilesDirectory"], "\\DomainsWhiteList.txt")))
+    new DomainManager(new FileManager(string.Concat(builder.Configuration["PathToWhiteFilesDirectory"], "/DomainsWhiteList.txt")))
     );
 
 builder.Services.AddCors(options =>

@@ -1,0 +1,188 @@
+CONFIGURATION DES PROJETS DE TRACKING
+
+==================================================
+1. SITE WEB
+==================================================
+
+1.1. Ajout du script JavaScript
+-------------------------------
+Ajouter le script JavaScript suivant sur toutes les pages devant être trackées :
+
+- WActionCatcher.js
+
+1.2. Ajout des classes
+----------------------
+Ajouter les fichiers suivants au projet :
+
+- ClientActionViewModel.cs
+- UserActions/ActionsType.cs
+- UserActions/ClientActions.cs
+- UserActions/ClientActionType.cs
+- UserActions/ContactRequests.cs
+- UserActions/ContactType.cs
+- UserActions/EstateSearch.cs
+- UserActions/UserActionsBase.cs
+- RequestLogDto.cs
+- RequestLogService.cs
+- RequestTrackingMiddleware.cs
+
+1.3. Modification du ContactFormController
+------------------------------------------
+Ajouter l’envoi des logs pour les différents types de formulaires :
+
+- STANDARD_INFO
+- CONTACT_ESTATE
+- EVALUATION
+- NEW_ESTATES_NOTIFICATION
+
+Veiller à transmettre les bonnes valeurs pour :
+- ConType
+- EstateId
+- SearchParameters
+
+Exemple pour le contrôleur recevant les demandes STANDARD_INFO :
+
+    var contact = new ContactRequest
+    {
+        ConType = ContactType.STANDARD_INFO,
+        EstateId = null,
+        SearchParameters = null
+    };
+
+    _logService.SendLog(HttpContext, contact);
+
+1.4. Modification du HomeController
+-----------------------------------
+Ajouter l’action ContactButton présente dans :
+
+- Mini_Site_Web.Controllers.HomeController.cs
+
+1.5. Modification du Startup.cs
+--------------------------------
+Ajouter les lignes suivantes :
+
+    app.UseSession();
+
+Puis ajouter en dessous :
+
+    app.UseMiddleware<RequestTrackingMiddleware>();
+
+1.6. Configuration appsettings.json
+-----------------------------------
+Ajouter le paramètre suivant :
+
+    "APIPath": "URL_DE_L_API_DE_TRACKING"
+
+==================================================
+2. INTERFACE API
+==================================================
+
+2.1. Configuration des URLs
+---------------------------
+Configurer l’URL de l’API dans les fichiers appsettings.json :
+- du projet API_Tracker_Interface
+- des différents sites web utilisant l’API
+
+2.2. Configuration de sécurité
+------------------------------
+Configurer également le mot de passe de l’interface de l’API.
+
+==================================================
+3. TRACKING API
+==================================================
+
+3.1. Configuration NLog
+-----------------------
+Ajouter et configurer NLog.
+
+3.2. Rotation des logs
+----------------------
+Configurer la durée de rotation des logs (en minutes) utilisée par l’API afin de générer de nouveaux fichiers de logs.
+
+3.3. Dossier WhiteList
+----------------------
+Créer un dossier destiné à contenir les fichiers de WhiteList de l’API.
+Les fichiers seront créés automatiquement.
+
+Ajouter ensuite le chemin de ce dossier dans le fichier appsettings.json du projet APITracker.
+
+3.4. Dossier des logs
+---------------------
+Créer un dossier destiné à contenir les différents fichiers de logs générés par l’API.
+
+Ajouter ensuite le chemin de ce dossier dans le fichier appsettings.json.
+
+Attention :
+Ce dossier devra être partagé entre l’API et le MessageParser.
+
+3.5. Autorisation de l’interface d’administration
+-------------------------------------------------
+Ajouter l’adresse IP de l’interface d’administration afin qu’elle puisse accéder à la WhiteList de l’API.
+
+==================================================
+4. MESSAGE PARSER
+==================================================
+
+4.1. Dossier des logs de tracking
+---------------------------------
+Ajouter le chemin du dossier contenant les fichiers de logs au paramètre :
+
+- trackingDirectory
+
+4.2. Dossier d’archive
+----------------------
+Créer un dossier archive destiné à contenir les fichiers de logs une fois traités par le MessageParser.
+
+Ajouter ensuite son chemin au paramètre :
+
+- archiveDirectory
+
+4.3. Dossier des fichiers invalides
+-----------------------------------
+Créer un dossier invalid destiné à contenir les logs invalides traités.
+
+Ajouter ensuite son chemin au paramètre :
+
+- invalidDirectory
+
+4.4. Dossier de travail
+-----------------------
+Créer un dossier work destiné à contenir les fichiers en cours de traitement par le MessageParser.
+
+Ajouter ensuite son chemin au paramètre :
+
+- workingDirectory
+
+4.5. Durée maximale des sessions
+--------------------------------
+Configurer la durée maximale d’une session utilisateur (en minutes, valeur par default 20).
+
+Cette valeur permettra au MessageParser de déterminer si une session est encore active ou non.
+
+4.6. Configuration de la base de données
+----------------------------------------
+Créer et configurer une base de données MariaDB à l’aide des tables présentes dans le fichier :
+
+- TrackingDB.sql
+
+Ajouter ensuite les paramètres de connexion :
+- server
+- user
+- password
+- database
+
+4.7. Gestion des erreurs de traitement
+--------------------------------------
+Si un fichier ne peut pas être inséré en base de données :
+
+- le fichier restera bloqué dans le dossier working ;
+- cela indiquera qu’une erreur est survenue ;
+- le MessageParser ne pourra plus traiter d’autres fichiers tant que le fichier problématique sera présent dans le dossier working.
+
+Le message d’erreur sera :
+- écrit dans le fichier configuré par NLog ;
+- enregistré dans la table File_Monitoring avec le statut FAILED.
+
+Pour relancer le MessageParser :
+1. Corriger manuellement le problème présent dans le fichier ;
+2. Déplacer le fichier dans le dossier tracking afin qu’il soit traité à nouveau.

@@ -1,11 +1,8 @@
-﻿using Common;
-using Common.UserActions;
+﻿using Message_Parser.Data;
+using Message_Parser.Data.UserActions;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Message_Parser.Infrastructure
 {
@@ -110,32 +107,46 @@ namespace Message_Parser.Infrastructure
                                 dto.ActionType = (ActionsType)actionValue;
                                 break;
 
-                            //case "ActionParameters":
-                            //    var stringActionParam = reader.TokenType == JsonTokenType.Null ? null : reader.GetString();
-
-                            //    if (dto.Action == null) return null;
-                            //    dto.ActionParameters = dto.Action switch
-                            //    {
-                            //        ActionsType.CLIENT_ACTION => JsonSerializer.Deserialize<ClientActionParameters>(stringActionParam),
-                            //        ActionsType.CONTACT_REQUEST => JsonSerializer.Deserialize<ContactRequestParameters>(stringActionParam),
-                            //        ActionsType.ESTATE_SEARCH => JsonSerializer.Deserialize<EstateSearchParameters>(stringActionParam),
-                            //        _ => null
-                            //    };
-                            //    break;
-
                             case "ActionParameters":
-                                if (reader.TokenType != JsonTokenType.Null)
+                                if (reader.TokenType == JsonTokenType.Null)
                                 {
-                                    using var doc = JsonDocument.ParseValue(ref reader);
-                                    string rawJson = doc.RootElement.GetRawText();
-                                    dto.ActionParameters = JsonConvert.DeserializeObject<UserActionsBase>(
-                                        rawJson,
-                                        new JsonSerializerSettings //Pour convertir automatiquement le UserActionBase en une de ses sous classe.
-                                        {
-                                            TypeNameHandling = TypeNameHandling.Auto
-                                        });
+                                    dto.ActionParameters = null;
+                                    break;
+                                }
+
+                                using (var document = JsonDocument.ParseValue(ref reader))
+                                {
+                                    var rawJson = document.RootElement.GetRawText();
+
+                                    dto.ActionParameters = dto.ActionType switch
+                                    {
+                                        ActionsType.CLIENT_ACTION =>
+                                            JsonConvert.DeserializeObject<ClientActions>(rawJson),
+
+                                        ActionsType.CONTACT_REQUEST =>
+                                            JsonConvert.DeserializeObject<ContactRequest>(rawJson),
+
+                                        ActionsType.ESTATE_SEARCH =>
+                                            JsonConvert.DeserializeObject<EstateSearchs>(rawJson),
+
+                                        _ => null
+                                    };
                                 }
                                 break;
+
+                            //case "ActionParameters":
+                            //    if (reader.TokenType != JsonTokenType.Null)
+                            //    {
+                            //        using var doc = JsonDocument.ParseValue(ref reader);
+                            //        string rawJson = doc.RootElement.GetRawText();
+                            //        dto.ActionParameters = JsonConvert.DeserializeObject<UserActionsBase>(
+                            //            rawJson,
+                            //            new JsonSerializerSettings //Pour convertir automatiquement le UserActionBase en une de ses sous classe.
+                            //            {
+                            //                TypeNameHandling = TypeNameHandling.Auto
+                            //            });
+                            //    }
+                            //    break;
 
                             case "LanguageBrowser":
                                 dto.LanguageBrowser = reader.GetString()!;

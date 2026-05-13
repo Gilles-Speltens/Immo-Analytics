@@ -53,12 +53,12 @@ namespace Mini_Site_Web.Services
             try
             {
                 //Utilisation de Newtonsoft.Json car System.Text.Json ne gère pas le polymorphisme en .NET 6
-                var settings = new JsonSerializerSettings
-                {
-                    TypeNameHandling = TypeNameHandling.Auto
-                };
+                //var settings = new JsonSerializerSettings
+                //{
+                //    TypeNameHandling = TypeNameHandling.Auto
+                //};
 
-                var json = JsonConvert.SerializeObject(logDto, settings);
+                var json = JsonConvert.SerializeObject(logDto);
 
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
@@ -87,7 +87,14 @@ namespace Mini_Site_Web.Services
             var user_cookie_consent = IsConsentGuid(context);
             //var session_cookie_consent = true;
 
-            var date = DateTime.UtcNow;
+            // Get current UTC time
+            DateTime timeUtc = DateTime.UtcNow;
+
+            // Find the target time zone for Belgium / CEST (UTC + 02:00 in summer)
+            TimeZoneInfo cestZone = TimeZoneInfo.FindSystemTimeZoneById("Central Europe Standard Time");
+
+            // Convert UTC to the local CEST time
+            var date = TimeZoneInfo.ConvertTimeFromUtc(timeUtc, cestZone);
 
             var userId = user_cookie_consent
                 ? (context.Request.Cookies["uid"] ?? null)

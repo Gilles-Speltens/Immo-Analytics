@@ -24,7 +24,7 @@ namespace Message_Parser.Reposiroties
         public bool Insert(UserAction userAction, MySqlConnection connection)
         {
             int rows = connection.Execute(
-                "INSERT INTO User_Actions (Time, Page_Id, Action_Type, Action_Parameter) VALUES (@Time, @PageId, @ActionType, @ActionParameter)",
+                "INSERT INTO user_actions (time, page_id, action_type, action_parameter) VALUES (@Time, @PageId, @ActionType, @ActionParameter)",
                 userAction);
 
             return rows == 1;
@@ -62,19 +62,19 @@ namespace Message_Parser.Reposiroties
                 parameters.Add($"ActionType{i}", batch[i].ActionType);
 
                 //Utilisation de Newtonsoft.Json car System.Text.Json ne gère pas le polymorphisme en .NET 6
-                var settings = new JsonSerializerSettings
-                {
-                    TypeNameHandling = TypeNameHandling.All
-                };
+                //var settings = new JsonSerializerSettings
+                //{
+                //    TypeNameHandling = TypeNameHandling.All
+                //};
 
-                var json = JsonConvert.SerializeObject(batch[i].ActionParameter, settings);
+                var json = JsonConvert.SerializeObject(batch[i].ActionParameter);
 
                 parameters.Add($"ActionParameter{i}", json);
             }
 
             sqlValues.Length--;
 
-            var sql = $"INSERT INTO User_Actions (Time, Page_Id, Action_Type, Action_Parameter) VALUES {sqlValues}";
+            var sql = $"INSERT INTO user_actions (time, page_id, action_type, action_parameter) VALUES {sqlValues}";
 
             return await connection.ExecuteAsync(sql, parameters, transaction);
         }

@@ -1,0 +1,335 @@
+================================================================================
+  DOCUMENTATION - MESSAGE_PARSER
+  Projet ASP.NET Core 10 (.NET 10)
+  Date de création : 2026-05-13
+================================================================================
+
+
+--------------------------------------------------------------------------------
+  1. VUE D'ENSEMBLE
+--------------------------------------------------------------------------------
+
+Message_Parser est une application console .NET 10 permettant de traiter des fichiers
+de logs de tracking générés par un site web.
+
+L’application :
+- lit les fichiers de logs présents dans un répertoire ;
+- désérialise les lignes de logs ;
+- reconstruit les sessions utilisateurs ;
+- enregistre les données en base MySQL ;
+- archive les fichiers traités ;
+- journalise les erreurs et le suivi de traitement.
+
+--------------------------------------------------------------------------------
+  2. STACK TECHNIQUE
+--------------------------------------------------------------------------------
+
+- .NET 10
+- Dapper
+- MySQL
+- NLog
+- System.Text.Json
+- Newtonsoft.Json
+
+--------------------------------------------------------------------------------
+  3. STRUCTURE DU PROJET
+--------------------------------------------------------------------------------
+
+Le projet est organisé en plusieurs couches :
+
+- Data
+    Contient les DTO, enums et la logique métier liée à la persistance.
+
+- Entities
+    Contient les entités métier représentant les tables de la base de données.
+
+- Infrastructure
+    Contient les composants techniques :
+    désérialisation des logs, écriture de logs, etc.
+
+- Repositories
+    Contient l’accès aux données via Dapper.
+
+- Services
+    Contient les services de traitement des fichiers et des logs.
+
+- Program.cs
+    Point d’entrée de l’application.
+
+
+--------------------------------------------------------------------------------
+  4. FLUX DE TRAITEMENT
+--------------------------------------------------------------------------------
+
+1. L’application charge la configuration depuis appsettings.json.
+2. Les fichiers présents dans le dossier de tracking sont récupérés.
+3. Chaque fichier est déplacé dans un dossier de travail.
+4. Les lignes sont désérialisées en objets RequestLogDto.
+5. Toutes les entités sont construite depuis les logs.
+6. Si une ligne ne peut pas être construite, elle est déplacé dans un fichier invalid.
+6. Les données sont insérées en base.
+7. Le fichier est déplacé dans le dossier d’archive.
+8. En cas d’erreur, le fichier reste dans le dossier de travail.
+
+--------------------------------------------------------------------------------
+  5. CONFIGURATION (appsettings.json)
+--------------------------------------------------------------------------------
+
+Le fichier appsettings.json contient notamment :
+
+- trackingDirectory
+    Dossier contenant les fichiers à traiter. Doit être le même que l'API.
+    Ex : C:/Users/Desktop/Immo-Analytics/Webulous/Logs
+
+- archiveDirectory
+    Dossier des fichiers archivés.
+    Ex : C:/Users/Desktop/Immo-Analytics/Webulous/Logs/Archive
+
+- invalidDirectory
+    Dossier des fichiers invalides.
+    Ex : C:/Users/Desktop/Immo-Analytics/Webulous/Logs/Invalid
+
+- workingDirectory
+    Dossier temporaire de traitement.
+    Ex : C:/Users/Desktop/Immo-Analytics/Webulous/Logs/Working
+
+- sessionDuration
+    Durée maximale d’une session en minute.
+    20 minutes par défaut 
+
+- DBConnection
+    Chaîne de connexion MySQL.
+    Ex :
+    	"server=localhost;user=root;password=1234;database=AnalyticsDB"
+
+- NLogConfigPath
+    Chemin du fichier de configuration NLog.
+
+--------------------------------------------------------------------------------
+  6. ARCHITECTURE ET COMPOSANTS CLÉS
+--------------------------------------------------------------------------------
+Classes principales
+===================
+
+Program.cs
+-----------
+
+Point d’entrée de l’application.
+
+Responsabilités :
+- chargement de la configuration ;
+- initialisation du logger ;
+- création de MessageParserApp ;
+- lancement du traitement.
+
+MessageParserApp
+----------------
+
+Classe principale orchestrant le traitement des logs.
+
+Responsabilités :
+- récupération des fichiers ;
+- traitement des fichiers ;
+- insertion en base ;
+- gestion des erreurs ;
+- archivage.
+
+Services
+========
+
+FileProcessingService
+---------------------
+
+Responsable du traitement des fichiers.
+
+Fonctionnalités :
+- lecture des fichiers ;
+- validation ;
+- déplacement des fichiers ;
+- archivage ;
+- gestion des fichiers invalides.
+
+LogProcessingService
+--------------------
+
+Responsable du traitement des logs désérialisés.
+
+Infrastructure
+==============
+
+LogFileDeserializer
+-------------------
+
+Responsable de la désérialisation des lignes de logs.
+
+Convertit les données JSON en objets RequestLogDto.
+
+Gère également :
+- les différents types de UserAction ;
+- les paramètres spécifiques des actions ;
+- la reconstruction des objets métier.
+
+LogWriter
+---------
+
+Responsable de l’écriture des logs techniques.
+
+Repositories
+============
+
+BaseRepository
+--------------
+
+Classe de base contenant la connexion MySQL commune.
+
+SessionsRepository
+------------------
+
+Gestion des sessions utilisateur :
+- insertion ;
+- récupération ;
+- mise à jour.
+
+HitPageRepository
+-----------------
+
+Gestion des pages visitées.
+
+UserActionsRepository
+---------------------
+
+Gestion des actions utilisateurs.
+
+MonitoringRepository
+--------------------
+
+Gestion du suivi de traitement des fichiers.
+
+SiteRepository
+--------------
+
+Gestion des sites.
+
+Entités principales
+===================
+
+Session
+-------
+
+Représente une session utilisateur.
+
+HitPage
+-------
+
+Représente une page visitée.
+
+UserAction
+----------
+
+Représente une action effectuée par l’utilisateur.
+
+Site
+----
+
+Représente un site.
+
+FileMonitoring
+--------------
+
+Représente l’état de traitement d’un fichier.
+
+UserActions
+===========
+
+Types disponibles
+-----------------
+
+1. HitPage
+    Représente un changement de page.
+
+2. EstateSearch
+    Représente une recherche de biens immobiliers.
+
+3. ContactRequest
+    Représente l’envoi d’un formulaire de contact.
+
+4. ClientAction
+    Représente les actions frontend sans interaction directe avec le backend.
+
+ClientAction
+------------
+
+Les ClientActions sont envoyées via JavaScript.
+
+Le script :
+- ajoute un listener sur les éléments contenant une classe commençant par "w-action" ;
+- détecte le type d’action ;
+- envoie une requête POST vers le backend.
+
+Exemple :
+
+<a href="tel:+3299999999" class="red w-action--phone-call">
+
+ClientActionType disponibles :
+- external-link
+- print
+- details
+- email
+- phone-call
+- virtual-visit
+- share
+- download
+
+Ajout d’une nouvelle UserAction
+-------------------------------
+
+1. Ajouter une valeur dans l’enum ActionsType.
+2. Créer la classe contenant les paramètres.
+3. Mettre à jour la base de données.
+4. Ajouter la désérialisation dans :
+   Infrastructure/LogFileDeserializer.cs
+
+Ajout d’un nouveau ClientActionType
+-----------------------------------
+
+1. Ajouter une valeur dans l’enum ClientActionType.
+2. Ajouter le traitement correspondant dans le contrôleur frontend.
+
+--------------------------------------------------------------------------------
+  7. BASE DE DONNÉES
+--------------------------------------------------------------------------------
+
+Le projet utilise MariaDB avec Dapper.
+
+Tables (voir schéma pour plus de détails):
+- sessions
+- hit_page
+- user_actions
+- monitoring
+- sites
+
+--------------------------------------------------------------------------------
+  8. LOGS ET MONITORING
+--------------------------------------------------------------------------------
+
+Le projet utilise NLog pour :
+- les erreurs ;
+- les warnings ;
+- les informations de traitement.
+
+Le traitement des fichiers est également stocké en base via FileMonitoring.
+
+--------------------------------------------------------------------------------
+  9. REMARQUES
+--------------------------------------------------------------------------------
+
+- Le dernier fichier du dossier de tracking n’est pas traité afin d’éviter
+  de lire un fichier encore en cours d’écriture.
+
+- Les sessions sont regroupées selon une durée configurable.
+
+- Si un fichier ne peut pas être inséré dans la base de données, celui-ci restera bloqué dans le dossier working, indiquant qu’un problème est survenu.
+Dans ce cas, le MessageParser ne pourra plus traiter d’autres fichiers tant que le fichier problématique restera présent dans le dossier working.
+Le message d’erreur sera écrit dans le fichier configuré par NLog, et une nouvelle entrée sera ajoutée dans la table File_Monitoring avec le statut FAILED.
+Pour remettre le MessageParser en fonctionnement, il faudra corriger manuellement le problème présent dans le fichier, puis déplacer ce dernier dans le dossier tracking afin qu’il soit traité à nouveau.
+
